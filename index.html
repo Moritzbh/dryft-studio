@@ -123,7 +123,13 @@
             --radius-image: 20px;
         }
 
-        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            width: 100%;
+        }
         body {
             font-family: var(--font-body);
             background: var(--bg);
@@ -131,6 +137,7 @@
             font-size: 16px;
             line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
             font-weight: 400;
         }
         ::selection { background: var(--primary); color: #fff; }
@@ -1927,10 +1934,13 @@
         }
         @media (max-width: 640px) {
             .hero--split { padding: 120px 18px 60px; }
+            .hero--split .hero-inner { width: 100%; min-width: 0; }
+            .hero-text, .hero-stack { width: 100%; min-width: 0; max-width: 100%; }
             .hero-stack--showcase {
                 aspect-ratio: 1 / 1.05;
                 max-height: none;
-                min-height: 440px;
+                min-height: 0;
+                width: 100%;
             }
             .hs-pdp { top: 6%; left: 2%; width: 96%; }
             .hs-mobile { bottom: -2%; left: -4%; width: 50%; border-radius: 22px; }
@@ -3092,10 +3102,13 @@
             .sv-orbit--content { display: none; }
             .sv-orbit--ai      { top: 12%; right: -2%; }
             .sv-orbit--store   { top: 36%; right: -4%; }
-            .sv-metric { padding: 9px 11px; gap: 7px; }
-            .sv-metric-icon { width: 26px; height: 26px; }
-            .sv-metric-value { font-size: 14px; }
+            .solution-visual { width: 100%; max-width: 480px; margin: 0 auto; }
+            .sv-metric { padding: 8px 9px; gap: 6px; min-width: 0; }
+            .sv-metric-icon { width: 24px; height: 24px; }
+            .sv-metric-value { font-size: 13px; }
             .sv-metric-label { font-size: 8px; }
+            .sv-metric-text { min-width: 0; overflow: hidden; }
+            .sv-metrics { width: 96%; gap: 6px; }
             .sv-live-tag { font-size: 9px; padding: 7px 12px 7px 10px; }
         }
 
@@ -3752,7 +3765,7 @@
             .about-portrait { max-width: 460px; margin: 0 auto; }
         }
         @media (max-width: 640px) {
-            .about-portrait { aspect-ratio: 4 / 4.6; }
+            .about-portrait { aspect-ratio: 4 / 4.6; width: 100%; max-width: 420px; margin: 0 auto; }
             .portrait-meta { min-width: 86%; padding: 11px 16px 11px 12px; gap: 10px; }
             .portrait-meta-mark { width: 32px; height: 32px; font-size: 12px; }
             .portrait-meta strong { font-size: 14px; }
