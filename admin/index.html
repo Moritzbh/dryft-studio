@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB Brands · Lead Dashboard</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #FAFAFB;
+            --bg-card: #FFFFFF;
+            --primary: #0305C6;
+            --primary-dark: #0204A0;
+            --accent: #FF21A6;
+            --yellow: #FFDE59;
+            --text: #0A0A0A;
+            --text-muted: #6B7280;
+            --text-light: #9CA3AF;
+            --border: rgba(10, 10, 10, 0.08);
+            --border-strong: rgba(10, 10, 10, 0.12);
+            --green: #10B981;
+            --orange: #F59E0B;
+            --red: #EF4444;
+            --radius: 14px;
+            --radius-sm: 10px;
+            --radius-pill: 100px;
+            --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        html { -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 14px;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+        input { font-family: inherit; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ===== LOGIN GATE ===== */
+        .gate {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 24px;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(3, 5, 198, 0.08), transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 33, 166, 0.07), transparent 50%),
+                var(--bg);
+        }
+        .gate-card {
+            width: 100%; max-width: 380px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px 36px;
+            box-shadow: 0 20px 60px rgba(3, 5, 198, 0.10);
+        }
+        .gate-logo {
+            font-size: 22px; font-weight: 800; color: var(--primary);
+            letter-spacing: -0.5px; margin-bottom: 4px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .gate-logo-mark {
+            width: 32px; height: 32px; border-radius: 9px;
+            background: var(--primary); color: #fff;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800;
+            box-shadow: 0 4px 12px rgba(3, 5, 198, 0.25);
+        }
+        .gate-sub {
+            font-size: 12px; font-weight: 600; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 28px;
+        }
+        .gate label {
+            display: block; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.2px;
+            color: var(--text-muted); margin-bottom: 8px;
+        }
+        .gate input[type="password"] {
+            width: 100%; padding: 14px 16px;
+            font-size: 14px; font-weight: 500;
+            background: var(--bg);
+            border: 1.5px solid transparent;
+            border-radius: var(--radius-sm);
+            outline: none; transition: all 0.2s;
+        }
+        .gate input[type="password"]:focus {
+            background: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(3, 5, 198, 0.08);
+        }
+        .gate button {
+            width: 100%; padding: 14px;
+            margin-top: 16px;
+            background: var(--primary); color: #fff;
+            font-size: 13px; font-weight: 700; letter-spacing: 0.2px;
+            border-radius: var(--radius-pill);
+            transition: all 0.25s;
+            box-shadow: 0 8px 24px rgba(3, 5, 198, 0.25);
+        }
+        .gate button:hover { background: var(--accent); box-shadow: 0 12px 32px rgba(255, 33, 166, 0.30); }
+        .gate-error {
+            font-size: 12px; color: var(--red);
+            margin-top: 12px; min-height: 16px; font-weight: 600;
+        }
+
+        /* ===== APP ===== */
+        .app { display: none; min-height: 100vh; }
+        .app.active { display: block; }
+
+        .topbar {
+            position: sticky; top: 0; z-index: 10;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: saturate(180%) blur(12px);
+            -webkit-backdrop-filter: saturate(180%) blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .topbar-inner {
+            max-width: 1280px; margin: 0 auto;
+            padding: 18px 32px;
+            display: flex; align-items: center; justify-content: space-between; gap: 20px;
+        }
+        .topbar-left {
+            display: flex; align-items: center; gap: 14px;
+        }
+        .topbar-logo {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: var(--primary); color: #fff;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800;
+            box-shadow: 0 4px 12px rgba(3, 5, 198, 0.22);
+        }
+        .topbar-title {
+            font-size: 16px; font-weight: 800; color: var(--primary);
+            letter-spacing: -0.3px;
+        }
+        .topbar-title small {
+            display: block; font-size: 10px; font-weight: 600;
+            color: var(--text-light); text-transform: uppercase; letter-spacing: 1.5px;
+            letter-spacing: 1.2px; margin-top: 2px;
+        }
+        .topbar-actions { display: flex; gap: 10px; align-items: center; }
+        .btn-icon {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: var(--bg);
+            color: var(--text-muted);
+            display: inline-flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+        }
+        .btn-icon:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .btn-logout {
+            padding: 9px 16px;
+            background: var(--bg);
+            color: var(--text-muted);
+            font-size: 12px; font-weight: 700;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        .btn-logout:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+        .container {
+            max-width: 1280px; margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+        .stat {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px 24px;
+            transition: all 0.2s;
+        }
+        .stat:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+        .stat-label {
+            font-size: 11px; font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1.2px;
+            margin-bottom: 10px;
+        }
+        .stat-value {
+            font-size: 30px; font-weight: 800;
+            color: var(--primary); letter-spacing: -1px;
+        }
+        .stat.new .stat-value { color: var(--primary); }
+        .stat.progress .stat-value { color: var(--orange); }
+        .stat.delivered .stat-value { color: var(--green); }
+        .stat.total .stat-value { color: var(--text); }
+
+        /* Filters */
+        .toolbar {
+            display: flex; gap: 12px; align-items: center;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .search {
+            flex: 1; min-width: 240px;
+            position: relative;
+        }
+        .search input {
+            width: 100%; padding: 12px 16px 12px 42px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            font-size: 13px; font-weight: 500;
+            outline: none; transition: all 0.2s;
+        }
+        .search input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(3, 5, 198, 0.08);
+        }
+        .search svg {
+            position: absolute; left: 16px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        .filters {
+            display: flex; gap: 6px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            padding: 4px;
+        }
+        .filter-btn {
+            padding: 9px 18px;
+            font-size: 12px; font-weight: 700;
+            color: var(--text-muted);
+            border-radius: var(--radius-pill);
+            transition: all 0.2s;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .filter-btn:hover { color: var(--primary); }
+        .filter-btn.active {
+            background: var(--primary); color: #fff;
+        }
+
+        /* Leads table / cards */
+        .leads {
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .lead-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px 26px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px 26px;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .lead-card:hover {
+            border-color: var(--border-strong);
+            box-shadow: 0 12px 32px rgba(3, 5, 198, 0.06);
+        }
+        .lead-card.status-delivered { opacity: 0.65; }
+        .lead-card.status-delivered:hover { opacity: 1; }
+
+        .lead-header {
+            display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+        .lead-name {
+            font-size: 17px; font-weight: 800; color: var(--text);
+            letter-spacing: -0.3px;
+        }
+        .lead-company {
+            font-size: 13px; color: var(--text-muted); font-weight: 500;
+        }
+        .lead-company::before { content: '·'; margin-right: 8px; }
+
+        .lead-meta {
+            display: flex; flex-wrap: wrap; gap: 18px;
+            font-size: 13px; color: var(--text-muted);
+        }
+        .lead-meta-item {
+            display: flex; align-items: center; gap: 8px;
+            cursor: pointer;
+            transition: color 0.15s;
+        }
+        .lead-meta-item:hover { color: var(--primary); }
+        .lead-meta-item svg {
+            color: var(--text-light);
+            flex-shrink: 0;
+        }
+        .lead-meta-item:hover svg { color: var(--primary); }
+        .lead-meta-item .copy-hint {
+            font-size: 10px; color: var(--green); font-weight: 700;
+            opacity: 0; transition: opacity 0.2s;
+        }
+        .lead-meta-item.copied .copy-hint { opacity: 1; }
+
+        .lead-side {
+            display: flex; flex-direction: column; align-items: flex-end;
+            gap: 12px;
+            min-width: 150px;
+        }
+        .badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 11px;
+            font-size: 10px; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1px;
+            border-radius: var(--radius-pill);
+        }
+        .badge::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%;
+            background: currentColor;
+        }
+        .badge-new { background: rgba(3, 5, 198, 0.10); color: var(--primary); }
+        .badge-progress { background: rgba(245, 158, 11, 0.12); color: var(--orange); }
+        .badge-delivered { background: rgba(16, 185, 129, 0.12); color: var(--green); }
+
+        .badge-channel {
+            background: var(--bg); color: var(--text-muted);
+            font-size: 10px; padding: 4px 10px; border-radius: var(--radius-pill);
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+            display: inline-flex; align-items: center; gap: 5px;
+        }
+        .badge-channel svg { width: 11px; height: 11px; }
+        .badge-channel.whatsapp { background: rgba(37, 211, 102, 0.10); color: #25D366; }
+        .badge-reference {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 4px 10px;
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            border-radius: 100px;
+            background: rgba(255, 33, 166, 0.10);
+            color: var(--accent, #FF21A6);
+        }
+        .badge-reference svg { width: 11px; height: 11px; }
+
+        .lead-actions {
+            display: flex; gap: 6px;
+        }
+        .lead-action {
+            padding: 8px 14px;
+            font-size: 11px; font-weight: 700;
+            color: var(--text-muted);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            transition: all 0.2s;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .lead-action:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .lead-action.danger:hover { background: var(--red); border-color: var(--red); }
+        .lead-action.success:hover { background: var(--green); border-color: var(--green); }
+
+        .lead-time {
+            font-size: 11px; color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Empty state */
+        .empty {
+            background: #fff;
+            border: 2px dashed var(--border-strong);
+            border-radius: var(--radius);
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .empty-icon {
+            width: 64px; height: 64px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: rgba(3, 5, 198, 0.08);
+            color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .empty h3 {
+            font-size: 18px; color: var(--primary); font-weight: 800;
+            margin-bottom: 6px; letter-spacing: -0.3px;
+        }
+        .empty p {
+            font-size: 13px; color: var(--text-muted);
+            max-width: 360px; margin: 0 auto;
+        }
+
+        /* Loading */
+        .loading {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 60px 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        .spinner {
+            width: 28px; height: 28px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 14px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 24px; left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--text);
+            color: #fff;
+            padding: 12px 22px;
+            border-radius: var(--radius-pill);
+            font-size: 12px; font-weight: 700;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.20);
+            transition: transform 0.3s cubic-bezier(.2,.8,.3,1.2);
+            z-index: 200;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+        .toast.error { background: var(--red); }
+        .toast.success { background: var(--green); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .stats { grid-template-columns: 1fr 1fr; }
+            .container { padding: 20px; }
+            .topbar-inner { padding: 16px 20px; }
+            .lead-card { grid-template-columns: 1fr; gap: 16px; }
+            .lead-side { align-items: flex-start; }
+            .lead-meta { gap: 14px; }
+        }
+        @media (max-width: 540px) {
+            .stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .stat { padding: 18px 18px; }
+            .stat-value { font-size: 24px; }
+            .lead-card { padding: 18px 20px; }
+            .toolbar { flex-direction: column; align-items: stretch; }
+            .filters { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ LOGIN GATE ============ -->
+    <div class="gate" id="gate">
+        <form class="gate-card" id="gateForm" autocomplete="off">
+            <div class="gate-logo">
+                <span class="gate-logo-mark">BB</span>
+                Lead Dashboard
+            </div>
+            <p class="gate-sub">BB Brands · Internal</p>
+            <label for="adminToken">Admin Token</label>
+            <input type="password" id="adminToken" placeholder="••••••••••••" autofocus required>
+            <button type="submit">Einloggen</button>
+            <p class="gate-error" id="gateError"></p>
+        </form>
+    </div>
+
+    <!-- ============ APP ============ -->
+    <div class="app" id="app">
+        <div class="topbar">
+            <div class="topbar-inner">
+                <div class="topbar-left">
+                    <span class="topbar-logo">BB</span>
+                    <div>
+                        <div class="topbar-title">Lead Dashboard<small>Style Guide Anfragen</small></div>
+                    </div>
+                </div>
+                <div class="topbar-actions">
+                    <button class="btn-icon" id="refreshBtn" title="Neu laden">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                    </button>
+                    <button class="btn-logout" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="stats">
+                <div class="stat total">
+                    <div class="stat-label">Gesamt</div>
+                    <div class="stat-value" id="statTotal">—</div>
+                </div>
+                <div class="stat new">
+                    <div class="stat-label">Neu</div>
+                    <div class="stat-value" id="statNew">—</div>
+                </div>
+                <div class="stat progress">
+                    <div class="stat-label">In Arbeit</div>
+                    <div class="stat-value" id="statProgress">—</div>
+                </div>
+                <div class="stat delivered">
+                    <div class="stat-label">Versendet</div>
+                    <div class="stat-value" id="statDelivered">—</div>
+                </div>
+            </div>
+
+            <div class="toolbar">
+                <div class="search">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="search" id="searchInput" placeholder="Suchen nach Name, Unternehmen, E-Mail …">
+                </div>
+                <div class="filters" role="tablist">
+                    <button class="filter-btn active" data-filter="all">Alle</button>
+                    <button class="filter-btn" data-filter="new">Neu</button>
+                    <button class="filter-btn" data-filter="in-progress">In Arbeit</button>
+                    <button class="filter-btn" data-filter="delivered">Versendet</button>
+                    <button class="filter-btn" data-filter="reference" title="Nur Leads mit Referenz-Einwilligung">Referenz-OK</button>
+                </div>
+            </div>
+
+            <div id="leadsContainer">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    Leads werden geladen …
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const STORAGE_KEY = 'bb_admin_token';
+        const API = '/api/leads';
+
+        const gate = document.getElementById('gate');
+        const app = document.getElementById('app');
+        const gateForm = document.getElementById('gateForm');
+        const gateError = document.getElementById('gateError');
+        const tokenInput = document.getElementById('adminToken');
+        const leadsContainer = document.getElementById('leadsContainer');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const toast = document.getElementById('toast');
+
+        let leads = [];
+        let currentFilter = 'all';
+        let currentSearch = '';
+        let token = localStorage.getItem(STORAGE_KEY) || '';
+
+        // ====== Toast ======
+        let toastTimer;
+        function showToast(msg, type = '') {
+            toast.textContent = msg;
+            toast.className = 'toast show ' + type;
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        // ====== API helpers ======
+        async function apiCall(method, body) {
+            const opts = {
+                method,
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json',
+                },
+            };
+            if (body) opts.body = JSON.stringify(body);
+            const res = await fetch(API, opts);
+            const data = await res.json().catch(() => ({}));
+            if (res.status === 401) {
+                logout();
+                throw new Error('Unauthorized');
+            }
+            if (!res.ok) throw new Error(data.error || 'Request failed');
+            return data;
+        }
+
+        async function loadLeads() {
+            leadsContainer.innerHTML = '<div class="loading"><div class="spinner"></div>Leads werden geladen …</div>';
+            try {
+                const data = await apiCall('GET');
+                leads = data.leads || [];
+                renderStats();
+                renderLeads();
+            } catch (err) {
+                if (err.message !== 'Unauthorized') {
+                    leadsContainer.innerHTML = '<div class="empty"><div class="empty-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Fehler beim Laden</h3><p>' + err.message + '</p></div>';
+                }
+            }
+        }
+
+        // ====== Rendering ======
+        function renderStats() {
+            document.getElementById('statTotal').textContent = leads.length;
+            document.getElementById('statNew').textContent = leads.filter(l => l.status === 'new').length;
+            document.getElementById('statProgress').textContent = leads.filter(l => l.status === 'in-progress').length;
+            document.getElementById('statDelivered').textContent = leads.filter(l => l.status === 'delivered').length;
+        }
+
+        function getFiltered() {
+            const q = currentSearch.toLowerCase().trim();
+            return leads.filter(l => {
+                if (currentFilter === 'reference') {
+                    if (!l.consentReference) return false;
+                } else if (currentFilter !== 'all' && l.status !== currentFilter) {
+                    return false;
+                }
+                if (q) {
+                    const hay = (l.name + ' ' + l.company + ' ' + l.email + ' ' + (l.website || '')).toLowerCase();
+                    if (!hay.includes(q)) return false;
+                }
+                return true;
+            });
+        }
+
+        function escapeHtml(s) {
+            if (s == null) return '';
+            return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+
+        function formatTime(iso) {
+            if (!iso) return '';
+            const d = new Date(iso);
+            const now = new Date();
+            const diff = (now - d) / 1000;
+            if (diff < 60) return 'gerade eben';
+            if (diff < 3600) return Math.floor(diff / 60) + ' Min.';
+            if (diff < 86400) return Math.floor(diff / 3600) + ' Std.';
+            if (diff < 86400 * 7) return Math.floor(diff / 86400) + ' Tagen';
+            return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' });
+        }
+
+        function renderLeads() {
+            const filtered = getFiltered();
+            if (!filtered.length) {
+                leadsContainer.innerHTML = `
+                    <div class="empty">
+                        <div class="empty-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <h3>${leads.length === 0 ? 'Noch keine Leads' : 'Keine Treffer'}</h3>
+                        <p>${leads.length === 0 ? 'Sobald jemand das Formular ausfüllt, taucht der Lead hier auf.' : 'Anderen Filter wählen oder Suche anpassen.'}</p>
+                    </div>`;
+                return;
+            }
+
+            leadsContainer.innerHTML = '<div class="leads">' + filtered.map(l => {
+                const channelClass = l.delivery === 'whatsapp' ? 'whatsapp' : '';
+                const channelIcon = l.delivery === 'whatsapp'
+                    ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>'
+                    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';
+
+                const statusBadge = {
+                    'new': '<span class="badge badge-new">Neu</span>',
+                    'in-progress': '<span class="badge badge-progress">In Arbeit</span>',
+                    'delivered': '<span class="badge badge-delivered">Versendet</span>',
+                }[l.status] || '';
+
+                const actions = l.status === 'delivered'
+                    ? `<button class="lead-action" data-act="reopen" data-id="${escapeHtml(l.id)}">Reopen</button>
+                       <button class="lead-action danger" data-act="delete" data-id="${escapeHtml(l.id)}">Löschen</button>`
+                    : l.status === 'in-progress'
+                    ? `<button class="lead-action success" data-act="delivered" data-id="${escapeHtml(l.id)}">Versendet</button>
+                       <button class="lead-action danger" data-act="delete" data-id="${escapeHtml(l.id)}">Löschen</button>`
+                    : `<button class="lead-action" data-act="in-progress" data-id="${escapeHtml(l.id)}">In Arbeit</button>
+                       <button class="lead-action success" data-act="delivered" data-id="${escapeHtml(l.id)}">Versendet</button>
+                       <button class="lead-action danger" data-act="delete" data-id="${escapeHtml(l.id)}">Löschen</button>`;
+
+                const websiteHref = l.website && l.website.startsWith('http') ? l.website : 'https://' + (l.website || '');
+                const phoneClean = (l.phone || '').replace(/[^+\d]/g, '');
+                const waLink = phoneClean ? 'https://wa.me/' + phoneClean.replace(/^\+/, '') : '';
+
+                return `
+                    <article class="lead-card status-${escapeHtml(l.status)}">
+                        <div>
+                            <div class="lead-header">
+                                <span class="lead-name">${escapeHtml(l.name)}</span>
+                                <span class="lead-company">${escapeHtml(l.company)}</span>
+                            </div>
+                            <div class="lead-meta">
+                                <span class="lead-meta-item" data-copy="${escapeHtml(l.email)}" title="E-Mail kopieren">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                                    ${escapeHtml(l.email)}
+                                    <span class="copy-hint">kopiert</span>
+                                </span>
+                                ${l.phone ? `
+                                <span class="lead-meta-item" data-copy="${escapeHtml(l.phone)}" title="Telefon kopieren">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    ${escapeHtml(l.phone)}
+                                    <span class="copy-hint">kopiert</span>
+                                </span>` : ''}
+                                <a class="lead-meta-item" href="${escapeHtml(websiteHref)}" target="_blank" rel="noopener" title="Webseite öffnen">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                    ${escapeHtml(l.website)}
+                                </a>
+                                ${waLink ? `
+                                <a class="lead-meta-item" href="${escapeHtml(waLink)}" target="_blank" rel="noopener" title="Auf WhatsApp öffnen">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+                                    Auf WhatsApp öffnen
+                                </a>` : ''}
+                            </div>
+                        </div>
+                        <div class="lead-side">
+                            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
+                                ${statusBadge}
+                                <span class="badge-channel ${channelClass}">${channelIcon} ${l.delivery === 'whatsapp' ? 'WhatsApp' : 'E-Mail'}</span>
+                                ${l.consentReference ? `<span class="badge-reference" title="Einwilligung zur Logo-Nutzung als Referenz erteilt am ${escapeHtml(l.consentReferenceAt || '')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Referenz-OK</span>` : ''}
+                            </div>
+                            <span class="lead-time" title="${escapeHtml(l.createdAt)}">vor ${formatTime(l.createdAt)}</span>
+                            <div class="lead-actions">${actions}</div>
+                        </div>
+                    </article>`;
+            }).join('') + '</div>';
+
+            // Wire copy buttons
+            leadsContainer.querySelectorAll('[data-copy]').forEach(el => {
+                el.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const txt = el.getAttribute('data-copy');
+                    try {
+                        await navigator.clipboard.writeText(txt);
+                        el.classList.add('copied');
+                        setTimeout(() => el.classList.remove('copied'), 1500);
+                        showToast('Kopiert: ' + txt, 'success');
+                    } catch {
+                        showToast('Konnte nicht kopieren', 'error');
+                    }
+                });
+            });
+
+            // Wire action buttons
+            leadsContainer.querySelectorAll('[data-act]').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = btn.getAttribute('data-id');
+                    const act = btn.getAttribute('data-act');
+                    if (act === 'delete') {
+                        if (!confirm('Diesen Lead wirklich löschen?')) return;
+                        try {
+                            await apiCall('DELETE', { id });
+                            leads = leads.filter(l => l.id !== id);
+                            renderStats();
+                            renderLeads();
+                            showToast('Lead gelöscht', 'success');
+                        } catch (err) { showToast('Fehler: ' + err.message, 'error'); }
+                        return;
+                    }
+                    const newStatus = act === 'reopen' ? 'new' : act;
+                    try {
+                        const data = await apiCall('PATCH', { id, status: newStatus });
+                        const idx = leads.findIndex(l => l.id === id);
+                        if (idx >= 0) leads[idx] = data.lead;
+                        renderStats();
+                        renderLeads();
+                        showToast('Status: ' + newStatus, 'success');
+                    } catch (err) { showToast('Fehler: ' + err.message, 'error'); }
+                });
+            });
+        }
+
+        // ====== Auth ======
+        function showApp() {
+            gate.style.display = 'none';
+            app.classList.add('active');
+            loadLeads();
+        }
+
+        function logout() {
+            localStorage.removeItem(STORAGE_KEY);
+            token = '';
+            app.classList.remove('active');
+            gate.style.display = 'flex';
+            tokenInput.value = '';
+            tokenInput.focus();
+        }
+
+        gateForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            gateError.textContent = '';
+            const t = tokenInput.value.trim();
+            if (!t) return;
+            token = t;
+            try {
+                await apiCall('GET');
+                localStorage.setItem(STORAGE_KEY, token);
+                showApp();
+            } catch (err) {
+                token = '';
+                if (err.message === 'Unauthorized') {
+                    gateError.textContent = 'Falsches Token.';
+                } else {
+                    gateError.textContent = 'Fehler: ' + err.message;
+                }
+            }
+        });
+
+        logoutBtn.addEventListener('click', logout);
+        refreshBtn.addEventListener('click', loadLeads);
+
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            renderLeads();
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.getAttribute('data-filter');
+                renderLeads();
+            });
+        });
+
+        // Auto-login if token saved
+        if (token) {
+            apiCall('GET').then(data => {
+                leads = data.leads || [];
+                showApp();
+            }).catch(() => {
+                logout();
+            });
+        }
+    </script>
+</body>
+</html>

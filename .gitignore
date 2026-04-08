@@ -1,0 +1,23 @@
+# Local dev / editor
+.claude/
+.DS_Store
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+
+# Vercel
+.vercel
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Large media (host externally instead)
+assets/*.mov
