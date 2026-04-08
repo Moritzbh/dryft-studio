@@ -2174,6 +2174,48 @@
             color: var(--text-muted);
             text-transform: uppercase;
         }
+        /* ----- Second magnet (AI Readiness Check) ----- */
+        .lm-second-magnet {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.12);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .lm-second-magnet-label {
+            font-family: var(--font-mono, var(--font-body));
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .lm-second-magnet-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 999px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 13.5px;
+            font-weight: 600;
+            line-height: 1.2;
+            cursor: pointer;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+        }
+        .lm-second-magnet-cta:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.24);
+            transform: translateY(-1px);
+        }
+        .lm-second-magnet-cta svg { flex-shrink: 0; opacity: 0.85; }
+        .lm-second-magnet-cta svg:last-child { transition: transform 0.3s ease; }
+        .lm-second-magnet-cta:hover svg:last-child { transform: translateX(3px); }
 
         /* ========== MODAL (Apple-style, glass backdrop) ========== */
         .lm-modal {
@@ -3280,6 +3322,26 @@
         .case-desc {
             font-size: 14px; font-weight: 400; color: var(--text-body);
             line-height: 1.7; flex: 1;
+        }
+        .case-ai-strip {
+            display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+            margin-top: 16px; padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px dashed rgba(255, 255, 255, 0.14);
+            border-radius: 10px;
+        }
+        .case-ai-strip-label {
+            font-family: var(--font-mono, var(--font-body));
+            font-size: 10px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; color: var(--text-muted);
+            margin-right: 4px;
+        }
+        .case-ai-chip {
+            font-family: var(--font-body); font-size: 11px; font-weight: 600;
+            color: var(--text-primary);
+            padding: 4px 9px; border-radius: 999px;
+            background: rgba(255, 33, 166, 0.10);
+            border: 1px solid rgba(255, 33, 166, 0.22);
         }
         .case-stats {
             display: flex; gap: 24px; margin-top: 22px; padding-top: 20px;
@@ -4516,9 +4578,14 @@
                         <div class="case-mark">WAKE<small>Performance Brand</small></div>
                     </div>
                     <div class="case-body">
-                        <div class="case-tag">Brand · Store · Visuals</div>
+                        <div class="case-tag">Brand · Store · Visuals · KI im Store</div>
                         <h3>Wake Performance: Von der Idee zur conversion­optimierten D2C-Marke</h3>
                         <p class="case-desc">Kein Logo, kein Store, keine Bildsprache, dafür ein innovatives Cooling-Gel-Produkt. Wir haben Brand Identity, Custom Dawn Theme, Produktvisualisierung und Verpackungsdesign in Rekordzeit gebaut. Aus „Ich habe ein Produkt" wurde eine Marke, der Kunden vertrauen.</p>
+                        <div class="case-ai-strip">
+                            <span class="case-ai-strip-label">+ AI Layer</span>
+                            <span class="case-ai-chip">KI-Produktberater</span>
+                            <span class="case-ai-chip">Auto-Tagging</span>
+                        </div>
                         <div class="case-stats">
                             <div>
                                 <div class="case-stat-val">0 → Launch</div>
@@ -4546,9 +4613,14 @@
                         <div class="case-mark">FacEvolution<small>Premium Beauty</small></div>
                     </div>
                     <div class="case-body">
-                        <div class="case-tag">Replatforming · Repositionierung</div>
+                        <div class="case-tag">Replatforming · Repositionierung · KI im Store</div>
                         <h3>FacEvolution: Vom Hersteller-Katalog zur Premium-DTC-Beauty-Brand</h3>
                         <p class="case-desc">Plattformwechsel von Shoptet zu Shopify plus komplette Repositionierung. Aus einem funktionalen Produkt-Katalog wurde eine Premium-Marke mit Schwarz-Gold-Ästhetik, neuem Claim „Extreme Results. Zero Compromise." und einem Store, der ein Markenerlebnis ist, kein Regal.</p>
+                        <div class="case-ai-strip">
+                            <span class="case-ai-strip-label">+ AI Layer</span>
+                            <span class="case-ai-chip">AI Search</span>
+                            <span class="case-ai-chip">Skin-Berater</span>
+                        </div>
                         <div class="case-stats">
                             <div>
                                 <div class="case-stat-val">Shoptet → Shopify</div>
@@ -4712,12 +4784,12 @@
                 </article>
                 <article class="resource-card reveal">
                     <div class="resource-thumb r2">
-                        <span class="resource-thumb-tag">Case Deep-Dive</span>
+                        <span class="resource-thumb-tag">Vorlage</span>
                     </div>
                     <div class="resource-body">
-                        <h3>So launchen wir eine Brand mit KI</h3>
-                        <p>Hinter den Kulissen: Welche KI-Tools wir nutzen, welche nicht, und warum Handarbeit weiter gewinnt.</p>
-                        <a href="#cases" class="resource-link">Case ansehen <span aria-hidden="true">→</span></a>
+                        <h3>AI Readiness Check für deinen Store</h3>
+                        <p>Wir analysieren deinen Shopify-Store auf vier KI-Hebel: Search, Produktberater, Support, Auto-Tagging. Konkrete Empfehlung statt Buzzword-Bingo.</p>
+                        <a href="#gratis-guide" class="resource-link">Check anfordern <span aria-hidden="true">→</span></a>
                     </div>
                 </article>
                 <article class="resource-card reveal">
@@ -4804,7 +4876,25 @@
                         <span class="faq-icon"></span>
                     </button>
                     <div class="faq-answer">
-                        <p>Wir bauen bewusst so wenig App-Abhängigkeit wie möglich ein. Jede App, die wir empfehlen, hat einen klaren Grund, und wir diskutieren die monatlichen Kosten offen, bevor wir etwas installieren. Ziel ist ein Store, der mit drei bis fünf essentiellen Apps läuft, nicht mit fünfundzwanzig.</p>
+                        <p>Wir bauen bewusst so wenig App-Abhängigkeit wie möglich ein. Jede App, die wir empfehlen, hat einen klaren Grund, und wir diskutieren die monatlichen Kosten offen, bevor wir etwas installieren. Ziel ist ein Store, der mit drei bis fünf essentiellen Apps läuft, nicht mit fünfundzwanzig. Funktionen wie Suche, Produktberater oder Support, für die andere fünf Apps stapeln, bauen wir direkt mit KI ins Theme — siehe nächste Frage.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Was bedeutet „KI im Store" konkret?
+                        <span class="faq-icon"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Andere Agenturen nutzen KI im Briefing, wir nutzen sie da, wo sie deinem Kunden begegnet: direkt im Store. Konkret bauen wir vier Bausteine ins Custom Liquid Theme ein. <strong>AI Search</strong>, die Fragen wie „kuhle Creme für meine Beine im Sommer" versteht, statt nur Schlagworte zu matchen. Ein <strong>KI-Produktberater</strong>, der wie ein guter Verkäufer drei passende Produkte vorschlägt. <strong>Automatisierter Support</strong>, der Standard-Fragen zu Versand, Größe und Retoure rund um die Uhr beantwortet. Und <strong>Auto-Tagging</strong>, das Produkte sauber strukturiert, ohne dass du es manuell pflegen musst. Alles über deine eigenen API-Keys, ohne monatliche App-Gebühren.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Macht ihr jetzt KI-Automation oder Branding? Wie passt das zusammen?
+                        <span class="faq-icon"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Beides — und genau darum geht's. Eine schöne Marke ohne Conversion ist ein teures Hobby. Eine KI-optimierte Pipeline ohne Markenkern ist ein generischer Dropshipping-Store. Wir kombinieren <strong>Design Excellence</strong> (handgemachte Visual Identity, Custom Liquid Theme) mit <strong>AI Operations</strong> (KI direkt im Store), weil wir glauben, dass D2C-Brands nur mit beidem gewinnen. Design entscheidet, ob jemand deine Marke kauft. KI entscheidet, ob deine Marke skaliert, ohne dass du im Support ertrinkst. Wir trennen das nicht — wir bauen es als ein System.</p>
                     </div>
                 </div>
                 <div class="faq-item">
