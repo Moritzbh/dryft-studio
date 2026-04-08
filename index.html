@@ -274,12 +274,35 @@
             -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 80%);
             opacity: 0.6;
         }
-        .hero-glow {
-            position: absolute; top: 38%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 1100px; height: 1100px;
-            background: radial-gradient(circle, rgba(255, 33, 166, 0.10) 0%, rgba(3, 5, 198, 0.06) 40%, transparent 70%);
-            pointer-events: none; z-index: 0;
+        /* Kinetic Wave Background — animated hero atmosphere (BB Brands colors) */
+        .hero-wave-bg {
+            position: absolute; inset: 0;
+            overflow: hidden; pointer-events: none;
+            z-index: 0;
+        }
+        .hero-wave-canvas {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            opacity: 0.42;
+            filter: blur(60px) contrast(1.15) saturate(1.3);
+            pointer-events: none;
+        }
+        .hero-wave-fade {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            height: 55%;
+            background: linear-gradient(to bottom,
+                transparent 0%,
+                rgba(255,255,255,0.05) 15%,
+                rgba(255,255,255,0.15) 30%,
+                rgba(255,255,255,0.35) 45%,
+                rgba(255,255,255,0.60) 60%,
+                rgba(255,255,255,0.82) 75%,
+                rgba(255,255,255,0.95) 88%,
+                #FFFFFF 100%);
+            pointer-events: none;
+        }
+        @media (max-width: 767px) {
+            .hero-wave-canvas { display: none; }
         }
         .hero-inner {
             max-width: 960px; margin: 0 auto; text-align: center;
@@ -4255,8 +4278,11 @@
 
     <!-- ============ HERO ============ -->
     <header class="hero hero--split">
+        <div class="hero-wave-bg" aria-hidden="true">
+            <canvas class="hero-wave-canvas"></canvas>
+            <div class="hero-wave-fade"></div>
+        </div>
         <div class="hero-grid-bg"></div>
-        <div class="hero-glow"></div>
         <div class="hero-inner">
             <!-- LEFT: TEXT BLOCK -->
             <div class="hero-text">
@@ -4387,7 +4413,9 @@
         </div>
     </header>
 
-    <!-- ============ TRUST BAR ============ -->
+    <!-- ============ TRUST BAR (TEMPORÄR DEAKTIVIERT — 2026-04-08) ============
+         Diese Section ist auf Wunsch temporär ausgeblendet.
+         Zum Reaktivieren: einfach dieses Kommentar-Wrapping entfernen.
     <section class="trust-bar" aria-label="Referenzkunden">
         <p class="trust-label">Vertraut von D2C-Marken im DACH-Raum</p>
         <div class="trust-logos">
@@ -4399,6 +4427,7 @@
             </span>
         </div>
     </section>
+    ============ END TRUST BAR (TEMPORÄR DEAKTIVIERT) ============ -->
 
     <!-- ============ STATS / METRICS ============ -->
     <section class="stats-row" aria-label="Studio in Zahlen">
@@ -5757,6 +5786,132 @@
             window.addEventListener('load', () => setTimeout(init, 120));
             window.addEventListener('resize', () => moveIndicator(current));
             setTimeout(init, 250);
+        })();
+    </script>
+
+    <!-- Hero Kinetic Waves — BB Brands adaptation of the Zovany landing hero background -->
+    <script>
+        (function initHeroWaves() {
+            const canvas = document.querySelector('.hero-wave-canvas');
+            const wrap = document.querySelector('.hero-wave-bg');
+            if (!canvas || !wrap) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            const COLORS = [
+                { r: 3,   g: 5,   b: 198, a: 0.55 }, // BB Primary Blue
+                { r: 255, g: 33,  b: 166, a: 0.50 }, // BB Hot Pink
+                { r: 255, g: 102, b: 196, a: 0.45 }, // BB Pink Light
+                { r: 15,  g: 20,  b: 60,  a: 0.20 }  // Deep navy depth
+            ];
+            const WAVE_CONFIGS = [
+                { speed: 0.0008, amplitude: 0.22, frequency: 0.0008, offsetY: 0.70, phase: 0 },
+                { speed: 0.0012, amplitude: 0.18, frequency: 0.0014, offsetY: 0.60, phase: Math.PI / 4 },
+                { speed: 0.0015, amplitude: 0.25, frequency: 0.0010, offsetY: 0.50, phase: Math.PI / 2 },
+                { speed: 0.0010, amplitude: 0.15, frequency: 0.0018, offsetY: 0.75, phase: Math.PI }
+            ];
+            const WAVE_ORDER = [3, 0, 1, 2];
+            const STEP = 25;
+
+            const state = {
+                w: 0, h: 0,
+                mouseActive: false,
+                targetMX: 0, targetMY: 0,
+                currentMX: 0, currentMY: 0,
+                inactivityTimer: null,
+                raf: 0,
+                waves: []
+            };
+
+            function initWaves() {
+                state.waves = WAVE_ORDER.map(idx => {
+                    const color = COLORS[idx];
+                    const cfg = WAVE_CONFIGS[idx];
+                    const points = [];
+                    for (let x = -STEP * 2; x <= state.w + STEP * 2; x += STEP) {
+                        points.push({ x: x, y: state.h * cfg.offsetY, baseY: state.h * cfg.offsetY });
+                    }
+                    return Object.assign({ color: color, points: points }, cfg);
+                });
+            }
+
+            function resize() {
+                const rect = wrap.getBoundingClientRect();
+                state.w = canvas.width = rect.width;
+                state.h = canvas.height = rect.height;
+                initWaves();
+            }
+
+            function animate(time) {
+                state.raf = requestAnimationFrame(animate);
+                if (window.innerWidth < 768) return;
+
+                ctx.clearRect(0, 0, state.w, state.h);
+                state.currentMX += (state.targetMX - state.currentMX) * 0.12;
+                state.currentMY += (state.targetMY - state.currentMY) * 0.12;
+
+                for (let w = 0; w < state.waves.length; w++) {
+                    const wave = state.waves[w];
+                    ctx.beginPath();
+                    ctx.moveTo(0, state.h);
+
+                    for (let i = 0; i < wave.points.length; i++) {
+                        const pt = wave.points[i];
+
+                        let waveY = Math.sin(pt.x * wave.frequency + time * wave.speed + wave.phase) * (wave.amplitude * state.h);
+                        waveY += Math.sin(pt.x * wave.frequency * 3.2 + time * wave.speed * 1.5) * (wave.amplitude * state.h * 0.2);
+
+                        if (state.mouseActive) {
+                            const dx = pt.x - state.currentMX;
+                            const dy = pt.y - state.currentMY;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            const maxDist = state.w * 0.5;
+                            if (dist < maxDist && dist > 0) {
+                                const force = Math.pow(1 - dist / maxDist, 2.5) * 4.5;
+                                const swirlStrength = force * 15;
+                                pt.x += (dy / dist) * swirlStrength * (i % 2 === 0 ? 1 : -1);
+                                waveY -= (state.currentMY - pt.baseY) * force * 0.8;
+                            }
+                        }
+
+                        const originX = (i - 2) * STEP;
+                        pt.x += (originX - pt.x) * 0.08;
+                        const targetY = pt.baseY + waveY;
+                        pt.y += (targetY - pt.y) * 0.15;
+
+                        if (i === 0) {
+                            ctx.lineTo(pt.x, pt.y);
+                        } else {
+                            const prev = wave.points[i - 1];
+                            const cx = (prev.x + pt.x) / 2;
+                            const cy = (prev.y + pt.y) / 2;
+                            ctx.quadraticCurveTo(prev.x, prev.y, cx, cy);
+                        }
+                    }
+
+                    ctx.lineTo(state.w, state.h);
+                    ctx.fillStyle = 'rgba(' + wave.color.r + ', ' + wave.color.g + ', ' + wave.color.b + ', ' + wave.color.a + ')';
+                    ctx.fill();
+                }
+            }
+
+            function onMouseMove(e) {
+                if (window.innerWidth < 768) return;
+                if (!state.mouseActive) {
+                    state.mouseActive = true;
+                    state.currentMX = e.clientX;
+                    state.currentMY = e.clientY;
+                }
+                state.targetMX = e.clientX;
+                state.targetMY = e.clientY;
+                if (state.inactivityTimer) clearTimeout(state.inactivityTimer);
+                state.inactivityTimer = setTimeout(function () { state.mouseActive = false; }, 4000);
+            }
+
+            resize();
+            window.addEventListener('resize', resize);
+            window.addEventListener('mousemove', onMouseMove, { passive: true });
+            state.raf = requestAnimationFrame(animate);
         })();
     </script>
 </body>
