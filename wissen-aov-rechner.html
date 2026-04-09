@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AOV-Uplift Simulator — BB Brands</title>
+    <meta name="description" content="Sieh in Echtzeit, wie viel mehr Profit ein höherer Warenkorbwert (AOV) für deinen Shopify-Shop bedeutet. Pro Monat, pro Jahr, ohne mehr Traffic.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://bb-brands.de/wissen-aov-rechner.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AOV-Uplift Simulator — BB Brands">
+    <meta property="og:description" content="Was bringen +5 € AOV pro Bestellung wirklich? Live-Simulation für deinen Shop.">
+    <meta property="og:url" content="https://bb-brands.de/wissen-aov-rechner.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #FFFFFF; --bg-surface: #F5F5F7;
+            --primary: #0305C6; --primary-dark: #0204A0;
+            --accent: #FF21A6; --accent-text: #F97316;
+            --text-primary: #0A0A0A; --text-body: #4B5563;
+            --text-muted: #9CA3AF;
+            --border: rgba(10,10,10,0.08); --border-strong: rgba(10,10,10,0.16);
+            --radius: 16px; --radius-sm: 10px; --radius-pill: 100px;
+            --font-display: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-serif: 'Instrument Serif', Georgia, serif;
+        }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--text-primary); font-size: 16px; line-height: 1.7; }
+        a { color: inherit; text-decoration: none; }
+
+        .page { max-width: 1080px; margin: 0 auto; padding: 48px 32px 120px; }
+
+        .top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 56px; gap: 16px; flex-wrap: wrap; }
+        .crumbs { font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
+        .crumbs a { transition: color .2s; }
+        .crumbs a:hover { color: var(--accent); }
+        .crumbs span { margin: 0 8px; }
+        .top-bar-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 18px; background: var(--primary); color: #fff;
+            border-radius: var(--radius-pill); font-weight: 700; font-size: 12px;
+            transition: all .25s; box-shadow: 0 6px 18px rgba(3,5,198,.22);
+        }
+        .top-bar-cta:hover { background: var(--accent); transform: translateY(-1px); }
+
+        .hero { margin-bottom: 48px; max-width: 760px; }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+            text-transform: uppercase; color: var(--accent-text);
+            padding: 6px 14px; border-radius: var(--radius-pill);
+            background: rgba(249,115,22,.1); margin-bottom: 24px;
+        }
+        .eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--accent-text); border-radius: 2px; }
+
+        h1 {
+            font-family: var(--font-display); font-size: clamp(34px, 5vw, 56px);
+            font-weight: 800; letter-spacing: -1.5px; line-height: 1.06;
+            color: var(--primary); margin-bottom: 20px;
+        }
+        h1 .accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-text); }
+        .lead { font-size: 19px; font-weight: 300; color: var(--text-body); line-height: 1.7; max-width: 660px; }
+
+        .calc { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 16px; }
+        @media (max-width: 880px) { .calc { grid-template-columns: 1fr; gap: 24px; } }
+
+        .calc-form {
+            background: var(--bg-surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 32px;
+        }
+        .calc-form h2 {
+            font-family: var(--font-display); font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1.4px; font-size: 12px;
+            color: var(--text-muted); margin-bottom: 20px;
+        }
+        .field { margin-bottom: 22px; }
+        .field:last-child { margin-bottom: 0; }
+        .field label { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+        .field label .live { font-family: var(--font-display); font-weight: 800; color: var(--primary); font-size: 14px; }
+        .field .hint { display: block; font-size: 12px; font-weight: 400; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+        .input-wrap { position: relative; }
+        .input-wrap .unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 14px; font-weight: 600; color: var(--text-muted); pointer-events: none; }
+        .field input[type=number] {
+            width: 100%; padding: 14px 44px 14px 16px;
+            background: #fff; border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm); font-family: var(--font-body);
+            font-size: 16px; font-weight: 600; color: var(--text-primary);
+            transition: border-color .2s, box-shadow .2s; -moz-appearance: textfield;
+        }
+        .field input[type=number]::-webkit-outer-spin-button,
+        .field input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .field input[type=number]:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(3,5,198,.10); }
+
+        /* Range slider for AOV uplift */
+        .field input[type=range] {
+            -webkit-appearance: none; appearance: none;
+            width: 100%; height: 6px; background: rgba(10,10,10,.08);
+            border-radius: var(--radius-pill); outline: none; cursor: pointer;
+            margin-top: 6px;
+        }
+        .field input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 24px; height: 24px; border-radius: 50%;
+            background: var(--primary); cursor: pointer;
+            border: 4px solid #fff; box-shadow: 0 4px 12px rgba(3,5,198,.32);
+            transition: transform .15s;
+        }
+        .field input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+        .field input[type=range]::-moz-range-thumb {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: var(--primary); cursor: pointer;
+            border: 4px solid #fff; box-shadow: 0 4px 12px rgba(3,5,198,.32);
+        }
+
+        .calc-result {
+            background: var(--primary); color: #fff;
+            border-radius: var(--radius); padding: 32px;
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .calc-result::before {
+            content: ''; position: absolute; top: -40%; right: -10%;
+            width: 80%; height: 200%;
+            background: radial-gradient(ellipse at center, rgba(255,33,166,.35) 0%, transparent 60%);
+            filter: blur(30px); pointer-events: none;
+        }
+        .calc-result-inner { position: relative; z-index: 1; }
+        .result-label {
+            font-size: 11px; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 12px;
+        }
+        .result-big {
+            font-family: var(--font-display); font-size: clamp(48px, 7vw, 76px);
+            font-weight: 800; letter-spacing: -2.5px; line-height: 1;
+            color: #FFDE59; margin-bottom: 8px;
+        }
+        .result-explain {
+            font-size: 14px; font-weight: 400; line-height: 1.6;
+            color: rgba(255,255,255,.84); margin-bottom: 28px;
+        }
+
+        .compare {
+            padding-top: 24px; border-top: 1px solid rgba(255,255,255,.18);
+        }
+        .compare-row {
+            display: grid; grid-template-columns: 1fr auto auto; gap: 16px;
+            padding: 12px 0; align-items: baseline;
+            border-bottom: 1px dashed rgba(255,255,255,.14);
+        }
+        .compare-row:last-child { border-bottom: none; }
+        .compare-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.7); text-transform: uppercase; letter-spacing: 1px; }
+        .compare-old { font-family: var(--font-display); font-weight: 600; color: rgba(255,255,255,.6); font-size: 14px; text-decoration: line-through; }
+        .compare-new { font-family: var(--font-display); font-weight: 800; color: #fff; font-size: 18px; }
+
+        .explainer { margin-top: 64px; max-width: 760px; }
+        .explainer h2 {
+            font-family: var(--font-display); font-size: 28px; font-weight: 800;
+            letter-spacing: -.6px; color: var(--primary); margin-bottom: 16px; line-height: 1.2;
+        }
+        .explainer p { font-size: 16px; line-height: 1.8; color: var(--text-body); margin-bottom: 18px; }
+        .explainer p strong { color: var(--text-primary); font-weight: 600; }
+        .explainer ul { margin: 0 0 24px 24px; }
+        .explainer ul li { margin-bottom: 10px; color: var(--text-body); }
+
+        .tactics {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+            margin: 32px 0;
+        }
+        @media (max-width: 680px) { .tactics { grid-template-columns: 1fr; } }
+        .tactic {
+            padding: 22px 24px; background: var(--bg-surface);
+            border: 1px solid var(--border); border-radius: var(--radius);
+        }
+        .tactic strong { display: block; font-family: var(--font-display); font-weight: 800; color: var(--primary); font-size: 15px; margin-bottom: 6px; }
+        .tactic p { font-size: 14px; color: var(--text-body); line-height: 1.6; margin: 0; }
+
+        .bottom-cta {
+            margin-top: 80px; padding: 48px;
+            background: var(--primary); color: #fff;
+            border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 32px; flex-wrap: wrap; position: relative; overflow: hidden;
+        }
+        .bottom-cta::before {
+            content: ''; position: absolute; top: -50%; right: -10%;
+            width: 60%; height: 200%;
+            background: radial-gradient(ellipse at center, rgba(255,33,166,.4) 0%, transparent 60%);
+            filter: blur(40px); pointer-events: none;
+        }
+        .bottom-cta-text { position: relative; max-width: 520px; }
+        .bottom-cta h2 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 800; letter-spacing: -.8px; line-height: 1.18; margin-bottom: 12px; }
+        .bottom-cta h2 .accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: #FFDE59; }
+        .bottom-cta p { font-size: 15px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,.84); }
+        .bottom-cta-btn {
+            position: relative;
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 28px; background: #fff; color: var(--primary);
+            border-radius: var(--radius-pill); font-weight: 800; font-size: 14px;
+            transition: all .25s; flex-shrink: 0;
+            box-shadow: 0 12px 32px rgba(0,0,0,.18);
+        }
+        .bottom-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(0,0,0,.28); }
+
+        @media (max-width: 768px) {
+            .page { padding: 32px 20px 80px; }
+            .top-bar { margin-bottom: 40px; }
+            .hero { margin-bottom: 32px; }
+            .calc-form, .calc-result { padding: 24px; }
+            .bottom-cta { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="top-bar">
+            <div class="crumbs"><a href="index.html">BB Brands</a><span>/</span><a href="wissen.html">Wissens-Hub</a><span>/</span>AOV-Uplift</div>
+            <a href="https://wa.me/491608725947?text=Hey%20Moritz%2C%20ich%20hab%20gerade%20euren%20AOV-Uplift%20Simulator%20benutzt%20und%20w%C3%BCrde%20gerne%20mit%20dir%20%C3%BCber%20konkrete%20Hebel%20f%C3%BCr%20meinen%20Warenkorbwert%20sprechen.%20Wo%20liegt%20bei%20mir%20der%20gr%C3%B6%C3%9Ftere%20Hebel%3F%0A%0A(Quelle%3A%20wissen-aov-rechner%20%C2%B7%20bb-brands.de)" target="_blank" rel="noopener" class="top-bar-cta">Auf WhatsApp schreiben</a>
+        </div>
+
+        <div class="hero">
+            <div class="eyebrow">Tool · 90 Sek.</div>
+            <h1>Was bringen <span class="accent">+5 € AOV</span> wirklich?</h1>
+            <p class="lead">AOV ist der unsichtbare Hebel im D2C-Game. Du brauchst keinen Cent mehr Ad-Spend, keinen neuen Kunden, kein neues Produkt — nur einen höheren durchschnittlichen Warenkorb. Sieh hier in Echtzeit, was schon kleine AOV-Steigerungen für dein Jahresergebnis bedeuten.</p>
+        </div>
+
+        <div class="calc">
+            <form class="calc-form" id="aovForm" onsubmit="return false;">
+                <h2>Dein aktueller Status</h2>
+
+                <div class="field">
+                    <label for="a-orders">Bestellungen pro Monat</label>
+                    <div class="input-wrap">
+                        <input type="number" id="a-orders" min="0" step="1" value="450">
+                        <span class="unit">#</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="a-aov">Aktueller AOV (Brutto)</label>
+                    <div class="input-wrap">
+                        <input type="number" id="a-aov" min="0" step="0.01" value="68.00">
+                        <span class="unit">€</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="a-margin">Deine Deckungsbeitrags-Marge</label>
+                    <div class="input-wrap">
+                        <input type="number" id="a-margin" min="0" max="100" step="0.5" value="38">
+                        <span class="unit">%</span>
+                    </div>
+                    <span class="hint">Wenn du sie nicht kennst — nutze unseren <a href="wissen-marge-rechner.html" style="color:var(--primary);text-decoration:underline;">Marge-Rechner</a>.</span>
+                </div>
+
+                <div class="field">
+                    <label for="a-uplift">AOV-Steigerung simulieren <span class="live" id="a-uplift-live">+8 %</span></label>
+                    <input type="range" id="a-uplift" min="0" max="40" step="1" value="8">
+                    <span class="hint">Schiebe den Regler, um zu sehen, was unterschiedliche AOV-Boosts bringen würden.</span>
+                </div>
+            </form>
+
+            <div class="calc-result">
+                <div class="calc-result-inner">
+                    <div class="result-label">Mehr Profit pro Jahr</div>
+                    <div class="result-big" id="a-profit-year">+24.797 €</div>
+                    <p class="result-explain">Das verdienst du <strong style="color:#fff;">zusätzlich pro Jahr</strong> — bei gleichem Traffic, gleichen Bestellungen, gleichem Ad-Budget. Nur weil dein Warenkorbwert um <span id="a-uplift-text">8 %</span> steigt.</p>
+
+                    <div class="compare">
+                        <div class="compare-row">
+                            <span class="compare-label">AOV</span>
+                            <span class="compare-old" id="a-aov-old">68,00 €</span>
+                            <span class="compare-new" id="a-aov-new">73,44 €</span>
+                        </div>
+                        <div class="compare-row">
+                            <span class="compare-label">Umsatz / Monat</span>
+                            <span class="compare-old" id="a-rev-old">30.600 €</span>
+                            <span class="compare-new" id="a-rev-new">33.048 €</span>
+                        </div>
+                        <div class="compare-row">
+                            <span class="compare-label">Profit / Monat</span>
+                            <span class="compare-old" id="a-profit-old">11.628 €</span>
+                            <span class="compare-new" id="a-profit-new">12.558 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="explainer">
+            <h2>Warum AOV der unterschätzteste Hebel im D2C ist</h2>
+            <p>Wenn ein Founder mehr Profit will, denkt er fast immer an dieselben drei Sachen: <strong>mehr Traffic, bessere Ads, neue Produkte</strong>. Alles davon ist teuer, alles davon braucht Zeit. AOV ist der einzige Hebel, der gar nichts davon braucht — er nutzt die Bestellungen, die du eh schon bekommst, und holt mehr aus jeder einzelnen raus.</p>
+            <p>Die Mathematik ist brutal einfach: Wenn dein Deckungsbeitrag bei 38 % liegt und du 5 € mehr AOV bekommst, sind das <strong>1,90 € reiner Profit pro Bestellung</strong>. Bei 450 Bestellungen im Monat = 855 € extra im Monat = 10.260 € extra im Jahr. Ohne einen einzigen neuen Kunden.</p>
+
+            <h2 style="margin-top:48px;">Die 4 schnellsten AOV-Hebel auf Shopify</h2>
+            <div class="tactics">
+                <div class="tactic">
+                    <strong>1. Echte Bundles statt Rabatt</strong>
+                    <p>"Buy 2, save 10 %" funktioniert mittelmäßig. "Das passende Set für die ganze Routine" funktioniert deutlich besser — weil es Logik statt Rabatt verkauft.</p>
+                </div>
+                <div class="tactic">
+                    <strong>2. Free-Shipping-Threshold knapp über AOV</strong>
+                    <p>Aktueller AOV 68 €? Setz die Schwelle auf 75 €. Der Großteil legt das eine Extra-Produkt nach — du gewinnst 7 € AOV, kostet dich 3 € Versand.</p>
+                </div>
+                <div class="tactic">
+                    <strong>3. Smart Upsells auf der PDP</strong>
+                    <p>Ein einziger relevanter Upsell direkt unter dem Add-to-Cart-Button (kein Pop-up im Cart) holt erfahrungsgemäß +6 - 12 % AOV.</p>
+                </div>
+                <div class="tactic">
+                    <strong>4. Post-Purchase Add-On</strong>
+                    <p>Eine 1-Klick-Bestätigungs-Seite mit einem zeitlich begrenzten Add-On bringt typischerweise 8 - 15 % der Käufer dazu, noch etwas hinzuzufügen.</p>
+                </div>
+            </div>
+
+            <p><strong>Was die Daten zeigen:</strong> In Shops, mit denen wir arbeiten, lässt sich der AOV in den ersten 4 - 6 Wochen meistens um 8 - 18 % heben — ohne neue Produkte, ohne Rabattaktion, einfach durch saubere Bundle-Logik, einen besseren Threshold und einen einzigen smarten Upsell. Wenn dich der genaue Plan für deinen Shop interessiert, kannst du dich gerne kurz mit uns auf WhatsApp unterhalten.</p>
+        </div>
+
+        <div class="bottom-cta">
+            <div class="bottom-cta-text">
+                <h2>Welcher AOV-Hebel passt zu deinem Shop? <span class="accent">Schauen wir uns das an.</span></h2>
+                <p>30 Minuten, kostenlos. Wir öffnen deinen Store gemeinsam und zeigen dir die 2 - 3 konkretesten Hebel — ohne Verkaufsgespräch.</p>
+            </div>
+            <a href="https://wa.me/491608725947?text=Hey%20Moritz%2C%20ich%20hab%20gerade%20euren%20AOV-Uplift%20Simulator%20benutzt%20und%20w%C3%BCrde%20gerne%20mit%20dir%20%C3%BCber%20konkrete%20Hebel%20f%C3%BCr%20meinen%20Warenkorbwert%20sprechen.%20Wo%20liegt%20bei%20mir%20der%20gr%C3%B6%C3%9Ftere%20Hebel%3F%0A%0A(Quelle%3A%20wissen-aov-rechner%20%C2%B7%20bb-brands.de)" target="_blank" rel="noopener" class="bottom-cta-btn">
+                Auf WhatsApp schreiben
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const ids = ['a-orders','a-aov','a-margin','a-uplift'];
+            const inp = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
+            const out = {
+                profitYear: document.getElementById('a-profit-year'),
+                upliftLive: document.getElementById('a-uplift-live'),
+                upliftText: document.getElementById('a-uplift-text'),
+                aovOld: document.getElementById('a-aov-old'),
+                aovNew: document.getElementById('a-aov-new'),
+                revOld: document.getElementById('a-rev-old'),
+                revNew: document.getElementById('a-rev-new'),
+                profitOld: document.getElementById('a-profit-old'),
+                profitNew: document.getElementById('a-profit-new')
+            };
+
+            const fmtEUR = (n) => new Intl.NumberFormat('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(Math.round(n)) + ' €';
+            const fmtEUR2 = (n) => new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n) + ' €';
+
+            const calc = () => {
+                const orders = parseFloat(inp['a-orders'].value) || 0;
+                const aov = parseFloat(inp['a-aov'].value) || 0;
+                const margin = parseFloat(inp['a-margin'].value) || 0;
+                const uplift = parseFloat(inp['a-uplift'].value) || 0;
+
+                const aovNew = aov * (1 + uplift / 100);
+                const revOld = orders * aov;
+                const revNew = orders * aovNew;
+                const profitOld = revOld * (margin / 100);
+                const profitNew = revNew * (margin / 100);
+                const profitDeltaYear = (profitNew - profitOld) * 12;
+
+                out.upliftLive.textContent = '+' + uplift + ' %';
+                out.upliftText.textContent = uplift + ' %';
+                out.aovOld.textContent = fmtEUR2(aov);
+                out.aovNew.textContent = fmtEUR2(aovNew);
+                out.revOld.textContent = fmtEUR(revOld);
+                out.revNew.textContent = fmtEUR(revNew);
+                out.profitOld.textContent = fmtEUR(profitOld);
+                out.profitNew.textContent = fmtEUR(profitNew);
+                out.profitYear.textContent = (profitDeltaYear >= 0 ? '+' : '') + fmtEUR(profitDeltaYear);
+            };
+
+            ids.forEach(id => {
+                inp[id].addEventListener('input', calc);
+                inp[id].addEventListener('change', calc);
+            });
+            calc();
+        })();
+    </script>
+</body>
+</html>

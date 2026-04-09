@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break-Even ROAS Rechner — BB Brands</title>
+    <meta name="description" content="Berechne kostenlos, welchen ROAS du wirklich brauchst, um mit deinen Meta Ads schwarze Zahlen zu schreiben. Inklusive COGS, Versand, Payment-Fees und Retouren.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://bb-brands.de/wissen-roas-rechner.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Break-Even ROAS Rechner — BB Brands">
+    <meta property="og:description" content="Welchen ROAS brauchst du wirklich, um mit deinen Meta Ads profitabel zu sein? Kostenloser Rechner, kein Login.">
+    <meta property="og:url" content="https://bb-brands.de/wissen-roas-rechner.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #FFFFFF; --bg-surface: #F5F5F7;
+            --primary: #0305C6; --primary-dark: #0204A0;
+            --accent: #FF21A6; --accent-text: #F97316;
+            --text-primary: #0A0A0A; --text-body: #4B5563;
+            --text-muted: #9CA3AF;
+            --border: rgba(10,10,10,0.08); --border-strong: rgba(10,10,10,0.16);
+            --radius: 16px; --radius-sm: 10px; --radius-pill: 100px;
+            --font-display: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-serif: 'Instrument Serif', Georgia, serif;
+        }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--text-primary); font-size: 16px; line-height: 1.7; }
+        a { color: inherit; text-decoration: none; }
+
+        .page { max-width: 1080px; margin: 0 auto; padding: 48px 32px 120px; }
+
+        .top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 56px; gap: 16px; flex-wrap: wrap; }
+        .crumbs { font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
+        .crumbs a { transition: color .2s; }
+        .crumbs a:hover { color: var(--accent); }
+        .crumbs span { margin: 0 8px; }
+        .top-bar-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 18px; background: var(--primary); color: #fff;
+            border-radius: var(--radius-pill); font-weight: 700; font-size: 12px;
+            transition: all .25s; box-shadow: 0 6px 18px rgba(3,5,198,.22);
+        }
+        .top-bar-cta:hover { background: var(--accent); transform: translateY(-1px); }
+
+        .hero { margin-bottom: 48px; max-width: 760px; }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+            text-transform: uppercase; color: var(--accent-text);
+            padding: 6px 14px; border-radius: var(--radius-pill);
+            background: rgba(249,115,22,.1); margin-bottom: 24px;
+        }
+        .eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--accent-text); border-radius: 2px; }
+
+        h1 {
+            font-family: var(--font-display); font-size: clamp(34px, 5vw, 56px);
+            font-weight: 800; letter-spacing: -1.5px; line-height: 1.06;
+            color: var(--primary); margin-bottom: 20px;
+        }
+        h1 .accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-text); }
+        .lead { font-size: 19px; font-weight: 300; color: var(--text-body); line-height: 1.7; max-width: 660px; }
+
+        /* Calculator layout */
+        .calc {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+            margin-top: 16px;
+        }
+        @media (max-width: 880px) { .calc { grid-template-columns: 1fr; gap: 24px; } }
+
+        .calc-form {
+            background: var(--bg-surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 32px;
+        }
+        .calc-form h2 {
+            font-family: var(--font-display); font-size: 18px; font-weight: 800;
+            color: var(--text-primary); letter-spacing: -.3px; margin-bottom: 20px;
+            text-transform: uppercase; letter-spacing: 1.4px; font-size: 12px;
+            color: var(--text-muted);
+        }
+        .field { margin-bottom: 20px; }
+        .field:last-child { margin-bottom: 0; }
+        .field label {
+            display: block; font-size: 13px; font-weight: 600;
+            color: var(--text-primary); margin-bottom: 8px;
+        }
+        .field .hint {
+            display: block; font-size: 12px; font-weight: 400;
+            color: var(--text-muted); margin-top: 4px; line-height: 1.5;
+        }
+        .input-wrap { position: relative; }
+        .input-wrap .unit {
+            position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+            font-size: 14px; font-weight: 600; color: var(--text-muted); pointer-events: none;
+        }
+        .field input {
+            width: 100%; padding: 14px 44px 14px 16px;
+            background: #fff; border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm); font-family: var(--font-body);
+            font-size: 16px; font-weight: 600; color: var(--text-primary);
+            transition: border-color .2s, box-shadow .2s;
+            -moz-appearance: textfield;
+        }
+        .field input::-webkit-outer-spin-button,
+        .field input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .field input:focus {
+            outline: none; border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(3,5,198,.10);
+        }
+
+        .calc-result {
+            background: var(--primary); color: #fff;
+            border-radius: var(--radius); padding: 32px;
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .calc-result::before {
+            content: ''; position: absolute; top: -40%; right: -10%;
+            width: 80%; height: 200%;
+            background: radial-gradient(ellipse at center, rgba(255,33,166,.35) 0%, transparent 60%);
+            filter: blur(30px); pointer-events: none;
+        }
+        .calc-result-inner { position: relative; z-index: 1; }
+        .result-label {
+            font-size: 11px; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; color: rgba(255,255,255,.7);
+            margin-bottom: 12px;
+        }
+        .result-big {
+            font-family: var(--font-display); font-size: clamp(56px, 8vw, 88px);
+            font-weight: 800; letter-spacing: -3px; line-height: 1;
+            color: #fff; margin-bottom: 8px;
+        }
+        .result-big .x { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: #FFDE59; font-size: .55em; margin-left: 6px; }
+        .result-explain {
+            font-size: 14px; font-weight: 400; line-height: 1.6;
+            color: rgba(255,255,255,.84); margin-bottom: 28px;
+        }
+        .result-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+            padding-top: 24px; border-top: 1px solid rgba(255,255,255,.18);
+        }
+        .result-cell { }
+        .result-cell-label {
+            font-size: 11px; font-weight: 600; letter-spacing: 1px;
+            text-transform: uppercase; color: rgba(255,255,255,.6);
+            margin-bottom: 6px;
+        }
+        .result-cell-value {
+            font-family: var(--font-display); font-size: 22px; font-weight: 800;
+            color: #fff; letter-spacing: -.5px;
+        }
+        .result-cell-value.warn { color: #FFDE59; }
+        .result-cell-value.danger { color: #FF21A6; }
+
+        /* Explanation block */
+        .explainer {
+            margin-top: 64px; max-width: 760px;
+        }
+        .explainer h2 {
+            font-family: var(--font-display); font-size: 28px; font-weight: 800;
+            letter-spacing: -.6px; color: var(--primary); margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .explainer p {
+            font-size: 16px; line-height: 1.8; color: var(--text-body);
+            margin-bottom: 18px;
+        }
+        .explainer p strong { color: var(--text-primary); font-weight: 600; }
+
+        .formula {
+            margin: 24px 0; padding: 20px 24px;
+            background: var(--bg-surface); border-left: 3px solid var(--accent-text);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+            font-size: 14px; color: var(--text-primary);
+        }
+        .formula strong { color: var(--accent-text); }
+
+        /* Bottom CTA */
+        .bottom-cta {
+            margin-top: 80px; padding: 48px;
+            background: var(--primary); color: #fff;
+            border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 32px; flex-wrap: wrap;
+            position: relative; overflow: hidden;
+        }
+        .bottom-cta::before {
+            content: ''; position: absolute; top: -50%; right: -10%;
+            width: 60%; height: 200%;
+            background: radial-gradient(ellipse at center, rgba(255,33,166,.4) 0%, transparent 60%);
+            filter: blur(40px); pointer-events: none;
+        }
+        .bottom-cta-text { position: relative; max-width: 520px; }
+        .bottom-cta h2 {
+            font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px);
+            font-weight: 800; letter-spacing: -.8px; line-height: 1.18; margin-bottom: 12px;
+        }
+        .bottom-cta h2 .accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: #FFDE59; }
+        .bottom-cta p { font-size: 15px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,.84); }
+        .bottom-cta-btn {
+            position: relative;
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 28px; background: #fff; color: var(--primary);
+            border-radius: var(--radius-pill); font-weight: 800; font-size: 14px;
+            transition: all .25s; flex-shrink: 0;
+            box-shadow: 0 12px 32px rgba(0,0,0,.18);
+        }
+        .bottom-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(0,0,0,.28); }
+
+        @media (max-width: 768px) {
+            .page { padding: 32px 20px 80px; }
+            .top-bar { margin-bottom: 40px; }
+            .hero { margin-bottom: 32px; }
+            .calc-form, .calc-result { padding: 24px; }
+            .bottom-cta { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="top-bar">
+            <div class="crumbs"><a href="index.html">BB Brands</a><span>/</span><a href="wissen.html">Wissens-Hub</a><span>/</span>Break-Even ROAS</div>
+            <a href="https://wa.me/491608725947?text=Hey%20Moritz%2C%20ich%20hab%20gerade%20euren%20Break-Even%20ROAS%20Rechner%20benutzt%20und%20w%C3%BCrde%20gerne%20kurz%20mit%20dir%20%C3%BCber%20meine%20Zahlen%20sprechen.%20K%C3%B6nnen%20wir%20mal%20schauen%2C%20wo%20ich%20realistisch%20stehe%20und%20was%20sich%20optimieren%20l%C3%A4sst%3F%0A%0A(Quelle%3A%20wissen-roas-rechner%20%C2%B7%20bb-brands.de)" target="_blank" rel="noopener" class="top-bar-cta">Auf WhatsApp schreiben</a>
+        </div>
+
+        <div class="hero">
+            <div class="eyebrow">Tool · 2 Min.</div>
+            <h1>Welchen ROAS brauchst du <span class="accent">wirklich?</span></h1>
+            <p class="lead">Die meisten Shopify-Owner wissen ihren ROAS, aber nicht ihren Break-Even-Punkt. Trag deine echten Zahlen ein und sieh in 30 Sekunden, ab welchem ROAS du mit deinen Meta Ads tatsächlich Geld verdienst — nicht nur Umsatz machst.</p>
+        </div>
+
+        <div class="calc">
+            <form class="calc-form" id="roasForm" onsubmit="return false;">
+                <h2>Deine Zahlen</h2>
+
+                <div class="field">
+                    <label for="r-price">Verkaufspreis (Brutto, inkl. USt)</label>
+                    <div class="input-wrap">
+                        <input type="number" id="r-price" min="0" step="0.01" value="79.90">
+                        <span class="unit">€</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="r-vat">USt-Satz</label>
+                    <div class="input-wrap">
+                        <input type="number" id="r-vat" min="0" max="100" step="0.1" value="19">
+                        <span class="unit">%</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="r-cogs">COGS (Wareneinkauf pro Stück)</label>
+                    <div class="input-wrap">
+                        <input type="number" id="r-cogs" min="0" step="0.01" value="18.00">
+                        <span class="unit">€</span>
+                    </div>
+                    <span class="hint">Was dich das Produkt selbst kostet, ohne Versand und Verpackung.</span>
+                </div>
+
+                <div class="field">
+                    <label for="r-shipping">Versand & Fulfillment (dein Anteil)</label>
+                    <div class="input-wrap">
+                        <input type="number" id="r-shipping" min="0" step="0.01" value="5.50">
+                        <span class="unit">€</span>
+                    </div>
+                    <span class="hint">Pick &amp; Pack, Versandlabel, Verpackungsmaterial — alles, was pro Bestellung anfällt.</span>
+                </div>
+
+                <div class="field">
+                    <label for="r-fee">Payment-Provider Gebühr</label>
+                    <div class="input-wrap">
+                        <input type="number" id="r-fee" min="0" max="100" step="0.01" value="2.5">
+                        <span class="unit">%</span>
+                    </div>
+                    <span class="hint">Stripe, Klarna, PayPal — meist 1.5 - 3 % vom Brutto.</span>
+                </div>
+
+                <div class="field">
+                    <label for="r-return">Retourenquote</label>
+                    <div class="input-wrap">
+                        <input type="number" id="r-return" min="0" max="100" step="0.1" value="8">
+                        <span class="unit">%</span>
+                    </div>
+                    <span class="hint">Wie viel Prozent deiner Bestellungen kommen zurück. Mode ~30 %, Beauty ~5 %.</span>
+                </div>
+            </form>
+
+            <div class="calc-result">
+                <div class="calc-result-inner">
+                    <div class="result-label">Dein Break-Even ROAS</div>
+                    <div class="result-big"><span id="r-be">2,40</span><span class="x">x</span></div>
+                    <p class="result-explain">Das ist der ROAS, ab dem du mit deinen Meta Ads die schwarze Null erreichst. Alles darunter = du zahlst drauf. Alles darüber = echter Profit.</p>
+
+                    <div class="result-grid">
+                        <div class="result-cell">
+                            <div class="result-cell-label">Empfohlener Ziel-ROAS</div>
+                            <div class="result-cell-value" id="r-target">3,60x</div>
+                        </div>
+                        <div class="result-cell">
+                            <div class="result-cell-label">Deckungsbeitrag / Bestellung</div>
+                            <div class="result-cell-value" id="r-cb">28,03 €</div>
+                        </div>
+                        <div class="result-cell">
+                            <div class="result-cell-label">Marge nach allem</div>
+                            <div class="result-cell-value" id="r-margin">41,7 %</div>
+                        </div>
+                        <div class="result-cell">
+                            <div class="result-cell-label">Netto-Umsatz / Bestellung</div>
+                            <div class="result-cell-value" id="r-net">67,14 €</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="explainer">
+            <h2>Was diese Zahl wirklich bedeutet</h2>
+            <p>Die meisten Agenturen und Tools zeigen dir nur den ROAS aus dem Meta Ads Manager. Das Problem: Meta rechnet mit dem <strong>Brutto-Umsatz</strong> — bevor MwSt., Wareneinsatz, Versand, Payment-Fees und Retouren abgezogen sind. Dein Break-Even ROAS ist der ROAS, ab dem aus diesem Brutto-Umsatz nach allen Abzügen wirklich noch Geld übrigbleibt.</p>
+            <p><strong>Beispiel:</strong> Bei 79,90 € Verkaufspreis und 41,7 % Deckungsbeitrag liegt dein Break-Even ROAS bei ca. 2,40x. Das heißt: Wenn du 1.000 € Ad-Spend laufen lässt und der Manager dir einen ROAS von 2,2 anzeigt, machst du <strong>real Verlust</strong> — auch wenn die Kampagne auf den ersten Blick "läuft".</p>
+
+            <div class="formula">
+                <strong>Formel:</strong> Break-Even ROAS = Brutto-Verkaufspreis ÷ Deckungsbeitrag<br>
+                Deckungsbeitrag = Netto-Erlös × (1 − Retourenquote) − COGS − Versand − Payment-Fee
+            </div>
+
+            <p>Der <strong>Empfohlene Ziel-ROAS</strong> oben rechts ist dein Break-Even × 1,5. Damit hast du einen Sicherheits-Puffer für Overhead (Tools, Steuern, dich selbst) und kannst noch reinvestieren. Wer langfristig profitabel skalieren will, sollte diesen Wert als Mindestziel für jede Kampagne setzen.</p>
+            <p><strong>Was jetzt?</strong> Wenn deine echten Kampagnen unter dem Break-Even liegen, gibt es genau drei Hebel: höhere Marge (Pricing oder COGS-Verhandlung), bessere CVR (Shop &amp; PDP-Optimierung), oder bessere Hooks &amp; Targeting (Ads-Setup). Welcher Hebel bei dir am meisten bringt, hängt von deinen Zahlen ab — und genau darüber kannst du dich gerne kurz mit uns auf WhatsApp unterhalten.</p>
+        </div>
+
+        <div class="bottom-cta">
+            <div class="bottom-cta-text">
+                <h2>Deine Zahl schockt dich? <span class="accent">Lass uns reden.</span></h2>
+                <p>Wir schauen uns deinen Account an und zeigen dir konkret, wo der größte Hebel liegt — Marge, CVR oder Ads. 30 Minuten, kostenlos, kein Pitch.</p>
+            </div>
+            <a href="https://wa.me/491608725947?text=Hey%20Moritz%2C%20ich%20hab%20gerade%20euren%20Break-Even%20ROAS%20Rechner%20benutzt%20und%20w%C3%BCrde%20gerne%20kurz%20mit%20dir%20%C3%BCber%20meine%20Zahlen%20sprechen.%20K%C3%B6nnen%20wir%20mal%20schauen%2C%20wo%20ich%20realistisch%20stehe%20und%20was%20sich%20optimieren%20l%C3%A4sst%3F%0A%0A(Quelle%3A%20wissen-roas-rechner%20%C2%B7%20bb-brands.de)" target="_blank" rel="noopener" class="bottom-cta-btn">
+                Auf WhatsApp schreiben
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const ids = ['r-price','r-vat','r-cogs','r-shipping','r-fee','r-return'];
+            const inputs = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
+            const out = {
+                be: document.getElementById('r-be'),
+                target: document.getElementById('r-target'),
+                cb: document.getElementById('r-cb'),
+                margin: document.getElementById('r-margin'),
+                net: document.getElementById('r-net')
+            };
+
+            const fmtEUR = (n) => new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n) + ' €';
+            const fmtX = (n) => new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+            const fmtPct = (n) => new Intl.NumberFormat('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(n) + ' %';
+
+            const calc = () => {
+                const price = parseFloat(inputs['r-price'].value) || 0;
+                const vat = parseFloat(inputs['r-vat'].value) || 0;
+                const cogs = parseFloat(inputs['r-cogs'].value) || 0;
+                const shipping = parseFloat(inputs['r-shipping'].value) || 0;
+                const fee = parseFloat(inputs['r-fee'].value) || 0;
+                const ret = parseFloat(inputs['r-return'].value) || 0;
+
+                if (price <= 0) return;
+
+                const net = price / (1 + vat / 100);
+                const paymentFee = price * (fee / 100);
+                const effectiveNet = net * (1 - ret / 100);
+                const variableCosts = cogs + shipping + paymentFee;
+                const cb = effectiveNet - variableCosts;
+                const breakEven = cb > 0 ? price / cb : 0;
+                const target = breakEven * 1.5;
+                const marginPct = effectiveNet > 0 ? (cb / effectiveNet) * 100 : 0;
+
+                // Update UI
+                if (cb <= 0) {
+                    out.be.textContent = '∞';
+                    out.target.textContent = '∞';
+                    out.target.className = 'result-cell-value danger';
+                } else {
+                    out.be.textContent = fmtX(breakEven);
+                    out.target.textContent = fmtX(target) + 'x';
+                    out.target.className = 'result-cell-value';
+                }
+                out.cb.textContent = fmtEUR(cb);
+                out.cb.className = cb < 0 ? 'result-cell-value danger' : 'result-cell-value';
+                out.margin.textContent = fmtPct(marginPct);
+                out.margin.className = marginPct < 20 ? 'result-cell-value warn' : 'result-cell-value';
+                out.net.textContent = fmtEUR(net);
+            };
+
+            ids.forEach(id => {
+                inputs[id].addEventListener('input', calc);
+                inputs[id].addEventListener('change', calc);
+            });
+
+            calc();
+        })();
+    </script>
+</body>
+</html>

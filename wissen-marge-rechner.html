@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit-Marge Rechner — BB Brands</title>
+    <meta name="description" content="Berechne kostenlos deine echte Marge pro Bestellung — inklusive aller versteckten Kosten: Shopify-Fees, Payment-Provider, Versand, Steuern, Retouren. Kein Login.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://bb-brands.de/wissen-marge-rechner.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Profit-Marge Rechner — BB Brands">
+    <meta property="og:description" content="Was bleibt wirklich übrig pro Bestellung? Kostenloser Marge-Rechner mit allen versteckten Kosten.">
+    <meta property="og:url" content="https://bb-brands.de/wissen-marge-rechner.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #FFFFFF; --bg-surface: #F5F5F7;
+            --primary: #0305C6; --primary-dark: #0204A0;
+            --accent: #FF21A6; --accent-text: #F97316;
+            --text-primary: #0A0A0A; --text-body: #4B5563;
+            --text-muted: #9CA3AF;
+            --border: rgba(10,10,10,0.08); --border-strong: rgba(10,10,10,0.16);
+            --radius: 16px; --radius-sm: 10px; --radius-pill: 100px;
+            --font-display: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-serif: 'Instrument Serif', Georgia, serif;
+        }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--text-primary); font-size: 16px; line-height: 1.7; }
+        a { color: inherit; text-decoration: none; }
+
+        .page { max-width: 1080px; margin: 0 auto; padding: 48px 32px 120px; }
+
+        .top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 56px; gap: 16px; flex-wrap: wrap; }
+        .crumbs { font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
+        .crumbs a { transition: color .2s; }
+        .crumbs a:hover { color: var(--accent); }
+        .crumbs span { margin: 0 8px; }
+        .top-bar-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 18px; background: var(--primary); color: #fff;
+            border-radius: var(--radius-pill); font-weight: 700; font-size: 12px;
+            transition: all .25s; box-shadow: 0 6px 18px rgba(3,5,198,.22);
+        }
+        .top-bar-cta:hover { background: var(--accent); transform: translateY(-1px); }
+
+        .hero { margin-bottom: 48px; max-width: 760px; }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+            text-transform: uppercase; color: var(--accent-text);
+            padding: 6px 14px; border-radius: var(--radius-pill);
+            background: rgba(249,115,22,.1); margin-bottom: 24px;
+        }
+        .eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--accent-text); border-radius: 2px; }
+
+        h1 {
+            font-family: var(--font-display); font-size: clamp(34px, 5vw, 56px);
+            font-weight: 800; letter-spacing: -1.5px; line-height: 1.06;
+            color: var(--primary); margin-bottom: 20px;
+        }
+        h1 .accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-text); }
+        .lead { font-size: 19px; font-weight: 300; color: var(--text-body); line-height: 1.7; max-width: 660px; }
+
+        .calc { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 16px; }
+        @media (max-width: 880px) { .calc { grid-template-columns: 1fr; gap: 24px; } }
+
+        .calc-form {
+            background: var(--bg-surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 32px;
+        }
+        .calc-form h2 {
+            font-family: var(--font-display); font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1.4px; font-size: 12px;
+            color: var(--text-muted); margin-bottom: 20px;
+        }
+        .field { margin-bottom: 20px; }
+        .field:last-child { margin-bottom: 0; }
+        .field label { display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+        .field .hint { display: block; font-size: 12px; font-weight: 400; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+        .input-wrap { position: relative; }
+        .input-wrap .unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 14px; font-weight: 600; color: var(--text-muted); pointer-events: none; }
+        .field input {
+            width: 100%; padding: 14px 44px 14px 16px;
+            background: #fff; border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm); font-family: var(--font-body);
+            font-size: 16px; font-weight: 600; color: var(--text-primary);
+            transition: border-color .2s, box-shadow .2s; -moz-appearance: textfield;
+        }
+        .field input::-webkit-outer-spin-button,
+        .field input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .field input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(3,5,198,.10); }
+
+        .calc-result {
+            background: var(--primary); color: #fff;
+            border-radius: var(--radius); padding: 32px;
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .calc-result::before {
+            content: ''; position: absolute; top: -40%; right: -10%;
+            width: 80%; height: 200%;
+            background: radial-gradient(ellipse at center, rgba(255,33,166,.35) 0%, transparent 60%);
+            filter: blur(30px); pointer-events: none;
+        }
+        .calc-result-inner { position: relative; z-index: 1; }
+        .result-label {
+            font-size: 11px; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 12px;
+        }
+        .result-big {
+            font-family: var(--font-display); font-size: clamp(56px, 8vw, 88px);
+            font-weight: 800; letter-spacing: -3px; line-height: 1;
+            color: #fff; margin-bottom: 8px;
+        }
+        .result-big .pct { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: #FFDE59; font-size: .55em; margin-left: 6px; }
+        .result-explain {
+            font-size: 14px; font-weight: 400; line-height: 1.6;
+            color: rgba(255,255,255,.84); margin-bottom: 28px;
+        }
+
+        /* Cost waterfall */
+        .waterfall { padding-top: 24px; border-top: 1px solid rgba(255,255,255,.18); }
+        .waterfall-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 0; font-size: 13px;
+        }
+        .waterfall-label { color: rgba(255,255,255,.75); font-weight: 500; }
+        .waterfall-value { font-family: var(--font-display); font-weight: 700; color: #fff; }
+        .waterfall-row.deduct .waterfall-value { color: #FF8AB8; }
+        .waterfall-row.deduct .waterfall-value::before { content: '−\00a0'; }
+        .waterfall-row.total {
+            margin-top: 12px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,.22);
+            font-size: 15px;
+        }
+        .waterfall-row.total .waterfall-label { font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .8px; font-size: 11px; }
+        .waterfall-row.total .waterfall-value { color: #FFDE59; font-size: 18px; }
+
+        .explainer { margin-top: 64px; max-width: 760px; }
+        .explainer h2 {
+            font-family: var(--font-display); font-size: 28px; font-weight: 800;
+            letter-spacing: -.6px; color: var(--primary); margin-bottom: 16px; line-height: 1.2;
+        }
+        .explainer p { font-size: 16px; line-height: 1.8; color: var(--text-body); margin-bottom: 18px; }
+        .explainer p strong { color: var(--text-primary); font-weight: 600; }
+
+        .formula {
+            margin: 24px 0; padding: 20px 24px;
+            background: var(--bg-surface); border-left: 3px solid var(--accent-text);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+            font-size: 14px; color: var(--text-primary);
+        }
+        .formula strong { color: var(--accent-text); }
+
+        .bottom-cta {
+            margin-top: 80px; padding: 48px;
+            background: var(--primary); color: #fff;
+            border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 32px; flex-wrap: wrap; position: relative; overflow: hidden;
+        }
+        .bottom-cta::before {
+            content: ''; position: absolute; top: -50%; right: -10%;
+            width: 60%; height: 200%;
+            background: radial-gradient(ellipse at center, rgba(255,33,166,.4) 0%, transparent 60%);
+            filter: blur(40px); pointer-events: none;
+        }
+        .bottom-cta-text { position: relative; max-width: 520px; }
+        .bottom-cta h2 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 800; letter-spacing: -.8px; line-height: 1.18; margin-bottom: 12px; }
+        .bottom-cta h2 .accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: #FFDE59; }
+        .bottom-cta p { font-size: 15px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,.84); }
+        .bottom-cta-btn {
+            position: relative;
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 28px; background: #fff; color: var(--primary);
+            border-radius: var(--radius-pill); font-weight: 800; font-size: 14px;
+            transition: all .25s; flex-shrink: 0;
+            box-shadow: 0 12px 32px rgba(0,0,0,.18);
+        }
+        .bottom-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(0,0,0,.28); }
+
+        @media (max-width: 768px) {
+            .page { padding: 32px 20px 80px; }
+            .top-bar { margin-bottom: 40px; }
+            .hero { margin-bottom: 32px; }
+            .calc-form, .calc-result { padding: 24px; }
+            .bottom-cta { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="top-bar">
+            <div class="crumbs"><a href="index.html">BB Brands</a><span>/</span><a href="wissen.html">Wissens-Hub</a><span>/</span>Profit-Marge</div>
+            <a href="https://wa.me/491608725947?text=Hey%20Moritz%2C%20ich%20hab%20gerade%20euren%20Profit-Marge%20Rechner%20benutzt%20und%20w%C3%BCrde%20gerne%20mit%20dir%20%C3%BCber%20meine%20echten%20Zahlen%20sprechen.%20Bei%20mir%20bleibt%20gef%C3%BChlt%20weniger%20%C3%BCbrig%20als%20gedacht%20%E2%80%94%20l%C3%A4sst%20sich%20da%20was%20optimieren%3F%0A%0A(Quelle%3A%20wissen-marge-rechner%20%C2%B7%20bb-brands.de)" target="_blank" rel="noopener" class="top-bar-cta">Auf WhatsApp schreiben</a>
+        </div>
+
+        <div class="hero">
+            <div class="eyebrow">Tool · 2 Min.</div>
+            <h1>Was bleibt <span class="accent">wirklich übrig?</span></h1>
+            <p class="lead">Shopify-Owner überschätzen ihre Marge fast immer um 10 - 20 Prozentpunkte. Trag deine echten Zahlen ein und sieh, was nach allen versteckten Kosten — MwSt., Wareneinsatz, Shopify-Fees, Payment-Provider, Versand, Retouren — wirklich pro Bestellung in deiner Tasche landet.</p>
+        </div>
+
+        <div class="calc">
+            <form class="calc-form" id="margeForm" onsubmit="return false;">
+                <h2>Deine Zahlen</h2>
+
+                <div class="field">
+                    <label for="m-price">Verkaufspreis (Brutto, inkl. USt)</label>
+                    <div class="input-wrap">
+                        <input type="number" id="m-price" min="0" step="0.01" value="89.00">
+                        <span class="unit">€</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="m-vat">USt-Satz</label>
+                    <div class="input-wrap">
+                        <input type="number" id="m-vat" min="0" max="100" step="0.1" value="19">
+                        <span class="unit">%</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="m-cogs">COGS (Wareneinkauf pro Stück)</label>
+                    <div class="input-wrap">
+                        <input type="number" id="m-cogs" min="0" step="0.01" value="22.00">
+                        <span class="unit">€</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="m-ship">Versand (dein Anteil)</label>
+                    <div class="input-wrap">
+                        <input type="number" id="m-ship" min="0" step="0.01" value="4.50">
+                        <span class="unit">€</span>
+                    </div>
+                    <span class="hint">Versandlabel + Pick &amp; Pack pro Bestellung.</span>
+                </div>
+
+                <div class="field">
+                    <label for="m-pack">Verpackung &amp; Inserts</label>
+                    <div class="input-wrap">
+                        <input type="number" id="m-pack" min="0" step="0.01" value="1.20">
+                        <span class="unit">€</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="m-payfee">Payment-Provider Gebühr</label>
+                    <div class="input-wrap">
+                        <input type="number" id="m-payfee" min="0" max="100" step="0.01" value="2.5">
+                        <span class="unit">%</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="m-shopify">Shopify-Transaction-Fee</label>
+                    <div class="input-wrap">
+                        <input type="number" id="m-shopify" min="0" max="100" step="0.01" value="0">
+                        <span class="unit">%</span>
+                    </div>
+                    <span class="hint">Nur wenn du nicht Shopify Payments nutzt: 0.5 - 2.0 %.</span>
+                </div>
+
+                <div class="field">
+                    <label for="m-return">Retourenquote</label>
+                    <div class="input-wrap">
+                        <input type="number" id="m-return" min="0" max="100" step="0.1" value="6">
+                        <span class="unit">%</span>
+                    </div>
+                </div>
+            </form>
+
+            <div class="calc-result">
+                <div class="calc-result-inner">
+                    <div class="result-label">Deine echte Marge</div>
+                    <div class="result-big"><span id="m-pct">38,2</span><span class="pct">%</span></div>
+                    <p class="result-explain">Das bleibt von jedem Brutto-Euro Verkaufspreis übrig — bevor du auch nur einen Cent Ad-Spend ausgegeben hast. Dein "Geld zum Skalieren".</p>
+
+                    <div class="waterfall">
+                        <div class="waterfall-row">
+                            <span class="waterfall-label">Brutto-Verkaufspreis</span>
+                            <span class="waterfall-value" id="m-brutto">89,00 €</span>
+                        </div>
+                        <div class="waterfall-row deduct">
+                            <span class="waterfall-label">MwSt</span>
+                            <span class="waterfall-value" id="m-vat-eur">14,21 €</span>
+                        </div>
+                        <div class="waterfall-row deduct">
+                            <span class="waterfall-label">COGS</span>
+                            <span class="waterfall-value" id="m-cogs-eur">22,00 €</span>
+                        </div>
+                        <div class="waterfall-row deduct">
+                            <span class="waterfall-label">Versand &amp; Verpackung</span>
+                            <span class="waterfall-value" id="m-ship-eur">5,70 €</span>
+                        </div>
+                        <div class="waterfall-row deduct">
+                            <span class="waterfall-label">Payment + Shopify Fees</span>
+                            <span class="waterfall-value" id="m-fees-eur">2,23 €</span>
+                        </div>
+                        <div class="waterfall-row deduct">
+                            <span class="waterfall-label">Retouren-Verlust</span>
+                            <span class="waterfall-value" id="m-ret-eur">2,30 €</span>
+                        </div>
+                        <div class="waterfall-row total">
+                            <span class="waterfall-label">Deckungsbeitrag</span>
+                            <span class="waterfall-value" id="m-cb-eur">42,57 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="explainer">
+            <h2>Warum die meisten ihre Marge falsch rechnen</h2>
+            <p>Wenn ein Founder sagt "ich hab 60 % Marge", meint er meistens (Verkaufspreis − COGS) ÷ Verkaufspreis. Das ist die <strong>Bruttomarge</strong> — und sie ignoriert systematisch fünf Kostenblöcke, die im echten Shopify-Alltag jeden Monat zuschlagen:</p>
+            <ul style="margin: 0 0 24px 24px;">
+                <li><strong>Mehrwertsteuer</strong> (in DE 19 %, bei Lebensmitteln/Büchern 7 %)</li>
+                <li><strong>Versand &amp; Verpackung</strong> — selbst wenn du Versand "kostenlos" anbietest, zahlst du es</li>
+                <li><strong>Payment-Provider-Fees</strong> (Stripe, Klarna, PayPal: 1.5 - 3 %)</li>
+                <li><strong>Shopify-Transaction-Fees</strong> (wenn du nicht Shopify Payments nutzt)</li>
+                <li><strong>Retouren-Verlust</strong> — verlorenes Produkt + verlorener Versand-Hin und -Rück + Wiederaufbereitung</li>
+            </ul>
+            <p>Die echte Zahl heißt <strong>Deckungsbeitrag</strong> oder <strong>Contribution Margin</strong>. Sie sagt dir: "Das ist das Geld, das pro Bestellung übrig bleibt, um Marketing, Personal, Tools und Steuern zu bezahlen." Und das ist die einzige Zahl, die für Skalierung wirklich zählt.</p>
+
+            <div class="formula">
+                <strong>Deckungsbeitrag</strong> = (Brutto ÷ (1+USt)) × (1−Retouren%)<br>
+                &nbsp;&nbsp;− COGS − Versand − Verpackung<br>
+                &nbsp;&nbsp;− Brutto × (Payment-Fee% + Shopify-Fee%)
+            </div>
+
+            <p><strong>Faustregel:</strong> Unter 30 % echter Marge ist Skalieren über bezahlte Ads sehr schwer. Bei 30 - 40 % funktioniert es mit straffem Setup. Über 40 % hast du echten Spielraum für aggressive Akquise. Wenn du unter der 30 %-Marke liegst, ist <strong>Pricing oder Sortiment</strong> meistens der erste Hebel — nicht mehr Werbung.</p>
+            <p>Wenn du wissen willst, welcher Hebel bei dir am realistischsten ist (Pricing, COGS-Verhandlung, AOV-Boost oder Cost-Cutting im Fulfillment), kannst du dich gerne kurz mit uns auf WhatsApp unterhalten — wir schauen uns deinen Account an und sagen dir ehrlich, wo der größte Schritt versteckt ist.</p>
+        </div>
+
+        <div class="bottom-cta">
+            <div class="bottom-cta-text">
+                <h2>Marge zu dünn? <span class="accent">Wir finden den Hebel.</span></h2>
+                <p>30 Minuten, kostenlos, kein Pitch. Wir schauen uns deinen Shop an und zeigen dir, welcher Margen-Hebel bei dir am realistischsten ist.</p>
+            </div>
+            <a href="https://wa.me/491608725947?text=Hey%20Moritz%2C%20ich%20hab%20gerade%20euren%20Profit-Marge%20Rechner%20benutzt%20und%20w%C3%BCrde%20gerne%20mit%20dir%20%C3%BCber%20meine%20echten%20Zahlen%20sprechen.%20Bei%20mir%20bleibt%20gef%C3%BChlt%20weniger%20%C3%BCbrig%20als%20gedacht%20%E2%80%94%20l%C3%A4sst%20sich%20da%20was%20optimieren%3F%0A%0A(Quelle%3A%20wissen-marge-rechner%20%C2%B7%20bb-brands.de)" target="_blank" rel="noopener" class="bottom-cta-btn">
+                Auf WhatsApp schreiben
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const ids = ['m-price','m-vat','m-cogs','m-ship','m-pack','m-payfee','m-shopify','m-return'];
+            const inp = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
+            const out = {
+                pct: document.getElementById('m-pct'),
+                brutto: document.getElementById('m-brutto'),
+                vat: document.getElementById('m-vat-eur'),
+                cogs: document.getElementById('m-cogs-eur'),
+                ship: document.getElementById('m-ship-eur'),
+                fees: document.getElementById('m-fees-eur'),
+                ret: document.getElementById('m-ret-eur'),
+                cb: document.getElementById('m-cb-eur')
+            };
+
+            const fmtEUR = (n) => new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n) + ' €';
+            const fmtPct = (n) => new Intl.NumberFormat('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(n);
+
+            const calc = () => {
+                const price = parseFloat(inp['m-price'].value) || 0;
+                const vatPct = parseFloat(inp['m-vat'].value) || 0;
+                const cogs = parseFloat(inp['m-cogs'].value) || 0;
+                const ship = parseFloat(inp['m-ship'].value) || 0;
+                const pack = parseFloat(inp['m-pack'].value) || 0;
+                const payfee = parseFloat(inp['m-payfee'].value) || 0;
+                const shopify = parseFloat(inp['m-shopify'].value) || 0;
+                const ret = parseFloat(inp['m-return'].value) || 0;
+
+                if (price <= 0) return;
+
+                const net = price / (1 + vatPct / 100);
+                const vatEUR = price - net;
+                const fees = price * ((payfee + shopify) / 100);
+                const shipPack = ship + pack;
+                // Retouren-Verlust: vereinfacht als verlorener Deckungsbeitrag-Anteil
+                // Pro retournierte Bestellung verlieren wir (COGS handling) + Versand-Hin und -Rück
+                // Vereinfacht: ret% × (Versand × 2 + 0.3 × COGS Wiederaufbereitung)
+                const retLoss = (ret / 100) * (ship * 2 + cogs * 0.3 + pack);
+                const cb = net - cogs - shipPack - fees - retLoss;
+                const marginPct = price > 0 ? (cb / price) * 100 : 0;
+
+                out.pct.textContent = fmtPct(marginPct);
+                out.brutto.textContent = fmtEUR(price);
+                out.vat.textContent = fmtEUR(vatEUR);
+                out.cogs.textContent = fmtEUR(cogs);
+                out.ship.textContent = fmtEUR(shipPack);
+                out.fees.textContent = fmtEUR(fees);
+                out.ret.textContent = fmtEUR(retLoss);
+                out.cb.textContent = fmtEUR(cb);
+            };
+
+            ids.forEach(id => {
+                inp[id].addEventListener('input', calc);
+                inp[id].addEventListener('change', calc);
+            });
+            calc();
+        })();
+    </script>
+</body>
+</html>

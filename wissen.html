@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wissens-Hub — BB Brands</title>
-    <meta name="description" content="Vier Wege, BB Brands kennenzulernen, ohne dich gleich auf ein Erstgespräch festzunageln. Guide, Framework, AI Check, Brand Audit. Kostenlos. Ohne E-Mail-Pflicht.">
+    <meta name="description" content="Wissen, Frameworks und Live-Tools für D2C-Founder. Guides, AI Check, Brand Audit plus 3 Rechner für ROAS, Marge und AOV. Kostenlos. Ohne E-Mail-Pflicht.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://bb-brands.de/wissen.html">
 
@@ -131,6 +131,48 @@
         .card-thumb.t2 { background-image: linear-gradient(135deg, #F97316 0%, #FF21A6 100%); }
         .card-thumb.t3 { background-image: linear-gradient(135deg, #0204A0 0%, #F97316 100%); }
         .card-thumb.t4 { background-image: linear-gradient(135deg, #FF21A6 0%, #0305C6 100%); }
+        .card-thumb.t5 { background-image: linear-gradient(135deg, #0305C6 0%, #FFDE59 140%); }
+        .card-thumb.t6 { background-image: linear-gradient(135deg, #F97316 0%, #0305C6 120%); }
+        .card-thumb.t7 { background-image: linear-gradient(135deg, #FFDE59 0%, #FF21A6 100%); }
+
+        /* Section divider for Tools row */
+        .section-head {
+            display: flex; align-items: flex-end; justify-content: space-between;
+            gap: 24px; flex-wrap: wrap;
+            margin: 96px 0 28px;
+            padding-top: 36px;
+            border-top: 1px solid var(--border);
+        }
+        .section-head-text { max-width: 620px; }
+        .section-head .eyebrow { margin-bottom: 18px; }
+        .section-head h2 {
+            font-family: var(--font-display); font-size: clamp(28px, 3.6vw, 42px);
+            font-weight: 800; letter-spacing: -1.2px; line-height: 1.1;
+            color: var(--primary); margin-bottom: 12px;
+        }
+        .section-head h2 .accent {
+            font-family: var(--font-serif); font-style: italic; font-weight: 400;
+            color: var(--accent-text);
+        }
+        .section-head p {
+            font-size: 15px; font-weight: 300; color: var(--text-body); line-height: 1.7;
+        }
+        .section-head-meta {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 12px; font-weight: 700; letter-spacing: 1.4px;
+            text-transform: uppercase; color: var(--accent-text);
+            padding: 8px 14px; border-radius: var(--radius-pill);
+            background: rgba(249, 115, 22, 0.1); flex-shrink: 0;
+        }
+        .section-head-meta::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%;
+            background: var(--accent-text); animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+
+        .grid.grid-tools { grid-template-columns: repeat(3, 1fr); }
+        @media (max-width: 1080px) { .grid.grid-tools { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 720px)  { .grid.grid-tools { grid-template-columns: 1fr; } }
         .card-tag {
             position: absolute; bottom: 16px; left: 16px;
             font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
@@ -302,6 +344,76 @@
                         <span>Antwort meist in &lt;2h</span>
                     </div>
                     <span class="card-link">Audit auf WhatsApp starten
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="section-head">
+            <div class="section-head-text">
+                <div class="eyebrow">Live-Tools</div>
+                <h2>Drei Rechner, <span class="accent">die du jetzt sofort brauchst.</span></h2>
+                <p>Reine Browser-Tools, kein Login, kein Download. Du gibst deine Zahlen ein, du siehst sofort die Wahrheit über deine Unit Economics. Inkl. Erklärung, was die Zahl bedeutet.</p>
+            </div>
+            <span class="section-head-meta">Live · Kostenlos · Ohne Login</span>
+        </div>
+
+        <div class="grid grid-tools">
+
+            <a href="wissen-roas-rechner.html" class="card">
+                <span class="card-step">Tool · Ads</span>
+                <div class="card-thumb t5">
+                    <span class="card-tag">Rechner</span>
+                </div>
+                <div class="card-body">
+                    <h3>Break-Even ROAS Rechner</h3>
+                    <p>Ab welchem ROAS verdienst du wirklich Geld? Inkl. MwSt., Payment-Fees und Retouren. Die Zahl, ohne die Meta Ads ein Bauchgefühl bleiben.</p>
+                    <div class="card-meta">
+                        <span>⚡ Live-Berechnung</span>
+                        <span>·</span>
+                        <span>Für Meta-Ads-Founder</span>
+                    </div>
+                    <span class="card-link">Jetzt rechnen
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                </div>
+            </a>
+
+            <a href="wissen-marge-rechner.html" class="card">
+                <span class="card-step">Tool · Profit</span>
+                <div class="card-thumb t6">
+                    <span class="card-tag">Rechner</span>
+                </div>
+                <div class="card-body">
+                    <h3>Profit-Marge Rechner</h3>
+                    <p>Was bleibt wirklich übrig nach COGS, Versand, Verpackung, Shopify und Retouren? Wasserfall-Ansicht, die jeden Euro Schritt für Schritt aufschlüsselt.</p>
+                    <div class="card-meta">
+                        <span>⚡ Live-Berechnung</span>
+                        <span>·</span>
+                        <span>Inkl. Wasserfall</span>
+                    </div>
+                    <span class="card-link">Marge prüfen
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                </div>
+            </a>
+
+            <a href="wissen-aov-rechner.html" class="card">
+                <span class="card-step">Tool · Wachstum</span>
+                <div class="card-thumb t7">
+                    <span class="card-tag">Simulator</span>
+                </div>
+                <div class="card-body">
+                    <h3>AOV-Uplift Simulator</h3>
+                    <p>Was passiert mit deinem Jahresprofit, wenn du den Warenkorb um 10% hebst? Schieber rechts, Profit links, plus 4 konkrete Hebel um da hinzukommen.</p>
+                    <div class="card-meta">
+                        <span>⚡ Live-Slider</span>
+                        <span>·</span>
+                        <span>Inkl. Hebel-Liste</span>
+                    </div>
+                    <span class="card-link">Hebel testen
                         <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </span>
                 </div>
