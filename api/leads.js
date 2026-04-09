@@ -29,7 +29,19 @@ const KV_TOKEN =
   '';
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || '';
 
+// Email notifications (optional — runs only if RESEND_API_KEY is set)
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
+const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'info@bb-brands.de';
+const NOTIFY_FROM = process.env.NOTIFY_FROM || 'BB Brands Lead <leads@bb-brands.de>';
+
 const HASH_KEY = 'bb:leads';
+
+const PAIN_LABELS = {
+  branding: 'Brand & Identity',
+  shop: 'Shopify Store & CVR',
+  ads: 'Meta & Performance Ads',
+  ai: 'KI im Store & Support',
+};
 
 // ----- Redis helper (single REST call) ----------------------
 async function redis(...command) {
@@ -114,6 +126,58 @@ module.exports = async function handler(req, res) {
         return jsonResponse(res, 200, { ok: true });
       }
 
+      const magnet = str(body.magnet, 40) || 'style-guide';
+      const isWhatsAppFunnel = magnet === 'whatsapp-chat';
+
+      // ========== WHATSAPP CHAT FUNNEL ==========
+      if (isWhatsAppFunnel) {
+        const lead = {
+          magnet: 'whatsapp-chat',
+          name: str(body.name, 120),
+          brand: str(body.brand, 200),
+          website: str(body.website, 300),
+          pain: ['branding', 'shop', 'ads', 'ai'].includes(body.pain) ? body.pain : '',
+          context: str(body.context, 1000),
+          phone: str(body.phone, 60),
+          source: str(body.source, 60) || 'unknown',
+          consentChat: body.consentChat === true || body.consentChat === 'true' || body.consentChat === 'on',
+        };
+
+        const errors = {};
+        if (!lead.name) errors.name = 'Name fehlt';
+        if (!lead.brand) errors.brand = 'Marke fehlt';
+        if (!lead.website || !isUrl(lead.website)) errors.website = 'Webseite ungültig';
+        if (!lead.pain) errors.pain = 'Engpass nicht ausgewählt';
+        if (!lead.phone || lead.phone.replace(/\D/g, '').length < 6) errors.phone = 'Telefon ungültig';
+        if (!lead.consentChat) errors.consentChat = 'Einwilligung erforderlich';
+        if (Object.keys(errors).length) {
+          return jsonResponse(res, 400, { ok: false, errors });
+        }
+
+        const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        const now = new Date().toISOString();
+        const record = {
+          id,
+          ...lead,
+          status: 'new',
+          createdAt: now,
+          deliveredAt: null,
+          consentChatAt: now,
+          ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || null,
+          userAgent: str(req.headers['user-agent'] || '', 300),
+        };
+
+        await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+
+        // Fire-and-forget email notification (don't block response on failure)
+        sendWhatsAppLeadEmail(record).catch((err) =>
+          console.error('[/api/leads] email notify failed:', err)
+        );
+
+        return jsonResponse(res, 200, { ok: true, id });
+      }
+
+      // ========== EXISTING LEAD MAGNETS (style-guide / ai-readiness-check) ==========
       const lead = {
         name: str(body.name, 120),
         company: str(body.company, 200),
@@ -141,6 +205,7 @@ module.exports = async function handler(req, res) {
       const now = new Date().toISOString();
       const record = {
         id,
+        magnet,
         ...lead,
         status: 'new',
         createdAt: now,
@@ -216,6 +281,78 @@ module.exports = async function handler(req, res) {
     return jsonResponse(res, 500, { ok: false, error: 'server error' });
   }
 };
+
+// ----- WhatsApp lead email notifier (Resend API, optional) -----
+async function sendWhatsAppLeadEmail(record) {
+  if (!RESEND_API_KEY) {
+    console.log('[/api/leads] RESEND_API_KEY not set — skipping email notification');
+    return;
+  }
+  const painLabel = PAIN_LABELS[record.pain] || record.pain;
+  const subject = `WhatsApp-Lead · ${record.brand} · ${painLabel}`;
+  const escapeHtml = (s) =>
+    String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+
+  const html = `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#0B0B12;">
+      <div style="display:inline-block;padding:6px 14px;border-radius:999px;background:#25D366;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:16px;">Neuer WhatsApp-Lead</div>
+      <h2 style="font-size:22px;margin:0 0 6px;font-weight:700;letter-spacing:-0.6px;">${escapeHtml(record.name)} · ${escapeHtml(record.brand)}</h2>
+      <p style="margin:0 0 20px;color:#55555C;font-size:14px;">Quelle: ${escapeHtml(record.source)} · ${new Date(record.createdAt).toLocaleString('de-DE')}</p>
+
+      <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.55;">
+        <tr><td style="padding:8px 0;color:#8C8C95;width:120px;">Engpass</td><td style="padding:8px 0;font-weight:600;">${escapeHtml(painLabel)}</td></tr>
+        <tr><td style="padding:8px 0;color:#8C8C95;">Webseite</td><td style="padding:8px 0;"><a href="${escapeHtml(record.website)}" style="color:#0305C6;">${escapeHtml(record.website)}</a></td></tr>
+        <tr><td style="padding:8px 0;color:#8C8C95;">WhatsApp</td><td style="padding:8px 0;"><a href="https://wa.me/${escapeHtml((record.phone || '').replace(/\D/g, ''))}" style="color:#25D366;font-weight:600;">${escapeHtml(record.phone)}</a></td></tr>
+        ${record.context ? `<tr><td style="padding:8px 0;color:#8C8C95;vertical-align:top;">Kontext</td><td style="padding:8px 0;">${escapeHtml(record.context)}</td></tr>` : ''}
+      </table>
+
+      <div style="margin-top:24px;padding:14px 18px;background:#F4F4FF;border-radius:12px;font-size:13px;color:#55555C;">
+        Lead-ID: <code style="font-family:monospace;">${escapeHtml(record.id)}</code><br>
+        Im Admin-Dashboard: <a href="https://bb-brands.de/admin" style="color:#0305C6;">bb-brands.de/admin</a>
+      </div>
+    </div>
+  `;
+
+  const text = [
+    `Neuer WhatsApp-Lead`,
+    ``,
+    `Name: ${record.name}`,
+    `Marke: ${record.brand}`,
+    `Webseite: ${record.website}`,
+    `Engpass: ${painLabel}`,
+    `WhatsApp: ${record.phone}`,
+    record.context ? `Kontext: ${record.context}` : null,
+    `Quelle: ${record.source}`,
+    `Zeit: ${new Date(record.createdAt).toLocaleString('de-DE')}`,
+    ``,
+    `Lead-ID: ${record.id}`,
+    `Admin: https://bb-brands.de/admin`,
+  ].filter(Boolean).join('\n');
+
+  const resp = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: NOTIFY_FROM,
+      to: [NOTIFY_EMAIL],
+      reply_to: `https://wa.me/${(record.phone || '').replace(/\D/g, '')}`,
+      subject,
+      html,
+      text,
+    }),
+  });
+  if (!resp.ok) {
+    const errText = await resp.text();
+    throw new Error(`Resend ${resp.status}: ${errText}`);
+  }
+}
 
 // ----- raw body reader (fallback for when Vercel doesn't parse) -----
 function readBody(req) {

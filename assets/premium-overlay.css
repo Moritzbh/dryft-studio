@@ -369,3 +369,565 @@ img { border-radius: inherit; }
 @media (prefers-reduced-motion: reduce) {
     * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+/* =========================================================
+   15. WHATSAPP CHAT MODAL
+   3-Step Value-Stack Funnel — direkter Lead an Moritz.
+   Reuses .lm-modal scaffolding (backdrop, close, body).
+   ========================================================= */
+
+.wa-modal-card {
+    max-width: 580px !important;
+    background: #FFFFFF !important;
+    border: 1px solid rgba(11, 11, 18, 0.06) !important;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.95) inset,
+        0 28px 70px -24px rgba(3, 5, 198, 0.30),
+        0 60px 140px -40px rgba(37, 211, 102, 0.22) !important;
+}
+
+/* ----- Header ----- */
+.wa-modal-header {
+    padding: 44px 44px 20px;
+    border-bottom: 1px solid rgba(11, 11, 18, 0.05);
+    background:
+        radial-gradient(120% 80% at 0% 0%, rgba(37, 211, 102, 0.06) 0%, transparent 60%),
+        linear-gradient(180deg, #FFFFFF 0%, #FCFBF7 100%);
+}
+
+.wa-modal-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(37, 211, 102, 0.10);
+    color: #0E8A3E;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+.wa-modal-eyebrow svg { color: #25D366; }
+
+.wa-modal-header h3 {
+    font-size: clamp(22px, 3.2vw, 28px);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--ink);
+    margin: 0 0 8px;
+}
+
+.wa-modal-sub {
+    color: #55555C;
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin: 0 0 22px;
+    font-weight: 350;
+}
+
+/* Progress bar */
+.wa-progress {
+    position: relative;
+    height: 28px;
+    margin-top: 8px;
+}
+.wa-progress-bar {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(11, 11, 18, 0.08);
+    overflow: hidden;
+}
+.wa-progress-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--wa-progress, 16%);
+    background: linear-gradient(90deg, #0305C6 0%, #25D366 100%);
+    border-radius: 999px;
+    transition: width 0.55s cubic-bezier(.22,.61,.36,1);
+}
+.wa-progress-steps {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.wa-progress-step {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1.5px solid rgba(11, 11, 18, 0.12);
+    color: #8C8C95;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s var(--ease-premium);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 2px 6px rgba(11,11,18,0.04);
+}
+.wa-progress-step.is-done {
+    background: linear-gradient(180deg, #0305C6, #0204A0);
+    border-color: transparent;
+    color: #FFFFFF;
+}
+.wa-progress-step.is-active {
+    background: linear-gradient(180deg, #25D366, #1FB055);
+    border-color: transparent;
+    color: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.18), 0 2px 6px rgba(37, 211, 102, 0.35);
+    transform: scale(1.08);
+}
+
+/* ----- Form / Steps ----- */
+.wa-form {
+    padding: 28px 44px 36px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+    min-height: 0;
+}
+
+.wa-step {
+    display: none;
+    animation: waFadeUp 0.45s var(--ease-premium);
+}
+.wa-step.is-active { display: block; }
+
+@keyframes waFadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.wa-value-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(3, 5, 198, 0.06);
+    color: var(--bb-blue);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+.wa-value-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--bb-blue);
+    box-shadow: 0 0 0 3px rgba(3, 5, 198, 0.16);
+}
+
+.wa-field {
+    margin-bottom: 18px;
+    display: block;
+}
+.wa-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: 0.1px;
+}
+.wa-label small {
+    font-weight: 400;
+    color: #8C8C95;
+    margin-left: 4px;
+    letter-spacing: 0;
+}
+.wa-form input[type="text"],
+.wa-form input[type="url"],
+.wa-form input[type="tel"],
+.wa-form input[type="email"],
+.wa-form textarea {
+    width: 100%;
+    padding: 13px 16px;
+    background: #FFFFFF !important;
+    border: 1px solid rgba(11, 11, 18, 0.10) !important;
+    border-radius: 14px !important;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--ink);
+    transition: all 0.25s var(--ease-premium);
+}
+.wa-form textarea {
+    resize: vertical;
+    min-height: 64px;
+    line-height: 1.5;
+}
+.wa-form input:focus,
+.wa-form textarea:focus {
+    border-color: var(--bb-blue) !important;
+    box-shadow: 0 0 0 4px rgba(3, 5, 198, 0.10) !important;
+    outline: none !important;
+}
+.wa-form input.is-error,
+.wa-form textarea.is-error {
+    border-color: #E11D48 !important;
+    box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.10) !important;
+}
+.wa-hint {
+    display: block;
+    font-size: 12px;
+    color: #8C8C95;
+    margin-top: 6px;
+    line-height: 1.45;
+}
+
+/* ----- Pain selector grid ----- */
+.wa-pain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+}
+.wa-pain {
+    position: relative;
+    cursor: pointer;
+    display: block;
+}
+.wa-pain input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.wa-pain-card {
+    display: block;
+    padding: 14px 14px 13px;
+    border-radius: 14px;
+    background: #FFFFFF;
+    border: 1px solid rgba(11, 11, 18, 0.10);
+    transition: all 0.3s var(--ease-premium);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 2px 6px rgba(11,11,18,0.03);
+}
+.wa-pain:hover .wa-pain-card {
+    border-color: rgba(3, 5, 198, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.95) inset, 0 12px 28px -14px rgba(3,5,198,0.18);
+}
+.wa-pain input:checked + .wa-pain-card {
+    border-color: var(--bb-blue);
+    background: linear-gradient(180deg, #FFFFFF 0%, #F4F4FF 100%);
+    box-shadow:
+        0 0 0 3px rgba(3, 5, 198, 0.12),
+        0 1px 0 rgba(255,255,255,0.95) inset,
+        0 14px 32px -14px rgba(3, 5, 198, 0.25);
+}
+.wa-pain-emoji {
+    display: block;
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+.wa-pain-title {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.1px;
+    margin-bottom: 3px;
+}
+.wa-pain-sub {
+    display: block;
+    font-size: 11.5px;
+    color: #8C8C95;
+    line-height: 1.4;
+}
+
+/* ----- Mini insight (after pain pick) ----- */
+.wa-insight[hidden] { display: none !important; }
+.wa-insight {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    margin: 18px 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.08) 0%, rgba(3, 5, 198, 0.06) 100%);
+    border: 1px solid rgba(37, 211, 102, 0.18);
+    animation: waFadeUp 0.45s var(--ease-premium);
+}
+.wa-insight-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #25D366, #1FB055);
+    color: #FFFFFF;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px -4px rgba(37, 211, 102, 0.5);
+}
+.wa-insight-text { flex: 1; min-width: 0; }
+.wa-insight-text strong {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0E8A3E;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+}
+.wa-insight-text p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink);
+}
+
+/* ----- Promise badge (Step 3) ----- */
+.wa-promise {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+    border-radius: 14px;
+    background: rgba(3, 5, 198, 0.05);
+    border: 1px solid rgba(3, 5, 198, 0.12);
+    color: var(--ink);
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+.wa-promise svg {
+    color: var(--bb-blue);
+    flex-shrink: 0;
+}
+
+/* ----- Consent ----- */
+.wa-consent {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    padding: 12px 0 4px;
+    cursor: pointer;
+    margin-bottom: 18px;
+}
+.wa-consent input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.wa-consent-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid rgba(11, 11, 18, 0.25);
+    background: #FFFFFF;
+    flex-shrink: 0;
+    margin-top: 1px;
+    position: relative;
+    transition: all 0.2s var(--ease-premium);
+}
+.wa-consent input:checked + .wa-consent-box {
+    background: var(--bb-blue);
+    border-color: var(--bb-blue);
+}
+.wa-consent input:checked + .wa-consent-box::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid #FFFFFF;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.wa-consent-text {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #55555C;
+}
+.wa-consent-text a {
+    color: var(--bb-blue);
+    text-decoration: underline;
+}
+.wa-consent.is-error .wa-consent-box {
+    border-color: #E11D48;
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.12);
+}
+
+/* ----- Action buttons ----- */
+.wa-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 8px;
+}
+.wa-back, .wa-next, .wa-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 22px;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.32s var(--ease-premium);
+}
+.wa-back {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(11, 11, 18, 0.10);
+    color: #55555C;
+    backdrop-filter: blur(8px);
+}
+.wa-back:hover {
+    border-color: rgba(11, 11, 18, 0.18);
+    color: var(--ink);
+    transform: translateX(-2px);
+}
+.wa-next {
+    margin-left: auto;
+    background: linear-gradient(180deg, #0A0CD8 0%, #0305C6 55%, #0204A0 100%);
+    color: #FFFFFF;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+        0 1px 2px rgba(3, 5, 198, 0.5),
+        0 10px 28px -8px rgba(3, 5, 198, 0.42);
+}
+.wa-next:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.32),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+        0 1px 2px rgba(3, 5, 198, 0.5),
+        0 14px 36px -8px rgba(3, 5, 198, 0.5);
+}
+.wa-submit {
+    flex: 1;
+    background: linear-gradient(180deg, #2EE876 0%, #25D366 55%, #1FB055 100%);
+    color: #FFFFFF;
+    padding: 16px 24px;
+    font-size: 15px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.32),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+        0 1px 2px rgba(37, 211, 102, 0.5),
+        0 12px 32px -8px rgba(37, 211, 102, 0.5),
+        0 24px 64px -20px rgba(37, 211, 102, 0.4);
+}
+.wa-submit:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.36),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.16),
+        0 1px 2px rgba(37, 211, 102, 0.5),
+        0 16px 40px -8px rgba(37, 211, 102, 0.55),
+        0 30px 80px -22px rgba(37, 211, 102, 0.48);
+}
+.wa-submit[disabled] {
+    opacity: 0.7;
+    cursor: progress;
+    transform: none !important;
+}
+
+.wa-micro {
+    margin: 12px 0 0;
+    font-size: 11.5px;
+    color: #8C8C95;
+    text-align: center;
+}
+
+/* ----- Success state ----- */
+.wa-success[hidden] { display: none !important; }
+.wa-success {
+    text-align: center;
+    padding: 24px 8px 12px;
+    animation: waFadeUp 0.5s var(--ease-premium);
+}
+.wa-success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin: 0 auto 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #25D366, #1FB055);
+    color: #FFFFFF;
+    box-shadow: 0 12px 32px -8px rgba(37, 211, 102, 0.55);
+}
+.wa-success h3 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    color: var(--ink);
+    margin: 0 0 10px;
+}
+.wa-success p {
+    color: #55555C;
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin: 0 0 16px;
+    font-weight: 350;
+}
+.wa-fallback-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 11px 20px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #2EE876, #1FB055);
+    color: #FFFFFF !important;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.32),
+        0 10px 24px -8px rgba(37, 211, 102, 0.5);
+    transition: transform 0.3s var(--ease-premium);
+}
+.wa-fallback-link:hover { transform: translateY(-2px); }
+
+/* ----- Mobile ----- */
+@media (max-width: 600px) {
+    .wa-modal-card { max-height: calc(100vh - 24px) !important; }
+    .wa-modal-header { padding: 36px 24px 18px; }
+    .wa-form { padding: 22px 24px 28px; }
+    .wa-pain-grid { grid-template-columns: 1fr; }
+    .wa-actions { flex-wrap: wrap; }
+    .wa-next, .wa-submit { width: 100%; flex: 1 0 100%; margin-left: 0; }
+    .wa-back { width: 100%; flex: 1 0 100%; order: 2; }
+    .wa-modal-header h3 { font-size: 20px; }
+}
+
+/* ---------- 16. WHATSAPP CTA TRIGGER (replaces booking link) ---------- */
+.btn-whatsapp {
+    background: linear-gradient(180deg, #2EE876 0%, #25D366 55%, #1FB055 100%) !important;
+    color: #FFFFFF !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.32),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+        0 1px 2px rgba(37, 211, 102, 0.5),
+        0 12px 32px -8px rgba(37, 211, 102, 0.45),
+        0 24px 64px -20px rgba(37, 211, 102, 0.38) !important;
+}
+.btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.36),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.16),
+        0 1px 2px rgba(37, 211, 102, 0.5),
+        0 16px 40px -8px rgba(37, 211, 102, 0.55),
+        0 30px 80px -22px rgba(37, 211, 102, 0.46) !important;
+}
+.btn-whatsapp svg { color: #FFFFFF; }
+.nav-cta.btn-whatsapp { padding: 9px 18px; }
