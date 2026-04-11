@@ -18,12 +18,13 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #FFFFFF; --bg-surface: #F5F5F7;
-            --primary: #0305C6; --primary-dark: #0204A0;
-            --accent: #FF21A6; --accent-text: #F97316;
-            --text-primary: #0A0A0A; --text-body: #4B5563;
-            --text-muted: #9CA3AF;
-            --border: rgba(10,10,10,0.08); --border-strong: rgba(10,10,10,0.16);
+            --bg: #0A0A0A; --bg-surface: #111113;
+            --bg-card: #141417;
+            --primary: #5B6BFF; --primary-dark: #3D4FE6;
+            --accent: #FF21A6; --accent-text: #FB923C;
+            --text-primary: #FAFAFA; --text-body: #A1A1AA;
+            --text-muted: #71717A;
+            --border: rgba(255,255,255,0.08); --border-strong: rgba(91,107,255,0.32);
             --radius: 16px; --radius-pill: 100px;
             --font-display: 'Plus Jakarta Sans', -apple-system, sans-serif;
             --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
@@ -44,7 +45,7 @@
             display: inline-flex; align-items: center; gap: 8px;
             padding: 10px 18px; background: var(--primary); color: #fff;
             border-radius: var(--radius-pill); font-weight: 700; font-size: 12px;
-            transition: all .25s; box-shadow: 0 6px 18px rgba(3,5,198,.22);
+            transition: all .25s; box-shadow: 0 6px 18px rgba(91,107,255,.42);
         }
         .top-bar-cta:hover { background: var(--accent); transform: translateY(-1px); }
 
@@ -54,7 +55,7 @@
             font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
             text-transform: uppercase; color: var(--accent-text);
             padding: 6px 14px; border-radius: var(--radius-pill);
-            background: rgba(249,115,22,.1); margin-bottom: 24px;
+            background: rgba(251,146,60,.12); margin-bottom: 24px;
         }
         .eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--accent-text); border-radius: 2px; }
 
@@ -107,7 +108,7 @@
         .layer {
             display: grid; grid-template-columns: 64px 1fr; gap: 22px;
             padding: 26px 28px; border: 1px solid var(--border); border-radius: var(--radius);
-            background: linear-gradient(135deg, rgba(3,5,198,.03) 0%, rgba(249,115,22,.04) 100%);
+            background: linear-gradient(135deg, rgba(91,107,255,.06) 0%, rgba(251,146,60,.04) 100%);
             transition: all .25s;
         }
         .layer:hover { border-color: var(--border-strong); transform: translateX(3px); }
@@ -130,10 +131,10 @@
         .live-chrome {
             display: flex; align-items: center; gap: 12px;
             padding: 14px 18px; border-bottom: 1px solid var(--border);
-            background: #fff;
+            background: var(--bg-card);
         }
         .live-dots { display: flex; gap: 6px; }
-        .live-dots span { width: 10px; height: 10px; border-radius: 50%; background: #E5E7EB; }
+        .live-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.12); }
         .live-dots span:nth-child(1) { background: #FF5F57; }
         .live-dots span:nth-child(2) { background: #FEBC2E; }
         .live-dots span:nth-child(3) { background: #28C840; }
@@ -152,13 +153,15 @@
         /* Bottom CTA */
         .bottom-cta {
             margin-top: 88px; padding: 48px 40px;
-            background: var(--primary); color: #fff;
+            background: linear-gradient(135deg, #16161A 0%, #1B1B3A 100%);
+            border: 1px solid rgba(91,107,255,0.32);
+            color: #fff;
             border-radius: var(--radius); position: relative; overflow: hidden;
         }
         .bottom-cta::before {
             content: ''; position: absolute; top: -50%; right: -10%;
             width: 60%; height: 200%;
-            background: radial-gradient(ellipse at center, rgba(255,33,166,.4) 0%, transparent 60%);
+            background: radial-gradient(ellipse at center, rgba(255,33,166,.32) 0%, transparent 60%);
             filter: blur(40px); pointer-events: none;
         }
         .bottom-cta-inner { position: relative; }
@@ -176,10 +179,10 @@
             padding: 16px 28px; border-radius: var(--radius-pill);
             font-weight: 800; font-size: 13px; letter-spacing: .2px; transition: all .25s;
         }
-        .cta-primary { background: #fff; color: var(--primary); box-shadow: 0 12px 32px rgba(0,0,0,.18); }
-        .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(0,0,0,.28); }
-        .cta-secondary { background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.24); }
-        .cta-secondary:hover { background: rgba(255,255,255,.18); }
+        .cta-primary { background: linear-gradient(135deg, #7E8BFF 0%, #5B6BFF 50%, #3D4FE6 100%); color: #fff; box-shadow: 0 12px 32px rgba(91,107,255,.42); }
+        .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(91,107,255,.56); }
+        .cta-secondary { background: rgba(255,255,255,.06); color: #fff; border: 1px solid rgba(255,255,255,.18); }
+        .cta-secondary:hover { background: rgba(255,255,255,.12); border-color: rgba(91,107,255,.42); }
 
         .next-step {
             margin-top: 32px; padding: 24px 28px;
@@ -197,6 +200,9 @@
             .layer { grid-template-columns: 1fr; gap: 12px; }
         }
     </style>
+    <link rel="stylesheet" href="assets/premium-overlay-v2.css">
+    <link rel="stylesheet" href="assets/premium-cleanup.css">
+    <script src="assets/premium-reveal.js" defer></script>
 </head>
 <body>
     <div class="page">

@@ -13,10 +13,10 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #FFFFFF; --bg-surface: #F5F5F7;
-            --text-heading: #0305C6; --text-body: #6B7280;
-            --text-muted: #9CA3AF; --primary: #0305C6; --accent: #FF21A6;
-            --border: rgba(10,10,10,0.08);
+            --bg: #0A0A0A; --bg-surface: #111113;
+            --text-heading: #5B6BFF; --text-body: #A1A1AA;
+            --text-muted: #71717A; --primary: #5B6BFF; --accent: #FF21A6;
+            --border: rgba(255,255,255,0.08);
             --font-display: 'Plus Jakarta Sans', -apple-system, sans-serif;
             --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
             --font-mono: 'Plus Jakarta Sans', -apple-system, sans-serif;
@@ -101,7 +101,7 @@
             color: #fff; border: none; font-family: var(--font-display);
             font-size: 14px; font-weight: 700; cursor: pointer;
             transition: all 0.3s; border-radius: var(--radius-pill);
-            box-shadow: 0 8px 24px rgba(3, 5, 198, 0.28);
+            box-shadow: 0 8px 24px rgba(91, 107, 255, 0.4);
         }
         .calendly-placeholder .cta:hover {
             transform: translateY(-2px);
@@ -137,6 +137,9 @@
             .booking-embed { padding: 40px 24px; min-height: 400px; }
         }
     </style>
+    <link rel="stylesheet" href="assets/premium-overlay-v2.css">
+    <link rel="stylesheet" href="assets/premium-cleanup.css">
+    <script src="assets/premium-reveal.js" defer></script>
 </head>
 <body>
     <div class="page">

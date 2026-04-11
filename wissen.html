@@ -20,17 +20,18 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #FFFFFF;
-            --bg-surface: #F5F5F7;
-            --primary: #0305C6;
-            --primary-dark: #0204A0;
+            --bg: #0A0A0A;
+            --bg-surface: #111113;
+            --bg-card: #141417;
+            --primary: #5B6BFF;
+            --primary-dark: #3D4FE6;
             --accent: #FF21A6;
-            --accent-text: #F97316;
-            --text-primary: #0A0A0A;
-            --text-body: #6B7280;
-            --text-muted: #9CA3AF;
-            --border: rgba(10,10,10,0.08);
-            --border-strong: rgba(10,10,10,0.16);
+            --accent-text: #FB923C;
+            --text-primary: #FAFAFA;
+            --text-body: #A1A1AA;
+            --text-muted: #71717A;
+            --border: rgba(255,255,255,0.08);
+            --border-strong: rgba(91,107,255,0.32);
             --radius: 16px;
             --radius-pill: 100px;
             --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -56,9 +57,9 @@
             padding: 12px 22px; background: var(--primary); color: #fff;
             border-radius: var(--radius-pill); font-weight: 700; font-size: 13px;
             letter-spacing: .2px; transition: all .25s;
-            box-shadow: 0 6px 18px rgba(3,5,198,.22);
+            box-shadow: 0 6px 18px rgba(91,107,255,.42);
         }
-        .top-bar-cta:hover { background: var(--accent); transform: translateY(-1px); box-shadow: 0 10px 24px rgba(255,33,166,.32); }
+        .top-bar-cta:hover { background: var(--accent); transform: translateY(-1px); box-shadow: 0 10px 24px rgba(255,33,166,.42); }
 
         .hero { max-width: 760px; margin-bottom: 80px; }
         .eyebrow {
@@ -66,7 +67,7 @@
             font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
             text-transform: uppercase; color: var(--accent-text);
             padding: 6px 14px; border-radius: var(--radius-pill);
-            background: rgba(249, 115, 22, 0.1); margin-bottom: 24px;
+            background: rgba(251, 146, 60, 0.12); margin-bottom: 24px;
         }
         .eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--accent-text); border-radius: 2px; }
 
@@ -105,34 +106,34 @@
 
         .card {
             display: flex; flex-direction: column;
-            background: var(--bg); border: 1px solid var(--border);
+            background: var(--bg-card); border: 1px solid var(--border);
             border-radius: var(--radius); overflow: hidden;
             transition: all .3s; position: relative;
         }
         .card:hover {
             border-color: var(--border-strong);
             transform: translateY(-3px);
-            box-shadow: 0 18px 48px rgba(10,10,10,.08);
+            box-shadow: 0 24px 60px -28px rgba(91,107,255,.42), 0 0 0 1px rgba(255,255,255,.06) inset;
         }
         .card-step {
             position: absolute; top: 18px; right: 18px;
             font-size: 10px; font-weight: 800; letter-spacing: 1.4px;
-            text-transform: uppercase; color: var(--text-muted);
-            background: rgba(255,255,255,.92); padding: 5px 10px;
-            border-radius: var(--radius-pill); border: 1px solid var(--border);
-            backdrop-filter: blur(8px);
+            text-transform: uppercase; color: #FAFAFA;
+            background: rgba(20,20,23,.78); padding: 5px 10px;
+            border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(8px); z-index: 2;
         }
         .card-thumb {
             aspect-ratio: 16 / 9; background: var(--bg-surface);
             background-size: cover; background-position: center;
             position: relative;
         }
-        .card-thumb.t1 { background-image: linear-gradient(135deg, #0305C6 0%, #2325E0 100%); }
-        .card-thumb.t2 { background-image: linear-gradient(135deg, #F97316 0%, #FF21A6 100%); }
-        .card-thumb.t3 { background-image: linear-gradient(135deg, #0204A0 0%, #F97316 100%); }
-        .card-thumb.t4 { background-image: linear-gradient(135deg, #FF21A6 0%, #0305C6 100%); }
-        .card-thumb.t5 { background-image: linear-gradient(135deg, #0305C6 0%, #FFDE59 140%); }
-        .card-thumb.t6 { background-image: linear-gradient(135deg, #F97316 0%, #0305C6 120%); }
+        .card-thumb.t1 { background-image: linear-gradient(135deg, #5B6BFF 0%, #7E8BFF 100%); }
+        .card-thumb.t2 { background-image: linear-gradient(135deg, #FB923C 0%, #FF21A6 100%); }
+        .card-thumb.t3 { background-image: linear-gradient(135deg, #3D4FE6 0%, #FB923C 100%); }
+        .card-thumb.t4 { background-image: linear-gradient(135deg, #FF21A6 0%, #5B6BFF 100%); }
+        .card-thumb.t5 { background-image: linear-gradient(135deg, #5B6BFF 0%, #FFDE59 140%); }
+        .card-thumb.t6 { background-image: linear-gradient(135deg, #FB923C 0%, #5B6BFF 120%); }
         .card-thumb.t7 { background-image: linear-gradient(135deg, #FFDE59 0%, #FF21A6 100%); }
 
         /* Section divider for Tools row */
@@ -162,7 +163,7 @@
             font-size: 12px; font-weight: 700; letter-spacing: 1.4px;
             text-transform: uppercase; color: var(--accent-text);
             padding: 8px 14px; border-radius: var(--radius-pill);
-            background: rgba(249, 115, 22, 0.1); flex-shrink: 0;
+            background: rgba(251, 146, 60, 0.12); flex-shrink: 0;
         }
         .section-head-meta::before {
             content: ''; width: 6px; height: 6px; border-radius: 50%;
@@ -209,7 +210,9 @@
         /* Bottom CTA */
         .bottom-cta {
             margin-top: 100px; padding: 56px 48px;
-            background: var(--primary); color: #fff;
+            background: linear-gradient(135deg, #16161A 0%, #1B1B3A 100%);
+            border: 1px solid rgba(91,107,255,0.32);
+            color: #fff;
             border-radius: var(--radius);
             display: flex; align-items: center; justify-content: space-between;
             gap: 40px; flex-wrap: wrap;
@@ -218,7 +221,7 @@
         .bottom-cta::before {
             content: ''; position: absolute; top: -50%; right: -10%;
             width: 60%; height: 200%;
-            background: radial-gradient(ellipse at center, rgba(255,33,166,.4) 0%, transparent 60%);
+            background: radial-gradient(ellipse at center, rgba(255,33,166,.32) 0%, transparent 60%);
             filter: blur(40px); pointer-events: none;
         }
         .bottom-cta-text { position: relative; max-width: 540px; }
@@ -238,12 +241,14 @@
         .bottom-cta-btn {
             position: relative;
             display: inline-flex; align-items: center; gap: 10px;
-            padding: 18px 32px; background: #fff; color: var(--primary);
+            padding: 18px 32px;
+            background: linear-gradient(135deg, #7E8BFF 0%, #5B6BFF 50%, #3D4FE6 100%);
+            color: #fff;
             border-radius: var(--radius-pill); font-weight: 800; font-size: 14px;
             letter-spacing: .2px; transition: all .25s; flex-shrink: 0;
-            box-shadow: 0 12px 32px rgba(0,0,0,.18);
+            box-shadow: 0 12px 32px rgba(91,107,255,.42);
         }
-        .bottom-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(0,0,0,.28); }
+        .bottom-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(91,107,255,.56); }
 
         @media (max-width: 768px) {
             .page { padding: 32px 20px 80px; }
@@ -252,6 +257,9 @@
             .bottom-cta { padding: 40px 28px; flex-direction: column; align-items: flex-start; text-align: left; }
         }
     </style>
+    <link rel="stylesheet" href="assets/premium-overlay-v2.css">
+    <link rel="stylesheet" href="assets/premium-cleanup.css">
+    <script src="assets/premium-reveal.js" defer></script>
 </head>
 <body>
     <div class="page">
@@ -266,7 +274,7 @@
             <p>Vier Wege, BB Brands kennenzulernen — vom 5-Minuten-Read bis zum kostenlosen Audit. Such dir den passenden Einstieg in deine Customer Journey aus. Kein Newsletter, keine E-Mail-Pflicht, kein Pitch.</p>
 
             <div class="journey-strip">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0305C6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B6BFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
                 <p><strong>So liest du den Hub:</strong> Je weiter du nach unten gehst, desto näher kommst du dem direkten Gespräch. Oben Wissen, unten Aktion.</p>
             </div>
         </div>

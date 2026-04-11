@@ -1,0 +1,472 @@
+/* =========================================================
+   BB BRANDS — PREMIUM OVERLAY v2
+   "Premium Pass v1" — sits on top of premium-overlay.css and
+   the per-page inline <style> blocks. Non-destructive.
+
+   8 Moves:
+     1. Stronger film grain
+     2. Hero gradient mesh (blue → magenta → orange blobs)
+     3. Display typography upgrade (clamp, OpenType, italic accents)
+     4. Glass cards with backdrop-blur on key surfaces
+     5. Scroll-reveal animations (paired with premium-reveal.js)
+     6. Gradient-stroke borders on hero CTA + tool cards
+     7. Tabular numerals in calculators + stat blocks
+     8. Section dividers with gradient hairline
+   ========================================================= */
+
+/* ---------- 0. SHARED TOKENS (additive) ---------- */
+:root {
+    --pv2-blue:     #5B6BFF;
+    --pv2-blue-hi:  #7E8BFF;
+    --pv2-magenta:  #FF21A6;
+    --pv2-orange:   #FB923C;
+    --pv2-ink:      #FAFAFA;
+    --pv2-ink-soft: #E4E4E7;
+    --pv2-mute:     #A1A1AA;
+    --pv2-bg:       #0A0A0A;
+    --pv2-card:     #141417;
+
+    --pv2-ease:     cubic-bezier(.22, .61, .36, 1);
+    --pv2-ease-out: cubic-bezier(.16, 1, .3, 1);
+
+    /* Gradient-stroke for premium borders */
+    --pv2-grad-stroke: linear-gradient(135deg,
+        rgba(126, 139, 255, 0.55) 0%,
+        rgba(91, 107, 255, 0.32) 30%,
+        rgba(255, 33, 166, 0.28) 65%,
+        rgba(251, 146, 60, 0.42) 100%);
+}
+
+/* Tabular numerals globally — perfect alignment everywhere it matters */
+html {
+    font-feature-settings: "ss01", "kern", "liga", "calt";
+}
+body {
+    font-feature-settings: "ss01", "kern", "liga", "calt";
+}
+
+/* ---------- 1. STRONGER FILM GRAIN ---------- */
+/* Reinforces the existing body::before grain in v1 with a slower,
+   higher-contrast layer for a more cinematic feel. */
+body::after {
+    content: '';
+    position: fixed;
+    inset: -50%;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.95 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E");
+    background-size: 320px 320px;
+    animation: pv2-grain 8s steps(8) infinite;
+}
+@keyframes pv2-grain {
+    0%, 100% { transform: translate(0, 0); }
+    10%      { transform: translate(-5%, -5%); }
+    20%      { transform: translate(-10%, 5%); }
+    30%      { transform: translate(5%, -10%); }
+    40%      { transform: translate(-5%, 12%); }
+    50%      { transform: translate(-12%, 0%); }
+    60%      { transform: translate(7%, 5%); }
+    70%      { transform: translate(-3%, -8%); }
+    80%      { transform: translate(8%, 8%); }
+    90%      { transform: translate(-8%, -3%); }
+}
+
+/* ---------- 2. HERO GRADIENT MESH ---------- */
+/* Adds a soft three-blob mesh behind the hero. Pure CSS — no markup
+   change needed. The blobs slowly drift for "atmosphere". */
+.hero,
+.hero--split,
+header.hero {
+    position: relative;
+    isolation: isolate;
+}
+.hero::before,
+.hero--split::before,
+header.hero::before {
+    content: '';
+    position: absolute;
+    inset: -10% -10% 0 -10%;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(40% 50% at 20% 30%, rgba(91, 107, 255, 0.28) 0%, transparent 70%),
+        radial-gradient(35% 45% at 78% 18%, rgba(255, 33, 166, 0.20) 0%, transparent 70%),
+        radial-gradient(45% 55% at 60% 75%, rgba(251, 146, 60, 0.16) 0%, transparent 70%),
+        radial-gradient(30% 35% at 12% 80%, rgba(126, 139, 255, 0.18) 0%, transparent 70%);
+    filter: blur(10px) saturate(140%);
+    animation: pv2-mesh-drift 22s ease-in-out infinite alternate;
+}
+@keyframes pv2-mesh-drift {
+    0%   { transform: translate3d(0, 0, 0)      scale(1);    }
+    50%  { transform: translate3d(2%, -1.5%, 0) scale(1.04); }
+    100% { transform: translate3d(-2%, 1%, 0)   scale(1.02); }
+}
+
+/* Make sure hero content sits above the mesh */
+.hero > *,
+.hero--split > *,
+header.hero > * {
+    position: relative;
+    z-index: 1;
+}
+.hero-bg-wrap,
+.hero-grid-bg,
+.hero-wave-canvas,
+.hero-wave-fade {
+    z-index: 0 !important;
+}
+
+/* ---------- 3. DISPLAY TYPOGRAPHY UPGRADE ---------- */
+/* Lift the largest headlines into proper editorial display sizes
+   with tighter tracking. Uses clamp() so it scales beautifully. */
+.hero h1,
+.hero--split h1,
+header.hero h1 {
+    font-size: clamp(3.25rem, 7.6vw, 6.75rem) !important;
+    line-height: 0.96 !important;
+    letter-spacing: -0.045em !important;
+    font-weight: 700 !important;
+    text-wrap: balance;
+}
+
+/* Italic display accents — anywhere they appear */
+.hero h1 .accent,
+.hero--split h1 .accent,
+header.hero h1 .accent,
+.section-title .accent,
+h1 .accent,
+h2 .accent {
+    font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.025em !important;
+}
+
+/* Section titles get a softer clamp too */
+.section-title,
+section h2 {
+    font-size: clamp(2rem, 4.6vw, 3.6rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.032em !important;
+    text-wrap: balance;
+}
+
+/* Hero sub gets editorial breathing */
+.hero-sub,
+.hero--split .hero-sub,
+.section-sub {
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem) !important;
+    line-height: 1.55 !important;
+    text-wrap: pretty;
+    max-width: 62ch;
+}
+
+/* ---------- 4. GLASS CARDS (backdrop-blur on premium surfaces) ---------- */
+/* Promotes a curated set of cards from "flat dark" to "frosted glass". */
+.problem-card,
+.service-card,
+.guarantee-card,
+.resource-card,
+.about-card,
+.stack-card,
+.hs-card,
+.float-pill,
+.float-note,
+.proof-card,
+.tool-card,
+.step-card,
+.card,
+.layer,
+.field,
+.form-card,
+.calc-form,
+.calc-result,
+.live-box,
+.lever,
+.phase,
+.callout,
+.formula,
+.compare,
+.bottom-cta,
+.bottom-strip {
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+}
+
+/* Slight transparency on the most "card-like" surfaces so the
+   underlying mesh / grain shows through faintly. */
+.problem-card,
+.service-card,
+.guarantee-card,
+.resource-card,
+.about-card,
+.tool-card,
+.step-card,
+.card,
+.form-card,
+.calc-form,
+.live-box,
+.lever,
+.phase {
+    background-color: rgba(20, 20, 23, 0.78) !important;
+}
+
+/* ---------- 5. SCROLL REVEAL ---------- */
+/* Pairs with premium-reveal.js. Elements with [data-reveal] start
+   slightly translated + faded, animate to neutral when in viewport. */
+[data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition:
+        opacity 0.85s var(--pv2-ease-out),
+        transform 0.85s var(--pv2-ease-out);
+    will-change: opacity, transform;
+}
+[data-reveal].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+[data-reveal-delay="1"].is-visible { transition-delay: 0.08s; }
+[data-reveal-delay="2"].is-visible { transition-delay: 0.16s; }
+[data-reveal-delay="3"].is-visible { transition-delay: 0.24s; }
+[data-reveal-delay="4"].is-visible { transition-delay: 0.32s; }
+[data-reveal-delay="5"].is-visible { transition-delay: 0.40s; }
+
+/* Auto-reveal targets — applied without needing to edit HTML.
+   Uses .pv2-auto-reveal class added by reveal.js to each match. */
+.pv2-auto-reveal {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition:
+        opacity 0.9s var(--pv2-ease-out),
+        transform 0.9s var(--pv2-ease-out);
+    will-change: opacity, transform;
+}
+.pv2-auto-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+/* ---------- 6. GRADIENT-STROKE BORDERS ---------- */
+/* Premium feel: border replaced with a 1px gradient via mask. */
+.btn-primary,
+.nav-cta,
+.lm-submit,
+.bottom-cta-btn,
+.bottom-strip-btn,
+.tool-card,
+.step-card,
+.card,
+.stack-card,
+.hs-card,
+.calc-result,
+.calc-form,
+.form-card,
+.live-box,
+.lever,
+.phase,
+.bottom-cta,
+.bottom-strip {
+    position: relative;
+}
+
+.tool-card::before,
+.step-card::before,
+.card::before,
+.stack-card::before,
+.hs-card::before,
+.calc-result::before,
+.calc-form::before,
+.form-card::before,
+.live-box::before,
+.lever::before,
+.phase::before,
+.bottom-cta::before,
+.bottom-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--pv2-grad-stroke);
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.65;
+    transition: opacity 0.4s var(--pv2-ease);
+}
+.tool-card:hover::before,
+.step-card:hover::before,
+.card:hover::before,
+.stack-card:hover::before,
+.hs-card:hover::before,
+.lever:hover::before,
+.phase:hover::before {
+    opacity: 1;
+}
+
+/* Premium CTA gets an animated gradient ring on hover */
+.btn-primary::after,
+.nav-cta::after,
+.lm-submit::after,
+.bottom-cta-btn::after,
+.bottom-strip-btn::after,
+.cta-primary::after,
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg,
+        rgba(126, 139, 255, 0.0) 0%,
+        rgba(126, 139, 255, 0.55) 35%,
+        rgba(255, 33, 166, 0.55) 65%,
+        rgba(251, 146, 60, 0.0) 100%);
+    opacity: 0;
+    transition: opacity 0.4s var(--pv2-ease);
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(10px);
+}
+.btn-primary:hover::after,
+.nav-cta:hover::after,
+.lm-submit:hover::after,
+.bottom-cta-btn:hover::after,
+.bottom-strip-btn:hover::after,
+.cta-primary:hover::after,
+.submit-btn:hover::after {
+    opacity: 0.9;
+}
+
+/* ---------- 7. TABULAR NUMERALS in calculators + stats ---------- */
+.calc-result,
+.calc-result *,
+.stat-card,
+.stat-card *,
+.stat-num,
+.stats-row *,
+.field input,
+.field-input,
+input[type="number"],
+.calc-input,
+.result-num,
+.result-value,
+.metric,
+.waterfall-row,
+.row,
+.code-block,
+pre, code,
+.amount,
+.value {
+    font-variant-numeric: tabular-nums !important;
+    font-feature-settings: "tnum", "lnum", "ss01" !important;
+}
+
+/* Make the giant result numbers feel "engineered" */
+.calc-result .result-num,
+.calc-result strong,
+.calc-result .big,
+.stat-num {
+    font-feature-settings: "tnum", "lnum", "ss01", "case" !important;
+    letter-spacing: -0.02em;
+}
+
+/* ---------- 8. SECTION DIVIDERS — gradient hairline ---------- */
+/* Replace solid section borders with a soft brand-tinted fade. */
+section + section,
+.problem,
+.solution,
+.services,
+.guarantees,
+.about,
+.resources,
+.faq,
+.final-cta,
+.stats-row,
+.leadmagnet {
+    border-bottom: none !important;
+    position: relative;
+}
+
+.problem::after,
+.solution::after,
+.services::after,
+.guarantees::after,
+.about::after,
+.resources::after,
+.faq::after,
+.stats-row::after,
+.leadmagnet::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: min(880px, 88%);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.04) 12%,
+        rgba(91, 107, 255, 0.42) 50%,
+        rgba(255, 255, 255, 0.04) 88%,
+        transparent 100%);
+    pointer-events: none;
+}
+
+/* Standalone <hr> in articles too */
+hr {
+    border: none !important;
+    height: 1px !important;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(91, 107, 255, 0.30) 50%,
+        transparent 100%) !important;
+    margin: 48px auto !important;
+    max-width: 480px;
+}
+
+/* ---------- 9. MICRO POLISH ---------- */
+/* Smoother text on dark — Mac/iOS look */
+html, body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Lift the existing card hover state a touch more */
+.problem-card:hover,
+.service-card:hover,
+.guarantee-card:hover,
+.resource-card:hover,
+.about-card:hover,
+.tool-card:hover,
+.step-card:hover,
+.card:hover,
+.lever:hover,
+.phase:hover {
+    transform: translateY(-6px) !important;
+}
+
+/* Selection in brand color */
+::selection { background: rgba(91, 107, 255, 0.45); color: #FFFFFF; }
+
+/* ---------- 10. REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+    body::after,
+    .hero::before,
+    .hero--split::before,
+    header.hero::before {
+        animation: none !important;
+    }
+    [data-reveal],
+    .pv2-auto-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
