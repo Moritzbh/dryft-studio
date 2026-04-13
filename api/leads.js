@@ -194,8 +194,11 @@ module.exports = async function handler(req, res) {
       if (!lead.name) errors.name = 'Name fehlt';
       if (!lead.company) errors.company = 'Unternehmen fehlt';
       if (!lead.website || !isUrl(lead.website)) errors.website = 'Webseite ungültig';
-      if (!lead.email || !isEmail(lead.email)) errors.email = 'E-Mail ungültig';
-      if (lead.delivery === 'whatsapp' && !lead.phone) errors.phone = 'Telefon nötig für WhatsApp';
+      if (lead.delivery === 'whatsapp') {
+        if (!lead.phone) errors.phone = 'WhatsApp-Nummer fehlt';
+      } else {
+        if (!lead.email || !isEmail(lead.email)) errors.email = 'E-Mail ungültig';
+      }
       if (!lead.consentGuide) errors.consentGuide = 'Einwilligung zur Datenverarbeitung erforderlich';
       if (Object.keys(errors).length) {
         return jsonResponse(res, 400, { ok: false, errors });
