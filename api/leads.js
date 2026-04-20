@@ -497,19 +497,25 @@ async function sendPushNotification(record) {
 
   const payload = buildPushPayload(record);
 
+  // ntfy akzeptiert Publishing via JSON-POST-Body (offizielle empfohlene Methode
+  // wenn Actions komplexer werden — siehe https://docs.ntfy.sh/publish/#publish-as-json)
+  // Vorteile: kein Latin-1-HTTP-Header-Escaping, kein Komma-in-Action-Workaround,
+  // Priority als Zahl (1-5), Tags als Array, Actions als Native-Array.
+  const body = {
+    topic: NTFY_TOPIC,
+    title: payload.title,
+    message: payload.message,
+    priority: payload.priority === 'high' ? 5 : payload.priority === 'low' ? 2 : 3,
+    tags: payload.tags, // Array
+    click: payload.clickUrl,
+    actions: payload.actions, // Array von Action-Objekten
+  };
+
   try {
-    const resp = await fetch(`${NTFY_SERVER}/${NTFY_TOPIC}`, {
+    const resp = await fetch(NTFY_SERVER, {
       method: 'POST',
-      headers: {
-        // ntfy nutzt HTTP-Headers für Metadata. Latin-1-safe damit Umlaute nicht crashen.
-        'Title': encodeLatin1Header(payload.title),
-        'Priority': payload.priority,
-        'Tags': payload.tags,
-        'Click': payload.clickUrl,
-        'Actions': payload.actions,
-        'Content-Type': 'text/plain; charset=utf-8',
-      },
-      body: payload.message,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     });
     if (!resp.ok) {
       const errText = await resp.text();
@@ -612,8 +618,8 @@ function buildPushPayload(record) {
       clear: false,
     });
   }
-  // JSON-Array stringified für ntfy X-Actions Header
-  const actionsHeader = JSON.stringify(actions.slice(0, 3));
+  // Actions als Array (nicht stringified) — wird im JSON-POST-Body von sendPushNotification genutzt
+  const actionsArray = actions.slice(0, 3);
 
   // === ERSTGESPRÄCH ===
   if (record.magnet === 'erstgespraech') {
@@ -633,9 +639,9 @@ function buildPushPayload(record) {
       title,
       message: lines.join('\n'),
       priority: isHighValue ? 'high' : 'default',
-      tags: isHighValue ? 'fire,moneybag' : 'mailbox_with_mail',
+      tags: isHighValue ? ['fire', 'moneybag'] : ['mailbox_with_mail'],
       clickUrl: ADMIN_URL,
-      actions: actionsHeader,
+      actions: actionsArray,
     };
   }
 
@@ -651,22 +657,13 @@ function buildPushPayload(record) {
       record.context ? `\n💬 ${record.context}` : null,
       time ? `\n🕐 ${time} Uhr` : null,
     ].filter(Boolean);
-    // WhatsApp-Primary: Chat direkt öffnen
-    const waAction = phoneClean
-      ? `view, Chat, https://wa.me/${phoneClean}, clear=true`
-      : null;
-    const whatsappActions = [
-      waAction,
-      `view, Admin, ${ADMIN_URL}, clear=true`,
-      record.website ? `view, Website, ${record.website.startsWith('http') ? record.website : 'https://' + record.website}, clear=false` : null,
-    ].filter(Boolean).slice(0, 3).join('; ');
     return {
       title,
       message: lines.join('\n'),
       priority: 'high',
-      tags: 'speech_balloon,fire',
+      tags: ['speech_balloon', 'fire'],
       clickUrl: phoneClean ? `https://wa.me/${phoneClean}` : ADMIN_URL,
-      actions: whatsappActions,
+      actions: actionsArray,
     };
   }
 
@@ -689,9 +686,9 @@ function buildPushPayload(record) {
       title,
       message: lines.join('\n'),
       priority: 'default',
-      tags: record.consentReference ? 'rocket,star' : 'rocket',
+      tags: record.consentReference ? ['rocket', 'star'] : ['rocket'],
       clickUrl: ADMIN_URL,
-      actions: actionsHeader,
+      actions: actionsArray,
     };
   }
 
@@ -711,9 +708,9 @@ function buildPushPayload(record) {
     title: genericTitle,
     message: genericLines.join('\n'),
     priority: 'default',
-    tags: 'bell',
+    tags: ['bell'],
     clickUrl: ADMIN_URL,
-    actions: actionsHeader,
+    actions: actionsArray,
   };
 }
 
