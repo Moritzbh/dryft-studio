@@ -37,9 +37,6 @@ const NOTIFY_FROM = process.env.NOTIFY_FROM || 'BB Brands Lead <leads@bb-brands.
 // Push notifications via ntfy.sh (optional — runs only if NTFY_TOPIC is set)
 const NTFY_TOPIC = process.env.NTFY_TOPIC || '';
 const NTFY_SERVER = process.env.NTFY_SERVER || 'https://ntfy.sh';
-// Separater Token nur für Quick-Status-Updates aus Push-Notifications.
-// Weniger mächtig als ADMIN_TOKEN: kann nur Status von 'new' → 'in-progress' → 'delivered' toggeln.
-const PUSH_ACTION_TOKEN = process.env.PUSH_ACTION_TOKEN || '';
 
 const HASH_KEY = 'bb:leads';
 
@@ -139,17 +136,6 @@ function checkAdmin(req) {
   const auth = req.headers['authorization'] || req.headers['Authorization'] || '';
   const token = auth.replace(/^Bearer\s+/i, '');
   return ADMIN_TOKEN && token && token === ADMIN_TOKEN;
-}
-
-// Separater Auth-Check für eingeschränkte Push-Quick-Actions (nur Status-Update).
-// Akzeptiert sowohl ADMIN_TOKEN als auch PUSH_ACTION_TOKEN.
-function checkPushOrAdmin(req) {
-  const auth = req.headers['authorization'] || req.headers['Authorization'] || '';
-  const token = auth.replace(/^Bearer\s+/i, '');
-  if (!token) return false;
-  if (ADMIN_TOKEN && token === ADMIN_TOKEN) return true;
-  if (PUSH_ACTION_TOKEN && token === PUSH_ACTION_TOKEN) return true;
-  return false;
 }
 
 function jsonResponse(res, status, body) {
@@ -378,9 +364,9 @@ module.exports = async function handler(req, res) {
       return jsonResponse(res, 200, { ok: true, leads, count: leads.length });
     }
 
-    // ============ PATCH: update status (admin OR push-action token) ============
+    // ============ PATCH: update status (admin) ============
     if (req.method === 'PATCH') {
-      if (!checkPushOrAdmin(req)) {
+      if (!checkAdmin(req)) {
         return jsonResponse(res, 401, { ok: false, error: 'unauthorized' });
       }
       const body = req.body || (await readJsonBody(req));
@@ -497,25 +483,19 @@ async function sendPushNotification(record) {
 
   const payload = buildPushPayload(record);
 
-  // ntfy akzeptiert Publishing via JSON-POST-Body (offizielle empfohlene Methode
-  // wenn Actions komplexer werden — siehe https://docs.ntfy.sh/publish/#publish-as-json)
-  // Vorteile: kein Latin-1-HTTP-Header-Escaping, kein Komma-in-Action-Workaround,
-  // Priority als Zahl (1-5), Tags als Array, Actions als Native-Array.
-  const body = {
-    topic: NTFY_TOPIC,
-    title: payload.title,
-    message: payload.message,
-    priority: payload.priority === 'high' ? 5 : payload.priority === 'low' ? 2 : 3,
-    tags: payload.tags, // Array
-    click: payload.clickUrl,
-    actions: payload.actions, // Array von Action-Objekten
-  };
-
   try {
-    const resp = await fetch(NTFY_SERVER, {
+    const resp = await fetch(`${NTFY_SERVER}/${NTFY_TOPIC}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      headers: {
+        // ntfy nutzt HTTP-Headers für Metadata. Latin-1-safe damit Umlaute nicht crashen.
+        'Title': encodeLatin1Header(payload.title),
+        'Priority': payload.priority,
+        'Tags': payload.tags,
+        'Click': payload.clickUrl,
+        'Actions': payload.actions,
+        'Content-Type': 'text/plain; charset=utf-8',
+      },
+      body: payload.message,
     });
     if (!resp.ok) {
       const errText = await resp.text();
@@ -533,7 +513,6 @@ async function sendPushNotification(record) {
 // plus optional expliziter Case für reicheres Formatting.
 function buildPushPayload(record) {
   const ADMIN_URL = 'https://bb-brands.de/admin';
-  const LEADS_API_URL = 'https://bb-brands.de/api/leads';
   const time = record.createdAt
     ? new Date(record.createdAt).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
     : '';
@@ -546,80 +525,20 @@ function buildPushPayload(record) {
     record.magnet === 'whatsapp-chat';
 
   // Shared: Action-Buttons bauen (max 3 — ntfy-Limit)
-  // JSON-Array-Format damit HTTP-Actions (Status-Update) + view-Actions gemischt werden können.
-  // Reihenfolge: [Antworten/Kontakt] → [In Arbeit] → [Erledigt]  — die drei wichtigsten.
-  // Alles weitere (Admin, Website) via Tap-auf-Notification (Click-Header).
-  const phoneClean = (record.phone || '').replace(/\D/g, '');
+  // Labels bewusst ohne Umlaute, damit HTTP-Header Latin-1 safe bleibt.
   const actions = [];
-
-  // 1. Primary Action: Kontakt aufnehmen (WhatsApp bei Phone, E-Mail sonst)
+  const phoneClean = (record.phone || '').replace(/\D/g, '');
   if (phoneClean) {
-    actions.push({
-      action: 'view',
-      label: 'WhatsApp',
-      url: `https://wa.me/${phoneClean}`,
-      clear: true,
-    });
+    actions.push(`view, WhatsApp, https://wa.me/${phoneClean}, clear=true`);
   } else if (record.email) {
-    actions.push({
-      action: 'view',
-      label: 'Antworten',
-      url: `mailto:${record.email}?subject=Deine%20Anfrage%20bei%20BB%20Brands`,
-      clear: false,
-    });
+    actions.push(`view, Antworten, mailto:${record.email}?subject=Deine%20Anfrage%20bei%20BB%20Brands, clear=false`);
   }
-
-  // 2. Status → In Arbeit (HTTP PATCH, nur wenn Token gesetzt ist)
-  if (PUSH_ACTION_TOKEN && record.id) {
-    actions.push({
-      action: 'http',
-      label: 'In Arbeit',
-      url: LEADS_API_URL,
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer ${PUSH_ACTION_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: record.id, status: 'in-progress' }),
-      clear: true,
-    });
-
-    // 3. Status → Erledigt
-    actions.push({
-      action: 'http',
-      label: 'Erledigt',
-      url: LEADS_API_URL,
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer ${PUSH_ACTION_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: record.id, status: 'delivered' }),
-      clear: true,
-    });
-  }
-
-  // ntfy akzeptiert max 3 Actions. Wenn Push-Token nicht gesetzt → Fallback auf Admin + Website
-  // damit auch ohne Quick-Status-Feature was passiert.
-  if (actions.length < 3) {
-    actions.push({
-      action: 'view',
-      label: 'Admin',
-      url: ADMIN_URL,
-      clear: true,
-    });
-  }
-  if (actions.length < 3 && record.website) {
+  actions.push(`view, Admin, ${ADMIN_URL}, clear=true`);
+  if (record.website) {
     const webHref = record.website.startsWith('http') ? record.website : `https://${record.website}`;
-    actions.push({
-      action: 'view',
-      label: 'Website',
-      url: webHref,
-      clear: false,
-    });
+    actions.push(`view, Website, ${webHref}, clear=false`);
   }
-  // Actions als Array (nicht stringified) — wird im JSON-POST-Body von sendPushNotification genutzt
-  const actionsArray = actions.slice(0, 3);
+  const actionsHeader = actions.slice(0, 3).join('; ');
 
   // === ERSTGESPRÄCH ===
   if (record.magnet === 'erstgespraech') {
@@ -639,9 +558,9 @@ function buildPushPayload(record) {
       title,
       message: lines.join('\n'),
       priority: isHighValue ? 'high' : 'default',
-      tags: isHighValue ? ['fire', 'moneybag'] : ['mailbox_with_mail'],
+      tags: isHighValue ? 'fire,moneybag' : 'mailbox_with_mail',
       clickUrl: ADMIN_URL,
-      actions: actionsArray,
+      actions: actionsHeader,
     };
   }
 
@@ -657,13 +576,22 @@ function buildPushPayload(record) {
       record.context ? `\n💬 ${record.context}` : null,
       time ? `\n🕐 ${time} Uhr` : null,
     ].filter(Boolean);
+    // WhatsApp-Primary: Chat direkt öffnen
+    const waAction = phoneClean
+      ? `view, Chat, https://wa.me/${phoneClean}, clear=true`
+      : null;
+    const whatsappActions = [
+      waAction,
+      `view, Admin, ${ADMIN_URL}, clear=true`,
+      record.website ? `view, Website, ${record.website.startsWith('http') ? record.website : 'https://' + record.website}, clear=false` : null,
+    ].filter(Boolean).slice(0, 3).join('; ');
     return {
       title,
       message: lines.join('\n'),
       priority: 'high',
-      tags: ['speech_balloon', 'fire'],
+      tags: 'speech_balloon,fire',
       clickUrl: phoneClean ? `https://wa.me/${phoneClean}` : ADMIN_URL,
-      actions: actionsArray,
+      actions: whatsappActions,
     };
   }
 
@@ -686,9 +614,9 @@ function buildPushPayload(record) {
       title,
       message: lines.join('\n'),
       priority: 'default',
-      tags: record.consentReference ? ['rocket', 'star'] : ['rocket'],
+      tags: record.consentReference ? 'rocket,star' : 'rocket',
       clickUrl: ADMIN_URL,
-      actions: actionsArray,
+      actions: actionsHeader,
     };
   }
 
@@ -708,9 +636,9 @@ function buildPushPayload(record) {
     title: genericTitle,
     message: genericLines.join('\n'),
     priority: 'default',
-    tags: ['bell'],
+    tags: 'bell',
     clickUrl: ADMIN_URL,
-    actions: actionsArray,
+    actions: actionsHeader,
   };
 }
 
