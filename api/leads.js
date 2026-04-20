@@ -43,6 +43,28 @@ const PAIN_LABELS = {
   ai: 'KI im Store & Support',
 };
 
+// Erstgespräch-Form enums (aus website/erstgespraech.html)
+const ERSTGESPRAECH_UMSATZ = ['<5k', '5-25k', '25-100k', '100k+', 'unklar'];
+const ERSTGESPRAECH_BAUSTELLE = [
+  'store-neu',
+  'store-optimize',
+  'store-rebuild',
+  'branding',
+  'ads',
+  'mehrere',
+];
+const ERSTGESPRAECH_TIMELINE = ['sofort', '1-monat', '2-3-monate', 'explorativ'];
+const ERSTGESPRAECH_BUDGET = ['<5k', '5-10k', '10-20k', '20k+', 'unklar', ''];
+const ERSTGESPRAECH_ATTRIBUTION = [
+  'google',
+  'linkedin',
+  'instagram',
+  'empfehlung',
+  'cold-outreach',
+  'andere',
+  '',
+];
+
 // ----- Redis helper (single REST call) ----------------------
 async function redis(...command) {
   if (!KV_URL || !KV_TOKEN) {
@@ -128,6 +150,61 @@ module.exports = async function handler(req, res) {
 
       const magnet = str(body.magnet, 40) || 'style-guide';
       const isWhatsAppFunnel = magnet === 'whatsapp-chat';
+      const isErstgespraech = magnet === 'erstgespraech';
+
+      // ========== ERSTGESPRÄCH FORMULAR ==========
+      if (isErstgespraech) {
+        const lead = {
+          magnet: 'erstgespraech',
+          name: str(body.name, 120),
+          email: str(body.email, 200),
+          brand: str(body.brand, 200),
+          website: str(body.website, 300),
+          wasVerkauft: str(body.was_verkauft || body.wasVerkauft, 1000),
+          umsatz: ERSTGESPRAECH_UMSATZ.includes(body.umsatz) ? body.umsatz : '',
+          baustelle: ERSTGESPRAECH_BAUSTELLE.includes(body.baustelle) ? body.baustelle : '',
+          timeline: ERSTGESPRAECH_TIMELINE.includes(body.timeline) ? body.timeline : '',
+          budget: ERSTGESPRAECH_BUDGET.includes(body.budget || '') ? (body.budget || '') : '',
+          attribution: ERSTGESPRAECH_ATTRIBUTION.includes(body.attribution || '') ? (body.attribution || '') : '',
+          consentContact:
+            body.consentContact === true ||
+            body.consentContact === 'true' ||
+            body.consentContact === 'on',
+        };
+
+        const errors = {};
+        if (!lead.name) errors.name = 'Name fehlt';
+        if (!lead.email || !isEmail(lead.email)) errors.email = 'E-Mail ungültig';
+        if (!lead.brand) errors.brand = 'Marke fehlt';
+        if (lead.website && !isUrl(lead.website)) errors.website = 'Webseite ungültig';
+        if (!lead.wasVerkauft) errors.was_verkauft = 'Beschreibung fehlt';
+        if (!lead.umsatz) errors.umsatz = 'Umsatz-Range fehlt';
+        if (!lead.baustelle) errors.baustelle = 'Baustelle fehlt';
+        if (!lead.timeline) errors.timeline = 'Timeline fehlt';
+        if (!lead.consentContact) errors.consentContact = 'Einwilligung erforderlich';
+        if (Object.keys(errors).length) {
+          return jsonResponse(res, 400, { ok: false, errors });
+        }
+
+        const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        const now = new Date().toISOString();
+        const record = {
+          id,
+          ...lead,
+          // Shim-Felder, damit das Admin-Dashboard bestehende Spalten nutzen kann
+          company: lead.brand,
+          delivery: 'email',
+          status: 'new',
+          createdAt: now,
+          deliveredAt: null,
+          consentContactAt: now,
+          ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || null,
+          userAgent: str(req.headers['user-agent'] || '', 300),
+        };
+
+        await redis('HSET', HASH_KEY, id, JSON.stringify(record));
+        return jsonResponse(res, 200, { ok: true, id });
+      }
 
       // ========== WHATSAPP CHAT FUNNEL ==========
       if (isWhatsAppFunnel) {

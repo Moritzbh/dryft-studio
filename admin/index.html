@@ -344,6 +344,71 @@
         }
         .badge-reference svg { width: 11px; height: 11px; }
 
+        /* Magnet-Label (welcher Funnel hat den Lead erzeugt) */
+        .badge-magnet {
+            display: inline-flex; align-items: center;
+            padding: 3px 9px;
+            font-size: 10px; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.8px;
+            border-radius: 100px;
+            background: rgba(255, 222, 89, 0.16);
+            color: #B6891A;
+        }
+        .badge-magnet.magnet-erstgespraech {
+            background: rgba(3, 5, 198, 0.12);
+            color: var(--primary);
+        }
+        .badge-magnet.magnet-whatsapp-chat {
+            background: rgba(37, 211, 102, 0.12);
+            color: #1FAF4C;
+        }
+
+        /* Info-Tags für Erstgespräch-Leads (Umsatz, Baustelle, Timeline, Budget) */
+        .info-tags {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-top: 12px;
+        }
+        .info-tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 12px;
+            font-size: 11px; font-weight: 700;
+            color: var(--text-muted);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+        }
+        .info-tag-label {
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase; letter-spacing: 0.6px;
+            font-size: 9.5px;
+        }
+        .info-tag.tag-revenue { color: var(--primary); border-color: rgba(3, 5, 198, 0.2); }
+        .info-tag.tag-urgent {
+            color: var(--orange);
+            background: rgba(245, 158, 11, 0.08);
+            border-color: rgba(245, 158, 11, 0.25);
+        }
+        .info-tag.tag-baustelle { color: var(--accent); border-color: rgba(255, 33, 166, 0.22); }
+
+        /* "Was verkauft" / Kontext-Textzeile */
+        .lead-context {
+            margin-top: 14px;
+            padding: 12px 14px;
+            background: var(--bg);
+            border-left: 3px solid var(--primary);
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .lead-context-label {
+            font-size: 10px; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
         .lead-actions {
             display: flex; gap: 6px;
         }
@@ -471,7 +536,7 @@
                 <div class="topbar-left">
                     <span class="topbar-logo">BB</span>
                     <div>
-                        <div class="topbar-title">Lead Dashboard<small>Style Guide Anfragen</small></div>
+                        <div class="topbar-title">Lead Dashboard<small>Alle Anfragen &middot; Erstgespräch, Style Guide, WhatsApp</small></div>
                     </div>
                 </div>
                 <div class="topbar-actions">
@@ -513,6 +578,7 @@
                     <button class="filter-btn" data-filter="new">Neu</button>
                     <button class="filter-btn" data-filter="in-progress">In Arbeit</button>
                     <button class="filter-btn" data-filter="delivered">Versendet</button>
+                    <button class="filter-btn" data-filter="erstgespraech" title="Nur Erstgespräch-Anfragen">Erstgespräch</button>
                     <button class="filter-btn" data-filter="reference" title="Nur Leads mit Referenz-Einwilligung">Referenz-OK</button>
                 </div>
             </div>
@@ -605,16 +671,57 @@
             return leads.filter(l => {
                 if (currentFilter === 'reference') {
                     if (!l.consentReference) return false;
+                } else if (currentFilter === 'erstgespraech') {
+                    if (l.magnet !== 'erstgespraech') return false;
                 } else if (currentFilter !== 'all' && l.status !== currentFilter) {
                     return false;
                 }
                 if (q) {
-                    const hay = (l.name + ' ' + l.company + ' ' + (l.email || '') + ' ' + (l.phone || '') + ' ' + (l.website || '')).toLowerCase();
+                    const hay = [
+                        l.name, l.company, l.brand, l.email, l.phone, l.website,
+                        l.wasVerkauft, l.umsatz, l.baustelle, l.timeline,
+                    ].filter(Boolean).join(' ').toLowerCase();
                     if (!hay.includes(q)) return false;
                 }
                 return true;
             });
         }
+
+        // ─── Erstgespräch-Label-Maps ───
+        const UMSATZ_LABELS = {
+            '<5k': '< 5.000 €/Mo',
+            '5-25k': '5–25k/Mo',
+            '25-100k': '25–100k/Mo',
+            '100k+': '> 100k/Mo',
+            'unklar': 'Umsatz unklar',
+        };
+        const BAUSTELLE_LABELS = {
+            'store-neu': 'Shop neu bauen',
+            'store-optimize': 'Shop optimieren',
+            'store-rebuild': 'Shop Rebuild',
+            'branding': 'Branding',
+            'ads': 'Performance Ads',
+            'mehrere': 'Mehrere Bereiche',
+        };
+        const TIMELINE_LABELS = {
+            'sofort': 'Sofort (2 Wo.)',
+            '1-monat': '~ 1 Monat',
+            '2-3-monate': '2–3 Monate',
+            'explorativ': 'Explorativ',
+        };
+        const BUDGET_LABELS = {
+            '<5k': '< 5k €',
+            '5-10k': '5–10k €',
+            '10-20k': '10–20k €',
+            '20k+': '> 20k €',
+            'unklar': 'Budget unklar',
+        };
+        const MAGNET_LABELS = {
+            'erstgespraech': 'Erstgespräch',
+            'style-guide': 'Style Guide',
+            'ai-readiness-check': 'AI-Check',
+            'whatsapp-chat': 'WhatsApp',
+        };
 
         function escapeHtml(s) {
             if (s == null) return '';
@@ -648,6 +755,7 @@
             }
 
             leadsContainer.innerHTML = '<div class="leads">' + filtered.map(l => {
+                const isErstgespraech = l.magnet === 'erstgespraech';
                 const channelClass = l.delivery === 'whatsapp' ? 'whatsapp' : '';
                 const channelIcon = l.delivery === 'whatsapp'
                     ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>'
@@ -658,6 +766,38 @@
                     'in-progress': '<span class="badge badge-progress">In Arbeit</span>',
                     'delivered': '<span class="badge badge-delivered">Versendet</span>',
                 }[l.status] || '';
+
+                const magnetBadge = l.magnet
+                    ? `<span class="badge-magnet magnet-${escapeHtml(l.magnet)}">${escapeHtml(MAGNET_LABELS[l.magnet] || l.magnet)}</span>`
+                    : '';
+
+                // Erstgespräch-spezifische Info-Tags
+                let infoTags = '';
+                let contextBlock = '';
+                if (isErstgespraech) {
+                    const tags = [];
+                    if (l.umsatz && UMSATZ_LABELS[l.umsatz]) {
+                        tags.push(`<span class="info-tag tag-revenue"><span class="info-tag-label">Umsatz</span> ${escapeHtml(UMSATZ_LABELS[l.umsatz])}</span>`);
+                    }
+                    if (l.baustelle && BAUSTELLE_LABELS[l.baustelle]) {
+                        tags.push(`<span class="info-tag tag-baustelle"><span class="info-tag-label">Baustelle</span> ${escapeHtml(BAUSTELLE_LABELS[l.baustelle])}</span>`);
+                    }
+                    if (l.timeline && TIMELINE_LABELS[l.timeline]) {
+                        const urgent = l.timeline === 'sofort' ? ' tag-urgent' : '';
+                        tags.push(`<span class="info-tag${urgent}"><span class="info-tag-label">Timeline</span> ${escapeHtml(TIMELINE_LABELS[l.timeline])}</span>`);
+                    }
+                    if (l.budget && BUDGET_LABELS[l.budget]) {
+                        tags.push(`<span class="info-tag"><span class="info-tag-label">Budget</span> ${escapeHtml(BUDGET_LABELS[l.budget])}</span>`);
+                    }
+                    if (tags.length) infoTags = `<div class="info-tags">${tags.join('')}</div>`;
+                    if (l.wasVerkauft) {
+                        contextBlock = `
+                            <div class="lead-context">
+                                <div class="lead-context-label">Was verkauft</div>
+                                ${escapeHtml(l.wasVerkauft)}
+                            </div>`;
+                    }
+                }
 
                 const actions = l.status === 'delivered'
                     ? `<button class="lead-action" data-act="reopen" data-id="${escapeHtml(l.id)}">Reopen</button>
@@ -672,13 +812,14 @@
                 const websiteHref = l.website && l.website.startsWith('http') ? l.website : 'https://' + (l.website || '');
                 const phoneClean = (l.phone || '').replace(/[^+\d]/g, '');
                 const waLink = phoneClean ? 'https://wa.me/' + phoneClean.replace(/^\+/, '') : '';
+                const displayCompany = l.brand || l.company || '';
 
                 return `
                     <article class="lead-card status-${escapeHtml(l.status)}">
                         <div>
                             <div class="lead-header">
                                 <span class="lead-name">${escapeHtml(l.name)}</span>
-                                <span class="lead-company">${escapeHtml(l.company)}</span>
+                                ${displayCompany ? `<span class="lead-company">${escapeHtml(displayCompany)}</span>` : ''}
                             </div>
                             <div class="lead-meta">
                                 ${l.email ? `
@@ -693,20 +834,24 @@
                                     ${escapeHtml(l.phone)}
                                     <span class="copy-hint">kopiert</span>
                                 </span>` : ''}
+                                ${l.website ? `
                                 <a class="lead-meta-item" href="${escapeHtml(websiteHref)}" target="_blank" rel="noopener" title="Webseite öffnen">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                                     ${escapeHtml(l.website)}
-                                </a>
+                                </a>` : ''}
                                 ${waLink ? `
                                 <a class="lead-meta-item" href="${escapeHtml(waLink)}" target="_blank" rel="noopener" title="Auf WhatsApp öffnen">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
                                     Auf WhatsApp öffnen
                                 </a>` : ''}
                             </div>
+                            ${infoTags}
+                            ${contextBlock}
                         </div>
                         <div class="lead-side">
                             <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
                                 ${statusBadge}
+                                ${magnetBadge}
                                 <span class="badge-channel ${channelClass}">${channelIcon} ${l.delivery === 'whatsapp' ? 'WhatsApp' : 'E-Mail'}</span>
                                 ${l.consentReference ? `<span class="badge-reference" title="Einwilligung zur Logo-Nutzung als Referenz erteilt am ${escapeHtml(l.consentReferenceAt || '')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Referenz-OK</span>` : ''}
                             </div>
