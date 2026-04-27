@@ -8,14 +8,14 @@
     <meta name="keywords" content="Shopify Agentur, D2C Brand Studio, Shopify Store bauen, Branding DACH, Performance Ads, E-Commerce Agentur, KI Agentur, Shopify Theme">
     <meta name="author" content="Moritz Bohmbach — BB Brands">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://bb-brands.de">
+    <link rel="canonical" href="https://bbbrands.de">
     <meta name="theme-color" content="#0A0A0A">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="BB Brands — Wir bauen, du verkaufst.">
     <meta property="og:description" content="Branding, Store, E-Mail, Ads aus einer Hand. Mit Liefer-Garantie in Tagen. Für D2C-Brands, die mehr wollen als einen Template-Shop.">
-    <meta property="og:url" content="https://bb-brands.de">
+    <meta property="og:url" content="https://bbbrands.de">
     <meta property="og:site_name" content="BB Brands">
     <meta property="og:locale" content="de_DE">
 
@@ -31,7 +31,7 @@
       "@type": "ProfessionalService",
       "name": "BB Brands",
       "description": "Brand Studio für D2C-Marken auf Shopify. Branding, Store, E-Mail-Marketing und Performance Ads aus einer Hand.",
-      "url": "https://bb-brands.de",
+      "url": "https://bbbrands.de",
       "founder": {
         "@type": "Person",
         "name": "Moritz Bohmbach"
@@ -54,9 +54,9 @@
         "E-Mail Marketing"
       ],
       "potentialAction": {
-        "@type": "CommunicateAction",
-        "name": "Schreib uns auf WhatsApp",
-        "target": "https://wa.me/491608725947"
+        "@type": "ReserveAction",
+        "name": "Kostenloses Erstgespräch buchen",
+        "target": "https://bbbrands.de/erstgespraech.html"
       }
     }
     </script>
@@ -64,7 +64,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
     <!-- Preload above-the-fold hero showcase images for fast LCP -->
     <link rel="preload" as="image" href="assets/hero-showcase-pdp-800.jpg"
@@ -82,42 +81,40 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            /* Primary BB Brands Colors — DARK MODE
-               Brand blue lifted to a luminous electric tone so it pops on black.
-               Pink kept as rare secondary accent. */
-            --bb-blue:       #5B6BFF;
-            --bb-blue-dark:  #3D4FE6;
-            --bb-blue-light: #7E8BFF;
-            --bb-pink:       #FF21A6;
-            --bb-pink-light: #FF66C4;
-            --bb-yellow:     #FFDE59;
-            --bb-white:      #FAFAFA;
+            /* Primary BB Brands Colors */
+            --bb-blue:       #0A0A0A;
+            --bb-blue-dark:  #000000;
+            --bb-blue-light: #262626;
+            --bb-pink:       #1A1A1A;
+            --bb-pink-light: #525252;
+            --bb-yellow:     #D4D4D4;
+            --bb-white:      #FFFFFF;
             --bb-black:      #0A0A0A;
-            --bb-gray:       #141417;
-            --bb-gray-dark:  #71717A;
-            --bb-gradient-glow: linear-gradient(90deg, #5B6BFF, #FF21A6, #FFDE59);
+            --bb-gray:       #F5F5F7;
+            --bb-gray-dark:  #6B7280;
+            --bb-gradient-glow: linear-gradient(90deg, #0A0A0A, #1A1A1A, #D4D4D4);
 
-            /* Semantic tokens — dark surfaces, off-black ground */
-            --bg: #0A0A0A;
-            --bg-surface: #111113;
-            --bg-elevated: #16161A;
-            --bg-card: #141417;
-            --text-primary: #FAFAFA;
-            --text-heading: #FAFAFA;
-            --text-body: #A1A1AA;
-            --text-muted: #71717A;
-            --accent: #5B6BFF;
-            --accent-light: #7E8BFF;
-            --accent-dark: #3D4FE6;
-            --accent-glow: rgba(91, 107, 255, 0.18);
-            /* Text accent — kept blue family for coherence on dark */
-            --accent-text: #7E8BFF;
-            --accent-text-light: #A4ADFF;
-            --primary: #5B6BFF;
-            --primary-light: #7E8BFF;
-            --primary-dark: #3D4FE6;
-            --border: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(255, 255, 255, 0.18);
+            /* Semantic tokens */
+            --bg: #FFFFFF;
+            --bg-surface: #F5F5F7;
+            --bg-elevated: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --text-primary: #0A0A0A;
+            --text-heading: #0A0A0A;
+            --text-body: #6B7280;
+            --text-muted: #9CA3AF;
+            --accent: #1A1A1A;
+            --accent-light: #525252;
+            --accent-dark: #000000;
+            --accent-glow: rgba(26, 26, 26, 0.12);
+            /* Text accent — orange replaces pink for typographic accents */
+            --accent-text: #1A1A1A;
+            --accent-text-light: #525252;
+            --primary: #0A0A0A;
+            --primary-light: #262626;
+            --primary-dark: #000000;
+            --border: rgba(10, 10, 10, 0.08);
+            --border-hover: rgba(10, 10, 10, 0.25);
             --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-mono: 'Plus Jakarta Sans', -apple-system, sans-serif;
@@ -159,7 +156,7 @@
             letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent-text);
             display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px;
             padding: 6px 14px; border-radius: var(--radius-pill);
-            background: rgba(255, 33, 166, 0.08);
+            background: rgba(26, 26, 26, 0.08);
         }
         .eyebrow::before {
             content: ''; width: 18px; height: 2px; background: var(--accent); border-radius: 2px;
@@ -189,7 +186,7 @@
         nav.top-nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             padding: 0 40px;
-            background: rgba(10, 10, 10, 0.65);
+            background: rgba(255, 255, 255, 0.82);
             backdrop-filter: saturate(180%) blur(14px);
             -webkit-backdrop-filter: saturate(180%) blur(14px);
             border-bottom: 1px solid transparent;
@@ -197,7 +194,7 @@
         }
         nav.top-nav.scrolled {
             border-bottom-color: var(--border);
-            background: rgba(10, 10, 10, 0.88);
+            background: rgba(255, 255, 255, 0.95);
         }
         .nav-inner {
             max-width: var(--max-width); margin: 0 auto;
@@ -213,12 +210,12 @@
             background: var(--primary);
             display: inline-flex; align-items: center; justify-content: center;
             color: #fff; font-weight: 800; font-size: 15px; letter-spacing: -0.5px;
-            box-shadow: 0 4px 14px rgba(91, 107, 255, 0.25);
+            box-shadow: 0 4px 14px rgba(10, 10, 10, 0.25);
         }
         .logo-img {
             width: 36px; height: 36px; border-radius: 10px;
             object-fit: cover; display: block;
-            box-shadow: 0 4px 14px rgba(91, 107, 255, 0.2);
+            box-shadow: 0 4px 14px rgba(10, 10, 10, 0.2);
         }
         .nav-links { display: flex; gap: 36px; list-style: none; }
         .nav-links a {
@@ -230,9 +227,9 @@
             padding: 12px 24px; background: var(--primary); color: #fff;
             font-family: var(--font-body); font-size: 13px; font-weight: 600;
             transition: all 0.25s; border-radius: var(--radius-pill);
-            box-shadow: 0 4px 14px rgba(91, 107, 255, 0.22);
+            box-shadow: 0 4px 14px rgba(10, 10, 10, 0.22);
         }
-        .nav-cta:hover { background: var(--accent); box-shadow: 0 6px 20px rgba(255, 33, 166, 0.3); }
+        .nav-cta:hover { background: var(--accent); box-shadow: 0 6px 20px rgba(26, 26, 26, 0.3); }
 
         .nav-burger {
             display: none; width: 34px; height: 34px; position: relative; z-index: 110;
@@ -268,7 +265,7 @@
             padding: 160px 40px 100px;
             display: flex; flex-direction: column; justify-content: center;
             position: relative; overflow: hidden;
-            background: var(--bg-card);
+            background: #FFFFFF;
         }
         .hero-grid-bg {
             position: absolute; inset: 0; pointer-events: none;
@@ -298,13 +295,13 @@
             height: 55%;
             background: linear-gradient(to bottom,
                 transparent 0%,
-                rgba(10,10,10,0.05) 15%,
-                rgba(10,10,10,0.18) 30%,
-                rgba(10,10,10,0.40) 45%,
-                rgba(10,10,10,0.65) 60%,
-                rgba(10,10,10,0.85) 75%,
-                rgba(10,10,10,0.96) 88%,
-                #0A0A0A 100%);
+                rgba(255,255,255,0.05) 15%,
+                rgba(255,255,255,0.15) 30%,
+                rgba(255,255,255,0.35) 45%,
+                rgba(255,255,255,0.60) 60%,
+                rgba(255,255,255,0.82) 75%,
+                rgba(255,255,255,0.95) 88%,
+                #FFFFFF 100%);
             pointer-events: none;
         }
         @media (max-width: 767px) {
@@ -317,8 +314,8 @@
         .hero-badge {
             display: inline-flex; align-items: center; gap: 10px;
             padding: 9px 20px;
-            border: 1px solid rgba(91, 107, 255, 0.12);
-            background: rgba(91, 107, 255, 0.04);
+            border: 1px solid rgba(10, 10, 10, 0.12);
+            background: rgba(10, 10, 10, 0.04);
             border-radius: var(--radius-pill);
             font-family: var(--font-body); font-size: 11px; font-weight: 700;
             color: var(--primary); letter-spacing: 1.5px; text-transform: uppercase;
@@ -368,12 +365,12 @@
             font-size: 14px; font-weight: 700; letter-spacing: 0.2px;
             transition: all 0.3s ease; position: relative;
             border-radius: var(--radius-pill);
-            box-shadow: 0 8px 28px rgba(91, 107, 255, 0.28);
+            box-shadow: 0 8px 28px rgba(10, 10, 10, 0.28);
         }
         .btn-primary:hover {
             transform: translateY(-2px);
             background: var(--accent);
-            box-shadow: 0 14px 42px rgba(255, 33, 166, 0.38);
+            box-shadow: 0 14px 42px rgba(26, 26, 26, 0.38);
         }
         .btn-primary svg { transition: transform 0.3s; }
         .btn-primary:hover svg { transform: translateX(4px); }
@@ -381,35 +378,15 @@
             display: inline-flex; align-items: center; gap: 10px;
             padding: 18px 34px;
             background: transparent; color: var(--primary);
-            border: 1.5px solid rgba(91, 107, 255, 0.18);
+            border: 1.5px solid rgba(10, 10, 10, 0.18);
             font-family: var(--font-body); font-size: 14px; font-weight: 700;
             transition: all 0.2s;
             border-radius: var(--radius-pill);
         }
         .btn-ghost:hover {
             border-color: var(--primary);
-            background: rgba(91, 107, 255, 0.04);
+            background: rgba(10, 10, 10, 0.04);
         }
-        /* Secondary button — dezenter als btn-primary, für Quick-Path "WhatsApp" CTAs */
-        .btn-secondary {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 14px 26px;
-            background: rgba(91, 107, 255, 0.06);
-            color: var(--primary);
-            border: 1.5px solid rgba(91, 107, 255, 0.18);
-            font-family: var(--font-body); font-size: 13px; font-weight: 600;
-            transition: all 0.2s;
-            border-radius: var(--radius-pill);
-            cursor: pointer;
-        }
-        .btn-secondary:hover {
-            background: rgba(91, 107, 255, 0.10);
-            border-color: var(--primary);
-            transform: translateY(-1px);
-        }
-        .btn-secondary svg { color: #25D366; flex-shrink: 0; }
-        /* btn-call ist eine reine Marker-Klasse für das Tracking — visueller Style kommt von btn-primary */
-
         .hero-guarantees {
             display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
             margin: 48px auto 0; max-width: 720px;
@@ -419,19 +396,19 @@
             display: inline-flex; align-items: center; gap: 9px;
             padding: 11px 18px;
             background: rgba(255, 255, 255, 0.72);
-            border: 1px solid rgba(91, 107, 255, 0.14);
+            border: 1px solid rgba(10, 10, 10, 0.14);
             border-radius: var(--radius-pill);
             font-family: var(--font-body); font-size: 12px; font-weight: 600;
             color: var(--primary); letter-spacing: 0.2px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 2px 12px rgba(91, 107, 255, 0.04);
+            box-shadow: 0 2px 12px rgba(10, 10, 10, 0.04);
             transition: all 0.3s ease;
         }
         .hero-guarantee:hover {
             border-color: var(--accent);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 33, 166, 0.12);
+            box-shadow: 0 6px 20px rgba(26, 26, 26, 0.12);
         }
         .hero-guarantee svg {
             color: var(--accent-text); flex-shrink: 0;
@@ -485,12 +462,12 @@
         /* ===== CARD BASE ===== */
         .stack-card {
             position: absolute;
-            background: var(--bg-card);
+            background: #FFFFFF;
             border-radius: 20px;
-            border: 1px solid rgba(91, 107, 255, 0.08);
+            border: 1px solid rgba(10, 10, 10, 0.08);
             box-shadow:
-                0 40px 80px -24px rgba(91, 107, 255, 0.22),
-                0 16px 36px -12px rgba(255, 33, 166, 0.10),
+                0 40px 80px -24px rgba(10, 10, 10, 0.22),
+                0 16px 36px -12px rgba(26, 26, 26, 0.10),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.7);
             padding: 22px 22px 20px;
             transition: transform 0.6s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s;
@@ -498,13 +475,13 @@
         .stack-card:hover {
             transform: translateY(-6px) rotate(0deg) !important;
             box-shadow:
-                0 50px 100px -28px rgba(91, 107, 255, 0.30),
-                0 20px 44px -12px rgba(255, 33, 166, 0.18);
+                0 50px 100px -28px rgba(10, 10, 10, 0.30),
+                0 20px 44px -12px rgba(26, 26, 26, 0.18);
         }
         .stack-tag {
             display: inline-block;
             padding: 6px 12px;
-            background: rgba(255, 33, 166, 0.08);
+            background: rgba(26, 26, 26, 0.08);
             border-radius: 100px;
             font-size: 9px;
             font-weight: 800;
@@ -544,7 +521,7 @@
             justify-content: center;
             font-weight: 800;
             font-size: 15px;
-            box-shadow: 0 4px 12px rgba(91, 107, 255, 0.30);
+            box-shadow: 0 4px 12px rgba(10, 10, 10, 0.30);
             letter-spacing: -0.5px;
         }
         .brand-logo-text {
@@ -580,7 +557,7 @@
             aspect-ratio: 1;
             border-radius: 50%;
             margin-bottom: 6px;
-            box-shadow: 0 4px 10px rgba(91, 107, 255, 0.10);
+            box-shadow: 0 4px 10px rgba(10, 10, 10, 0.10);
             border: 2px solid #fff;
             outline: 1px solid rgba(0,0,0,0.04);
         }
@@ -594,9 +571,9 @@
         .brand-typo {
             text-align: center;
             padding: 12px 8px 10px;
-            background: rgba(91, 107, 255, 0.04);
+            background: rgba(10, 10, 10, 0.04);
             border-radius: 12px;
-            border: 1px solid rgba(91, 107, 255, 0.06);
+            border: 1px solid rgba(10, 10, 10, 0.06);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -621,7 +598,7 @@
             justify-content: space-between;
             margin-top: 14px;
             padding-top: 12px;
-            border-top: 1px dashed rgba(91, 107, 255, 0.10);
+            border-top: 1px dashed rgba(10, 10, 10, 0.10);
             gap: 12px;
         }
         .brand-icons {
@@ -657,7 +634,7 @@
             align-items: start;
         }
         .shop-image {
-            background: linear-gradient(135deg, #f5f5f7 0%, rgba(255, 255, 255, 0.10) 100%);
+            background: linear-gradient(135deg, #f5f5f7 0%, #e5e5ec 100%);
             border-radius: 14px;
             width: 134px;
             height: 134px;
@@ -673,7 +650,7 @@
             width: 64%; height: 64%;
             background: linear-gradient(160deg, var(--bb-pink) 0%, var(--bb-blue) 100%);
             border-radius: 50% 50% 45% 55% / 60% 60% 40% 40%;
-            box-shadow: 0 12px 28px rgba(91, 107, 255, 0.30);
+            box-shadow: 0 12px 28px rgba(10, 10, 10, 0.30);
         }
         .shop-image-tag {
             position: absolute;
@@ -686,7 +663,7 @@
             border-radius: 6px;
             letter-spacing: 0.5px;
             z-index: 2;
-            box-shadow: 0 4px 10px rgba(255, 222, 89, 0.50);
+            box-shadow: 0 4px 10px rgba(212, 212, 212, 0.50);
         }
         .shop-info {
             display: flex;
@@ -704,7 +681,7 @@
             margin-bottom: 4px;
         }
         .shop-rating .stars {
-            color: #FFB400;
+            color: #9CA3AF;
             letter-spacing: 0.5px;
             font-size: 11px;
         }
@@ -754,7 +731,7 @@
             flex: 1;
             text-align: center;
             padding: 4px 0;
-            border: 1px solid rgba(91, 107, 255, 0.15);
+            border: 1px solid rgba(10, 10, 10, 0.15);
             border-radius: 6px;
             font-size: 8px;
             font-weight: 700;
@@ -774,7 +751,7 @@
             padding: 9px 12px;
             border-radius: 100px;
             letter-spacing: 0.4px;
-            box-shadow: 0 6px 16px rgba(91, 107, 255, 0.32);
+            box-shadow: 0 6px 16px rgba(10, 10, 10, 0.32);
             border: none;
             cursor: pointer;
             text-transform: uppercase;
@@ -782,8 +759,8 @@
         /* ===== ARCTIVE CASE CONTENT (inside BB Brands chrome) ===== */
         .shop-image--arctive {
             background:
-                radial-gradient(ellipse at 50% 65%, rgba(255, 45, 120, 0.20) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 30%, rgba(0, 229, 255, 0.10) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 65%, rgba(26, 26, 26, 0.20) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 30%, rgba(156, 163, 175, 0.10) 0%, transparent 60%),
                 linear-gradient(180deg, #0F0F15 0%, #050507 100%) !important;
         }
         .shop-image--arctive::before { display: none !important; }
@@ -796,7 +773,7 @@
             box-shadow:
                 inset 0 3px 0 rgba(255, 255, 255, 0.05),
                 0 14px 30px rgba(0, 0, 0, 0.6),
-                0 0 30px rgba(255, 45, 120, 0.30);
+                0 0 30px rgba(26, 26, 26, 0.30);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -823,8 +800,8 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: #FF2D78;
-            box-shadow: 0 0 12px #FF2D78, 0 0 4px #FF2D78;
+            background: #1A1A1A;
+            box-shadow: 0 0 12px #1A1A1A, 0 0 4px #1A1A1A;
             border-radius: 0 0 6px 6px;
         }
         .arctive-bottle .ab-logo {
@@ -847,15 +824,15 @@
         .arctive-bottle .ab-tag {
             font-size: 5px;
             font-weight: 700;
-            color: #FF2D78;
+            color: #1A1A1A;
             text-align: center;
             letter-spacing: 0.8px;
             text-transform: uppercase;
         }
         .shop-image--arctive .shop-image-tag {
-            background: #FF2D78 !important;
+            background: #1A1A1A !important;
             color: #fff !important;
-            box-shadow: 0 4px 10px rgba(255, 45, 120, 0.50) !important;
+            box-shadow: 0 4px 10px rgba(26, 26, 26, 0.50) !important;
         }
 
         /* ===========================================================
@@ -871,8 +848,8 @@
             background: #050507;
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow:
-                0 50px 100px -28px rgba(91, 107, 255, 0.30),
-                0 24px 50px -16px rgba(255, 33, 166, 0.18),
+                0 50px 100px -28px rgba(10, 10, 10, 0.30),
+                0 24px 50px -16px rgba(26, 26, 26, 0.18),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.04);
             display: flex;
             flex-direction: column;
@@ -883,12 +860,12 @@
         .pdp-frame:hover {
             transform: translateY(-4px);
             box-shadow:
-                0 60px 120px -28px rgba(91, 107, 255, 0.36),
-                0 28px 60px -16px rgba(255, 33, 166, 0.24);
+                0 60px 120px -28px rgba(10, 10, 10, 0.36),
+                0 28px 60px -16px rgba(26, 26, 26, 0.24);
         }
         /* --- announcement bar --- */
         .pdp-anno {
-            background: var(--bg-card);
+            background: #FFFFFF;
             color: #050507;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -897,17 +874,17 @@
             letter-spacing: 1.4px;
             text-transform: uppercase;
             padding: 8px 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+            border-bottom: 1px solid #E5E5E7;
         }
         .pdp-anno span { text-align: center; }
         /* --- nav bar --- */
         .pdp-nav {
-            background: var(--bg-card);
+            background: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 12px 18px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+            border-bottom: 1px solid #E5E5E7;
         }
         .pdp-nav-logo {
             font-family: 'Inter', sans-serif;
@@ -941,7 +918,7 @@
         .pdp-nav-icon {
             width: 22px; height: 22px;
             border-radius: 50%;
-            background: var(--bg-surface);
+            background: #F5F5F7;
             display: flex; align-items: center; justify-content: center;
             font-size: 10px;
             color: #050507;
@@ -951,7 +928,7 @@
             position: absolute;
             top: -2px; right: -2px;
             width: 11px; height: 11px;
-            background: #00E5FF;
+            background: #9CA3AF;
             color: #050507;
             border-radius: 50%;
             font-size: 7px;
@@ -997,8 +974,8 @@
             overflow: hidden;
         }
         .pdp-thumb.active {
-            border-color: #00E5FF;
-            box-shadow: 0 0 0 1px #00E5FF, 0 0 12px rgba(0, 229, 255, 0.30);
+            border-color: #9CA3AF;
+            box-shadow: 0 0 0 1px #9CA3AF, 0 0 12px rgba(156, 163, 175, 0.30);
         }
         .pdp-thumb-bottle {
             width: 14px; height: 24px;
@@ -1012,15 +989,15 @@
             position: absolute;
             bottom: 0; left: 0; right: 0;
             height: 1.5px;
-            background: var(--swatch-c, #FF2D78);
-            box-shadow: 0 0 4px var(--swatch-c, #FF2D78);
+            background: var(--swatch-c, #1A1A1A);
+            box-shadow: 0 0 4px var(--swatch-c, #1A1A1A);
         }
         .pdp-hero-img {
             flex: 1;
             border-radius: 10px;
             background:
-                radial-gradient(ellipse at 50% 60%, rgba(255, 45, 120, 0.30) 0%, transparent 60%),
-                radial-gradient(ellipse at 30% 30%, rgba(0, 229, 255, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 60%, rgba(26, 26, 26, 0.30) 0%, transparent 60%),
+                radial-gradient(ellipse at 30% 30%, rgba(156, 163, 175, 0.18) 0%, transparent 55%),
                 linear-gradient(180deg, #0F0F15 0%, #050507 100%);
             border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
@@ -1051,7 +1028,7 @@
                 inset 0 4px 0 rgba(255, 255, 255, 0.06),
                 inset 0 -10px 24px rgba(0, 0, 0, 0.6),
                 0 22px 50px rgba(0, 0, 0, 0.7),
-                0 0 50px rgba(255, 45, 120, 0.30);
+                0 0 50px rgba(26, 26, 26, 0.30);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -1075,8 +1052,8 @@
             position: absolute;
             bottom: 0; left: 0; right: 0;
             height: 6px;
-            background: #FF2D78;
-            box-shadow: 0 0 16px #FF2D78, 0 0 6px #FF2D78;
+            background: #1A1A1A;
+            box-shadow: 0 0 16px #1A1A1A, 0 0 6px #1A1A1A;
             border-radius: 0 0 8px 8px;
         }
         .pdp-bottle .pb-logo {
@@ -1099,7 +1076,7 @@
         .pdp-bottle .pb-cat {
             font-size: 6px;
             font-weight: 800;
-            color: #00E5FF;
+            color: #9CA3AF;
             text-align: center;
             letter-spacing: 1.4px;
             text-transform: uppercase;
@@ -1116,7 +1093,7 @@
         .pdp-img-tag {
             position: absolute;
             top: 10px; left: 10px;
-            background: #FF2D78;
+            background: #1A1A1A;
             color: #fff;
             font-size: 7px;
             font-weight: 900;
@@ -1124,7 +1101,7 @@
             border-radius: 3px;
             letter-spacing: 0.8px;
             text-transform: uppercase;
-            box-shadow: 0 4px 12px rgba(255, 45, 120, 0.50);
+            box-shadow: 0 4px 12px rgba(26, 26, 26, 0.50);
             z-index: 3;
         }
         .pdp-img-trust {
@@ -1141,7 +1118,7 @@
         }
         .pdp-img-trust span::before {
             content: '✓ ';
-            color: #00E5FF;
+            color: #9CA3AF;
         }
         /* --- info column --- */
         .pdp-info {
@@ -1155,7 +1132,7 @@
         .pdp-cat {
             font-size: 7px;
             font-weight: 800;
-            color: #00E5FF;
+            color: #9CA3AF;
             letter-spacing: 1.6px;
             text-transform: uppercase;
         }
@@ -1193,12 +1170,12 @@
             content: '';
             width: 12px;
             height: 12px;
-            background: #00E5FF;
+            background: #9CA3AF;
             border-radius: 50%;
             flex-shrink: 0;
             display: inline-block;
-            box-shadow: 0 0 8px rgba(0, 229, 255, 0.45);
-            background-image: linear-gradient(135deg, #00E5FF, #00B8D4);
+            box-shadow: 0 0 8px rgba(156, 163, 175, 0.45);
+            background-image: linear-gradient(135deg, #9CA3AF, #525252);
         }
         .pdp-rating-row {
             display: flex;
@@ -1209,7 +1186,7 @@
             color: rgba(255, 255, 255, 0.55);
         }
         .pdp-rating-row .stars {
-            color: #FFB400;
+            color: #9CA3AF;
             font-size: 11px;
             letter-spacing: 1px;
         }
@@ -1232,7 +1209,7 @@
             text-decoration: line-through;
         }
         .pdp-price-save {
-            background: #FF2D78;
+            background: #1A1A1A;
             color: #fff;
             font-size: 7px;
             font-weight: 900;
@@ -1296,16 +1273,16 @@
             color: rgba(255, 255, 255, 0.40);
         }
         .pdp-bundle.active {
-            background: rgba(0, 229, 255, 0.06);
-            border-color: #00E5FF;
-            box-shadow: 0 0 0 1px #00E5FF, 0 0 18px rgba(0, 229, 255, 0.30);
+            background: rgba(156, 163, 175, 0.06);
+            border-color: #9CA3AF;
+            box-shadow: 0 0 0 1px #9CA3AF, 0 0 18px rgba(156, 163, 175, 0.30);
         }
-        .pdp-bundle.active .bb-name { color: #00E5FF; }
+        .pdp-bundle.active .bb-name { color: #9CA3AF; }
         .pdp-bundle .bb-flag {
             position: absolute;
             top: -7px; left: 50%;
             transform: translateX(-50%);
-            background: #00E5FF;
+            background: #9CA3AF;
             color: #050507;
             font-size: 6px;
             font-weight: 900;
@@ -1320,12 +1297,12 @@
             bottom: -1px; right: 4px;
             font-size: 6px;
             font-weight: 900;
-            color: #FF2D78;
+            color: #1A1A1A;
             letter-spacing: 0.3px;
         }
         .pdp-cta {
             margin-top: 6px;
-            background: #00E5FF;
+            background: #9CA3AF;
             color: #050507;
             font-size: 11px;
             font-weight: 900;
@@ -1334,7 +1311,7 @@
             border-radius: 6px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            box-shadow: 0 8px 20px rgba(0, 229, 255, 0.30);
+            box-shadow: 0 8px 20px rgba(156, 163, 175, 0.30);
             position: relative;
         }
         .pdp-cta::after {
@@ -1348,24 +1325,24 @@
             gap: 5px;
             font-size: 8px;
             font-weight: 800;
-            color: #A3E635;
+            color: #9CA3AF;
             letter-spacing: 0.3px;
             margin-top: 1px;
         }
         .pdp-delivery::before {
             content: '●';
             font-size: 8px;
-            color: #A3E635;
-            text-shadow: 0 0 6px #A3E635;
+            color: #9CA3AF;
+            text-shadow: 0 0 6px #9CA3AF;
         }
         /* --- bottom trust strip --- */
         .pdp-trust-strip {
-            background: var(--bg-card);
+            background: #FFFFFF;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 6px;
             padding: 12px 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.10);
+            border-top: 1px solid #E5E5E7;
         }
         .pdp-trust-cell {
             display: flex;
@@ -1397,10 +1374,10 @@
             position: absolute;
             bottom: -14px;
             right: -10px;
-            background: var(--bg-card);
+            background: #FFFFFF;
             border-radius: 100px;
-            border: 1px solid rgba(91, 107, 255, 0.12);
-            box-shadow: 0 16px 36px -12px rgba(91, 107, 255, 0.30), 0 8px 22px -8px rgba(255, 33, 166, 0.20);
+            border: 1px solid rgba(10, 10, 10, 0.12);
+            box-shadow: 0 16px 36px -12px rgba(10, 10, 10, 0.30), 0 8px 22px -8px rgba(26, 26, 26, 0.20);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1411,7 +1388,7 @@
         .pdp-brand-chip .chip-mark {
             width: 26px; height: 26px;
             background: #050507;
-            color: #00E5FF;
+            color: #9CA3AF;
             border-radius: 7px;
             display: flex;
             align-items: center;
@@ -1419,7 +1396,7 @@
             font-weight: 900;
             font-size: 13px;
             letter-spacing: -0.5px;
-            box-shadow: 0 3px 10px rgba(0, 229, 255, 0.30);
+            box-shadow: 0 3px 10px rgba(156, 163, 175, 0.30);
             font-family: 'Inter', sans-serif;
         }
         .pdp-brand-chip .chip-text {
@@ -1455,9 +1432,9 @@
             position: relative;
             margin-right: 16px;
             margin-left: 0;
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 33, 166, 0.22);
-            box-shadow: 0 6px 16px rgba(255, 33, 166, 0.10);
+            background: #fff;
+            border: 1px solid rgba(26, 26, 26, 0.22);
+            box-shadow: 0 6px 16px rgba(26, 26, 26, 0.10);
             margin-bottom: 0;
             transform: rotate(1.5deg);
         }
@@ -1470,13 +1447,13 @@
         .ad-card {
             position: absolute;
             width: 152px;
-            background: var(--bg-card);
+            background: #FFFFFF;
             border-radius: 14px;
-            border: 1px solid rgba(91, 107, 255, 0.08);
+            border: 1px solid rgba(10, 10, 10, 0.08);
             overflow: hidden;
             box-shadow:
-                0 24px 50px -16px rgba(91, 107, 255, 0.24),
-                0 8px 22px -8px rgba(255, 33, 166, 0.14);
+                0 24px 50px -16px rgba(10, 10, 10, 0.24),
+                0 8px 22px -8px rgba(26, 26, 26, 0.14);
             transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
         }
         .ad-card--main {
@@ -1510,7 +1487,7 @@
             width: 18px; height: 18px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--bb-pink), var(--bb-blue));
-            box-shadow: 0 2px 6px rgba(255, 33, 166, 0.30);
+            box-shadow: 0 2px 6px rgba(26, 26, 26, 0.30);
         }
         .ad-handle {
             font-size: 9px;
@@ -1531,21 +1508,21 @@
             width: 56%; height: 56%;
             background: linear-gradient(160deg, var(--bb-pink), var(--bb-blue));
             border-radius: 50% 50% 45% 55%;
-            box-shadow: 0 8px 24px rgba(255, 33, 166, 0.45);
+            box-shadow: 0 8px 24px rgba(26, 26, 26, 0.45);
         }
         .ad-card--left .ad-image {
-            background: linear-gradient(140deg, #fff5e6 0%, #ffe4b8 100%);
+            background: linear-gradient(140deg, #F5F5F7 0%, #F5F5F7 100%);
         }
         .ad-card--left .ad-image::after {
             background: linear-gradient(160deg, var(--bb-yellow), var(--bb-pink));
-            box-shadow: 0 8px 24px rgba(255, 222, 89, 0.55);
+            box-shadow: 0 8px 24px rgba(212, 212, 212, 0.55);
         }
         .ad-card--right .ad-image {
-            background: linear-gradient(140deg, rgba(126, 139, 255, 0.12) 0%, rgba(126, 139, 255, 0.30) 100%);
+            background: linear-gradient(140deg, #F5F5F7 0%, #E5E5E7 100%);
         }
         .ad-card--right .ad-image::after {
-            background: linear-gradient(160deg, var(--bb-blue), #7E8BFF);
-            box-shadow: 0 8px 24px rgba(91, 107, 255, 0.45);
+            background: linear-gradient(160deg, var(--bb-blue), #262626);
+            box-shadow: 0 8px 24px rgba(10, 10, 10, 0.45);
         }
         /* ARCTIVE ad cards: suppress default glowing blob, content lives inside */
         .ad-image--arctive::after { display: none !important; }
@@ -1580,14 +1557,14 @@
             padding: 4px 9px;
             border-radius: 100px;
             letter-spacing: 0.4px;
-            box-shadow: 0 6px 14px rgba(255, 222, 89, 0.55);
+            box-shadow: 0 6px 14px rgba(212, 212, 212, 0.55);
             z-index: 4;
             text-transform: uppercase;
         }
         .ad-badge--neu {
             background: var(--accent);
             color: #fff;
-            box-shadow: 0 6px 14px rgba(255, 33, 166, 0.45);
+            box-shadow: 0 6px 14px rgba(26, 26, 26, 0.45);
         }
 
         /* ===== BEAMS (SVG GLOWING CONNECTORS) ===== */
@@ -1604,7 +1581,7 @@
             stroke-width: 2.5;
             stroke-linecap: round;
             fill: none;
-            filter: drop-shadow(0 0 6px rgba(255, 33, 166, 0.55)) drop-shadow(0 0 14px rgba(91, 107, 255, 0.30));
+            filter: drop-shadow(0 0 6px rgba(26, 26, 26, 0.55)) drop-shadow(0 0 14px rgba(10, 10, 10, 0.30));
             animation: beam-pulse 2.8s ease-in-out infinite;
         }
         .beam-1 { animation-delay: 0s; }
@@ -1618,13 +1595,13 @@
         /* ===== PROOF CARDS ===== */
         .proof-card {
             position: absolute;
-            background: var(--bg-card);
+            background: #fff;
             border-radius: 100px;
             padding: 12px 20px;
             box-shadow:
-                0 20px 44px -12px rgba(91, 107, 255, 0.22),
+                0 20px 44px -12px rgba(10, 10, 10, 0.22),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(91, 107, 255, 0.10);
+            border: 1px solid rgba(10, 10, 10, 0.10);
             display: flex;
             align-items: center;
             gap: 14px;
@@ -1634,13 +1611,13 @@
         .proof-card--roas {
             top: 6%;
             left: -10%;
-            border-color: rgba(91, 107, 255, 0.18);
+            border-color: rgba(10, 10, 10, 0.18);
             animation-delay: 0s;
         }
         .proof-card--cvr {
             bottom: 38%;
             right: -8%;
-            border-color: rgba(255, 33, 166, 0.22);
+            border-color: rgba(26, 26, 26, 0.22);
             animation-delay: 1.6s;
         }
         @keyframes proof-float {
@@ -1676,7 +1653,7 @@
         .proof-card--cvr .proof-value strong { color: var(--accent-text); }
         .proof-spark {
             width: 32px; height: 16px;
-            color: #FFB400;
+            color: #9CA3AF;
         }
 
         /* ===== HERO SHOWCASE (image-driven) ===== */
@@ -1693,8 +1670,8 @@
             position: absolute;
             inset: -8% -12% -4% -12%;
             background:
-                radial-gradient(60% 55% at 55% 45%, rgba(91, 107, 255, 0.18) 0%, rgba(91, 107, 255, 0.05) 40%, rgba(91, 107, 255, 0) 70%),
-                radial-gradient(45% 40% at 30% 80%, rgba(255, 33, 166, 0.18) 0%, rgba(255, 33, 166, 0) 65%);
+                radial-gradient(60% 55% at 55% 45%, rgba(10, 10, 10, 0.18) 0%, rgba(10, 10, 10, 0.05) 40%, rgba(10, 10, 10, 0) 70%),
+                radial-gradient(45% 40% at 30% 80%, rgba(26, 26, 26, 0.18) 0%, rgba(26, 26, 26, 0) 65%);
             filter: blur(20px);
             pointer-events: none;
             z-index: 0;
@@ -1703,12 +1680,12 @@
             position: absolute;
             border-radius: 22px;
             overflow: hidden;
-            background: var(--bg-card);
+            background: #FFFFFF;
             transition: transform 0.6s cubic-bezier(.2,.8,.2,1), filter 0.4s ease;
             will-change: transform;
             filter:
-                drop-shadow(0 38px 70px rgba(91, 107, 255, 0.22))
-                drop-shadow(0 14px 30px rgba(255, 33, 166, 0.14));
+                drop-shadow(0 38px 70px rgba(10, 10, 10, 0.22))
+                drop-shadow(0 14px 30px rgba(26, 26, 26, 0.14));
             isolation: isolate;
         }
         .hs-card::after {
@@ -1721,8 +1698,8 @@
             box-shadow:
                 inset 0 0 0 1px rgba(255, 255, 255, 0.55),
                 inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
-                inset 0 -1px 0 0 rgba(91, 107, 255, 0.08);
-            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 18%, rgba(3,5,198,0.04) 100%);
+                inset 0 -1px 0 0 rgba(10, 10, 10, 0.08);
+            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 18%, rgba(10, 10, 10,0.04) 100%);
             z-index: 2;
         }
         .hs-card img {
@@ -1735,8 +1712,8 @@
         }
         .hs-card:hover {
             filter:
-                drop-shadow(0 50px 90px rgba(91, 107, 255, 0.30))
-                drop-shadow(0 18px 38px rgba(255, 33, 166, 0.20));
+                drop-shadow(0 50px 90px rgba(10, 10, 10, 0.30))
+                drop-shadow(0 18px 38px rgba(26, 26, 26, 0.20));
         }
 
         /* main desktop PDP */
@@ -1803,11 +1780,11 @@
             background: rgba(255, 255, 255, 0.96);
             -webkit-backdrop-filter: blur(14px);
             backdrop-filter: blur(14px);
-            border: 1px solid rgba(91, 107, 255, 0.10);
+            border: 1px solid rgba(10, 10, 10, 0.10);
             border-radius: 999px;
             box-shadow:
-                0 22px 48px -16px rgba(91, 107, 255, 0.28),
-                0 8px 18px -6px rgba(255, 33, 166, 0.18);
+                0 22px 48px -16px rgba(10, 10, 10, 0.28),
+                0 8px 18px -6px rgba(26, 26, 26, 0.18);
             font-family: var(--font-body);
         }
         .hs-chip-mark {
@@ -1821,7 +1798,7 @@
             font-weight: 900;
             font-size: 13px;
             letter-spacing: -0.4px;
-            box-shadow: 0 6px 14px rgba(255, 33, 166, 0.35);
+            box-shadow: 0 6px 14px rgba(26, 26, 26, 0.35);
         }
         .hs-chip-text { display: flex; flex-direction: column; line-height: 1.1; }
         .hs-chip-name {
@@ -1847,8 +1824,8 @@
             align-items: center;
             gap: 8px;
             padding: 9px 16px 9px 11px;
-            background: var(--bg-card);
-            border: 1px solid rgba(91, 107, 255, 0.10);
+            background: #FFFFFF;
+            border: 1px solid rgba(10, 10, 10, 0.10);
             border-radius: 999px;
             font-family: var(--font-body);
             font-size: 11px;
@@ -1857,8 +1834,8 @@
             letter-spacing: 0.2px;
             white-space: nowrap;
             box-shadow:
-                0 18px 40px -14px rgba(91, 107, 255, 0.30),
-                0 6px 14px -4px rgba(255, 33, 166, 0.14),
+                0 18px 40px -14px rgba(10, 10, 10, 0.30),
+                0 6px 14px -4px rgba(26, 26, 26, 0.14),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.8);
             animation: proof-float 6s ease-in-out infinite;
         }
@@ -1872,7 +1849,7 @@
             position: absolute;
             z-index: 12;
             padding: 12px 14px 11px;
-            background: linear-gradient(180deg, #FFF6BF 0%, #FFE680 100%);
+            background: linear-gradient(180deg, #F5F5F7 0%, #D4D4D4 100%);
             border-radius: 4px;
             font-family: var(--font-body);
             color: #0A0A0A;
@@ -1888,7 +1865,7 @@
             position: absolute;
             top: -6px; left: 50%;
             width: 38px; height: 12px;
-            background: rgba(255, 33, 166, 0.50);
+            background: rgba(26, 26, 26, 0.50);
             transform: translateX(-50%) rotate(-2deg);
             border-radius: 2px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.18);
@@ -1930,11 +1907,11 @@
             width: 64px; height: 64px;
             display: grid;
             place-items: center;
-            background: var(--bg-card);
+            background: #FFFFFF;
             border-radius: 50%;
-            border: 1.5px solid rgba(91, 107, 255, 0.12);
+            border: 1.5px solid rgba(10, 10, 10, 0.12);
             box-shadow:
-                0 22px 40px -14px rgba(91, 107, 255, 0.32),
+                0 22px 40px -14px rgba(10, 10, 10, 0.32),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.85);
             font-family: var(--font-body);
             font-size: 8px;
@@ -2067,14 +2044,14 @@
             position: absolute;
             top: 10%; left: -12%;
             width: 820px; height: 820px;
-            background: radial-gradient(circle, rgba(91, 107, 255, 0.09) 0%, rgba(255, 33, 166, 0.05) 40%, transparent 70%);
+            background: radial-gradient(circle, rgba(10, 10, 10, 0.09) 0%, rgba(26, 26, 26, 0.05) 40%, transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
         .lm-bg-glow.right {
             left: auto; right: -14%;
             top: auto; bottom: -10%;
-            background: radial-gradient(circle, rgba(255, 33, 166, 0.08) 0%, rgba(255, 222, 89, 0.04) 40%, transparent 70%);
+            background: radial-gradient(circle, rgba(26, 26, 26, 0.08) 0%, rgba(212, 212, 212, 0.04) 40%, transparent 70%);
         }
         .lm-inner {
             max-width: var(--max-width); margin: 0 auto;
@@ -2112,7 +2089,7 @@
             color: #fff;
             border-radius: 50%;
             display: inline-flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 12px rgba(91, 107, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(10, 10, 10, 0.25);
             margin-top: 1px;
         }
         .lm-benefits li strong { color: var(--primary); font-weight: 700; }
@@ -2152,20 +2129,20 @@
             text-transform: uppercase;
             color: var(--accent-text);
             padding: 7px 13px;
-            background: rgba(255, 33, 166, 0.08);
-            border: 1px solid rgba(255, 33, 166, 0.18);
+            background: rgba(26, 26, 26, 0.08);
+            border: 1px solid rgba(26, 26, 26, 0.18);
             border-radius: 100px;
         }
         .lm-showcase-tag .lm-pulse {
             width: 7px; height: 7px; border-radius: 50%;
             background: var(--accent);
-            box-shadow: 0 0 0 0 rgba(255, 33, 166, 0.6);
+            box-shadow: 0 0 0 0 rgba(26, 26, 26, 0.6);
             animation: lmPulse 2s ease-out infinite;
         }
         @keyframes lmPulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 33, 166, 0.55); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 33, 166, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 33, 166, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(26, 26, 26, 0.55); }
+            70% { box-shadow: 0 0 0 10px rgba(26, 26, 26, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(26, 26, 26, 0); }
         }
 
         /* ========== CTA Button (opens modal) ========== */
@@ -2177,7 +2154,7 @@
             gap: 12px;
             margin-top: 36px;
             padding: 18px 32px;
-            background: linear-gradient(135deg, var(--primary) 0%, #3D4FE6 50%, var(--accent) 130%);
+            background: linear-gradient(135deg, var(--primary) 0%, #0A0A0A 50%, var(--accent) 130%);
             color: #fff;
             border: 0;
             border-radius: 100px;
@@ -2189,8 +2166,8 @@
             overflow: hidden;
             box-shadow:
                 0 1px 0 rgba(255, 255, 255, 0.25) inset,
-                0 10px 24px rgba(91, 107, 255, 0.28),
-                0 24px 48px -16px rgba(255, 33, 166, 0.32);
+                0 10px 24px rgba(10, 10, 10, 0.28),
+                0 24px 48px -16px rgba(26, 26, 26, 0.32);
             transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
                         box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             isolation: isolate;
@@ -2200,8 +2177,8 @@
             transform: translateY(-2px) scale(1.01);
             box-shadow:
                 0 1px 0 rgba(255, 255, 255, 0.3) inset,
-                0 14px 32px rgba(91, 107, 255, 0.34),
-                0 32px 64px -18px rgba(255, 33, 166, 0.4);
+                0 14px 32px rgba(10, 10, 10, 0.34),
+                0 32px 64px -18px rgba(26, 26, 26, 0.4);
         }
         .lm-cta:active { transform: translateY(0) scale(0.99); }
         .lm-cta-shine {
@@ -2297,7 +2274,7 @@
         .lm-modal-backdrop {
             position: absolute;
             inset: 0;
-            background: rgba(8, 10, 30, 0.55);
+            background: rgba(10, 10, 10, 0.55);
             backdrop-filter: blur(14px) saturate(140%);
             -webkit-backdrop-filter: blur(14px) saturate(140%);
         }
@@ -2306,14 +2283,14 @@
             width: 100%;
             max-width: 620px;
             max-height: calc(100vh - 48px);
-            background: var(--bg-card);
+            background: #fff;
             border-radius: 22px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(10, 10, 10, 0.06);
             box-shadow:
                 0 1px 0 rgba(255, 255, 255, 0.6) inset,
-                0 20px 60px rgba(91, 107, 255, 0.18),
-                0 60px 120px -20px rgba(255, 33, 166, 0.18);
+                0 20px 60px rgba(10, 10, 10, 0.18),
+                0 60px 120px -20px rgba(26, 26, 26, 0.18);
             transform: translateY(20px) scale(0.96);
             opacity: 0;
             transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
@@ -2333,7 +2310,7 @@
             align-items: center;
             justify-content: center;
             background: rgba(10, 10, 10, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(10, 10, 10, 0.06);
             border-radius: 50%;
             color: var(--text-body);
             cursor: pointer;
@@ -2356,15 +2333,15 @@
         /* Apple Safari-style window */
         .lm-window {
             position: relative;
-            background: var(--bg-card);
+            background: #fff;
             border-radius: 18px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(10, 10, 10, 0.06);
             box-shadow:
                 0 1px 0 rgba(255, 255, 255, 0.6) inset,
-                0 12px 28px rgba(91, 107, 255, 0.10),
-                0 40px 80px -20px rgba(91, 107, 255, 0.18),
-                0 60px 140px -40px rgba(255, 33, 166, 0.14);
+                0 12px 28px rgba(10, 10, 10, 0.10),
+                0 40px 80px -20px rgba(10, 10, 10, 0.18),
+                0 60px 140px -40px rgba(26, 26, 26, 0.14);
             transform: translateZ(0);
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                         box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -2373,16 +2350,16 @@
             transform: translateY(-4px);
             box-shadow:
                 0 1px 0 rgba(255, 255, 255, 0.6) inset,
-                0 18px 36px rgba(91, 107, 255, 0.13),
-                0 54px 100px -20px rgba(91, 107, 255, 0.22),
-                0 80px 160px -40px rgba(255, 33, 166, 0.18);
+                0 18px 36px rgba(10, 10, 10, 0.13),
+                0 54px 100px -20px rgba(10, 10, 10, 0.22),
+                0 80px 160px -40px rgba(26, 26, 26, 0.18);
         }
         .lm-window::before {
             content: '';
             position: absolute; inset: 0;
             border-radius: 18px;
             padding: 1px;
-            background: linear-gradient(145deg, rgba(91, 107, 255, 0.18), rgba(255, 33, 166, 0.12) 40%, transparent 75%);
+            background: linear-gradient(145deg, rgba(10, 10, 10, 0.18), rgba(26, 26, 26, 0.12) 40%, transparent 75%);
             -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -2394,7 +2371,7 @@
             align-items: center;
             gap: 14px;
             padding: 14px 18px;
-            background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(255, 255, 255, 0.08) 100%);
+            background: linear-gradient(180deg, #F6F6F7 0%, #ECECEE 100%);
             border-bottom: 1px solid rgba(10, 10, 10, 0.08);
             position: relative;
             z-index: 1;
@@ -2409,9 +2386,9 @@
             display: block;
             box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.12);
         }
-        .lm-window-traffic span:nth-child(1) { background: #FF5F57; }
-        .lm-window-traffic span:nth-child(2) { background: #FEBC2E; }
-        .lm-window-traffic span:nth-child(3) { background: #28C840; }
+        .lm-window-traffic span:nth-child(1) { background: #525252; }
+        .lm-window-traffic span:nth-child(2) { background: #9CA3AF; }
+        .lm-window-traffic span:nth-child(3) { background: #6B7280; }
         .lm-window-nav {
             display: flex; gap: 6px;
             color: rgba(10, 10, 10, 0.35);
@@ -2425,7 +2402,7 @@
             justify-content: center;
             gap: 8px;
             background: rgba(255, 255, 255, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(10, 10, 10, 0.06);
             border-radius: 8px;
             padding: 7px 14px;
             font-family: var(--font-mono, -apple-system, sans-serif);
@@ -2461,12 +2438,12 @@
             border-radius: 8px;
             text-decoration: none;
             transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 2px 8px rgba(91, 107, 255, 0.25);
+            box-shadow: 0 2px 8px rgba(10, 10, 10, 0.25);
         }
         .lm-window-newtab:hover {
             background: var(--accent);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(255, 33, 166, 0.3);
+            box-shadow: 0 4px 12px rgba(26, 26, 26, 0.3);
         }
         .lm-window-newtab svg { width: 11px; height: 11px; }
 
@@ -2546,11 +2523,11 @@
 
         /* Form card (mock browser style) */
         .lm-formcard {
-            background: var(--bg-card);
+            background: #fff;
             border: 1px solid var(--border);
             border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 30px 80px rgba(91, 107, 255, 0.12);
+            box-shadow: 0 30px 80px rgba(10, 10, 10, 0.12);
             position: relative;
         }
         .lm-formcard::before {
@@ -2558,7 +2535,7 @@
             position: absolute; inset: 0;
             border-radius: var(--radius);
             padding: 1px;
-            background: linear-gradient(145deg, rgba(91, 107, 255, 0.15), rgba(255, 33, 166, 0.10), transparent 70%);
+            background: linear-gradient(145deg, rgba(10, 10, 10, 0.15), rgba(26, 26, 26, 0.10), transparent 70%);
             -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -2573,9 +2550,9 @@
         .lm-preview-topbar .lm-dot {
             width: 11px; height: 11px; border-radius: 50%;
         }
-        .lm-preview-topbar .lm-dot:nth-child(1) { background: #FF5F57; }
-        .lm-preview-topbar .lm-dot:nth-child(2) { background: #FEBC2E; }
-        .lm-preview-topbar .lm-dot:nth-child(3) { background: #28C840; }
+        .lm-preview-topbar .lm-dot:nth-child(1) { background: #525252; }
+        .lm-preview-topbar .lm-dot:nth-child(2) { background: #9CA3AF; }
+        .lm-preview-topbar .lm-dot:nth-child(3) { background: #6B7280; }
         .lm-preview-topbar .lm-url {
             flex: 1;
             text-align: center;
@@ -2646,15 +2623,15 @@
             width: 100%;
         }
         .lm-field input::placeholder { color: var(--text-muted); font-weight: 400; }
-        .lm-field input:hover { border-color: rgba(91, 107, 255, 0.12); }
+        .lm-field input:hover { border-color: rgba(10, 10, 10, 0.12); }
         .lm-field input:focus {
-            background: var(--bg-card);
+            background: #fff;
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(91, 107, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(10, 10, 10, 0.08);
         }
         .lm-field.highlight input {
-            background: rgba(91, 107, 255, 0.04);
-            border-color: rgba(91, 107, 255, 0.20);
+            background: rgba(10, 10, 10, 0.04);
+            border-color: rgba(10, 10, 10, 0.20);
         }
         .lm-radio-group {
             display: grid;
@@ -2672,7 +2649,7 @@
             user-select: none;
             position: relative;
         }
-        .lm-radio:hover { border-color: rgba(91, 107, 255, 0.14); }
+        .lm-radio:hover { border-color: rgba(10, 10, 10, 0.14); }
         .lm-radio input {
             position: absolute;
             opacity: 0;
@@ -2682,7 +2659,7 @@
             width: 18px; height: 18px;
             border-radius: 50%;
             border: 2px solid rgba(10, 10, 10, 0.15);
-            background: var(--bg-card);
+            background: #fff;
             position: relative;
             transition: all 0.2s;
             flex-shrink: 0;
@@ -2717,7 +2694,7 @@
             font-weight: 700;
         }
         .lm-radio:has(input:checked) {
-            background: rgba(91, 107, 255, 0.05);
+            background: rgba(10, 10, 10, 0.05);
             border-color: var(--primary);
         }
         .lm-consents {
@@ -2737,7 +2714,7 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .lm-consent:hover { border-color: rgba(91, 107, 255, 0.14); }
+        .lm-consent:hover { border-color: rgba(10, 10, 10, 0.14); }
         .lm-consent input {
             position: absolute;
             opacity: 0;
@@ -2749,8 +2726,8 @@
             min-width: 20px;
             margin-top: 2px;
             border-radius: 6px;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(10, 10, 10, 0.18);
+            background: #fff;
             position: relative;
             transition: all 0.2s;
             flex-shrink: 0;
@@ -2775,7 +2752,7 @@
             transform: rotate(45deg) scale(1);
         }
         .lm-consent:has(input:checked) {
-            background: rgba(91, 107, 255, 0.05);
+            background: rgba(10, 10, 10, 0.05);
             border-color: var(--primary);
         }
         .lm-consent-text {
@@ -2800,7 +2777,7 @@
             vertical-align: 1px;
         }
         .lm-consent-text .lm-consent-tag.required {
-            background: rgba(91, 107, 255, 0.10);
+            background: rgba(10, 10, 10, 0.10);
             color: var(--primary);
         }
         .lm-consent-text .lm-consent-tag.optional {
@@ -2814,8 +2791,8 @@
         }
         .lm-consent-text a:hover { opacity: 0.8; }
         .lm-consent.lm-consent-error {
-            border-color: #E11D48;
-            background: rgba(225, 29, 72, 0.04);
+            border-color: #1A1A1A;
+            background: rgba(26, 26, 26, 0.04);
         }
         .lm-submit {
             display: inline-flex; align-items: center; justify-content: center; gap: 12px;
@@ -2829,13 +2806,13 @@
             letter-spacing: 0.2px;
             border-radius: var(--radius-pill);
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(91, 107, 255, 0.30);
+            box-shadow: 0 10px 30px rgba(10, 10, 10, 0.30);
             width: 100%;
         }
         .lm-submit:hover {
             transform: translateY(-2px);
             background: var(--accent);
-            box-shadow: 0 14px 42px rgba(255, 33, 166, 0.38);
+            box-shadow: 0 14px 42px rgba(26, 26, 26, 0.38);
         }
         .lm-submit svg { transition: transform 0.3s; }
         .lm-submit:hover svg { transform: translateX(4px); }
@@ -2861,7 +2838,7 @@
             background: var(--primary);
             color: #fff;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 14px 36px rgba(91, 107, 255, 0.30);
+            box-shadow: 0 14px 36px rgba(10, 10, 10, 0.30);
             animation: lmPop 0.5s cubic-bezier(.2,.8,.3,1.2);
         }
         @keyframes lmPop {
@@ -2904,10 +2881,10 @@
             border: 1px solid transparent;
         }
         .problem-card:hover {
-            background: var(--bg-card);
-            border-color: rgba(91, 107, 255, 0.12);
+            background: #fff;
+            border-color: rgba(10, 10, 10, 0.12);
             transform: translateY(-4px);
-            box-shadow: 0 16px 40px rgba(91, 107, 255, 0.08);
+            box-shadow: 0 16px 40px rgba(10, 10, 10, 0.08);
         }
         .problem-num {
             font-family: var(--font-body); font-size: 11px; font-weight: 700;
@@ -2953,7 +2930,7 @@
             display: flex; align-items: center; justify-content: center;
             color: #fff;
             background: var(--primary);
-            box-shadow: 0 6px 18px rgba(91, 107, 255, 0.25);
+            box-shadow: 0 6px 18px rgba(10, 10, 10, 0.25);
         }
         .solution-point h4 {
             font-family: var(--font-display); font-size: 18px; font-weight: 800;
@@ -2975,8 +2952,8 @@
             position: absolute;
             inset: -6% -10% -6% -10%;
             background:
-                radial-gradient(58% 50% at 50% 45%, rgba(91, 107, 255, 0.16) 0%, rgba(91, 107, 255, 0.04) 45%, rgba(91, 107, 255, 0) 70%),
-                radial-gradient(45% 40% at 80% 75%, rgba(255, 33, 166, 0.18) 0%, rgba(255, 33, 166, 0) 65%);
+                radial-gradient(58% 50% at 50% 45%, rgba(10, 10, 10, 0.16) 0%, rgba(10, 10, 10, 0.04) 45%, rgba(10, 10, 10, 0) 70%),
+                radial-gradient(45% 40% at 80% 75%, rgba(26, 26, 26, 0.18) 0%, rgba(26, 26, 26, 0) 65%);
             filter: blur(24px);
             pointer-events: none;
             z-index: 0;
@@ -2986,12 +2963,12 @@
             inset: 4% 2% 18% 2%;
             border-radius: 22px;
             overflow: hidden;
-            background: var(--bg-card);
+            background: #FFFFFF;
             transform: rotate(-1.2deg);
             transition: transform 0.6s cubic-bezier(.2,.8,.2,1), filter 0.4s ease;
             filter:
-                drop-shadow(0 38px 70px rgba(91, 107, 255, 0.20))
-                drop-shadow(0 14px 30px rgba(255, 33, 166, 0.12));
+                drop-shadow(0 38px 70px rgba(10, 10, 10, 0.20))
+                drop-shadow(0 14px 30px rgba(26, 26, 26, 0.12));
             animation: hs-float-slow 9s ease-in-out infinite;
             z-index: 1;
         }
@@ -3004,8 +2981,8 @@
             box-shadow:
                 inset 0 0 0 1px rgba(255, 255, 255, 0.55),
                 inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
-                inset 0 -1px 0 0 rgba(91, 107, 255, 0.08);
-            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 18%, rgba(3,5,198,0.04) 100%);
+                inset 0 -1px 0 0 rgba(10, 10, 10, 0.08);
+            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 18%, rgba(10, 10, 10,0.04) 100%);
             z-index: 2;
         }
         .sv-frame img {
@@ -3019,8 +2996,8 @@
         .sv-frame:hover {
             transform: rotate(0deg) translateY(-6px);
             filter:
-                drop-shadow(0 50px 90px rgba(91, 107, 255, 0.28))
-                drop-shadow(0 18px 38px rgba(255, 33, 166, 0.18));
+                drop-shadow(0 50px 90px rgba(10, 10, 10, 0.28))
+                drop-shadow(0 18px 38px rgba(26, 26, 26, 0.18));
         }
         /* live "BB // OS" tag pinned to the framework */
         .sv-live-tag {
@@ -3032,12 +3009,12 @@
             align-items: center;
             gap: 8px;
             padding: 8px 14px 8px 12px;
-            background: var(--bg-card);
-            border: 1px solid rgba(91, 107, 255, 0.10);
+            background: #FFFFFF;
+            border: 1px solid rgba(10, 10, 10, 0.10);
             border-radius: 999px;
             box-shadow:
-                0 18px 36px -10px rgba(91, 107, 255, 0.20),
-                0 6px 14px -4px rgba(255, 33, 166, 0.14);
+                0 18px 36px -10px rgba(10, 10, 10, 0.20),
+                0 6px 14px -4px rgba(26, 26, 26, 0.14);
             font-family: var(--font-body);
             font-size: 10px;
             font-weight: 800;
@@ -3051,13 +3028,13 @@
             height: 8px;
             background: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(255, 33, 166, 0.55);
+            box-shadow: 0 0 0 0 rgba(26, 26, 26, 0.55);
             animation: sv-pulse 2.2s ease-out infinite;
         }
         @keyframes sv-pulse {
-            0%   { box-shadow: 0 0 0 0 rgba(255, 33, 166, 0.55); }
-            70%  { box-shadow: 0 0 0 9px rgba(255, 33, 166, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 33, 166, 0); }
+            0%   { box-shadow: 0 0 0 0 rgba(26, 26, 26, 0.55); }
+            70%  { box-shadow: 0 0 0 9px rgba(26, 26, 26, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(26, 26, 26, 0); }
         }
         /* floating module pills around the framework — labels orbit the BRAND core */
         .sv-orbit {
@@ -3067,12 +3044,12 @@
             align-items: center;
             gap: 7px;
             padding: 7px 13px 7px 10px;
-            background: var(--bg-card);
-            border: 1px solid rgba(91, 107, 255, 0.10);
+            background: #FFFFFF;
+            border: 1px solid rgba(10, 10, 10, 0.10);
             border-radius: 999px;
             box-shadow:
-                0 16px 32px -10px rgba(91, 107, 255, 0.18),
-                0 6px 14px -4px rgba(255, 33, 166, 0.10);
+                0 16px 32px -10px rgba(10, 10, 10, 0.18),
+                0 6px 14px -4px rgba(26, 26, 26, 0.10);
             font-family: var(--font-body);
             font-size: 11px;
             font-weight: 700;
@@ -3108,12 +3085,12 @@
             align-items: center;
             gap: 10px;
             padding: 11px 14px;
-            background: var(--bg-card);
-            border: 1px solid rgba(91, 107, 255, 0.08);
+            background: #FFFFFF;
+            border: 1px solid rgba(10, 10, 10, 0.08);
             border-radius: 14px;
             box-shadow:
-                0 18px 38px -12px rgba(91, 107, 255, 0.18),
-                0 6px 14px -4px rgba(255, 33, 166, 0.08);
+                0 18px 38px -12px rgba(10, 10, 10, 0.18),
+                0 6px 14px -4px rgba(26, 26, 26, 0.08);
         }
         .sv-metric-icon {
             width: 30px;
@@ -3121,7 +3098,7 @@
             display: grid;
             place-items: center;
             border-radius: 9px;
-            background: linear-gradient(180deg, rgba(255, 33, 166, 0.14) 0%, rgba(255, 33, 166, 0.06) 100%);
+            background: linear-gradient(180deg, rgba(26, 26, 26, 0.14) 0%, rgba(26, 26, 26, 0.06) 100%);
             color: var(--accent-text);
             flex-shrink: 0;
         }
@@ -3167,7 +3144,7 @@
             background: var(--bg-surface);
             border-bottom: 1px solid var(--border);
         }
-        .services .section-header .eyebrow { background: rgba(91, 107, 255, 0.08); color: var(--primary); }
+        .services .section-header .eyebrow { background: rgba(10, 10, 10, 0.08); color: var(--primary); }
         .services .section-header .eyebrow::before { background: var(--primary); }
         /* ===== CINEMATIC PROCESS STAGE ===== */
         .process-stage {
@@ -3198,7 +3175,7 @@
             background: var(--primary);
             border-radius: 6px;
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 14px rgba(91, 107, 255, 0.4);
+            box-shadow: 0 0 14px rgba(10, 10, 10, 0.4);
         }
         .process-tab {
             display: flex; align-items: center; gap: 18px;
@@ -3217,8 +3194,8 @@
             margin-left: -11px;
         }
         @keyframes processBreathe {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(91, 107, 255, 0.35); transform: scale(1); }
-            50% { box-shadow: 0 0 0 8px rgba(91, 107, 255, 0); transform: scale(1.18); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(10, 10, 10, 0.35); transform: scale(1); }
+            50% { box-shadow: 0 0 0 8px rgba(10, 10, 10, 0); transform: scale(1.18); }
         }
         .process-tab.active .process-dot {
             background: var(--primary);
@@ -3324,8 +3301,8 @@
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(91, 107, 255, 0.1);
-            box-shadow: 0 6px 24px -8px rgba(91, 107, 255, 0.12);
+            border: 1px solid rgba(10, 10, 10, 0.1);
+            box-shadow: 0 6px 24px -8px rgba(10, 10, 10, 0.12);
             opacity: 0;
             transform: translateY(14px) scale(0.85);
             transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -3334,8 +3311,8 @@
                         border-color 0.25s ease;
         }
         .process-chip:hover {
-            background: rgba(255, 33, 166, 0.08);
-            border-color: rgba(255, 33, 166, 0.3);
+            background: rgba(26, 26, 26, 0.08);
+            border-color: rgba(26, 26, 26, 0.3);
             color: var(--accent-text);
         }
         .process-step.active .process-chip {
@@ -3357,9 +3334,9 @@
             width: 760px; height: 760px;
             margin-top: -380px; margin-left: -380px;
             background: radial-gradient(circle at center,
-                rgba(91, 107, 255, 0.18) 0%,
-                rgba(91, 107, 255, 0.09) 28%,
-                rgba(91, 107, 255, 0) 62%);
+                rgba(10, 10, 10, 0.18) 0%,
+                rgba(10, 10, 10, 0.09) 28%,
+                rgba(10, 10, 10, 0) 62%);
             filter: blur(40px);
             pointer-events: none;
             opacity: 0;
@@ -3376,8 +3353,8 @@
             position: absolute;
             top: -60px; left: -100px; right: -60px; bottom: -60px;
             background: radial-gradient(ellipse at 22% 45%,
-                rgba(91, 107, 255, 0.06) 0%,
-                rgba(91, 107, 255, 0) 55%);
+                rgba(10, 10, 10, 0.06) 0%,
+                rgba(10, 10, 10, 0) 55%);
             pointer-events: none;
             z-index: -1;
             opacity: 0;
@@ -3500,7 +3477,7 @@
             background: var(--primary);
             transition: transform 0.35s cubic-bezier(.5,0,.1,1); z-index: 1;
             border-radius: var(--radius-pill);
-            box-shadow: 0 4px 14px rgba(91, 107, 255, 0.3);
+            box-shadow: 0 4px 14px rgba(10, 10, 10, 0.3);
         }
         .pricing-toggle-slider.right { transform: translateX(100%); }
         .packages-grid {
@@ -3509,7 +3486,7 @@
             margin-left: auto; margin-right: auto;
         }
         .package-card {
-            background: var(--bg-card); border: 1px solid rgba(91, 107, 255, 0.08);
+            background: #fff; border: 1px solid rgba(10, 10, 10, 0.08);
             padding: 44px 40px; position: relative;
             display: flex; flex-direction: column;
             transition: all 0.3s;
@@ -3517,13 +3494,13 @@
         }
         .package-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(91, 107, 255, 0.2);
-            box-shadow: 0 20px 50px rgba(91, 107, 255, 0.12);
+            border-color: rgba(10, 10, 10, 0.2);
+            box-shadow: 0 20px 50px rgba(10, 10, 10, 0.12);
         }
         .package-card.featured {
             border: 2px solid var(--primary);
-            background: linear-gradient(180deg, rgba(91, 107, 255, 0.14), var(--bg-card) 40%);
-            box-shadow: 0 20px 60px rgba(91, 107, 255, 0.25);
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.04), #fff 40%);
+            box-shadow: 0 20px 60px rgba(10, 10, 10, 0.15);
         }
         .package-badge {
             position: absolute; top: -14px; left: 40px;
@@ -3532,7 +3509,7 @@
             font-family: var(--font-body); font-size: 10px; font-weight: 800;
             letter-spacing: 1.5px; text-transform: uppercase; color: #fff;
             border-radius: var(--radius-pill);
-            box-shadow: 0 6px 18px rgba(255, 33, 166, 0.3);
+            box-shadow: 0 6px 18px rgba(26, 26, 26, 0.3);
         }
         .package-name {
             font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 2px;
@@ -3577,14 +3554,14 @@
         .package-cta.primary {
             background: var(--primary);
             color: #fff;
-            box-shadow: 0 6px 20px rgba(91, 107, 255, 0.25);
+            box-shadow: 0 6px 20px rgba(10, 10, 10, 0.25);
         }
-        .package-cta.primary:hover { background: var(--accent); box-shadow: 0 10px 32px rgba(255, 33, 166, 0.35); }
+        .package-cta.primary:hover { background: var(--accent); box-shadow: 0 10px 32px rgba(26, 26, 26, 0.35); }
         .package-cta.outline {
             background: transparent; color: var(--primary);
-            border: 1.5px solid rgba(91, 107, 255, 0.2);
+            border: 1.5px solid rgba(10, 10, 10, 0.2);
         }
-        .package-cta.outline:hover { border-color: var(--primary); background: rgba(91, 107, 255, 0.04); }
+        .package-cta.outline:hover { border-color: var(--primary); background: rgba(10, 10, 10, 0.04); }
 
         .pricing-pane { display: none; }
         .pricing-pane.active { display: block; }
@@ -3594,7 +3571,7 @@
             max-width: 1080px; margin: 64px auto 0;
             padding: 40px 48px;
             border: 1px solid var(--border);
-            background: rgba(91, 107, 255, 0.03);
+            background: rgba(10, 10, 10, 0.03);
             display: flex; flex-direction: column; gap: 32px;
         }
         .guarantee-main {
@@ -3612,7 +3589,7 @@
             font-family: var(--font-body); font-size: 10px; font-weight: 700;
             letter-spacing: 1.5px; text-transform: uppercase;
             color: var(--accent-text);
-            padding: 4px 12px; background: rgba(255, 33, 166, 0.08);
+            padding: 4px 12px; background: rgba(26, 26, 26, 0.08);
             border-radius: var(--radius-pill);
             margin-bottom: 12px;
         }
@@ -3662,8 +3639,8 @@
             position: absolute;
             inset: -8% -10% -6% -10%;
             background:
-                radial-gradient(55% 50% at 50% 40%, rgba(91, 107, 255, 0.20) 0%, rgba(91, 107, 255, 0.05) 45%, rgba(91, 107, 255, 0) 70%),
-                radial-gradient(45% 40% at 80% 80%, rgba(255, 33, 166, 0.18) 0%, rgba(255, 33, 166, 0) 65%);
+                radial-gradient(55% 50% at 50% 40%, rgba(10, 10, 10, 0.20) 0%, rgba(10, 10, 10, 0.05) 45%, rgba(10, 10, 10, 0) 70%),
+                radial-gradient(45% 40% at 80% 80%, rgba(26, 26, 26, 0.18) 0%, rgba(26, 26, 26, 0) 65%);
             filter: blur(28px);
             pointer-events: none;
             z-index: 0;
@@ -3673,12 +3650,12 @@
             inset: 2% 4% 12% 4%;
             border-radius: 20px;
             overflow: hidden;
-            background: var(--bg-card);
+            background: #FFFFFF;
             transform: rotate(-1.4deg);
             transition: transform 0.7s cubic-bezier(.2,.8,.2,1), filter 0.4s ease;
             filter:
-                drop-shadow(0 42px 80px rgba(91, 107, 255, 0.24))
-                drop-shadow(0 16px 34px rgba(255, 33, 166, 0.14));
+                drop-shadow(0 42px 80px rgba(10, 10, 10, 0.24))
+                drop-shadow(0 16px 34px rgba(26, 26, 26, 0.14));
             animation: hs-float-slow 11s ease-in-out infinite;
             z-index: 1;
         }
@@ -3691,8 +3668,8 @@
             box-shadow:
                 inset 0 0 0 1px rgba(255, 255, 255, 0.5),
                 inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
-                inset 0 -1px 0 0 rgba(91, 107, 255, 0.10);
-            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 22%, rgba(3,5,198,0.06) 100%);
+                inset 0 -1px 0 0 rgba(10, 10, 10, 0.10);
+            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 22%, rgba(10, 10, 10,0.06) 100%);
             z-index: 2;
         }
         .portrait-frame img {
@@ -3707,8 +3684,8 @@
         .portrait-frame:hover {
             transform: rotate(0deg) translateY(-6px);
             filter:
-                drop-shadow(0 56px 100px rgba(91, 107, 255, 0.30))
-                drop-shadow(0 22px 44px rgba(255, 33, 166, 0.20));
+                drop-shadow(0 56px 100px rgba(10, 10, 10, 0.30))
+                drop-shadow(0 22px 44px rgba(26, 26, 26, 0.20));
         }
         /* meta card pinned at the bottom edge */
         .portrait-meta {
@@ -3721,12 +3698,12 @@
             align-items: center;
             gap: 14px;
             padding: 14px 22px 14px 16px;
-            background: var(--bg-card);
-            border: 1px solid rgba(91, 107, 255, 0.08);
+            background: #FFFFFF;
+            border: 1px solid rgba(10, 10, 10, 0.08);
             border-radius: 18px;
             box-shadow:
-                0 26px 50px -14px rgba(91, 107, 255, 0.22),
-                0 10px 22px -6px rgba(255, 33, 166, 0.12);
+                0 26px 50px -14px rgba(10, 10, 10, 0.22),
+                0 10px 22px -6px rgba(26, 26, 26, 0.12);
             min-width: 78%;
         }
         .portrait-meta-mark {
@@ -3735,14 +3712,14 @@
             display: grid;
             place-items: center;
             border-radius: 11px;
-            background: linear-gradient(140deg, var(--primary) 0%, #3D4FE6 100%);
+            background: linear-gradient(140deg, var(--primary) 0%, #000000 100%);
             color: #FFFFFF;
             font-family: var(--font-display);
             font-size: 14px;
             font-weight: 800;
             letter-spacing: -0.4px;
             flex-shrink: 0;
-            box-shadow: 0 8px 20px -6px rgba(91, 107, 255, 0.45);
+            box-shadow: 0 8px 20px -6px rgba(10, 10, 10, 0.45);
         }
         .portrait-meta-text { display: flex; flex-direction: column; line-height: 1.15; }
         .portrait-meta strong {
@@ -3768,8 +3745,8 @@
             gap: 6px;
             margin-left: auto;
             padding: 6px 10px;
-            background: rgba(255, 33, 166, 0.08);
-            border: 1px solid rgba(255, 33, 166, 0.16);
+            background: rgba(26, 26, 26, 0.08);
+            border: 1px solid rgba(26, 26, 26, 0.16);
             border-radius: 999px;
             font-family: var(--font-body);
             font-size: 9px;
@@ -3783,7 +3760,7 @@
             height: 6px;
             background: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(255, 33, 166, 0.55);
+            box-shadow: 0 0 0 0 rgba(26, 26, 26, 0.55);
             animation: sv-pulse 2.2s ease-out infinite;
         }
         /* floating credentials around the portrait */
@@ -3794,12 +3771,12 @@
             align-items: center;
             gap: 8px;
             padding: 9px 14px 9px 11px;
-            background: var(--bg-card);
-            border: 1px solid rgba(91, 107, 255, 0.10);
+            background: #FFFFFF;
+            border: 1px solid rgba(10, 10, 10, 0.10);
             border-radius: 999px;
             box-shadow:
-                0 18px 36px -10px rgba(91, 107, 255, 0.20),
-                0 6px 14px -4px rgba(255, 33, 166, 0.12);
+                0 18px 36px -10px rgba(10, 10, 10, 0.20),
+                0 6px 14px -4px rgba(26, 26, 26, 0.12);
             font-family: var(--font-body);
             font-size: 11px;
             font-weight: 700;
@@ -3856,7 +3833,7 @@
         .faq-icon {
             width: 28px; height: 28px; flex-shrink: 0; margin-left: 20px;
             position: relative; transition: transform 0.3s;
-            border-radius: 50%; background: rgba(91, 107, 255, 0.08);
+            border-radius: 50%; background: rgba(10, 10, 10, 0.08);
         }
         .faq-icon::before, .faq-icon::after {
             content: ''; position: absolute; top: 50%; left: 50%;
@@ -3887,7 +3864,7 @@
             content: ''; position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 1200px; height: 800px;
-            background: radial-gradient(ellipse, rgba(91, 107, 255, 0.08) 0%, rgba(255, 33, 166, 0.06) 40%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(10, 10, 10, 0.08) 0%, rgba(26, 26, 26, 0.06) 40%, transparent 70%);
             pointer-events: none;
         }
         .final-cta-inner {
@@ -3941,8 +3918,8 @@
             display: inline-flex; align-items: center; gap: 10px;
             margin-top: 18px;
             padding: 10px 14px;
-            background: rgba(91, 107, 255, 0.06);
-            border: 1px solid rgba(91, 107, 255, 0.18);
+            background: rgba(10, 10, 10, 0.06);
+            border: 1px solid rgba(10, 10, 10, 0.18);
             border-radius: 12px;
             color: var(--bb-blue);
         }
@@ -3989,8 +3966,8 @@
         /* ====== STATS / METRICS ====== */
         .stats-row { padding: 24px 40px; background: var(--bg); border-bottom: 1px solid var(--border); }
         .stats-grid { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .stat-card { background: transparent; padding: 14px 18px; border: 1px solid rgba(91, 107, 255, 0.06); border-radius: 12px; display: flex; flex-direction: column; gap: 5px; transition: border-color 0.3s; position: relative; overflow: hidden; }
-        .stat-card:hover { border-color: rgba(91, 107, 255, 0.14); }
+        .stat-card { background: transparent; padding: 14px 18px; border: 1px solid rgba(10, 10, 10, 0.06); border-radius: 12px; display: flex; flex-direction: column; gap: 5px; transition: border-color 0.3s; position: relative; overflow: hidden; }
+        .stat-card:hover { border-color: rgba(10, 10, 10, 0.14); }
         .stat-card .stat-num { font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: -0.7px; line-height: 1; color: var(--primary); }
         .stat-card .stat-num .stat-suffix { color: var(--accent-text); }
         .stat-card .stat-label { font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.9px; text-transform: uppercase; color: var(--text-body); }
@@ -4001,22 +3978,22 @@
         .guarantees::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%); pointer-events: none; }
         .guarantees-container { max-width: var(--max-width); margin: 0 auto; position: relative; }
         .guarantees-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 64px; }
-        .guarantee-card { background: var(--bg-card); border: 1px solid rgba(91, 107, 255, 0.08); padding: 40px 36px; border-radius: var(--radius); display: flex; flex-direction: column; gap: 18px; transition: all 0.3s; position: relative; overflow: hidden; }
-        .guarantee-card.featured { grid-column: span 2; background: linear-gradient(180deg, rgba(91, 107, 255, 0.10), var(--bg-card) 60%); border: 1.5px solid rgba(91, 107, 255, 0.28); }
-        .guarantee-card:hover { transform: translateY(-4px); border-color: rgba(91, 107, 255, 0.2); box-shadow: 0 18px 50px rgba(91, 107, 255, 0.1); }
-        .guarantee-card .g-icon { width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255, 33, 166, 0.08); color: var(--accent-text); border-radius: 14px; flex-shrink: 0; }
+        .guarantee-card { background: #fff; border: 1px solid rgba(10, 10, 10, 0.08); padding: 40px 36px; border-radius: var(--radius); display: flex; flex-direction: column; gap: 18px; transition: all 0.3s; position: relative; overflow: hidden; }
+        .guarantee-card.featured { grid-column: span 2; background: linear-gradient(180deg, rgba(10, 10, 10, 0.04), #fff 60%); border: 1.5px solid rgba(10, 10, 10, 0.18); }
+        .guarantee-card:hover { transform: translateY(-4px); border-color: rgba(10, 10, 10, 0.2); box-shadow: 0 18px 50px rgba(10, 10, 10, 0.1); }
+        .guarantee-card .g-icon { width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center; background: rgba(26, 26, 26, 0.08); color: var(--accent-text); border-radius: 14px; flex-shrink: 0; }
         .guarantee-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; line-height: 1.25; }
         .guarantee-card.featured h3 { font-size: 28px; }
         .guarantee-card p { font-size: 14px; color: var(--text-body); line-height: 1.7; }
         .guarantee-card.featured p { font-size: 15px; max-width: 720px; }
-        .guarantee-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent-text); padding: 5px 12px; background: rgba(255, 33, 166, 0.08); border-radius: var(--radius-pill); align-self: flex-start; }
+        .guarantee-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent-text); padding: 5px 12px; background: rgba(26, 26, 26, 0.08); border-radius: var(--radius-pill); align-self: flex-start; }
         .guarantees-cta { margin-top: 56px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
         .guarantees-cta .btn-primary { padding: 18px 36px; font-size: 14px; }
         .guarantees-cta-meta { font-size: 12px; color: var(--text-muted); font-family: var(--font-body); letter-spacing: 0.3px; }
 
         /* ====== ABOUT CREDENTIALS ====== */
         .about-creds { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 10px; }
-        .about-cred { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(91, 107, 255, 0.05); border: 1px solid rgba(91, 107, 255, 0.1); border-radius: var(--radius-pill); font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); }
+        .about-cred { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(10, 10, 10, 0.05); border: 1px solid rgba(10, 10, 10, 0.1); border-radius: var(--radius-pill); font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); }
         .about-cred svg { color: var(--accent-text); flex-shrink: 0; }
         .about-creds--compact { margin-top: 28px; padding-top: 24px; gap: 8px; }
         .about-creds--compact .about-cred { padding: 6px 11px; font-size: 11px; gap: 6px; letter-spacing: 0.1px; }
@@ -4024,9 +4001,9 @@
         /* ====== RESOURCES / CONTENT HUB ====== */
         .resources { padding: var(--section-pad) 40px; border-bottom: 1px solid var(--border); }
         .resources-grid { max-width: var(--max-width); margin: 64px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-        .resource-card { background: var(--bg); border: 1px solid rgba(91, 107, 255, 0.08); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s; }
-        .resource-card:hover { transform: translateY(-6px); border-color: rgba(91, 107, 255, 0.2); box-shadow: 0 18px 44px rgba(91, 107, 255, 0.1); }
-        .resource-thumb { aspect-ratio: 4/3; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 18px; background: linear-gradient(135deg, #5B6BFF, #7E8BFF); }
+        .resource-card { background: var(--bg); border: 1px solid rgba(10, 10, 10, 0.08); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s; }
+        .resource-card:hover { transform: translateY(-6px); border-color: rgba(10, 10, 10, 0.2); box-shadow: 0 18px 44px rgba(10, 10, 10, 0.1); }
+        .resource-thumb { aspect-ratio: 4/3; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 18px; background: linear-gradient(135deg, #0A0A0A, #262626); }
         .resource-thumb img {
             position: absolute;
             inset: 0;
@@ -4038,21 +4015,21 @@
             will-change: transform;
         }
         .resource-card:hover .resource-thumb img { transform: scale(1.05); }
-        .resource-thumb.r1 { background: linear-gradient(135deg, #5B6BFF, #7E8BFF); }
-        .resource-thumb.r2 { background: linear-gradient(135deg, #FF21A6, #FF66C4); }
-        .resource-thumb.r3 { background: linear-gradient(135deg, #5B6BFF, #A48BFF, #FF21A6); }
-        .resource-thumb.r4 { background: linear-gradient(135deg, #FFDE59, #FF21A6); }
+        .resource-thumb.r1 { background: linear-gradient(135deg, #0A0A0A, #262626); }
+        .resource-thumb.r2 { background: linear-gradient(135deg, #1A1A1A, #525252); }
+        .resource-thumb.r3 { background: linear-gradient(135deg, #0A0A0A, #1A1A1A, #1A1A1A); }
+        .resource-thumb.r4 { background: linear-gradient(135deg, #D4D4D4, #1A1A1A); }
         .resource-thumb::before {
             content: '';
             position: absolute;
             inset: 0;
             background:
                 radial-gradient(circle at 70% 30%, rgba(255,255,255,0.18) 0%, transparent 55%),
-                linear-gradient(180deg, rgba(91, 107, 255, 0) 30%, rgba(91, 107, 255, 0.20) 100%);
+                linear-gradient(180deg, rgba(10, 10, 10, 0) 30%, rgba(10, 10, 10, 0.20) 100%);
             pointer-events: none;
             z-index: 1;
         }
-        .resource-thumb-tag { position: relative; z-index: 2; font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; padding: 5px 11px; background: rgba(91, 107, 255, 0.55); backdrop-filter: blur(8px); border-radius: var(--radius-pill); border: 1px solid rgba(255, 255, 255, 0.20); }
+        .resource-thumb-tag { position: relative; z-index: 2; font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; padding: 5px 11px; background: rgba(10, 10, 10, 0.55); backdrop-filter: blur(8px); border-radius: var(--radius-pill); border: 1px solid rgba(255, 255, 255, 0.20); }
         .resource-body { padding: 22px 22px 24px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
         .resource-body h4 { font-family: var(--font-display); font-size: 17px; font-weight: 800; color: var(--primary); letter-spacing: -0.4px; line-height: 1.3; }
         .resource-body p { font-size: 13px; color: var(--text-body); line-height: 1.6; flex: 1; }
@@ -4067,9 +4044,9 @@
         .final-cta-bullets { list-style: none; display: flex; flex-direction: column; gap: 16px; margin: 0 0 36px 0; }
         .final-cta-bullets li { display: flex; align-items: flex-start; gap: 14px; font-size: 15px; color: var(--text-primary); line-height: 1.55; }
         .final-cta-bullets li strong { font-weight: 700; color: var(--primary); }
-        .final-cta-bullets .b-icon { flex-shrink: 0; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255, 33, 166, 0.1); color: var(--accent-text); border-radius: 8px; margin-top: 1px; }
+        .final-cta-bullets .b-icon { flex-shrink: 0; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; background: rgba(26, 26, 26, 0.1); color: var(--accent-text); border-radius: 8px; margin-top: 1px; }
         .final-cta-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-        .final-cta-side { position: relative; aspect-ratio: 4/5; border-radius: var(--radius-image); background: linear-gradient(145deg, var(--primary), var(--accent)); overflow: hidden; box-shadow: 0 28px 72px rgba(91, 107, 255, 0.32); display: flex; flex-direction: column; justify-content: space-between; padding: 32px; isolation: isolate; }
+        .final-cta-side { position: relative; aspect-ratio: 4/5; border-radius: var(--radius-image); background: linear-gradient(145deg, var(--primary), var(--accent)); overflow: hidden; box-shadow: 0 28px 72px rgba(10, 10, 10, 0.32); display: flex; flex-direction: column; justify-content: space-between; padding: 32px; isolation: isolate; }
         .final-cta-side-bg {
             position: absolute;
             inset: 0;
@@ -4086,7 +4063,7 @@
             0%, 100% { transform: scale(1.05) translate(0, 0); }
             50%      { transform: scale(1.08) translate(-1.2%, -0.8%); }
         }
-        .final-cta-side::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(255, 222, 89, 0.20) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255, 33, 166, 0.32) 0%, transparent 55%), linear-gradient(160deg, rgba(91, 107, 255, 0.55) 0%, rgba(91, 107, 255, 0.18) 50%, rgba(255, 33, 166, 0.45) 100%); z-index: 1; }
+        .final-cta-side::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(212, 212, 212, 0.20) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(26, 26, 26, 0.32) 0%, transparent 55%), linear-gradient(160deg, rgba(10, 10, 10, 0.55) 0%, rgba(10, 10, 10, 0.18) 50%, rgba(26, 26, 26, 0.45) 100%); z-index: 1; }
         .final-cta-side-floater {
             position: absolute;
             top: -20px;
@@ -4096,11 +4073,11 @@
             align-items: center;
             gap: 9px;
             padding: 10px 16px 10px 12px;
-            background: var(--bg-card);
+            background: #FFFFFF;
             border-radius: 999px;
             box-shadow:
-                0 22px 44px -10px rgba(91, 107, 255, 0.34),
-                0 8px 20px -4px rgba(255, 33, 166, 0.22);
+                0 22px 44px -10px rgba(10, 10, 10, 0.34),
+                0 8px 20px -4px rgba(26, 26, 26, 0.22);
             font-family: var(--font-body);
             font-size: 11px;
             font-weight: 800;
@@ -4114,7 +4091,7 @@
             align-items: center;
             justify-content: center;
             padding: 4px 9px;
-            background: linear-gradient(180deg, var(--accent) 0%, #d61b8b 100%);
+            background: linear-gradient(180deg, var(--accent) 0%, #1a1a1a 100%);
             color: #FFFFFF;
             border-radius: 999px;
             font-family: var(--font-display);
@@ -4226,8 +4203,8 @@
                 transition: all 0.3s ease;
             }
             .process-tab.active {
-                background: rgba(91, 107, 255, 0.05);
-                border-color: rgba(91, 107, 255, 0.25);
+                background: rgba(10, 10, 10, 0.05);
+                border-color: rgba(10, 10, 10, 0.25);
             }
             .process-dot { display: none; }
             .process-tab-text { gap: 4px; }
@@ -4272,16 +4249,6 @@
             .reveal { opacity: 1; transform: none; }
         }
     </style>
-
-    <!-- ============ PREMIUM OVERLAY (non-destructive visual refinement) ============ -->
-    <link rel="stylesheet" href="assets/premium-overlay.css">
-    <link rel="stylesheet" href="assets/premium-overlay-v2.css">
-    <link rel="stylesheet" href="assets/premium-cleanup.css">
-    <script src="assets/premium-reveal.js" defer></script>
-    <!-- Attribution-Tracker: UTMs + Referrer + Landing-Page erfassen -->
-    <script src="/assets/attribution.js"></script>
-    <!-- Cookie/Consent Manager (lokal, kein Drittanbieter) -->
-    <script src="/assets/consent.js" defer></script>
 </head>
 <body>
 
@@ -4290,12 +4257,13 @@
         <div class="nav-inner">
             <a href="#" class="logo"><img src="assets/bb-logo.jpg" alt="BB Brands" class="logo-img">BB Brands</a>
             <ul class="nav-links">
+                <li><a href="#problem">Problem</a></li>
                 <li><a href="#services">Prozess</a></li>
                 <li><a href="#guarantees">Garantien</a></li>
-                <li><a href="wissen.html">Wissen</a></li>
+                <li><a href="#about">Studio</a></li>
                 <li><a href="#faq">FAQ</a></li>
             </ul>
-            <button type="button" class="nav-cta btn-whatsapp" data-wa-open data-wa-source="nav" aria-haspopup="dialog" aria-controls="waModal">Schreib uns direkt</button>
+            <a href="erstgespraech.html" class="nav-cta">Erstgespräch buchen</a>
             <button class="nav-burger" id="navBurger" aria-label="Menü öffnen" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
@@ -4303,12 +4271,12 @@
     </nav>
 
     <div class="mobile-overlay" id="mobileOverlay">
+        <a href="#problem">Problem</a>
         <a href="#services">Prozess</a>
         <a href="#guarantees">Garantien</a>
-        <a href="wissen.html">Wissen</a>
+        <a href="#about">Studio</a>
         <a href="#faq">FAQ</a>
-        <a href="erstgespraech.html" style="color: var(--c-primary, #0305C6); font-weight: 700;">Kostenloses Erstgespräch →</a>
-        <a href="#" data-wa-open data-wa-source="mobile-nav" style="color: #25D366;">Schreib uns direkt</a>
+        <a href="erstgespraech.html" style="color: var(--accent-text);">Erstgespräch buchen</a>
     </div>
 
     <!-- ============ HERO ============ -->
@@ -4333,9 +4301,9 @@
                     BB Brands verwandelt deinen Shopify Store in eine Premium-Marke. Exzellentes Design trifft auf KI im Store — für maximale Conversion und skalierbare Margen.
                 </p>
                 <div class="hero-actions">
-                    <a href="erstgespraech.html" class="btn-primary btn-call" data-cta-source="hero">
+                    <a href="erstgespraech.html" class="btn-primary">
                         Kostenloses Erstgespräch
-                        <span aria-hidden="true" style="margin-left: 4px;">→</span>
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </a>
                 </div>
                 <div class="hero-guarantees">
@@ -4485,197 +4453,203 @@
         </div>
     </section>
 
-
-    <!-- ============ WHATSAPP CHAT MODAL ============ -->
-    <!--
-      3-Step Value-Stack Funnel:
-        Step 1 — Brand & Shop (Quick wins per Engpass-Auswahl)
-        Step 2 — Engpass + freier Kontext (gezielter Mini-Insight)
-        Step 3 — Name & WhatsApp-Nummer (Lead landet im Backend + öffnet wa.me)
-
-      Backend: /api/leads (magnet="whatsapp-chat") → Upstash Redis + E-Mail an info@bb-brands.de
-      Lead-Verwaltung: /admin
-    -->
-    <div class="lm-modal wa-modal" id="waModal" hidden role="dialog" aria-modal="true" aria-labelledby="waModalTitle">
-        <div class="lm-modal-backdrop" data-wa-close></div>
-        <div class="lm-modal-card wa-modal-card" role="document">
-            <button type="button" class="lm-modal-close" data-wa-close aria-label="Schließen">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-            </button>
-
-            <!-- Header (sticky) -->
-            <div class="wa-modal-header">
-                <div class="wa-modal-eyebrow">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.465 3.488"/></svg>
-                    <span>Direkt mit Moritz auf WhatsApp</span>
+    <!-- ============ LEAD MAGNET ============ -->
+    <section class="leadmagnet" id="gratis-guide" aria-label="Kostenloser Brand Style Guide">
+        <div class="lm-bg-glow" aria-hidden="true"></div>
+        <div class="lm-bg-glow right" aria-hidden="true"></div>
+        <div class="container">
+            <div class="lm-inner">
+                <div class="lm-copy reveal">
+                    <div class="eyebrow">
+                        <span class="lm-free-tag">0 €</span> Für D2C-Founder
+                    </div>
+                    <h2 class="section-title">
+                        Dein kompletter Brand<br>
+                        Style Guide <span class="accent">in 24h</span>.
+                    </h2>
+                    <p class="section-sub">
+                        Kein Pitch. Keine Haken. Wir bauen dir einen interaktiven Brand Style Guide mit Logo-Nutzung, Farbsystem, Typografie, Bildsprache und Brand Voice. Genau so, wie wir ihn sonst nur für zahlende Kunden liefern. Du gibst uns ein paar Infos, wir liefern innerhalb von 24 Stunden. Per E-Mail oder WhatsApp, du entscheidest.
+                    </p>
+                    <ul class="lm-benefits">
+                        <li>
+                            <span class="lm-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <span><strong>Logo-Rules, Farbsystem & Typografie</strong>. Plus Spacing, Iconografie und UI-Tokens, die du sofort nutzen kannst.</span>
+                        </li>
+                        <li>
+                            <span class="lm-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <span><strong>Brand Voice, Dos & Don'ts, Bildsprache</strong>. Alles was dein Team (und dein Designer) braucht, um konsistent zu kommunizieren.</span>
+                        </li>
+                        <li>
+                            <span class="lm-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <span><strong>Interaktives HTML-Dokument</strong>. Kein totes PDF, live nutzbar, teilbar mit Copy-to-Clipboard für Farben und Snippets.</span>
+                        </li>
+                        <li>
+                            <span class="lm-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <span><strong>In 24h bei dir</strong>. Garantiert. Per E-Mail oder direkt auf WhatsApp.</span>
+                        </li>
+                    </ul>
+                    <div class="lm-trust-row">
+                        <span>100 % kostenlos</span>
+                        <span>Keine Kreditkarte</span>
+                        <span>Kein Newsletter</span>
+                    </div>
+                    <button type="button" class="lm-cta" id="lmOpenBtn" data-lm-open data-magnet="style-guide" aria-haspopup="dialog" aria-controls="lmModal">
+                        <span class="lm-cta-shine" aria-hidden="true"></span>
+                        <span class="lm-cta-text">Kostenlosen Style Guide anfordern</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <p class="lm-cta-micro">In 24h bei dir · Keine Weiterleitung · Kein Newsletter</p>
+                    <div class="lm-second-magnet">
+                        <span class="lm-second-magnet-label">Oder lieber technisch?</span>
+                        <button type="button" class="lm-second-magnet-cta" data-lm-open data-magnet="ai-readiness-check" aria-haspopup="dialog" aria-controls="lmModal">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
+                            <span>Kostenloser AI Readiness Check für deinen Store</span>
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </div>
                 </div>
-                <h3 id="waModalTitle">Zwei Minuten. Drei Fragen. Erste Insights sofort.</h3>
-                <p class="wa-modal-sub">Damit ich vorbereitet bin, wenn deine Nachricht reinkommt — und du nicht bei Null anfängst.</p>
-                <!-- Progress bar -->
-                <div class="wa-progress" aria-hidden="true">
-                    <div class="wa-progress-bar" id="waProgressBar"></div>
-                    <div class="wa-progress-steps">
-                        <span class="wa-progress-step is-active" data-progress="1">1</span>
-                        <span class="wa-progress-step" data-progress="2">2</span>
-                        <span class="wa-progress-step" data-progress="3">3</span>
+
+                <div class="lm-showcase reveal" id="lmShowcase">
+                    <div class="lm-showcase-tag">
+                        <span class="lm-pulse" aria-hidden="true"></span>
+                        Live Beispiel · Echter Kunde
+                    </div>
+                    <div class="lm-window" role="figure" aria-label="Beispiel: ARCTIVE Brand Style Guide">
+                        <div class="lm-window-chrome">
+                            <div class="lm-window-traffic" aria-hidden="true">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <div class="lm-window-url">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                <span><span class="lm-window-host">brand-guide.bb-brands.de</span>/arctive</span>
+                            </div>
+                            <div class="lm-window-actions">
+                                <a class="lm-window-newtab" href="/preview/arctive-style-guide.html" target="_blank" rel="noopener" aria-label="Beispiel im neuen Tab öffnen">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="lm-window-frame">
+                            <video
+                                class="lm-window-video"
+                                src="https://jm1dlc1r0alm6hwf.public.blob.vercel-storage.com/video/arctive-preview.mov"
+                                autoplay
+                                loop
+                                muted
+                                playsinline
+                                preload="metadata"
+                                aria-label="ARCTIVE Brand Style Guide — Beispiel-Video"
+                            ></video>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Form Body -->
-            <form class="wa-form" id="waForm" novalidate>
-                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-                <input type="hidden" name="magnet" value="whatsapp-chat">
-                <input type="hidden" name="source" id="waSourceField" value="hero">
-
-                <!-- ===== STEP 1 — Brand & Shop ===== -->
-                <div class="wa-step is-active" data-step="1">
-                    <div class="wa-value-tag">
-                        <span class="wa-value-dot"></span>
-                        Schritt 1 von 3 · Wer schreibt mir?
-                    </div>
-                    <div class="wa-field">
-                        <label class="wa-label" for="wa-brand">Wie heißt deine Marke?</label>
-                        <input type="text" id="wa-brand" name="brand" required placeholder="z.B. ARCTIVE Performance" autocomplete="organization">
-                    </div>
-                    <div class="wa-field">
-                        <label class="wa-label" for="wa-website">Deine Webseite oder dein Shop</label>
-                        <input type="url" id="wa-website" name="website" required placeholder="https://deine-brand.de" autocomplete="url" inputmode="url">
-                        <span class="wa-hint">Damit ich mir den Store schon vor unserem Chat anschauen kann.</span>
-                    </div>
-                    <div class="wa-actions">
-                        <button type="button" class="wa-next" data-wa-next="2">
-                            Weiter
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- ===== STEP 2 — Engpass + Mini-Insight ===== -->
-                <div class="wa-step" data-step="2">
-                    <div class="wa-value-tag">
-                        <span class="wa-value-dot"></span>
-                        Schritt 2 von 3 · Wo brennt's gerade?
-                    </div>
-                    <div class="wa-field">
-                        <span class="wa-label">Was ist <strong>aktuell</strong> dein größter Engpass?</span>
-                        <div class="wa-pain-grid" role="radiogroup" aria-label="Größter Engpass">
-                            <label class="wa-pain">
-                                <input type="radio" name="pain" value="branding" required>
-                                <div class="wa-pain-card">
-                                    <span class="wa-pain-emoji" aria-hidden="true">🎨</span>
-                                    <span class="wa-pain-title">Brand &amp; Identity</span>
-                                    <span class="wa-pain-sub">Sieht generic aus. Bleibt nicht hängen.</span>
-                                </div>
-                            </label>
-                            <label class="wa-pain">
-                                <input type="radio" name="pain" value="shop">
-                                <div class="wa-pain-card">
-                                    <span class="wa-pain-emoji" aria-hidden="true">🛍️</span>
-                                    <span class="wa-pain-title">Shopify Store &amp; CVR</span>
-                                    <span class="wa-pain-sub">Traffic kommt. Kunden gehen.</span>
-                                </div>
-                            </label>
-                            <label class="wa-pain">
-                                <input type="radio" name="pain" value="ads">
-                                <div class="wa-pain-card">
-                                    <span class="wa-pain-emoji" aria-hidden="true">📈</span>
-                                    <span class="wa-pain-title">Meta &amp; Performance Ads</span>
-                                    <span class="wa-pain-sub">CPMs steigen. ROAS bricht ein.</span>
-                                </div>
-                            </label>
-                            <label class="wa-pain">
-                                <input type="radio" name="pain" value="ai">
-                                <div class="wa-pain-card">
-                                    <span class="wa-pain-emoji" aria-hidden="true">🤖</span>
-                                    <span class="wa-pain-title">KI im Store &amp; Support</span>
-                                    <span class="wa-pain-sub">Du bist der Bottleneck. Nachts, sonntags.</span>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Per-pain Mini Value Insight (animated in after pain choice) -->
-                    <div class="wa-insight" id="waInsight" hidden>
-                        <div class="wa-insight-icon" aria-hidden="true">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                        </div>
-                        <div class="wa-insight-text">
-                            <strong id="waInsightTitle">Quick win für dich</strong>
-                            <p id="waInsightBody">…</p>
-                        </div>
-                    </div>
-
-                    <div class="wa-field">
-                        <label class="wa-label" for="wa-context">Kurz in deinen Worten — was hast du schon probiert? <small>(optional)</small></label>
-                        <textarea id="wa-context" name="context" rows="2" placeholder="z.B. „Theme einmal komplett redesignt, ROAS hängt trotzdem bei 1,8…"></textarea>
-                    </div>
-
-                    <div class="wa-actions">
-                        <button type="button" class="wa-back" data-wa-back="1">
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0 4-4m-4 4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            Zurück
-                        </button>
-                        <button type="button" class="wa-next" data-wa-next="3">
-                            Weiter
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- ===== STEP 3 — Name & Phone ===== -->
-                <div class="wa-step" data-step="3">
-                    <div class="wa-value-tag">
-                        <span class="wa-value-dot"></span>
-                        Schritt 3 von 3 · Letzter Step
-                    </div>
-                    <div class="wa-promise">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        <span>Innerhalb von <strong>2 Stunden</strong> bekommst du eine erste Idee für deinen größten Engpass — direkt auf WhatsApp. Keine Auto-Antwort.</span>
-                    </div>
-                    <div class="wa-field">
-                        <label class="wa-label" for="wa-name">Wie soll ich dich ansprechen?</label>
-                        <input type="text" id="wa-name" name="name" required placeholder="Max" autocomplete="given-name">
-                    </div>
-                    <div class="wa-field">
-                        <label class="wa-label" for="wa-phone">Deine WhatsApp-Nummer</label>
-                        <input type="tel" id="wa-phone" name="phone" required placeholder="+49 170 1234567" autocomplete="tel" inputmode="tel">
-                        <span class="wa-hint">Damit ich dir antworten kann, wenn du gerade nicht am Rechner bist.</span>
-                    </div>
-
-                    <label class="wa-consent" id="waConsent">
-                        <input type="checkbox" name="consentChat" required>
-                        <span class="wa-consent-box" aria-hidden="true"></span>
-                        <span class="wa-consent-text">
-                            Ich willige ein, dass BB Brands meine Angaben speichert und mich auf den genannten Wegen (WhatsApp, E-Mail) für eine kostenlose Beratung kontaktiert. Mir ist bewusst, dass beim Absenden meine Telefonnummer zur Eröffnung des Chats an WhatsApp Ireland Ltd. / Meta Platforms, Inc. (USA) übermittelt wird. Jederzeit widerruflich an <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>. Details in der <a href="/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a>.
-                        </span>
-                    </label>
-
-                    <div class="wa-actions">
-                        <button type="button" class="wa-back" data-wa-back="2">
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0 4-4m-4 4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            Zurück
-                        </button>
-                        <button type="submit" class="wa-submit">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.465 3.488"/></svg>
-                            <span class="wa-submit-text">WhatsApp öffnen &amp; senden</span>
-                        </button>
-                    </div>
-                    <p class="wa-micro">Beim Klick öffnet sich WhatsApp mit deiner Nachricht — du musst nur noch auf Senden tippen.</p>
-                </div>
-
-                <!-- ===== SUCCESS STATE ===== -->
-                <div class="wa-success" id="waSuccess" hidden>
-                    <div class="wa-success-icon" aria-hidden="true">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </div>
-                    <h3>Passt. WhatsApp ist offen.</h3>
-                    <p>Schick die Nachricht ab — ich antworte innerhalb von 2 Stunden persönlich. Falls WhatsApp nicht aufgegangen ist:</p>
-                    <a class="wa-fallback-link" id="waFallbackLink" href="#" target="_blank" rel="noopener">Hier manuell öffnen</a>
-                </div>
-            </form>
         </div>
-    </div>
+
+        <!-- ====== LEAD FORM MODAL ====== -->
+        <div class="lm-modal" id="lmModal" hidden role="dialog" aria-modal="true" aria-labelledby="lmModalTitle">
+            <div class="lm-modal-backdrop" data-lm-close></div>
+            <div class="lm-modal-card" role="document">
+                <button type="button" class="lm-modal-close" data-lm-close aria-label="Schließen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+                <div class="lm-modal-body">
+                    <div class="lm-form-head" id="lmFormHead">
+                        <div class="lm-form-eyebrow" id="lmFormEyebrow">Style Guide anfordern</div>
+                        <h3 id="lmModalTitle">Ein paar Infos — und er ist unterwegs.</h3>
+                    </div>
+                    <!--
+                      Backend: /api/leads (Vercel Serverless Function → Upstash Redis)
+                      Setup-Guide: SETUP-LEADS.md
+                      Lead-Verwaltung: /admin
+                    -->
+                    <form class="lm-form" id="lmForm" action="/api/leads" method="POST" novalidate>
+                            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                            <input type="hidden" name="magnet" id="lmMagnetField" value="style-guide">
+
+                            <div class="lm-row-2">
+                                <div class="lm-field">
+                                    <label class="lm-label" for="lm-name">Dein Name</label>
+                                    <input type="text" id="lm-name" name="name" required placeholder="Max Mustermann" autocomplete="name">
+                                </div>
+                                <div class="lm-field">
+                                    <label class="lm-label" for="lm-company">Unternehmen</label>
+                                    <input type="text" id="lm-company" name="company" required placeholder="Muster GmbH" autocomplete="organization">
+                                </div>
+                            </div>
+                            <div class="lm-field">
+                                <label class="lm-label" for="lm-website">Webseite</label>
+                                <input type="url" id="lm-website" name="website" required placeholder="https://deine-brand.de" autocomplete="url">
+                            </div>
+                            <div class="lm-field">
+                                <label class="lm-label" for="lm-email">E-Mail</label>
+                                <input type="email" id="lm-email" name="email" required placeholder="max@deine-brand.de" autocomplete="email">
+                            </div>
+                            <div class="lm-field" id="lmPhoneField">
+                                <label class="lm-label" for="lm-phone">Telefonnummer <small>(für WhatsApp-Versand)</small></label>
+                                <input type="tel" id="lm-phone" name="phone" placeholder="+49 170 1234567" autocomplete="tel">
+                            </div>
+
+                            <div class="lm-field">
+                                <span class="lm-label">Wie möchtest du ihn bekommen?</span>
+                                <div class="lm-radio-group" role="radiogroup" aria-label="Lieferung per">
+                                    <label class="lm-radio">
+                                        <input type="radio" name="delivery" value="email" checked>
+                                        <span class="lm-radio-bullet" aria-hidden="true"></span>
+                                        <span class="lm-radio-label">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                                            E-Mail
+                                        </span>
+                                    </label>
+                                    <label class="lm-radio">
+                                        <input type="radio" name="delivery" value="whatsapp">
+                                        <span class="lm-radio-bullet" aria-hidden="true"></span>
+                                        <span class="lm-radio-label">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.465 3.488"/></svg>
+                                            WhatsApp
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="lm-consents">
+                                <label class="lm-consent" id="lmConsentGuide">
+                                    <input type="checkbox" name="consentGuide" required>
+                                    <span class="lm-consent-box" aria-hidden="true"></span>
+                                    <span class="lm-consent-text">
+                                        <span class="lm-consent-tag required">Pflicht</span>
+                                        Ich willige ein, dass BB Brands meine Angaben sowie öffentlich zugängliche Inhalte meiner Webseite (Markenelemente, Texte, Store-Struktur) verarbeitet, um meinen kostenlosen Lead-Magnet (Brand Style Guide oder AI Readiness Check) zu erstellen und an mich auszuliefern. Dabei werden die relevanten Inhalte zur automatisierten Analyse an <strong>Manus&nbsp;AI</strong> (Butterfly&nbsp;Effect&nbsp;Pte&nbsp;Ltd, Singapur) übermittelt, ein Drittland ohne EU-Angemessenheitsbeschluss. Details und meine Rechte in der <a href="/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+                                    </span>
+                                </label>
+                                <label class="lm-consent" id="lmConsentReference">
+                                    <input type="checkbox" name="consentReference">
+                                    <span class="lm-consent-box" aria-hidden="true"></span>
+                                    <span class="lm-consent-text">
+                                        <span class="lm-consent-tag optional">Optional</span>
+                                        Ich stimme zu, dass BB Brands mein Firmenlogo und meinen Firmennamen als Referenzkunde auf <strong>bb-brands.de</strong> anzeigen darf. Diese Zustimmung ist freiwillig, jederzeit per E-Mail an <a href="mailto:info@bb-brands.de">info@bb-brands.de</a> widerruflich und hat keinen Einfluss auf die Erstellung des Style Guides.
+                                    </span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="lm-submit">
+                                <span class="lm-submit-text">Kostenlosen Style Guide anfordern</span>
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                            <p class="lm-micro">Innerhalb von 24h bei dir. Keine Weiterleitung, keine Abo-Falle, kein Newsletter.</p>
+                        </form>
+
+                        <div class="lm-success" id="lmSuccess" hidden>
+                            <div class="lm-success-icon" aria-hidden="true">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <h3>Passt! Wir sind dran.</h3>
+                            <p><span id="lmSuccessLead">Du bekommst deinen Brand Style Guide</span> innerhalb der nächsten 24 Stunden per <strong id="lmDeliveryChannel">E-Mail</strong>. Check schon mal deinen Posteingang.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ============ PROBLEM ============ -->
     <section class="problem" id="problem">
@@ -4972,187 +4946,15 @@
             </div>
 
             <div class="guarantees-cta reveal">
-                <a href="erstgespraech.html" class="btn-primary btn-call" data-cta-source="guarantees">
-                    Kostenloses Erstgespräch
-                    <span aria-hidden="true" style="margin-left: 6px;">→</span>
+                <a href="erstgespraech.html" class="btn-primary">
+                    Kostenloses Erstgespräch buchen
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
-                <p class="guarantees-cta-meta">30 Min. · unverbindlich · direkt mit Moritz · Angebot in 24h</p>
+                <p class="guarantees-cta-meta">30 Minuten · unverbindlich · direkt mit Moritz · Antwort innerhalb von 24 Stunden</p>
             </div>
         </div>
     </section>
 
-    <!-- ============ LEAD MAGNET ============ -->
-    <section class="leadmagnet" id="gratis-guide" aria-label="Kostenloser Brand Style Guide">
-        <div class="lm-bg-glow" aria-hidden="true"></div>
-        <div class="lm-bg-glow right" aria-hidden="true"></div>
-        <div class="container">
-            <div class="lm-inner">
-                <div class="lm-copy reveal">
-                    <div class="eyebrow">
-                        <span class="lm-free-tag">0 €</span> Für D2C-Founder
-                    </div>
-                    <h2 class="section-title">
-                        Dein kompletter Brand<br>
-                        Style Guide <span class="accent">in 24h</span>.
-                    </h2>
-                    <p class="section-sub">
-                        Kein Pitch. Keine Haken. Wir bauen dir einen interaktiven Brand Style Guide mit Logo-Nutzung, Farbsystem, Typografie, Bildsprache und Brand Voice. Genau so, wie wir ihn sonst nur für zahlende Kunden liefern. Du gibst uns ein paar Infos, wir liefern innerhalb von 24 Stunden — per WhatsApp direkt auf dein Handy.
-                    </p>
-                    <ul class="lm-benefits">
-                        <li>
-                            <span class="lm-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            <span><strong>Logo-Rules, Farbsystem & Typografie</strong>. Plus Spacing, Iconografie und UI-Tokens, die du sofort nutzen kannst.</span>
-                        </li>
-                        <li>
-                            <span class="lm-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            <span><strong>Brand Voice, Dos & Don'ts, Bildsprache</strong>. Alles was dein Team (und dein Designer) braucht, um konsistent zu kommunizieren.</span>
-                        </li>
-                        <li>
-                            <span class="lm-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            <span><strong>Interaktives HTML-Dokument</strong>. Kein totes PDF, live nutzbar, teilbar mit Copy-to-Clipboard für Farben und Snippets.</span>
-                        </li>
-                        <li>
-                            <span class="lm-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            <span><strong>In 24h bei dir</strong>. Garantiert. Per WhatsApp direkt auf dein Handy.</span>
-                        </li>
-                    </ul>
-                    <div class="lm-trust-row">
-                        <span>100 % kostenlos</span>
-                        <span>Keine Kreditkarte</span>
-                        <span>Kein Newsletter</span>
-                    </div>
-                    <button type="button" class="lm-cta" id="lmOpenBtn" data-lm-open data-magnet="style-guide" aria-haspopup="dialog" aria-controls="lmModal">
-                        <span class="lm-cta-shine" aria-hidden="true"></span>
-                        <span class="lm-cta-text">Kostenlosen Style Guide anfordern</span>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </button>
-                    <p class="lm-cta-micro">In 24h bei dir · Keine Weiterleitung · Kein Newsletter</p>
-                    <div class="lm-second-magnet">
-                        <span class="lm-second-magnet-label">Oder lieber technisch?</span>
-                        <button type="button" class="lm-second-magnet-cta" data-lm-open data-magnet="ai-readiness-check" aria-haspopup="dialog" aria-controls="lmModal">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
-                            <span>Kostenloser AI Readiness Check für deinen Store</span>
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="lm-showcase reveal" id="lmShowcase">
-                    <div class="lm-showcase-tag">
-                        <span class="lm-pulse" aria-hidden="true"></span>
-                        Live Beispiel · Echter Kunde
-                    </div>
-                    <div class="lm-window" role="figure" aria-label="Beispiel: ARCTIVE Brand Style Guide">
-                        <div class="lm-window-chrome">
-                            <div class="lm-window-traffic" aria-hidden="true">
-                                <span></span><span></span><span></span>
-                            </div>
-                            <div class="lm-window-url">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                <span><span class="lm-window-host">brand-guide.bb-brands.de</span>/arctive</span>
-                            </div>
-                            <div class="lm-window-actions">
-                                <a class="lm-window-newtab" href="/preview/arctive-style-guide.html" target="_blank" rel="noopener" aria-label="Beispiel im neuen Tab öffnen">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="lm-window-frame">
-                            <video
-                                class="lm-window-video"
-                                src="https://jm1dlc1r0alm6hwf.public.blob.vercel-storage.com/video/arctive-preview.mov"
-                                autoplay
-                                loop
-                                muted
-                                playsinline
-                                preload="metadata"
-                                aria-label="ARCTIVE Brand Style Guide — Beispiel-Video"
-                            ></video>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ====== LEAD FORM MODAL ====== -->
-        <div class="lm-modal" id="lmModal" hidden role="dialog" aria-modal="true" aria-labelledby="lmModalTitle">
-            <div class="lm-modal-backdrop" data-lm-close></div>
-            <div class="lm-modal-card" role="document">
-                <button type="button" class="lm-modal-close" data-lm-close aria-label="Schließen">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-                </button>
-                <div class="lm-modal-body">
-                    <div class="lm-form-head" id="lmFormHead">
-                        <div class="lm-form-eyebrow" id="lmFormEyebrow">Style Guide anfordern</div>
-                        <h3 id="lmModalTitle">Ein paar Infos — und er ist unterwegs.</h3>
-                    </div>
-                    <!--
-                      Backend: /api/leads (Vercel Serverless Function → Upstash Redis)
-                      Setup-Guide: SETUP-LEADS.md
-                      Lead-Verwaltung: /admin
-                    -->
-                    <form class="lm-form" id="lmForm" action="/api/leads" method="POST" novalidate>
-                            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-                            <input type="hidden" name="magnet" id="lmMagnetField" value="style-guide">
-
-                            <div class="lm-row-2">
-                                <div class="lm-field">
-                                    <label class="lm-label" for="lm-name">Dein Name</label>
-                                    <input type="text" id="lm-name" name="name" required placeholder="Max Mustermann" autocomplete="name">
-                                </div>
-                                <div class="lm-field">
-                                    <label class="lm-label" for="lm-company">Unternehmen</label>
-                                    <input type="text" id="lm-company" name="company" required placeholder="Muster GmbH" autocomplete="organization">
-                                </div>
-                            </div>
-                            <div class="lm-field">
-                                <label class="lm-label" for="lm-website">Webseite</label>
-                                <input type="url" id="lm-website" name="website" required placeholder="https://deine-brand.de" autocomplete="url">
-                            </div>
-                            <div class="lm-field" id="lmPhoneField">
-                                <label class="lm-label" for="lm-phone">Deine WhatsApp-Nummer</label>
-                                <input type="tel" id="lm-phone" name="phone" required placeholder="+49 170 1234567" autocomplete="tel">
-                            </div>
-                            <input type="hidden" name="delivery" value="whatsapp">
-
-                            <div class="lm-consents">
-                                <label class="lm-consent" id="lmConsentGuide">
-                                    <input type="checkbox" name="consentGuide" required>
-                                    <span class="lm-consent-box" aria-hidden="true"></span>
-                                    <span class="lm-consent-text">
-                                        <span class="lm-consent-tag required">Pflicht</span>
-                                        Ich willige ein, dass BB Brands meine Angaben sowie öffentlich zugängliche Inhalte meiner Webseite (Markenelemente, Texte, Store-Struktur) verarbeitet, um meinen kostenlosen Lead-Magnet (Brand Style Guide oder AI Readiness Check) zu erstellen und mir per <strong>WhatsApp</strong> zuzustellen. Dabei werden die relevanten Inhalte zur automatisierten Analyse an <strong>Manus&nbsp;AI</strong> (Butterfly&nbsp;Effect&nbsp;Pte&nbsp;Ltd, Singapur) übermittelt, ein Drittland ohne EU-Angemessenheitsbeschluss. Die Zustellung erfolgt über <strong>WhatsApp</strong> (Meta&nbsp;Platforms&nbsp;Inc., USA); meine Telefonnummer wird ausschließlich für die Auslieferung verwendet und nicht für Marketing-Zwecke genutzt. Details und meine Rechte in der <a href="/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a>.
-                                    </span>
-                                </label>
-                                <label class="lm-consent" id="lmConsentReference">
-                                    <input type="checkbox" name="consentReference">
-                                    <span class="lm-consent-box" aria-hidden="true"></span>
-                                    <span class="lm-consent-text">
-                                        <span class="lm-consent-tag optional">Optional</span>
-                                        Ich stimme zu, dass BB Brands mein Firmenlogo und meinen Firmennamen als Referenzkunde auf <strong>bb-brands.de</strong> anzeigen darf. Diese Zustimmung ist freiwillig, jederzeit per E-Mail an <a href="mailto:info@bb-brands.de">info@bb-brands.de</a> widerruflich und hat keinen Einfluss auf die Erstellung des Style Guides.
-                                    </span>
-                                </label>
-                            </div>
-
-                            <button type="submit" class="lm-submit">
-                                <span class="lm-submit-text">Kostenlosen Style Guide anfordern</span>
-                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            </button>
-                            <p class="lm-micro">Innerhalb von 24h bei dir. Keine Weiterleitung, keine Abo-Falle, kein Newsletter.</p>
-                        </form>
-
-                        <div class="lm-success" id="lmSuccess" hidden>
-                            <div class="lm-success-icon" aria-hidden="true">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
-                            <h3>Passt! Wir sind dran.</h3>
-                            <p><span id="lmSuccessLead">Du bekommst deinen Brand Style Guide</span> innerhalb der nächsten 24 Stunden per <strong>WhatsApp</strong>. Halte dein Handy bereit!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- ============ ABOUT ============ -->
     <section class="about" id="about">
         <div class="about-grid">
@@ -5216,7 +5018,6 @@
                 <div class="eyebrow" style="justify-content: center;">Wissens-Hub</div>
                 <h2 class="section-title">Bevor wir reden,<br><span class="accent">lies dich ein.</span></h2>
                 <p class="section-sub">Vier Ressourcen, die zeigen, wie wir denken, arbeiten und Marken aufbauen, kostenlos und ohne E-Mail-Pflicht.</p>
-                <a href="wissen.html" class="resource-link" style="margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:13px;color:var(--primary);">Alle Beiträge im Wissens-Hub <span aria-hidden="true">→</span></a>
             </div>
             <div class="resources-grid">
                 <article class="resource-card reveal">
@@ -5227,7 +5028,7 @@
                     <div class="resource-body">
                         <h3>D2C-Brand-Launch in 21 Tagen</h3>
                         <p>Der komplette Fahrplan vom ersten Logo bis zum laufenden Shopify-Store, inklusive Checkliste.</p>
-                        <a href="wissen-d2c-launch.html" class="resource-link">Guide lesen <span aria-hidden="true">→</span></a>
+                        <a href="#lead-magnet" class="resource-link">Guide lesen <span aria-hidden="true">→</span></a>
                     </div>
                 </article>
                 <article class="resource-card reveal">
@@ -5238,7 +5039,7 @@
                     <div class="resource-body">
                         <h3>AI Readiness Check für deinen Store</h3>
                         <p>Wir analysieren deinen Shopify-Store auf vier KI-Hebel: Search, Produktberater, Support, Auto-Tagging. Konkrete Empfehlung statt Buzzword-Bingo.</p>
-                        <a href="wissen-ai-check.html" class="resource-link">Check anfordern <span aria-hidden="true">→</span></a>
+                        <a href="#gratis-guide" class="resource-link">Check anfordern <span aria-hidden="true">→</span></a>
                     </div>
                 </article>
                 <article class="resource-card reveal">
@@ -5249,7 +5050,7 @@
                     <div class="resource-body">
                         <h3>Das BB-Brands-Brand-System</h3>
                         <p>Wie ein Styleguide aussieht, der nicht nur PDF-Deko ist, sondern Ads, Web und Verpackung trägt.</p>
-                        <a href="wissen-brand-system.html" class="resource-link">Framework sehen <span aria-hidden="true">→</span></a>
+                        <a href="#process" class="resource-link">Framework sehen <span aria-hidden="true">→</span></a>
                     </div>
                 </article>
                 <article class="resource-card reveal">
@@ -5260,7 +5061,7 @@
                     <div class="resource-body">
                         <h3>Kostenloser Brand-Audit</h3>
                         <p>30 Minuten, dein Shop auf dem Schirm. Wir zeigen, was sofort skaliert und was du loslassen darfst.</p>
-                        <a href="https://wa.me/491608725947?text=Hi%20Moritz%2C%20ich%20komme%20%C3%BCber%20euren%20Wissens-Hub%20und%20w%C3%BCrde%20gerne%20einen%20kostenlosen%20Brand%20Audit%20anfordern.%20Ich%20schick%20dir%20gleich%20kurz%20meinen%20Shop-Link%20und%20meine%20gr%C3%B6%C3%9Fte%20Baustelle.%20Wann%20passt%27s%20bei%20dir%3F%20%F0%9F%99%8C" target="_blank" rel="noopener" class="resource-link">Audit auf WhatsApp starten <span aria-hidden="true">→</span></a>
+                        <a href="erstgespraech.html" class="resource-link">Audit buchen <span aria-hidden="true">→</span></a>
                     </div>
                 </article>
             </div>
@@ -5414,9 +5215,9 @@
                     </li>
                 </ul>
                 <div class="final-cta-actions">
-                    <a href="erstgespraech.html" class="btn-primary btn-call" data-cta-source="final-cta">
-                        Kostenloses Erstgespräch
-                        <span aria-hidden="true" style="margin-left: 6px;">→</span>
+                    <a href="erstgespraech.html" class="btn-primary">
+                        Kostenloses Erstgespräch buchen
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </a>
                 </div>
             </div>
@@ -5488,15 +5289,15 @@
                 <h5>Vertrauen</h5>
                 <ul>
                     <li><a href="#guarantees">Garantien</a></li>
-                    <li><a href="wissen.html">Wissens-Hub</a></li>
+                    <li><a href="#resources">Wissens-Hub</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h5>Kontakt</h5>
                 <ul>
-                    <li><a href="#" data-wa-open data-wa-source="footer">Auf WhatsApp schreiben</a></li>
-                    <li><a href="mailto:info@bb-brands.de">info@bb-brands.de</a></li>
+                    <li><a href="erstgespraech.html">Erstgespräch buchen</a></li>
+                    <li><a href="mailto:moritz@bbbrands.de">moritz@bbbrands.de</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
             </div>
@@ -5504,9 +5305,9 @@
         <div class="footer-bottom">
             <p class="footer-copy">© 2026 BB Brands · Moritz Bohmbach</p>
             <ul class="footer-legal">
+                <li><a href="/preview/login" class="customer-login">Als Kunde einloggen</a></li>
                 <li><a href="impressum.html">Impressum</a></li>
                 <li><a href="datenschutz.html">Datenschutz</a></li>
-                <li><a href="#" data-bb-consent-open>Cookie-Einstellungen</a></li>
             </ul>
         </div>
     </footer>
@@ -5558,311 +5359,6 @@
             });
         }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // ====== WHATSAPP CHAT FUNNEL ======
-        (function () {
-            const modal = document.getElementById('waModal');
-            if (!modal) return;
-            const openers = document.querySelectorAll('[data-wa-open]');
-            const closers = modal.querySelectorAll('[data-wa-close]');
-            const form = document.getElementById('waForm');
-            const steps = modal.querySelectorAll('.wa-step');
-            const progressBar = document.getElementById('waProgressBar');
-            const progressSteps = modal.querySelectorAll('.wa-progress-step');
-            const sourceField = document.getElementById('waSourceField');
-            const insightEl = document.getElementById('waInsight');
-            const insightTitle = document.getElementById('waInsightTitle');
-            const insightBody = document.getElementById('waInsightBody');
-            const successEl = document.getElementById('waSuccess');
-            const fallbackLink = document.getElementById('waFallbackLink');
-            const submitBtn = modal.querySelector('.wa-submit');
-            const submitText = modal.querySelector('.wa-submit-text');
-            const consentEl = document.getElementById('waConsent');
-            const consentInput = consentEl.querySelector('input[name="consentChat"]');
-
-            const WA_NUMBER = '491608725947'; // ohne + und ohne Leerzeichen
-            let lastFocus = null;
-            let currentStep = 1;
-
-            // Per-pain Mini-Insights — Value bei jedem Schritt
-            const PAIN_INSIGHTS = {
-                branding: {
-                    title: 'Quick Win — Brand & Identity',
-                    body: 'Bei ARCTIVE Performance haben wir mit einem klaren Brand-System die wahrgenommene Premium-Positionierung in 3 Wochen aufgebaut — gleicher Traffic, signifikant höherer AOV. Die größten Hebel: Logo-Lockup, Farbsystem mit 1 Signal-Akzent, konsistente Bildsprache.'
-                },
-                shop: {
-                    title: 'Quick Win — Shop & CVR',
-                    body: 'Wake Performance hat seine CVR auf der PDP fast verdoppelt — nicht durch ein Redesign, sondern durch 3 gezielte Hebel: AI Search statt Standard-Suche, Trust-Stack über dem Buy-Button und ein KI-Produktberater, der Größenfragen direkt beantwortet.'
-                },
-                ads: {
-                    title: 'Quick Win — Meta Ads',
-                    body: 'Wenn ROAS unter 2 hängt, liegt es zu 80% nicht an der Creative-Quantität, sondern am Creative-System: Wir testen pro Woche nur 3–5 Hooks gegen 1 fixe Funnel-Logik — und tracken Hook-Performance separat. So sind wir bei einem Kunden von ROAS 2,1 auf 4,8 in 6 Wochen gekommen.'
-                },
-                ai: {
-                    title: 'Quick Win — KI im Store',
-                    body: 'Du musst nicht jeder erste Anfrage selbst beantworten. Ein KI-Berater im Theme (nicht als App) fängt Standardfragen 24/7 ab — Größe, Material, Versand, Pflege. Spart bei den meisten Brands 10–15h pro Woche. Direkt im Liquid, kein App-Stack-Bloat.'
-                }
-            };
-
-            const PAIN_LABELS = {
-                branding: 'Brand & Identity',
-                shop: 'Shopify Store & CVR',
-                ads: 'Meta & Performance Ads',
-                ai: 'KI im Store & Support'
-            };
-
-            // Update progress bar + dots
-            const updateProgress = (step) => {
-                const pct = step === 1 ? 16 : step === 2 ? 56 : 100;
-                if (progressBar) progressBar.style.setProperty('--wa-progress', pct + '%');
-                progressSteps.forEach(el => {
-                    const n = Number(el.dataset.progress);
-                    el.classList.toggle('is-active', n === step);
-                    el.classList.toggle('is-done', n < step);
-                });
-            };
-
-            // Show step
-            const showStep = (n) => {
-                steps.forEach(s => s.classList.toggle('is-active', Number(s.dataset.step) === n));
-                currentStep = n;
-                updateProgress(n);
-                // Focus first input of new step
-                setTimeout(() => {
-                    const active = modal.querySelector('.wa-step.is-active');
-                    if (active) {
-                        const firstInput = active.querySelector('input:not([type="hidden"]):not([type="radio"]), textarea');
-                        if (firstInput) firstInput.focus();
-                    }
-                }, 200);
-            };
-
-            // Validate single step
-            const validateStep = (n) => {
-                const step = modal.querySelector(`.wa-step[data-step="${n}"]`);
-                if (!step) return true;
-                let valid = true;
-                step.querySelectorAll('input[required], textarea[required]').forEach(input => {
-                    input.classList.remove('is-error');
-                    if (input.type === 'radio') {
-                        const checked = step.querySelector(`input[name="${input.name}"]:checked`);
-                        if (!checked) valid = false;
-                    } else if (!input.value.trim()) {
-                        input.classList.add('is-error');
-                        valid = false;
-                    } else if (input.type === 'url') {
-                        const v = input.value.trim();
-                        // Tolerant URL check (mit oder ohne https://)
-                        try {
-                            new URL(v.startsWith('http') ? v : 'https://' + v);
-                        } catch {
-                            input.classList.add('is-error');
-                            valid = false;
-                        }
-                    } else if (input.type === 'tel') {
-                        // Mind. 6 Ziffern
-                        if (input.value.replace(/\D/g, '').length < 6) {
-                            input.classList.add('is-error');
-                            valid = false;
-                        }
-                    }
-                });
-                if (n === 2) {
-                    // Pain muss gewählt sein
-                    const pain = step.querySelector('input[name="pain"]:checked');
-                    if (!pain) valid = false;
-                }
-                return valid;
-            };
-
-            // ===== Modal open/close =====
-            const openModal = (source) => {
-                if (sourceField && source) sourceField.value = source;
-                lastFocus = document.activeElement;
-                modal.hidden = false;
-                void modal.offsetWidth;
-                modal.classList.add('is-open');
-                document.body.classList.add('lm-modal-open');
-                showStep(1);
-            };
-            const closeModal = () => {
-                modal.classList.remove('is-open');
-                document.body.classList.remove('lm-modal-open');
-                setTimeout(() => {
-                    modal.hidden = true;
-                    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
-                }, 380);
-            };
-
-            openers.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openModal(btn.getAttribute('data-wa-source') || 'unknown');
-                });
-            });
-            closers.forEach(el => el.addEventListener('click', closeModal));
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-            });
-
-            // ===== Step navigation =====
-            modal.querySelectorAll('[data-wa-next]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const target = Number(btn.getAttribute('data-wa-next'));
-                    if (validateStep(currentStep)) showStep(target);
-                });
-            });
-            modal.querySelectorAll('[data-wa-back]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    showStep(Number(btn.getAttribute('data-wa-back')));
-                });
-            });
-
-            // ===== Pain selection → Mini-Insight =====
-            modal.querySelectorAll('input[name="pain"]').forEach(input => {
-                input.addEventListener('change', () => {
-                    const pain = input.value;
-                    const data = PAIN_INSIGHTS[pain];
-                    if (data) {
-                        insightTitle.textContent = data.title;
-                        insightBody.textContent = data.body;
-                        insightEl.hidden = false;
-                    }
-                });
-            });
-
-            // Clear consent error on toggle
-            consentInput.addEventListener('change', () => {
-                if (consentInput.checked) consentEl.classList.remove('is-error');
-            });
-
-            // ===== Build WhatsApp message =====
-            // Per-Source Templates: jeder CTA bekommt einen eigenen, menschlich
-            // formulierten Einstieg. Keine Emojis (rendern in WhatsApp nicht
-            // zuverlässig). Die Quelle wird unten als Klartext-Footer angehängt,
-            // damit Moritz beim Lesen sofort sieht, von welchem CTA der Lead kommt –
-            // unabhängig vom API-Tagging.
-            const SOURCE_INTROS = {
-                'final-cta':
-                    'ich hab eure Seite gerade zu Ende gelesen und bin bereit für das 30-Minuten-Gespräch, das ihr unten anbietet. Kostenlos, unverbindlich, direkt mit dir – genau so möchte ich starten. Mein Ziel: verstehen, wie ich aus meinem Store eine richtige Marke mache und wo bei mir gerade die größten Hebel liegen.',
-                'hero':
-                    'ich bin gerade auf eurer Startseite gelandet und das Thema "Brand statt nur Shop" trifft bei mir wirklich einen Nerv. Ich glaube, ihr könntet genau die Richtigen für meine nächste Phase sein – und würde gerne kurz mit dir sprechen, um zu schauen, ob das zusammenpasst.',
-                'guarantees':
-                    'eure Garantien haben mich überzeugt – vor allem dass ihr selbst Skin in the Game habt. Genau das hat mir bisher bei anderen Agenturen gefehlt. Ich würde gerne mit dir besprechen, wie wir das konkret auf meine Brand übertragen.',
-                'nav':
-                    'ich hab mir kurz eure Seite angeschaut und wollte direkt den Weg über WhatsApp gehen, statt erst durch ein Formular zu klicken. Lass uns sprechen – ich erzähl dir gerne, woran ich gerade hänge und was ich von einer Zusammenarbeit erwarten würde.',
-                'mobile-nav':
-                    'ich bin gerade mobil auf eurer Seite und wollte direkt den kurzen Weg gehen, statt mich durch Formulare zu kämpfen. Lass uns sprechen – ich erzähl dir kurz, wo ich stehe und was ich brauche.',
-                'footer':
-                    'ich hab mich gerade durch eure Seite gescrollt und ganz unten den Schritt gemacht, dich direkt anzuschreiben. Mir gefällt, wie ihr arbeitet – ich würde gerne mit dir besprechen, ob und wie wir zueinander passen.',
-                'resources-audit':
-                    'ich komme über euren Wissens-Hub und würde gerne den kostenlosen Brand-Audit anfordern, den ihr dort anbietet. Ich schick dir gleich auch noch ein paar Details zu meinem Shop und meiner größten Baustelle.'
-            };
-
-            const buildWaMessage = (data) => {
-                const name = (data.name || '').trim() || 'jemand';
-                const brand = (data.brand || '').trim() || 'meiner Brand';
-                const painLabel = PAIN_LABELS[data.pain] || data.pain || '–';
-                const website = (data.website || '').trim();
-                const context = (data.context || '').trim();
-                const source = data.source || 'unknown';
-
-                const intro = SOURCE_INTROS[source]
-                    || 'ich bin auf eurer Seite gelandet und würde gerne direkt mit dir sprechen, ob und wie wir zueinander passen.';
-
-                const lines = [
-                    `Hey Moritz, ich bin ${name} von ${brand} – ${intro}`,
-                    ``,
-                    `Kurz zu meiner Situation: meine größte Baustelle gerade ist ${painLabel}. Mein Shop ist ${website}, da bekommst du am schnellsten ein Gefühl, wo ich stehe.`
-                ];
-
-                if (context) {
-                    lines.push(``, `Was ich bisher probiert habe: ${context}`);
-                }
-
-                lines.push(
-                    ``,
-                    `Sag mir gerne, wann es bei dir passt – ich bin flexibel.`,
-                    ``,
-                    `– ${name}`,
-                    `(Quelle: ${source} · bb-brands.de)`
-                );
-
-                return lines.join('\n');
-            };
-
-            // ===== Submit =====
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                if (!validateStep(3)) return;
-                if (!consentInput.checked) {
-                    consentEl.classList.add('is-error');
-                    return;
-                }
-                // Honeypot
-                if (form.querySelector('input[name="_gotcha"]').value) return;
-
-                const fd = new FormData(form);
-                const attr = (window.bbAttribution && window.bbAttribution.getAll()) || {};
-                const data = {
-                    magnet: 'whatsapp-chat',
-                    name: fd.get('name'),
-                    brand: fd.get('brand'),
-                    website: fd.get('website'),
-                    pain: fd.get('pain'),
-                    context: fd.get('context') || '',
-                    phone: fd.get('phone'),
-                    source: fd.get('source') || 'unknown',
-                    consentChat: consentInput.checked,
-                    // Herkunft / Journey
-                    utm_source: attr.utm_source || '',
-                    utm_medium: attr.utm_medium || '',
-                    utm_campaign: attr.utm_campaign || '',
-                    utm_content: attr.utm_content || '',
-                    utm_term: attr.utm_term || '',
-                    referrer: attr.referrer || '',
-                    referrer_domain: attr.referrer_domain || '',
-                    landing_path: attr.landing_path || '',
-                    submit_path: attr.submit_path || ''
-                };
-
-                const waMessage = buildWaMessage(data);
-                const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`;
-
-                submitBtn.disabled = true;
-                if (submitText) submitText.textContent = 'Wird gesendet…';
-
-                // POST to backend (don't block WA opening on backend errors)
-                let backendOk = false;
-                try {
-                    const res = await fetch('/api/leads', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                        body: JSON.stringify(data)
-                    });
-                    const json = await res.json().catch(() => ({}));
-                    backendOk = res.ok && json.ok;
-                } catch (err) {
-                    console.warn('[wa-funnel] backend submit failed', err);
-                }
-
-                // Open WhatsApp regardless — user value first.
-                // Use a real anchor click so popup blockers don't kill it.
-                const tempAnchor = document.createElement('a');
-                tempAnchor.href = waUrl;
-                tempAnchor.target = '_blank';
-                tempAnchor.rel = 'noopener';
-                document.body.appendChild(tempAnchor);
-                tempAnchor.click();
-                document.body.removeChild(tempAnchor);
-
-                // Show success state with fallback link
-                if (fallbackLink) fallbackLink.href = waUrl;
-                form.querySelectorAll('.wa-step').forEach(s => s.classList.remove('is-active'));
-                successEl.hidden = false;
-                if (progressBar) progressBar.style.setProperty('--wa-progress', '100%');
-            });
-        })();
 
         // ====== LEAD MAGNET MODAL ======
         (function () {
@@ -5933,10 +5429,30 @@
             if (!form) return;
             const successEl = document.getElementById('lmSuccess');
             const formHead = document.getElementById('lmFormHead');
+            const phoneField = document.getElementById('lmPhoneField');
+            const phoneInput = phoneField.querySelector('input');
+            const channelLabel = document.getElementById('lmDeliveryChannel');
             const submitBtn = form.querySelector('.lm-submit');
             const submitText = form.querySelector('.lm-submit-text');
 
-            const showSuccess = (magnet) => {
+            // Phone field highlight + required toggle based on delivery choice
+            const updatePhoneState = () => {
+                const delivery = form.querySelector('input[name="delivery"]:checked').value;
+                if (delivery === 'whatsapp') {
+                    phoneInput.required = true;
+                    phoneField.classList.add('highlight');
+                } else {
+                    phoneInput.required = false;
+                    phoneField.classList.remove('highlight');
+                }
+            };
+            form.querySelectorAll('input[name="delivery"]').forEach(r => {
+                r.addEventListener('change', updatePhoneState);
+            });
+            updatePhoneState();
+
+            const showSuccess = (channel, magnet) => {
+                channelLabel.textContent = channel === 'whatsapp' ? 'WhatsApp' : 'E-Mail';
                 const successLead = document.getElementById('lmSuccessLead');
                 if (successLead) {
                     successLead.textContent = magnet === 'ai-readiness-check'
@@ -5973,11 +5489,9 @@
                 if (form.querySelector('input[name="_gotcha"]').value) return;
 
                 const formData = new FormData(form);
+                const delivery = formData.get('delivery');
                 const magnet = formData.get('magnet') || 'style-guide';
                 const previousBtnText = submitText.textContent;
-
-                // Attribution-Daten holen
-                const attr = (window.bbAttribution && window.bbAttribution.getAll()) || {};
 
                 // Build JSON payload for /api/leads
                 const payload = {
@@ -5985,21 +5499,11 @@
                     name: formData.get('name'),
                     company: formData.get('company'),
                     website: formData.get('website'),
-                    email: '',
+                    email: formData.get('email'),
                     phone: formData.get('phone') || '',
-                    delivery: 'whatsapp',
+                    delivery: delivery,
                     consentGuide: formData.get('consentGuide') === 'on',
                     consentReference: formData.get('consentReference') === 'on',
-                    // Herkunft / Journey
-                    utm_source: attr.utm_source || '',
-                    utm_medium: attr.utm_medium || '',
-                    utm_campaign: attr.utm_campaign || '',
-                    utm_content: attr.utm_content || '',
-                    utm_term: attr.utm_term || '',
-                    referrer: attr.referrer || '',
-                    referrer_domain: attr.referrer_domain || '',
-                    landing_path: attr.landing_path || '',
-                    submit_path: attr.submit_path || '',
                 };
 
                 submitBtn.disabled = true;
@@ -6016,7 +5520,7 @@
                     });
                     const data = await res.json().catch(() => ({}));
                     if (res.ok && data.ok) {
-                        showSuccess(magnet);
+                        showSuccess(delivery, magnet);
                     } else if (res.status === 400 && data.errors) {
                         const msgs = Object.values(data.errors).join(' · ');
                         throw new Error(msgs);
@@ -6026,7 +5530,7 @@
                 } catch (err) {
                     submitBtn.disabled = false;
                     submitText.textContent = previousBtnText;
-                    alert('Da ist leider etwas schiefgelaufen: ' + err.message + '\n\nSchreib uns direkt an info@bb-brands.de. Wir kümmern uns trotzdem um dich.');
+                    alert('Da ist leider etwas schiefgelaufen: ' + err.message + '\n\nSchreib uns direkt an moritz@bbbrands.de. Wir kümmern uns trotzdem um dich.');
                 }
             });
         })();
@@ -6297,10 +5801,10 @@
     <script>
         (function initKineticWaves() {
             const COLORS = [
-                { r: 61,  g: 79,  b: 230, a: 0.55 }, // Deep blue
-                { r: 91,  g: 107, b: 255, a: 0.50 }, // BB Brand Blue
-                { r: 126, g: 139, b: 255, a: 0.42 }, // Light blue
-                { r: 15,  g: 20,  b: 60,  a: 0.25 }  // Deep navy depth
+                { r: 0,   g: 0,   b: 0,   a: 0.65 }, // Black
+                { r: 38,  g: 38,  b: 38,  a: 0.60 }, // Charcoal
+                { r: 90,  g: 90,  b: 90,  a: 0.55 }, // Mid gray
+                { r: 0,   g: 0,   b: 0,   a: 0.25 }  // Deep black depth
             ];
             const WAVE_CONFIGS = [
                 { speed: 0.0008, amplitude: 0.22, frequency: 0.0008, offsetY: 0.70, phase: 0 },
