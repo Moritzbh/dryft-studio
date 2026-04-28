@@ -210,9 +210,10 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
       }
       if (ret && ret.startsWith('/preview/')) {
         location.href = ret;
-      } else {
+      } else if (d.brand.token) {
         location.href = '/preview/' + d.brand.slug + '-' + d.brand.token + '/';
       }
+      // ohne token: kein Auto-Redirect — Form anzeigen statt /preview/{slug}-null/ → 404
     })
     .catch(() => {});
 
@@ -273,8 +274,12 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
       const ret = params.get('return');
       if (ret && ret.startsWith('/preview/')) {
         location.href = ret;
-      } else {
+      } else if (data.brand.token) {
         location.href = '/preview/' + data.brand.slug + '-' + data.brand.token + '/';
+      } else {
+        errorEl.textContent = 'Brand-Konfiguration unvollständig (token fehlt). Bitte info@bb-brands.de kontaktieren.';
+        btn.disabled = false;
+        btn.textContent = 'Einloggen';
       }
     } catch (err) {
       errorEl.textContent = 'Netzwerkfehler. Bitte erneut versuchen.';

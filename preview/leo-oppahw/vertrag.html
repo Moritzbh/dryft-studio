@@ -159,9 +159,17 @@ section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
 }
 @media (max-width:680px){.sig{grid-template-columns:1fr;gap:32px}}
 .sig-block{font-size:13px;color:var(--muted)}
-.sig-line{height:1px;background:var(--ink);margin:36px 0 8px;width:100%}
+.sig-line{height:1px;background:var(--ink);margin:8px 0 8px;width:100%}
 .sig-block strong{color:var(--ink);font-weight:700;font-size:14px}
 .sig-block .role{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--subtle);margin-top:2px}
+.sig-mark{height:72px;display:flex;align-items:flex-end;margin-bottom:6px}
+.sig-mark svg{height:100%;width:auto;color:var(--ink)}
+.sig-empty{height:72px;display:flex;align-items:flex-end;margin-bottom:6px}
+.sig-place{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--subtle);margin-bottom:6px;
+}
+.sig-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:0.04em}
 
 /* Print */
 @media print{
@@ -198,12 +206,12 @@ section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
   <div class="cover-main">
     <span class="cover-kicker">✦ &nbsp;Werkvertrag</span>
     <h1 class="cover-title">LEO Sport Nutrition<br><em>× BB Brands.</em></h1>
-    <p class="cover-sub">Werkvertrag über die Erstellung eines Custom-Shopify-Themes — Homepage, PDP-Template, Cart-Drawer und Theme-Setup. Volltext zum Durchlesen, Unterschriftsfelder am Ende. Anzahlung erst nach beidseitiger Unterschrift.</p>
+    <p class="cover-sub">Werkvertrag über die Erstellung eines Custom-Shopify-Themes — Homepage, PDP-Template, Cart-Drawer und Theme-Setup. Volltext zum Durchlesen, Unterschriftsfelder am Ende. Zahlung 100 % upfront, Build-Start direkt nach Zahlungseingang.</p>
   </div>
   <div class="cover-bottom">
     <div><strong>Auftragswert</strong>500,00 € netto</div>
     <div><strong>Build-Zeit</strong>3–4 Wochen</div>
-    <div><strong>Build-Start</strong>nach Anzahlung</div>
+    <div><strong>Build-Start</strong>nach vollständiger Zahlung</div>
   </div>
 </section>
 
@@ -309,10 +317,10 @@ section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
     <div class="note">Gem. § 19 UStG wird keine Umsatzsteuer ausgewiesen. Pauschalpreis für den vollständigen Leistungsumfang gemäß § 2.</div>
   </div>
 
-  <p><strong>Zahlungsmodell · 50 / 50:</strong></p>
+  <p><strong>Zahlungsmodell · 100 % upfront:</strong></p>
   <ul>
-    <li><strong>50 % Anzahlung (250,00 €)</strong> — fällig binnen 7 Tagen nach Vertragsunterzeichnung, vor Build-Start</li>
-    <li><strong>50 % Restzahlung (250,00 €)</strong> — fällig binnen 7 Tagen nach Theme-Übergabe (gem. § 6)</li>
+    <li><strong>Vollständige Zahlung (500,00 €)</strong> — fällig binnen 7 Tagen nach beidseitiger Vertragsunterzeichnung</li>
+    <li>Der Build startet unmittelbar nach Zahlungseingang auf dem Konto des Auftragnehmers</li>
   </ul>
   <p>Die Rechnung wird elektronisch (PDF) an die im Auftraggeber-Profil hinterlegte E-Mail-Adresse gesendet. Zahlung per Banküberweisung in EUR. Bankverbindung folgt mit Rechnung.</p>
 </section>
@@ -362,7 +370,7 @@ section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
   <p class="s-num">§ 9</p>
   <h2 class="s-title">Vertragsdauer &amp; <em>Kündigung</em></h2>
   <p>Der Vertrag endet mit der vollständigen Übergabe und Zahlung. Eine ordentliche Kündigung vor Build-Abschluss ist ausgeschlossen.</p>
-  <p><strong>Außerordentliche Kündigung</strong> ist beidseitig bei Vorliegen wichtiger Gründe möglich (z. B. nachhaltige Verletzung von Mitwirkungspflichten oder Lieferpflichten). Im Fall einer Kündigung durch den Auftraggeber nach Build-Start wird die Anzahlung als pauschalierter Aufwendungsersatz nicht erstattet; bereits geleistete Arbeitsschritte verbleiben beim Auftragnehmer.</p>
+  <p><strong>Außerordentliche Kündigung</strong> ist beidseitig bei Vorliegen wichtiger Gründe möglich (z. B. nachhaltige Verletzung von Mitwirkungspflichten oder Lieferpflichten). Im Fall einer Kündigung durch den Auftraggeber nach Build-Start wird der Auftragswert als pauschalierter Aufwendungsersatz nicht erstattet; bereits geleistete Arbeitsschritte verbleiben beim Auftragnehmer. Bei einer Kündigung vor Build-Start wird der gezahlte Betrag abzüglich bereits angefallener Vorbereitungskosten anteilig erstattet.</p>
 </section>
 
 <!-- §10 -->
@@ -377,14 +385,30 @@ section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
 <!-- SIGNATURE -->
 <div class="sig">
   <div class="sig-block">
+    <p class="sig-place">Auftraggeber</p>
+    <div class="sig-empty"></div>
     <div class="sig-line"></div>
     <strong>LEO Sport Nutrition GmbH</strong>
-    <div class="role">Auftraggeber · Ort, Datum, Unterschrift</div>
+    <div class="role">Ort, Datum, Unterschrift &amp; Stempel</div>
   </div>
   <div class="sig-block">
+    <p class="sig-place">Auftragnehmer</p>
+    <div class="sig-mark" aria-label="Unterschrift Moritz Bohmbach">
+      <svg viewBox="0 0 280 90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Geschwungenes M -->
+        <path d="M14 64 C 14 50, 20 30, 30 28 C 38 26, 44 38, 46 52 C 48 64, 52 70, 58 64 C 66 56, 70 38, 78 30 C 84 25, 92 28, 92 42 C 92 54, 88 64, 90 68" />
+        <!-- Punkt nach M -->
+        <circle cx="100" cy="60" r="2.2" fill="currentColor" stroke="none" />
+        <!-- B mit Schleife -->
+        <path d="M118 26 C 118 36, 116 48, 112 60 C 110 66, 108 72, 110 76 C 113 80, 122 76, 132 68 C 142 60, 148 50, 142 44 C 138 40, 128 42, 122 48 C 118 52, 116 56, 118 60 C 122 64, 134 60, 144 56 C 156 52, 164 48, 162 56 C 160 64, 152 70, 144 74" />
+        <!-- Auslauf-Schwung -->
+        <path d="M150 72 C 168 70, 192 64, 218 58 C 238 54, 256 52, 270 56" />
+      </svg>
+    </div>
     <div class="sig-line"></div>
     <strong>Moritz Bohmbach · BB Brands</strong>
-    <div class="role">Auftragnehmer · Ort, Datum, Unterschrift</div>
+    <div class="role">Ort, Datum</div>
+    <div class="sig-meta">Wolfsburg, 28.04.2026</div>
   </div>
 </div>
 
