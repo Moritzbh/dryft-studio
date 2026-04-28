@@ -201,8 +201,24 @@ section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
   font-family:inherit;font-weight:700;font-size:13px;letter-spacing:0.04em;
   cursor:pointer;display:inline-flex;align-items:center;gap:10px;
   box-shadow:0 12px 28px rgba(0,0,0,0.32);
+  transition:background 180ms ease,opacity 180ms ease;
 }
 .print-btn:hover{background:var(--gold-deep)}
+.print-btn:disabled{opacity:0.7;cursor:wait}
+.print-btn .pdf-spinner{
+  width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);
+  border-top-color:#fff;border-radius:50%;
+  animation:pdf-spin 0.7s linear infinite;display:none;
+}
+.print-btn.is-loading .pdf-spinner{display:inline-block}
+.print-btn.is-loading .pdf-icon{display:none}
+@keyframes pdf-spin{to{transform:rotate(360deg)}}
+
+/* PDF-Render-Mode (gilt während html2pdf das DOM rendert) */
+.is-pdf-mode .no-print{display:none !important}
+.is-pdf-mode section.s,
+.is-pdf-mode .sig{break-inside:avoid;page-break-inside:avoid}
+.is-pdf-mode .paper{box-shadow:none}
 </style>
 </head>
 <body>
@@ -211,7 +227,7 @@ section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
 <section class="cover">
   <div class="cover-top">
     <div class="cover-top__left">
-      <a href="/preview/leo-oppahw/" class="cover-back">← Kunden-Bereich</a>
+      <a href="/preview/leo-oppahw/" class="cover-back no-print">← Kunden-Bereich</a>
       <div class="cover-brand"><span class="dot"></span>BB Brands · Vertrag</div>
     </div>
     <div class="cover-meta">Vertrag-Nr. BB-LEO-2026-001 · 28.04.2026</div>
@@ -427,10 +443,61 @@ section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
 
 </div></div>
 
-<button class="print-btn no-print" onclick="window.print()">
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-  Als PDF speichern
+<button class="print-btn no-print" id="bb-pdf-btn" onclick="downloadAsPdf()">
+  <svg class="pdf-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+  <span class="pdf-spinner" aria-hidden="true"></span>
+  <span class="pdf-label">Als PDF speichern</span>
 </button>
+
+<!-- html2pdf.js — Client-side PDF-Generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+async function downloadAsPdf() {
+  const btn = document.getElementById('bb-pdf-btn');
+  const labelEl = btn.querySelector('.pdf-label');
+  const origLabel = labelEl.textContent;
+
+  // Loading-State
+  btn.disabled = true;
+  btn.classList.add('is-loading');
+  labelEl.textContent = 'Erstelle PDF…';
+
+  // PDF-Render-Mode aktivieren
+  document.body.classList.add('is-pdf-mode');
+
+  // Kurzer paint-tick damit DOM-Klassen greifen bevor html2canvas snapshot zieht
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+  try {
+    if (typeof html2pdf === 'undefined') {
+      throw new Error('html2pdf library not loaded');
+    }
+    await html2pdf().set({
+      margin:    [8, 8, 8, 8],
+      filename:  'BB-LEO-2026-001-Werkvertrag.pdf',
+      image:     { type: 'jpeg', quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        letterRendering: true,
+        backgroundColor: '#ffffff',
+        windowWidth: document.documentElement.scrollWidth,
+      },
+      jsPDF:     { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+    }).from(document.body).save();
+  } catch (err) {
+    console.error('[BB PDF] Fehler:', err);
+    alert('PDF konnte nicht erstellt werden — wir öffnen das Druck-Menü als Fallback.\n\nDort: „Ziel" → „Als PDF speichern".');
+    window.print();
+  } finally {
+    document.body.classList.remove('is-pdf-mode');
+    btn.disabled = false;
+    btn.classList.remove('is-loading');
+    labelEl.textContent = origLabel;
+  }
+}
+</script>
 
 </body>
 </html>
