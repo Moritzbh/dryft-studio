@@ -482,19 +482,12 @@ const PHASES = [
 ];
 
 (function(){
-  const token = localStorage.getItem('bb-preview-token');
-  if (!token) {
-    location.href = '/preview/login?return=' + encodeURIComponent(location.pathname);
-    return;
-  }
-
-  fetch('/api/preview-auth?action=verify', {
-    headers: { 'Authorization': 'Bearer ' + token }
-  })
+  // Auth läuft über HttpOnly-Cookie (XSS-safe). Browser sendet Cookie automatisch.
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
     .then(r => r.json())
     .then(d => {
       if (!d.ok || !d.brand || d.brand.slug !== BRAND_SLUG) {
-        localStorage.removeItem('bb-preview-token');
+        localStorage.removeItem('bb-preview-brand');
         location.href = '/preview/login?return=' + encodeURIComponent(location.pathname);
         return;
       }
@@ -524,15 +517,18 @@ const PHASES = [
   }
 
   function renderPhases(brand) {
-    // Heuristik: aktuelle Phase aus Brand-Daten ableiten
-    // - Hat Pages = Build/Review
-    // - keine Pages = Onboarding/Plan
-    let currentIdx = 3; // Build als default wenn Pages da sind
-    if (!brand.pages || brand.pages.length === 0) currentIdx = 0;
-    else if (brand.pages.length >= 2) currentIdx = 4; // Review
+    // Phase aus Brand-Daten (vom Skill via /api/preview-auth set-phase gesetzt).
+    // Fallback-Heuristik wenn Phase-Field leer:
+    //   - keine Pages = Onboarding (0)
+    //   - 1 Page    = Build (3)
+    //   - 2+ Pages  = Review (4)
+    let currentIdx = 3;
     if (brand.phase) {
       const idx = PHASES.findIndex(p => p.key === brand.phase);
       if (idx >= 0) currentIdx = idx;
+    } else {
+      if (!brand.pages || brand.pages.length === 0) currentIdx = 0;
+      else if (brand.pages.length >= 2) currentIdx = 4;
     }
 
     const track = document.getElementById('phase-track');
@@ -616,9 +612,16 @@ const PHASES = [
   }
 
   document.getElementById('btn-logout').addEventListener('click', () => {
-    localStorage.removeItem('bb-preview-token');
-    localStorage.removeItem('bb-preview-brand');
-    location.href = '/preview/login';
+    // POST logout → Server löscht das Auth-Cookie
+    fetch('/api/preview-auth', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'logout' })
+    }).finally(() => {
+      localStorage.removeItem('bb-preview-brand');
+      location.href = '/preview/login';
+    });
   });
 })();
 </script>

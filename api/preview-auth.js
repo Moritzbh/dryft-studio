@@ -177,6 +177,46 @@ function getBearerToken(req) {
   return auth.replace(/^Bearer\s+/i, '').trim();
 }
 
+// ---------- Cookie helpers (HttpOnly auth — XSS-safe) ----------
+const AUTH_COOKIE_NAME = 'bb_preview_auth';
+
+function getCookieToken(req) {
+  const raw = req.headers['cookie'] || '';
+  if (!raw) return '';
+  const parts = raw.split(';');
+  for (const part of parts) {
+    const idx = part.indexOf('=');
+    if (idx === -1) continue;
+    const k = part.slice(0, idx).trim();
+    if (k === AUTH_COOKIE_NAME) {
+      return decodeURIComponent(part.slice(idx + 1).trim());
+    }
+  }
+  return '';
+}
+
+// Prefer Cookie, fallback to Bearer (für CLI/Skripte)
+function getAuthToken(req) {
+  return getCookieToken(req) || getBearerToken(req);
+}
+
+function setAuthCookie(res, token, maxAgeSec) {
+  const parts = [
+    `${AUTH_COOKIE_NAME}=${encodeURIComponent(token)}`,
+    'Path=/',
+    'HttpOnly',
+    'Secure',
+    'SameSite=Lax',
+    `Max-Age=${maxAgeSec}`,
+  ];
+  res.setHeader('Set-Cookie', parts.join('; '));
+}
+
+function clearAuthCookie(res) {
+  res.setHeader('Set-Cookie',
+    `${AUTH_COOKIE_NAME}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`);
+}
+
 function jsonResponse(res, status, body) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -189,6 +229,7 @@ function publicBrand(brand) {
     name: brand.name,
     slug: brand.slug,
     token: brand.token,
+    phase: brand.phase || null,
     pages: brand.pages || [],
   };
 }
@@ -217,7 +258,8 @@ module.exports = async function handler(req, res) {
       const action = url.searchParams.get('action');
 
       if (action === 'verify') {
-        const token = getBearerToken(req);
+        // Cookie zuerst (UI-Flow), dann Bearer (CLI/Skripte)
+        const token = getAuthToken(req);
         const data = verifyToken(token);
         if (!data) return jsonResponse(res, 401, { ok: false, error: 'invalid or expired token' });
         const brand = await getBrand(data.slug);
@@ -268,8 +310,11 @@ module.exports = async function handler(req, res) {
         }
 
         const token = makeToken(slug);
+        // HttpOnly-Cookie setzen (XSS-safe — JS kommt nicht ran)
+        setAuthCookie(res, token, Math.floor(TOKEN_VALIDITY_MS / 1000));
         return jsonResponse(res, 200, {
           ok: true,
+          // token wird auch im Body returned als Fallback für CLI-Tools (Bearer)
           token,
           brand: publicBrand(brand),
         });
@@ -309,6 +354,31 @@ module.exports = async function handler(req, res) {
             deployed_at: new Date().toISOString(),
           });
         }
+        await setBrand(slug, brand);
+        return jsonResponse(res, 200, { ok: true, brand: publicBrand(brand) });
+      }
+
+      // ----- logout (clears cookie) -----
+      if (action === 'logout') {
+        clearAuthCookie(res);
+        return jsonResponse(res, 200, { ok: true });
+      }
+
+      // ----- set-phase (admin only) -----
+      // Erlaubte Phasen: onboarding, plan, setup, build, review, launch, live
+      if (action === 'set-phase') {
+        if (!checkAdmin(req)) return jsonResponse(res, 401, { ok: false, error: 'unauthorized' });
+        const slug = str(body.slug, 60).toLowerCase();
+        const phase = str(body.phase, 40);
+        const VALID_PHASES = ['onboarding', 'plan', 'setup', 'build', 'review', 'launch', 'live'];
+        if (!isValidSlug(slug) || !VALID_PHASES.includes(phase)) {
+          return jsonResponse(res, 400, { ok: false, error: 'slug or phase invalid' });
+        }
+        const brand = await getBrand(slug);
+        if (!brand) return jsonResponse(res, 404, { ok: false, error: 'brand not found' });
+        brand.phase = phase;
+        brand.phase_set_at = new Date().toISOString();
+        brand.updated_at = new Date().toISOString();
         await setBrand(slug, brand);
         return jsonResponse(res, 200, { ok: true, brand: publicBrand(brand) });
       }

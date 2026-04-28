@@ -184,29 +184,21 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   const errorEl = document.getElementById('error');
   const btn = document.getElementById('submit-btn');
 
-  // If already logged in (token in localStorage), try auto-redirect
-  const existingToken = localStorage.getItem('bb-preview-token');
-  if (existingToken) {
-    fetch('/api/preview-auth?action=verify', {
-      headers: { 'Authorization': 'Bearer ' + existingToken }
-    })
-      .then(r => r.json())
-      .then(d => {
-        if (d.ok && d.brand) {
-          // Token is valid → redirect to dashboard
-          const params = new URLSearchParams(location.search);
-          const ret = params.get('return');
-          if (ret && ret.startsWith('/preview/')) {
-            location.href = ret;
-          } else {
-            location.href = '/preview/' + d.brand.slug + '-' + d.brand.token + '/';
-          }
+  // Auto-redirect wenn schon eingeloggt (Cookie wird automatisch mitgesendet)
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok && d.brand) {
+        const params = new URLSearchParams(location.search);
+        const ret = params.get('return');
+        if (ret && ret.startsWith('/preview/')) {
+          location.href = ret;
         } else {
-          localStorage.removeItem('bb-preview-token');
+          location.href = '/preview/' + d.brand.slug + '-' + d.brand.token + '/';
         }
-      })
-      .catch(() => {});
-  }
+      }
+    })
+    .catch(() => {});
 
   // Pre-fill slug if URL has ?slug= or ?return=/preview/{slug}-{token}/...
   const params = new URLSearchParams(location.search);
@@ -232,6 +224,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
     try {
       const res = await fetch('/api/preview-auth', {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'login',
@@ -257,7 +250,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
         return;
       }
 
-      localStorage.setItem('bb-preview-token', data.token);
+      // Auth-Cookie wurde vom Server gesetzt (HttpOnly). Brand-Info nur als Cache.
       localStorage.setItem('bb-preview-brand', JSON.stringify(data.brand));
 
       // Redirect — return param wins, else dashboard
