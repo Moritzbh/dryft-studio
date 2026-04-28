@@ -78,14 +78,14 @@ function verifyToken(token) {
   const parts = token.split('.');
   if (parts.length !== 2) return null;
   const [payloadB64, sigB64] = parts;
-  let payloadStr;
-  try { payloadStr = fromB64url(payloadB64).toString('utf8'); } catch { return null; }
-  const expectedSig = hmacB64url(payloadStr);
+  // HMAC is computed over the base64url-encoded payload (not decoded JSON)
+  const expectedSig = hmacB64url(payloadB64);
   if (sigB64 !== expectedSig) return null;
-  const [slug, expiresStr] = payloadStr.split('.');
-  const expires = parseInt(expiresStr, 10);
-  if (!slug || !expires || expires < Date.now()) return null;
-  return { slug, expires };
+  let data;
+  try { data = JSON.parse(fromB64url(payloadB64).toString('utf-8')); } catch { return null; }
+  if (!data || !data.slug || !data.exp) return null;
+  if (Date.now() > data.exp) return null;
+  return { slug: data.slug, expires: data.exp };
 }
 
 // ----- Validation -------------------------------------------
