@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Bachgold · Vorschau-Dashboard</title>
+<title>Bachgold · BB Brands Kunden-Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,13 +13,17 @@
 :root {
   --bg: #FAFAFB;
   --bg-card: #FFFFFF;
+  --bg-soft: #F4F4F7;
   --primary: #0305C6;
+  --primary-soft: rgba(3, 5, 198, 0.08);
   --accent: #FF21A6;
   --text: #0A0A0A;
   --text-muted: #6B7280;
   --text-light: #9CA3AF;
   --border: rgba(10, 10, 10, 0.08);
   --green: #10B981;
+  --orange: #F59E0B;
+  --red: #EF4444;
   --radius: 14px;
   --radius-sm: 10px;
   --radius-pill: 100px;
@@ -43,58 +47,63 @@ body {
 .app { display: none; }
 .app.is-active { display: block; }
 
+/* ===== Topbar ===== */
 .topbar {
   position: sticky; top: 0; z-index: 10;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--border);
-  padding: 16px 24px;
+  padding: 14px 28px;
 }
 .topbar-inner {
-  max-width: 1100px; margin: 0 auto;
+  max-width: 1180px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
 }
 .topbar-brand {
   display: flex; align-items: center; gap: 10px;
   font-size: 15px; font-weight: 700; color: var(--primary);
+  text-decoration: none;
 }
 .topbar-brand-mark {
-  width: 26px; height: 26px; border-radius: 7px;
+  width: 28px; height: 28px; border-radius: 8px;
   background: var(--primary); color: #fff;
   display: inline-flex; align-items: center; justify-content: center;
   font-size: 11px; font-weight: 800;
 }
-.topbar-actions { display: flex; gap: 12px; align-items: center; }
-.topbar-actions a {
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+.topbar-actions a, .btn-logout {
   font-size: 12px; color: var(--text-muted);
   text-decoration: none; font-weight: 600;
   padding: 8px 14px; border-radius: 999px;
-  transition: all .15s ease;
-}
-.topbar-actions a:hover { background: var(--bg); color: var(--text); }
-.btn-logout {
-  font-size: 12px; font-weight: 600;
-  border: 1px solid var(--border);
-  padding: 8px 14px; border-radius: 999px;
-  background: #fff;
-  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
   font-family: inherit;
-  color: var(--text-muted);
+  cursor: pointer;
   transition: all .15s ease;
 }
+.topbar-actions a:hover { background: var(--bg-soft); color: var(--text); }
+.btn-logout { border: 1px solid var(--border); }
 .btn-logout:hover { border-color: var(--text-muted); color: var(--text); }
 
+/* ===== Hero / Welcome ===== */
 .hero {
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 56px 24px 32px;
+  padding: 48px 28px 24px;
 }
-.hero-eyebrow {
-  font-size: 11px; font-weight: 700;
+.hero-greeting {
+  font-size: 12px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 1.5px;
   color: var(--primary);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-greeting::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--primary-soft), transparent);
+  max-width: 120px;
 }
 .hero h1 {
   font-size: clamp(28px, 4vw, 44px);
@@ -103,19 +112,92 @@ body {
   line-height: 1.1;
   margin-bottom: 12px;
 }
-.hero p {
+.hero-sub {
   font-size: 16px;
   color: var(--text-muted);
   max-width: 640px;
 }
 
+/* ===== Phase-Tracker ===== */
+.phase-strip {
+  max-width: 1180px;
+  margin: 24px auto;
+  padding: 0 28px;
+}
+.phase-track {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+}
+.phase-step {
+  flex: 1; min-width: 110px;
+  display: flex; flex-direction: column;
+  position: relative;
+}
+.phase-step + .phase-step::before {
+  content: ''; position: absolute;
+  left: -8px; top: 14px;
+  width: 16px; height: 2px;
+  background: var(--border);
+}
+.phase-step.is-done + .phase-step::before { background: var(--green); }
+.phase-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--bg-soft);
+  border: 2px solid var(--border);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.phase-step.is-done .phase-dot {
+  background: var(--green); border-color: var(--green); color: #fff;
+}
+.phase-step.is-current .phase-dot {
+  background: var(--primary); border-color: var(--primary); color: #fff;
+  box-shadow: 0 0 0 4px rgba(3, 5, 198, 0.12);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(3, 5, 198, 0.12); }
+  50% { box-shadow: 0 0 0 8px rgba(3, 5, 198, 0.04); }
+}
+.phase-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+.phase-step.is-done .phase-label,
+.phase-step.is-current .phase-label { color: var(--text); }
+
+/* ===== Section Headers ===== */
+.section-head {
+  max-width: 1180px;
+  margin: 32px auto 16px;
+  padding: 0 28px;
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.section-title {
+  font-size: 18px; font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.section-meta { font-size: 12px; color: var(--text-light); }
+
+/* ===== Cards ===== */
 .cards {
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 24px 24px 80px;
+  padding: 0 28px 24px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
+  gap: 16px;
 }
 
 .card {
@@ -123,7 +205,7 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 28px;
+  padding: 24px 24px 20px;
   text-decoration: none;
   color: inherit;
   transition: all .2s ease;
@@ -135,7 +217,7 @@ body {
   content: '';
   position: absolute;
   top: 0; right: 0;
-  width: 80px; height: 80px;
+  width: 100px; height: 100px;
   background: radial-gradient(circle at top right, rgba(3, 5, 198, 0.06), transparent 60%);
   pointer-events: none;
 }
@@ -144,18 +226,30 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 16px 40px rgba(3, 5, 198, 0.10);
 }
+.card-status {
+  position: absolute;
+  top: 18px; right: 18px;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--green); color: #fff;
+}
+.card-status.is-pending { background: var(--orange); }
+.card-status.is-draft { background: var(--text-light); }
 .card-icon {
-  width: 44px; height: 44px;
-  border-radius: 12px;
+  width: 40px; height: 40px;
+  border-radius: 10px;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  margin-bottom: 16px;
+  font-size: 18px;
+  margin-bottom: 14px;
 }
 .card-title {
-  font-size: 18px; font-weight: 700;
+  font-size: 17px; font-weight: 700;
   margin-bottom: 4px;
   letter-spacing: -0.3px;
 }
@@ -163,9 +257,10 @@ body {
   font-size: 12px;
   color: var(--text-muted);
   font-weight: 500;
+  line-height: 1.5;
 }
 .card-cta {
-  margin-top: 16px;
+  margin-top: 14px;
   font-size: 13px;
   font-weight: 700;
   color: var(--primary);
@@ -174,12 +269,99 @@ body {
 .card-cta::after { content: '→'; transition: transform .15s ease; }
 .card:hover .card-cta::after { transform: translateX(3px); }
 
+/* ===== Activity Stream ===== */
+.activity {
+  max-width: 1180px;
+  margin: 24px auto;
+  padding: 0 28px 32px;
+}
+.activity-list {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+}
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+.activity-text {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text);
+}
+.activity-text strong { font-weight: 700; }
+.activity-time {
+  font-size: 11px;
+  color: var(--text-light);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* ===== Help-Box ===== */
+.help-box {
+  max-width: 1180px;
+  margin: 16px auto 64px;
+  padding: 24px 28px;
+}
+.help-inner {
+  background: linear-gradient(135deg, var(--primary-soft), rgba(255, 33, 166, 0.04));
+  border: 1px solid rgba(3, 5, 198, 0.10);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.help-inner h3 {
+  font-size: 16px; font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: -0.2px;
+}
+.help-inner p {
+  font-size: 13px;
+  color: var(--text-muted);
+  flex: 1; min-width: 200px;
+}
+.help-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.help-actions a {
+  font-size: 13px; font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: all .15s ease;
+}
+.help-actions a:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
 .empty {
   text-align: center;
-  padding: 80px 24px;
+  padding: 60px 24px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
   color: var(--text-muted);
+  font-size: 14px;
+  margin: 0 28px;
 }
-.empty-emoji { font-size: 48px; margin-bottom: 16px; }
+.empty-emoji { font-size: 36px; margin-bottom: 12px; }
 
 .spinner {
   display: inline-block;
@@ -190,6 +372,15 @@ body {
   animation: spin 0.8s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 720px) {
+  .topbar { padding: 12px 16px; }
+  .hero, .phase-strip, .section-head, .cards, .activity, .help-box { padding-left: 16px; padding-right: 16px; }
+  .help-inner { flex-direction: column; align-items: flex-start; }
+  .phase-track { padding: 16px; }
+  .phase-step { min-width: 90px; }
+  .phase-label { font-size: 10px; }
+}
 </style>
 </head>
 <body>
@@ -197,17 +388,19 @@ body {
 <div class="gate" id="gate">
   <div style="text-align: center;">
     <div class="spinner"></div>
-    <p style="margin-top: 16px; font-size: 13px;">Lade Vorschau…</p>
+    <p style="margin-top: 16px; font-size: 13px;">Lade dein Dashboard…</p>
   </div>
 </div>
 
 <div class="app" id="app">
+
+  <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="topbar-brand">
+      <a href="https://www.bb-brands.de" class="topbar-brand">
         <span class="topbar-brand-mark">BB</span>
-        <span>BB Brands · Vorschau</span>
-      </div>
+        <span>BB Brands · Kunden-Hub</span>
+      </a>
       <div class="topbar-actions">
         <a href="mailto:info@bb-brands.de">Kontakt</a>
         <button class="btn-logout" id="btn-logout">Abmelden</button>
@@ -215,22 +408,78 @@ body {
     </div>
   </div>
 
+  <!-- Hero / Welcome -->
   <div class="hero">
-    <div class="hero-eyebrow">Vorschau-Dashboard</div>
+    <div class="hero-greeting">
+      <span id="greeting-time">Willkommen</span>
+    </div>
     <h1 id="brand-name">Bachgold</h1>
-    <p>Hier siehst du alle Vorschauen, die wir für dich vorbereitet haben. Klick auf eine Karte, um die Vorschau zu öffnen — inklusive Erklärungen zu jeder Section.</p>
+    <p class="hero-sub">Hier siehst du alles, was wir aktuell für dich vorbereitet haben — Vorschauen, Updates und alle nächsten Schritte. Kein Email-Hin-und-Her, kein WhatsApp-Suchen.</p>
+  </div>
+
+  <!-- Phase-Tracker -->
+  <div class="phase-strip">
+    <div class="phase-track" id="phase-track">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <!-- Vorschauen -->
+  <div class="section-head">
+    <div class="section-title">📂 Aktuelle Vorschauen</div>
+    <div class="section-meta" id="page-count"></div>
   </div>
 
   <div class="cards" id="cards"></div>
+
+  <!-- Activity Stream -->
+  <div class="section-head">
+    <div class="section-title">📅 Letzte Updates</div>
+    <div class="section-meta">automatisch aktualisiert</div>
+  </div>
+
+  <div class="activity">
+    <div class="activity-list" id="activity-list"></div>
+  </div>
+
+  <!-- Help-Box -->
+  <div class="help-box">
+    <div class="help-inner">
+      <div>
+        <h3>Fragen zur Vorschau?</h3>
+        <p>Schreib uns direkt — wir sind hier um dein Brand-Erlebnis perfekt zu machen.</p>
+      </div>
+      <div class="help-actions">
+        <a href="mailto:info@bb-brands.de">📧 E-Mail</a>
+        <a href="https://wa.me/491608725947">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>
 const BRAND_SLUG = "bachgold";
 const BRAND_TOKEN = "ayi1h3";
+
+// Page metadata — extend hier wenn neue Page-Types dazu kommen
 const PAGE_LABELS = {
-  homepage: { icon: '🏠', label: 'Homepage', sub: 'Startseite mit Hero, Reviews, Bundle-Finder' },
-  pdp: { icon: '📦', label: 'Produktseite', sub: 'PDP mit ATC, Trust, FAQ' },
+  homepage:  { icon: '🏠', label: 'Homepage',     sub: 'Die Startseite mit Hero, Trust-Strip, Reviews und Bundle-Finder' },
+  pdp:       { icon: '📦', label: 'Produktseite', sub: 'Die zentrale Conversion-Page mit ATC, Trust und FAQ' },
+  cart:      { icon: '🛒', label: 'Warenkorb',    sub: 'Cart-Drawer und Checkout-Vorbereitung' },
+  collection:{ icon: '🗂️', label: 'Kollektion',   sub: 'Produktübersicht und Filter' },
 };
+
+// Phase definitions — match shop-build phases
+const PHASES = [
+  { key: 'onboarding', label: 'Onboarding' },
+  { key: 'plan',       label: 'Plan' },
+  { key: 'setup',      label: 'Setup' },
+  { key: 'build',      label: 'Build' },
+  { key: 'review',     label: 'Review' },
+  { key: 'launch',     label: 'Launch' },
+  { key: 'live',       label: 'Live' },
+];
 
 (function(){
   const token = localStorage.getItem('bb-preview-token');
@@ -261,30 +510,109 @@ const PAGE_LABELS = {
     document.getElementById('brand-name').textContent = brand.name;
     localStorage.setItem('bb-preview-brand', JSON.stringify(brand));
 
+    // Greeting based on time-of-day
+    const hour = new Date().getHours();
+    const greeting = hour < 11 ? 'Guten Morgen' : (hour < 18 ? 'Hallo' : 'Guten Abend');
+    document.getElementById('greeting-time').textContent = greeting;
+
+    // Render phase tracker — derive current phase from brand state
+    renderPhases(brand);
+
+    // Render cards + activity stream
+    renderCards(brand);
+    renderActivity(brand);
+  }
+
+  function renderPhases(brand) {
+    // Heuristik: aktuelle Phase aus Brand-Daten ableiten
+    // - Hat Pages = Build/Review
+    // - keine Pages = Onboarding/Plan
+    let currentIdx = 3; // Build als default wenn Pages da sind
+    if (!brand.pages || brand.pages.length === 0) currentIdx = 0;
+    else if (brand.pages.length >= 2) currentIdx = 4; // Review
+    if (brand.phase) {
+      const idx = PHASES.findIndex(p => p.key === brand.phase);
+      if (idx >= 0) currentIdx = idx;
+    }
+
+    const track = document.getElementById('phase-track');
+    track.innerHTML = PHASES.map((p, i) => {
+      let cls = '';
+      if (i < currentIdx) cls = 'is-done';
+      else if (i === currentIdx) cls = 'is-current';
+      const num = String(i + 1).padStart(2, '0');
+      return `
+        <div class="phase-step ${cls}">
+          <span class="phase-dot">${i < currentIdx ? '✓' : num}</span>
+          <span class="phase-label">${p.label}</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderCards(brand) {
     const cardsEl = document.getElementById('cards');
     const pages = brand.pages || [];
+    document.getElementById('page-count').textContent = pages.length === 0 ? 'noch keine' : (pages.length === 1 ? '1 Vorschau' : pages.length + ' Vorschauen');
 
     if (!pages.length) {
-      cardsEl.innerHTML = '<div class="empty"><div class="empty-emoji">🛠️</div><p>Wir bereiten gerade deine Vorschauen vor. Schau gleich nochmal rein.</p></div>';
+      cardsEl.outerHTML = '<div class="empty"><div class="empty-emoji">🛠️</div>Wir bereiten gerade deine ersten Vorschauen vor. Du wirst per Mail informiert sobald sie fertig sind.</div>';
       return;
     }
 
     pages.sort((a, b) => (b.deployed_at || '').localeCompare(a.deployed_at || ''));
     cardsEl.innerHTML = pages.map(p => {
       const meta = PAGE_LABELS[p.key] || { icon: '📄', label: p.label || p.key, sub: '' };
-      const deployed = p.deployed_at ? new Date(p.deployed_at).toLocaleString('de-DE', {
-        day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
-      }) : '';
+      const deployed = p.deployed_at ? new Date(p.deployed_at) : null;
+      const deployedStr = deployed
+        ? deployed.toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+        : '';
       const url = '/preview/' + brand.slug + '-' + brand.token + '/' + p.key;
+      const isFresh = deployed && (Date.now() - deployed.getTime()) < 48 * 3600 * 1000;
+      const status = isFresh ? '<span class="card-status">Neu</span>' : '<span class="card-status is-draft">Live</span>';
       return `
         <a class="card" href="${url}">
+          ${status}
           <div class="card-icon">${meta.icon}</div>
           <div class="card-title">${meta.label}</div>
-          <div class="card-meta">${meta.sub || ''}${deployed ? ' · aktualisiert ' + deployed : ''}</div>
+          <div class="card-meta">${meta.sub}${deployedStr ? '<br>📅 ' + deployedStr : ''}</div>
           <div class="card-cta">Vorschau öffnen</div>
         </a>
       `;
     }).join('');
+  }
+
+  function renderActivity(brand) {
+    const listEl = document.getElementById('activity-list');
+    const pages = (brand.pages || []).slice().sort((a, b) => (b.deployed_at || '').localeCompare(a.deployed_at || ''));
+    if (!pages.length) {
+      listEl.innerHTML = '<div class="activity-item"><span class="activity-dot" style="background: var(--text-light)"></span><span class="activity-text">Noch keine Aktivitäten — wir starten gleich.</span></div>';
+      return;
+    }
+    listEl.innerHTML = pages.slice(0, 6).map(p => {
+      const meta = PAGE_LABELS[p.key] || { label: p.label || p.key };
+      const t = p.deployed_at ? new Date(p.deployed_at) : null;
+      const rel = t ? formatRelative(t) : '';
+      return `
+        <div class="activity-item">
+          <span class="activity-dot"></span>
+          <span class="activity-text">Neue Vorschau: <strong>${meta.label}</strong></span>
+          <span class="activity-time">${rel}</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function formatRelative(date) {
+    const diff = Date.now() - date.getTime();
+    const m = Math.round(diff / 60000);
+    if (m < 1) return 'gerade eben';
+    if (m < 60) return 'vor ' + m + ' Min';
+    const h = Math.round(m / 60);
+    if (h < 24) return 'vor ' + h + ' Std';
+    const d = Math.round(h / 24);
+    if (d < 7) return 'vor ' + d + ' Tagen';
+    return date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
   }
 
   document.getElementById('btn-logout').addEventListener('click', () => {

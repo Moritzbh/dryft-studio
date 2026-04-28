@@ -242,9 +242,14 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
       const data = await res.json();
 
       if (!data.ok) {
-        errorEl.textContent = data.error === 'wrong slug or password'
-          ? 'Falsches Kürzel oder Passwort.'
-          : (data.error || 'Login fehlgeschlagen.');
+        if (data.error === 'too many attempts') {
+          const sec = data.retryAfterSec || 60;
+          errorEl.textContent = `Zu viele Versuche. Bitte warte ${sec} Sek. und probier es nochmal.`;
+        } else {
+          errorEl.textContent = data.error === 'wrong slug or password'
+            ? 'Falsches Kürzel oder Passwort.'
+            : (data.error || 'Login fehlgeschlagen.');
+        }
         btn.disabled = false;
         btn.textContent = 'Einloggen';
         passwordInput.focus();

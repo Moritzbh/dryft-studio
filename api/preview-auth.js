@@ -38,7 +38,10 @@ const ADMIN_TOKEN = process.env.ADMIN_TOKEN || '';
 const PREVIEW_SECRET = process.env.BB_PREVIEW_SECRET || '';
 
 const BRAND_KEY_PREFIX = 'bb:preview:brand:';
-const TOKEN_VALIDITY_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+const RATE_KEY_PREFIX = 'bb:preview:rate:';
+const TOKEN_VALIDITY_MS = 14 * 24 * 60 * 60 * 1000; // 14 days (war 30, gekürzt für Security)
+const RATE_WINDOW_SEC = 60;          // 1 min sliding window
+const RATE_MAX_ATTEMPTS = 5;         // 5 Login-Versuche pro Min pro IP+slug-Kombi
 
 // ---------- Redis helper ----------
 async function redis(...command) {
@@ -111,6 +114,36 @@ function verifyToken(token) {
   if (!data || !data.slug || !data.exp) return null;
   if (Date.now() > data.exp) return null;
   return { slug: data.slug, expires: data.exp };
+}
+
+// ---------- Rate-Limiter (per IP + slug pair) ----------
+// Sliding-Window via Redis INCR + EXPIRE. Returns { ok, remaining, retryAfterSec }.
+async function checkAndConsumeRate(ip, slug) {
+  if (!ip || !slug) return { ok: true, remaining: RATE_MAX_ATTEMPTS };
+  const safeIp = ip.replace(/[^a-fA-F0-9.:]/g, '').slice(0, 45);
+  const safeSlug = slug.replace(/[^a-z0-9-]/g, '').slice(0, 60);
+  const key = `${RATE_KEY_PREFIX}${safeIp}:${safeSlug}`;
+  try {
+    const count = await redis('INCR', key);
+    if (count === 1) {
+      // First hit in window — set expiry
+      await redis('EXPIRE', key, RATE_WINDOW_SEC);
+    }
+    if (count > RATE_MAX_ATTEMPTS) {
+      const ttl = await redis('TTL', key);
+      return { ok: false, retryAfterSec: ttl > 0 ? ttl : RATE_WINDOW_SEC };
+    }
+    return { ok: true, remaining: RATE_MAX_ATTEMPTS - count };
+  } catch (e) {
+    // Fail-open: rate-limiter outage darf nicht den login blocken
+    console.error('[rate-limit] error:', e.message);
+    return { ok: true, remaining: RATE_MAX_ATTEMPTS };
+  }
+}
+
+function getClientIp(req) {
+  const xff = req.headers['x-forwarded-for'] || '';
+  return (xff.split(',')[0] || req.socket?.remoteAddress || '').trim();
 }
 
 // ---------- Brand storage ----------
@@ -212,6 +245,19 @@ module.exports = async function handler(req, res) {
         if (!isValidSlug(slug) || !password) {
           return jsonResponse(res, 400, { ok: false, error: 'slug or password invalid' });
         }
+
+        // Rate-Limiter: 5 Versuche/Min pro IP+slug-Kombi (Brute-Force-Protection)
+        const ip = getClientIp(req);
+        const rate = await checkAndConsumeRate(ip, slug);
+        if (!rate.ok) {
+          res.setHeader('Retry-After', String(rate.retryAfterSec));
+          return jsonResponse(res, 429, {
+            ok: false,
+            error: 'too many attempts',
+            retryAfterSec: rate.retryAfterSec,
+          });
+        }
+
         const brand = await getBrand(slug);
         if (!brand) return jsonResponse(res, 401, { ok: false, error: 'wrong slug or password' });
 
