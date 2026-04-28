@@ -241,6 +241,14 @@ function publicBrand(brand) {
   };
 }
 
+// Smart-Default-Status basierend auf page-key.
+// Pre-Build-Assets brauchen meistens Action vom Kunden, Theme-Pages gehen in Review.
+function defaultStatusForKey(key) {
+  if (key === 'contract' || key === 'onboarding') return 'pending_action';
+  if (key === 'scope_brief' || key === 'concept')  return 'ready';
+  return 'review'; // Theme-Pages
+}
+
 // ---------- Handler ----------
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -355,7 +363,7 @@ module.exports = async function handler(req, res) {
         if (page && typeof page === 'object' && page.key) {
           // Status preserve wenn page bereits existiert (z.B. 'approved' bleibt approved auch nach redeploy)
           const existingPage = (brand.pages || []).find(p => p.key === page.key);
-          const preservedStatus = existingPage?.status || 'review';
+          const preservedStatus = existingPage?.status || defaultStatusForKey(page.key);
           brand.pages = (brand.pages || []).filter(p => p.key !== page.key);
           brand.pages.push({
             key: str(page.key, 80),
@@ -399,13 +407,17 @@ module.exports = async function handler(req, res) {
       }
 
       // ----- set-page-status (admin only) -----
-      // Status: building, review, approved, change_request
+      // Theme-Vorschauen:    building, review, approved, change_request
+      // Pre-Build-Assets:    pending_action, ready, done
       if (action === 'set-page-status') {
         if (!checkAdmin(req)) return jsonResponse(res, 401, { ok: false, error: 'unauthorized' });
         const slug = str(body.slug, 60).toLowerCase();
         const pageKey = str(body.page_key, 80);
         const status = str(body.status, 40);
-        const VALID_STATUS = ['building', 'review', 'approved', 'change_request'];
+        const VALID_STATUS = [
+          'building', 'review', 'approved', 'change_request',  // Theme-Pages
+          'pending_action', 'ready', 'done',                    // Pre-Build-Assets
+        ];
         if (!isValidSlug(slug) || !pageKey || !VALID_STATUS.includes(status)) {
           return jsonResponse(res, 400, { ok: false, error: 'slug, page_key, or status invalid' });
         }
@@ -433,7 +445,7 @@ module.exports = async function handler(req, res) {
         const brand = await getBrand(slug);
         if (!brand) return jsonResponse(res, 404, { ok: false, error: 'brand not found' });
         const existingPage = (brand.pages || []).find(p => p.key === page.key);
-        const preservedStatus = existingPage?.status || 'review';
+        const preservedStatus = existingPage?.status || defaultStatusForKey(page.key);
         brand.pages = (brand.pages || []).filter(p => p.key !== page.key);
         brand.pages.push({
           key: str(page.key, 80),
