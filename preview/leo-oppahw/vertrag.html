@@ -215,16 +215,47 @@ section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
 @keyframes pdf-spin{to{transform:rotate(360deg)}}
 
 /* PDF-Render-Mode (gilt während html2pdf das DOM rendert) */
+.is-pdf-mode{background:#fff !important}
+.is-pdf-mode body{background:#fff !important;font-size:12px}
 .is-pdf-mode .no-print{display:none !important}
-.is-pdf-mode section.s,
-.is-pdf-mode .sig{break-inside:avoid;page-break-inside:avoid}
-.is-pdf-mode .paper{box-shadow:none}
+.is-pdf-mode .pdf-only{display:block !important}
+.is-pdf-mode .wrap{max-width:100% !important;margin:0 !important;padding:0 !important}
+.is-pdf-mode .paper{box-shadow:none !important;border-radius:0 !important;padding:0 24px !important}
+.is-pdf-mode .sig,
+.is-pdf-mode .sig-block,
+.is-pdf-mode .parties{break-inside:avoid;page-break-inside:avoid}
+.is-pdf-mode section.s{break-inside:auto;page-break-inside:auto}
+
+/* Compact PDF-Header (sichtbar nur im PDF) */
+.pdf-only{display:none}
+.pdf-only.pdf-header{
+  border-bottom:2px solid var(--ink);
+  padding:8px 24px 14px;margin:0 0 24px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+}
+.pdf-only.pdf-header .pdf-h-left{flex:1;min-width:0}
+.pdf-only.pdf-header .pdf-h-brand{
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-deep);
+  margin-bottom:6px;
+}
+.pdf-only.pdf-header .pdf-h-title{
+  font-family:'Instrument Serif',serif;font-size:22px;font-weight:400;
+  letter-spacing:-0.01em;line-height:1.1;color:var(--ink);
+}
+.pdf-only.pdf-header .pdf-h-title em{font-style:italic;color:var(--gold-deep)}
+.pdf-only.pdf-header .pdf-h-meta{
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;
+  letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);
+  text-align:right;line-height:1.6;flex-shrink:0;
+}
+.pdf-only.pdf-header .pdf-h-meta strong{color:var(--ink);font-weight:700}
 </style>
 </head>
 <body>
 
 <!-- COVER -->
-<section class="cover">
+<section class="cover no-print">
   <div class="cover-top">
     <div class="cover-top__left">
       <a href="/preview/leo-oppahw/" class="cover-back no-print">← Kunden-Bereich</a>
@@ -245,6 +276,19 @@ section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
 </section>
 
 <div class="wrap"><div class="paper">
+
+<!-- COMPACT PDF-HEADER (only visible in PDF) -->
+<header class="pdf-only pdf-header">
+  <div class="pdf-h-left">
+    <div class="pdf-h-brand">BB Brands · Werkvertrag</div>
+    <div class="pdf-h-title">LEO Sport Nutrition <em>× BB Brands</em></div>
+  </div>
+  <div class="pdf-h-meta">
+    Vertrag-Nr. <strong>BB-LEO-2026-001</strong><br>
+    Datum <strong>28.04.2026</strong><br>
+    Wert <strong>500,00 € netto</strong>
+  </div>
+</header>
 
 <!-- PARTIES -->
 <section class="s">
@@ -472,20 +516,24 @@ async function downloadAsPdf() {
     if (typeof html2pdf === 'undefined') {
       throw new Error('html2pdf library not loaded');
     }
+    // Render-Quelle: nur das .wrap (Cover ist .no-print). Falls .wrap fehlt, Fallback body.
+    const pdfSource = document.querySelector('.wrap') || document.body;
     await html2pdf().set({
-      margin:    [8, 8, 8, 8],
+      margin:    [12, 10, 14, 10],   // top, right, bottom, left in mm
       filename:  'BB-LEO-2026-001-Werkvertrag.pdf',
-      image:     { type: 'jpeg', quality: 0.98 },
+      image:     { type: 'jpeg', quality: 0.95 },
       html2canvas: {
         scale: 2,
         useCORS: true,
         letterRendering: true,
         backgroundColor: '#ffffff',
-        windowWidth: document.documentElement.scrollWidth,
+        windowWidth: 880,             // matches .wrap max-width — fixed, vorhersehbar
+        scrollX: 0,
+        scrollY: 0,
       },
       jsPDF:     { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
-      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-    }).from(document.body).save();
+      pagebreak: { mode: ['css', 'legacy'], avoid: ['.sig', '.parties', '.sig-block'] },
+    }).from(pdfSource).save();
   } catch (err) {
     console.error('[BB PDF] Fehler:', err);
     alert('PDF konnte nicht erstellt werden — wir öffnen das Druck-Menü als Fallback.\n\nDort: „Ziel" → „Als PDF speichern".');
