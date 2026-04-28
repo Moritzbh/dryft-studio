@@ -1,0 +1,2421 @@
+<!doctype html>
+<html lang="de">
+<head>
+<style id="bbprev-auth-gate-style">
+html.bbprev-auth-pending body { visibility: hidden !important; }
+html.bbprev-auth-pending::before { content:''; position:fixed; inset:0; background:#FAF6EC; z-index:9999999; }
+html.bbprev-auth-pending::after { content:'Lade Konzept-Store…'; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:99999990; font-family:-apple-system,BlinkMacSystemFont,sans-serif; font-size:14px; color:#5A5348; }
+</style>
+<script id="bbprev-auth-gate">
+(function() {
+  document.documentElement.classList.add('bbprev-auth-pending');
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.ok || !d.brand || d.brand.slug !== 'leo') {
+        location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+        return;
+      }
+      document.documentElement.classList.remove('bbprev-auth-pending');
+    })
+    .catch(function() {
+      location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+    });
+})();
+</script>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#15130F">
+<title>LEO Sport Nutrition — Drei Phasen. Ein System. Wissenschaftlich dosiert.</title>
+<meta name="description" content="LEO Sport Nutrition. Pre · Intra · Post. Entwickelt von zwei Sportmedizinern. Pharmaqualität · Kölner Liste® · Made in Germany.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Roboto+Condensed:wght@700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+/* =================================================================
+   LEO BRAND TOKENS  (cloned from Bachgold-DNA, LEO-Farbpalette)
+   ================================================================= */
+:root {
+  /* ---- FARBEN ---- */
+  --bg-snow:        #FFFFFF;
+  --bg-sand:        #FAF6EC;
+  --bg-sand-soft:   #FBF8EE;
+  --bg-sand-tint:   #FCFAF3;
+
+  --fg-forest:      #15130F;
+  --fg-charcoal:    #1A1612;
+
+  --accent-fire:    #C9A14A;       /* LEO Gold Hauptakzent */
+  --accent-fire-soft: #F5EFDC;
+
+  --neutral-moss:        #979D85;
+  --neutral-text-muted:  #6B6A65;
+
+  --state-success: #6B9C2B;
+  --rating-star:   #C9A14A;
+
+  /* Phase-Akzente */
+  --phase-activate: #D18A64;
+  --phase-energy:   #C43528;
+  --phase-recovery: #6B9C2B;
+
+  /* Semantic */
+  --color-bg:             var(--bg-snow);
+  --color-text:           var(--fg-forest);
+  --color-text-secondary: var(--neutral-moss);
+  --color-accent:         var(--accent-fire);
+  --color-dark-section:   var(--fg-forest);
+  --color-footer:         var(--fg-charcoal);
+
+  /* ---- SPACING — 8px Grid ---- */
+  --bg-space-1:  8px;  --bg-space-2: 16px;  --bg-space-3: 24px;
+  --bg-space-4: 32px;  --bg-space-5: 48px;  --bg-space-6: 64px;
+  --bg-space-7: 96px;  --bg-space-8: 128px; --bg-space-9: 192px;
+
+  /* ---- TYPO ---- */
+  --bg-letter-spacing-display: -0.03em;
+  --bg-letter-spacing-heading: -0.02em;
+  --bg-letter-spacing-eyebrow:  0.15em;
+  --bg-letter-spacing-mono:     0.08em;
+
+  --bg-line-height-tight:  1.1;
+  --bg-line-height-normal: 1.55;
+  --bg-line-height-loose:  1.8;
+
+  --bg-fs-display: clamp(56px, 12vw, 180px);
+  --bg-fs-h1:      clamp(40px,  6vw,  88px);
+  --bg-fs-h2:      clamp(28px,  4vw,  56px);
+  --bg-fs-h3:      clamp(22px,  3vw,  32px);
+  --bg-fs-body:    16px;
+  --bg-fs-body-lg: 18px;
+  --bg-fs-caption: 12px;
+
+  /* ---- BORDER ---- */
+  --bg-border-light: rgba(21, 19, 15, 0.12);
+  --bg-border-soft:  rgba(21, 19, 15, 0.06);
+  --bg-border-dark:  rgba(255, 255, 255, 0.12);
+
+  /* ---- RADIUS ---- */
+  --bg-btn-radius:   6px;
+  --bg-input-radius: 6px;
+  --bg-card-radius:  0px;
+  --bg-block-radius: 0px;
+
+  /* ---- SHADOWS ---- */
+  --bg-shadow-sm: 0 1px 3px rgba(21, 19, 15, 0.06);
+  --bg-shadow-md: 0 2px 24px rgba(21, 19, 15, 0.06);
+  --bg-shadow-lg: 0 4px 32px rgba(21, 19, 15, 0.10);
+
+  --brand-font-heading: "Roboto", sans-serif;
+  --brand-font-body:    "Roboto", sans-serif;
+  --brand-font-mono:    "Roboto", monospace;
+}
+
+/* =================================================================
+   GLOBAL RESET / BASE
+   ================================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 62.5%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.55;
+  color: var(--fg-forest);
+  background: var(--bg-snow);
+  letter-spacing: 0.005em;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+.button, .button--primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--fg-forest);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--bg-btn-radius);
+  border: 1px solid var(--fg-forest);
+  cursor: pointer;
+  transition: all 180ms ease-out;
+}
+.button:hover, .button--primary:hover {
+  background: var(--accent-fire);
+  border-color: var(--accent-fire);
+  color: #FFFFFF;
+}
+
+/* =================================================================
+   ANNOUNCEMENT BAR (clone of bg-ann-bar)
+   ================================================================= */
+.bg-ann-bar {
+  --bg-ann-background: #15130F;
+  --bg-ann-text: #FFFFFF;
+  --bg-ann-accent: #C9A14A;
+  --bg-ann-marquee-duration: 26s;
+  background: var(--bg-ann-background);
+  color: var(--bg-ann-text);
+  padding: 10px 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+.bg-ann-bar__desktop {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(20px, 3vw, 56px);
+  padding: 0 16px;
+}
+.bg-ann-item strong { color: var(--bg-ann-accent); font-weight: 700; }
+
+/* =================================================================
+   HEADER (clone of bg-header)
+   ================================================================= */
+.bg-header {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--bg-border-light);
+  position: sticky; top: 0; z-index: 100;
+}
+.bg-dh {
+  max-width: 1440px; margin: 0 auto;
+  display: flex; align-items: center; gap: 32px;
+  padding: 18px 32px;
+}
+.bg-dh-logo {
+  text-decoration: none; color: var(--fg-forest);
+  display: flex; flex-direction: column; line-height: 1;
+}
+.bg-dh-logo__main {
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-weight: 700; font-size: 26px; letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.bg-dh-logo__sub {
+  font-size: 9px; letter-spacing: 0.28em;
+  color: var(--neutral-moss); margin-top: 3px;
+  text-transform: uppercase; font-weight: 600;
+}
+.bg-dh-nav-wrap { flex: 1; }
+.bg-dh-nav {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; gap: 36px; justify-content: center;
+}
+.bg-dh-nav-link {
+  text-decoration: none; color: var(--fg-forest);
+  font-weight: 600; font-size: 13px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 8px 0; transition: color 160ms ease;
+}
+.bg-dh-nav-link:hover { color: var(--accent-fire); }
+.bg-dh-utility { display: flex; gap: 14px; align-items: center; }
+.bg-dh-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; color: var(--fg-forest);
+  text-decoration: none; border-radius: 50%;
+  transition: background 160ms ease;
+}
+.bg-dh-ic:hover { background: var(--bg-sand-tint); }
+.bg-dh-ic svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+.bg-hamburger { display: none; }
+@media (max-width: 900px) {
+  .bg-dh-nav-wrap { display: none; }
+  .bg-hamburger { display: inline-flex; }
+  .bg-dh { padding: 14px 18px; gap: 12px; justify-content: space-between; }
+  .bg-dh-logo__main { font-size: 22px; }
+}
+
+/* =================================================================
+   LEO HERO DUAL  (clone of bachgold-hero-dual)
+   ================================================================= */
+.leo-hero-dual {
+  position: relative;
+  background: var(--bg-snow);
+  overflow: hidden;
+  isolation: isolate;
+}
+.leo-hero-dual::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-color: #000000;
+  background-image: url("https://www.esn.com/cdn/shop/files/KW17_HeroTeaser_Mobil_1024x1280_DB.jpg?v=1776848226&width=2400");
+  background-size: auto 130%;
+  background-position: 105% 30%;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+.leo-hero-dual::after {
+  content: "";
+  position: absolute; inset: 0;
+  /* Soft fade from solid black (text area) into the image so there's no visible seam */
+  background: linear-gradient(90deg, #000 0%, #000 38%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 62%);
+  z-index: -1;
+}
+@media (max-width: 899px) {
+  .leo-hero-dual::before {
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.40;
+  }
+  .leo-hero-dual::after { background: rgba(0,0,0,0.4); }
+}
+.leo-hero-dual__container {
+  max-width: 1440px; margin: 0 auto;
+  padding: clamp(72px, 9vw, 140px) clamp(20px, 4vw, 48px);
+  position: relative;
+  min-height: clamp(560px, 70vh, 760px);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.leo-hero-dual__track {
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  inset: clamp(72px, 9vw, 140px) clamp(20px, 4vw, 48px);
+  transition: opacity 600ms ease;
+}
+.leo-hero-dual__track[data-active="true"] {
+  opacity: 1; pointer-events: auto; position: relative; inset: auto;
+}
+.leo-hero-dual__content {
+  max-width: 580px;
+}
+.leo-hero-dual__eyebrow {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px; letter-spacing: 0.24em;
+  text-transform: uppercase; font-weight: 700;
+  color: #E6C57A; margin: 0 0 18px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.leo-hero-dual__headline {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(42px, 6.5vw, 92px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  margin: 0 0 22px;
+  max-width: 14ch;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+.leo-hero-dual__subheadline {
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.55;
+  color: rgba(255,255,255,0.92);
+  margin: 0 0 32px;
+  max-width: 46ch;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+}
+.leo-hero-dual__ctas {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.leo-hero-dual__cta-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 32px;
+  background: var(--accent-fire); color: #FFFFFF;
+  font-family: "Roboto", sans-serif;
+  font-weight: 800; font-size: 13.5px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; border-radius: 6px;
+  transition: all 180ms ease-out;
+  box-shadow: 0 8px 22px rgba(201, 161, 74, 0.32);
+}
+.leo-hero-dual__cta-primary:hover {
+  background: var(--fg-forest); box-shadow: 0 10px 26px rgba(21, 19, 15, 0.28);
+  transform: translateY(-1px);
+}
+.leo-hero-dual__cta-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: #FFFFFF;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700; font-size: 13.5px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(255,255,255,0.55);
+  border-radius: 0;
+  padding: 14px 0;
+  transition: gap 200ms ease, color 160ms ease, border-color 160ms ease;
+}
+.leo-hero-dual__cta-secondary:hover { color: #E6C57A; border-bottom-color: #E6C57A; gap: 14px; }
+.leo-hero-dual__pills {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.leo-hero-dual__pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px;
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 999px;
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: #FFFFFF;
+}
+.leo-hero-dual__pill::before {
+  content: "✓"; color: #E6C57A; font-weight: 800;
+}
+
+/* Tin Mockup */
+.leo-tin {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 4 / 5;
+  margin: 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  filter: drop-shadow(0 24px 48px rgba(21, 19, 15, 0.18));
+}
+.leo-tin svg { width: 100%; height: 100%; }
+
+.leo-hero-dual__dots {
+  display: flex; gap: 10px; align-items: center;
+  margin-top: clamp(28px, 3vw, 40px);
+  justify-content: center;
+}
+.leo-hero-dual__dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.32);
+  border: none; cursor: pointer; padding: 0;
+  transition: all 280ms ease;
+}
+.leo-hero-dual__dot[aria-pressed="true"] {
+  background: var(--accent-fire);
+  width: 32px; border-radius: 999px;
+}
+.leo-hero-dual__dot-label {
+  font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.7);
+  margin-left: 16px; font-weight: 600;
+}
+
+/* (Old leo-tin and dots removed — replaced by leo-hero-visual stack) */
+
+/* =================================================================
+   PRESS / TRUST MARQUEE  (clone of bb-press)
+   ================================================================= */
+.bb-press {
+  background: var(--bg-sand-soft);
+  padding: clamp(28px, 3vw, 40px) 0;
+  border-top: 1px solid var(--bg-border-light);
+  border-bottom: 1px solid var(--bg-border-light);
+}
+.bb-press__inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+}
+.bb-press__heading {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px; letter-spacing: 0.24em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--neutral-moss);
+  text-align: center; margin: 0 0 22px;
+}
+.bb-press__marquee { overflow: hidden; }
+.bb-press__track {
+  display: inline-flex; align-items: center; gap: 56px;
+  animation: bb-press-scroll 38s linear infinite;
+  white-space: nowrap;
+}
+.bb-press__item { flex-shrink: 0; }
+.bb-press__ph {
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--fg-forest); opacity: 0.6;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+@keyframes bb-press-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* =================================================================
+   BUNDLE HIGHLIGHT — Two-column · Trinity left · Content right
+   ================================================================= */
+.leo-bundle-highlight {
+  position: relative;
+  background: var(--bg-snow);
+  padding: clamp(72px, 9vw, 140px) 0;
+  overflow: hidden;
+}
+.leo-bundle-highlight__inner {
+  max-width: 1320px; margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 96px);
+  align-items: center;
+}
+@media (max-width: 899px) {
+  .leo-bundle-highlight__inner { grid-template-columns: 1fr; gap: 48px; }
+}
+
+/* === Trinity (left column) === */
+.leo-bundle-highlight__media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.leo-bundle-highlight__media::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(201,161,74,0.22) 0%, rgba(201,161,74,0.06) 35%, transparent 65%);
+  z-index: 0;
+}
+.leo-bundle-highlight__media::after {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border: 1px dashed rgba(201,161,74,0.28);
+  border-radius: 50%;
+  z-index: 1;
+}
+.leo-bundle-highlight__trinity {
+  position: relative;
+  width: 88%;
+  aspect-ratio: 1 / 1;
+  z-index: 2;
+}
+.leo-bundle-highlight__tin {
+  position: absolute;
+  width: 44%;
+  filter: drop-shadow(0 24px 40px rgba(21, 19, 15, 0.28));
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.leo-bundle-highlight__tin svg { width: 100%; height: auto; display: block; }
+.leo-bundle-highlight__tin--top {
+  top: 0; left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  z-index: 3;
+}
+.leo-bundle-highlight__tin--left {
+  bottom: 4%; left: 4%;
+  transform: rotate(-6deg);
+  z-index: 2;
+}
+.leo-bundle-highlight__tin--right {
+  bottom: 4%; right: 4%;
+  transform: rotate(5deg);
+  z-index: 2;
+}
+.leo-bundle-highlight__tin--top:hover { transform: translateX(-50%) rotate(-2deg) translateY(-6px); }
+.leo-bundle-highlight__tin--left:hover { transform: rotate(-6deg) translateY(-6px); }
+.leo-bundle-highlight__tin--right:hover { transform: rotate(5deg) translateY(-6px); }
+
+/* === Content (right column) === */
+.leo-bundle-highlight__content { display: flex; flex-direction: column; }
+.leo-bundle-highlight__eyebrow {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px; letter-spacing: 0.24em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--accent-fire); margin: 0 0 16px;
+}
+.leo-bundle-highlight__eyebrow::before { content: "✦  "; opacity: 0.8; }
+.leo-bundle-highlight__heading {
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(40px, 5.4vw, 84px);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--fg-forest);
+  margin: 0 0 24px;
+}
+.leo-bundle-highlight__heading em {
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+  font-weight: 900;
+  color: var(--accent-fire);
+  letter-spacing: -0.025em;
+}
+.leo-bundle-highlight__lede {
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.6;
+  color: var(--fg-forest); opacity: 0.78;
+  max-width: 50ch;
+  margin: 0 0 32px;
+}
+
+/* === Price Card === */
+.leo-bundle-highlight__card {
+  background: var(--bg-sand-tint);
+  border: 1px solid var(--bg-border-light);
+  border-radius: 14px;
+  padding: 28px 28px 24px;
+  margin-bottom: 24px;
+}
+.leo-bundle-highlight__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.leo-bundle-highlight__price {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 4.6vw, 64px);
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: var(--fg-forest);
+}
+.leo-bundle-highlight__compare {
+  font-size: 16px;
+  color: var(--neutral-moss);
+  letter-spacing: 0.01em;
+}
+.leo-bundle-highlight__compare s { opacity: 0.85; }
+.leo-bundle-highlight__savings {
+  display: inline-flex;
+  padding: 5px 12px;
+  background: var(--accent-fire-soft);
+  color: var(--accent-fire);
+  font-family: "Roboto", sans-serif;
+  font-weight: 800;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  border-radius: 999px;
+}
+
+/* === Toggle === */
+.leo-bundle-highlight__toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.leo-bundle-highlight__toggle-btn {
+  position: relative;
+  padding: 14px 16px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--bg-border-light);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  transition: all 180ms ease;
+}
+.leo-bundle-highlight__toggle-btn .lbl-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 4px;
+}
+.leo-bundle-highlight__toggle-btn .lbl {
+  font-size: 14px; font-weight: 700; color: var(--fg-forest);
+  letter-spacing: 0;
+}
+.leo-bundle-highlight__toggle-btn .badge {
+  font-size: 10.5px; font-weight: 800;
+  color: var(--accent-fire);
+  letter-spacing: 0.04em;
+}
+.leo-bundle-highlight__toggle-btn .sub {
+  font-size: 12.5px; color: var(--neutral-moss);
+  font-weight: 500; letter-spacing: 0;
+}
+.leo-bundle-highlight__toggle-btn[aria-pressed="true"] {
+  border-color: var(--accent-fire);
+  background: rgba(201, 161, 74, 0.06);
+  box-shadow: 0 0 0 3px rgba(201, 161, 74, 0.12);
+}
+
+/* === CTA full-width === */
+.leo-bundle-highlight__cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 10px; width: 100%;
+  padding: 18px 32px;
+  background: var(--accent-fire);
+  color: #FFFFFF;
+  font-family: "Roboto", sans-serif;
+  font-weight: 800; font-size: 14px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 180ms ease-out;
+  box-shadow: 0 10px 28px rgba(201, 161, 74, 0.32);
+}
+.leo-bundle-highlight__cta:hover {
+  background: var(--fg-forest);
+  box-shadow: 0 12px 32px rgba(21, 19, 15, 0.28);
+  transform: translateY(-2px);
+}
+
+/* === Trust strip === */
+.leo-bundle-highlight__trust {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+@media (max-width: 599px) {
+  .leo-bundle-highlight__trust { grid-template-columns: 1fr; }
+}
+.leo-bundle-highlight__trust-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: var(--fg-forest); opacity: 0.82;
+}
+.leo-bundle-highlight__trust-item::before {
+  content: "✓";
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(47, 133, 52, 0.14);
+  color: var(--state-success);
+  font-size: 11px; font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* =================================================================
+   PHASE SYSTEM (clone of bb-hiw — three steps alternating)
+   ================================================================= */
+.bb-hiw {
+  background: var(--bg-snow);
+  padding: clamp(56px, 7vw, 96px) clamp(20px, 4vw, 48px);
+  color: var(--fg-forest);
+  overflow-x: clip;
+}
+.bb-hiw__inner { max-width: 1280px; margin: 0 auto; }
+.bb-hiw__header {
+  text-align: center; margin: 0 auto 4rem;
+  max-width: 80rem;
+}
+.bb-hiw__eyebrow {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px; letter-spacing: 0.24em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--accent-fire); margin: 0 0 14px;
+}
+.bb-hiw__heading {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(36px, 5.5vw, 68px);
+  line-height: 1.04; letter-spacing: -0.025em;
+  color: var(--fg-forest); margin: 0 0 16px;
+}
+.bb-hiw__sub {
+  font-size: 17px; font-weight: 500;
+  line-height: 1.55;
+  color: var(--fg-forest); opacity: 0.78;
+  margin: 0; max-width: 58rem;
+  margin-left: auto; margin-right: auto;
+}
+.bb-hiw__steps {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column;
+  gap: clamp(48px, 6vw, 88px);
+}
+.bb-hiw__step {
+  display: grid; grid-template-columns: 1fr;
+  gap: 32px; align-items: center;
+}
+@media (min-width: 900px) {
+  .bb-hiw__step {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(48px, 6vw, 96px);
+  }
+  .bb-hiw__step--reverse .bb-hiw__media { order: -1; }
+}
+@media (max-width: 899px) {
+  .bb-hiw__step .bb-hiw__media { order: -1; }
+}
+.bb-hiw__copy {
+  display: flex; flex-direction: column;
+  gap: 18px; max-width: 54rem; min-width: 0;
+}
+.bb-hiw__step-num {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px; letter-spacing: 0.2em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--accent-fire); margin: 0;
+}
+.bb-hiw__step-title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.05; letter-spacing: -0.025em;
+  color: var(--fg-forest); margin: 0;
+}
+.bb-hiw__step-body {
+  font-family: "Roboto", sans-serif;
+  font-size: 17px; font-weight: 500;
+  line-height: 1.55;
+  color: var(--fg-forest); opacity: 0.86;
+  margin: 0;
+}
+.bb-hiw__step-meta {
+  display: inline-flex; gap: 14px; flex-wrap: wrap;
+  margin-top: 8px;
+}
+.bb-hiw__step-chip {
+  display: inline-flex; padding: 6px 12px;
+  background: var(--bg-sand-soft);
+  border: 1px solid var(--bg-border-light);
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--fg-forest); opacity: 0.78;
+  border-radius: 999px;
+}
+.bb-hiw__media {
+  margin: 0; min-width: 0; width: 100%;
+}
+.bb-hiw__media-ph {
+  width: 100%; aspect-ratio: 4 / 3;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--bg-sand-soft) 0%, var(--bg-sand) 100%);
+  box-shadow: 0 12px 32px rgba(21, 19, 15, 0.10);
+  position: relative;
+  overflow: hidden;
+}
+.bb-hiw__step--phase-activate .bb-hiw__media-ph { background: linear-gradient(135deg, #F5E5D3 0%, #E8C8A8 100%); }
+.bb-hiw__step--phase-energy .bb-hiw__media-ph { background: linear-gradient(135deg, #F8DBD8 0%, #E89E96 100%); }
+.bb-hiw__step--phase-recovery .bb-hiw__media-ph { background: linear-gradient(135deg, #DCE8C8 0%, #B5CC8A 100%); }
+.bb-hiw__media-ph .leo-tin { width: 60%; max-width: 280px; }
+
+/* =================================================================
+   PRODUCT CARDS (3 phases)
+   ================================================================= */
+.leo-products {
+  background: var(--bg-sand-soft);
+  padding: clamp(56px, 7vw, 96px) clamp(20px, 4vw, 48px);
+}
+.leo-products__inner {
+  max-width: 1280px; margin: 0 auto;
+}
+.leo-products__head {
+  text-align: center; margin-bottom: clamp(40px, 5vw, 64px);
+}
+.leo-products__eyebrow {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px; letter-spacing: 0.24em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--accent-fire); margin: 0 0 14px;
+}
+.leo-products__heading {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.05; letter-spacing: -0.025em;
+  color: var(--fg-forest); margin: 0 auto;
+  max-width: 24ch;
+}
+.leo-products__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+.leo-product-card {
+  background: var(--bg-snow);
+  border: 1px solid var(--bg-border-light);
+  padding: clamp(28px, 3vw, 40px);
+  display: flex; flex-direction: column; gap: 18px;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.leo-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(21, 19, 15, 0.10);
+}
+.leo-product-card__phase-tag {
+  font-family: "Roboto", sans-serif;
+  font-size: 10.5px; letter-spacing: 0.22em;
+  text-transform: uppercase; font-weight: 800;
+  align-self: flex-start;
+  padding: 5px 10px; border-radius: 4px;
+}
+.leo-product-card--activate .leo-product-card__phase-tag { background: rgba(209, 138, 100, 0.14); color: var(--phase-activate); }
+.leo-product-card--energy   .leo-product-card__phase-tag { background: rgba(196, 53, 40, 0.10);  color: var(--phase-energy); }
+.leo-product-card--recovery .leo-product-card__phase-tag { background: rgba(107, 156, 43, 0.12); color: var(--phase-recovery); }
+.leo-product-card__media {
+  aspect-ratio: 4 / 5;
+  border-radius: 8px;
+  background: var(--bg-sand-tint);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.leo-product-card--activate .leo-product-card__media { background: linear-gradient(180deg, #F8E8D8 0%, #ECCDA8 100%); }
+.leo-product-card--energy   .leo-product-card__media { background: linear-gradient(180deg, #F8D8D5 0%, #E8A29B 100%); }
+.leo-product-card--recovery .leo-product-card__media { background: linear-gradient(180deg, #DDE5C8 0%, #B5C58A 100%); }
+.leo-product-card__media .leo-tin { width: 80%; max-width: 220px; filter: drop-shadow(0 12px 22px rgba(21,19,15,0.22)); }
+.leo-product-card__name {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.0; letter-spacing: -0.025em;
+  color: var(--fg-forest); margin: 0;
+}
+.leo-product-card__tagline {
+  font-size: 14.5px; line-height: 1.5;
+  color: var(--fg-forest); opacity: 0.78;
+  margin: 0;
+}
+.leo-product-card__ingredients {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 4px;
+}
+.leo-product-card__ing {
+  display: inline-flex; padding: 5px 10px;
+  background: var(--bg-sand-soft);
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--fg-forest); opacity: 0.78;
+}
+.leo-product-card__footer {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: auto; padding-top: 20px;
+  border-top: 1px solid var(--bg-border-light);
+}
+.leo-product-card__price {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900; font-size: 28px;
+  letter-spacing: -0.02em;
+  color: var(--fg-forest);
+}
+.leo-product-card__cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 11px 18px;
+  background: var(--fg-forest); color: #FFFFFF;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; border-radius: 6px;
+  transition: all 180ms ease-out;
+}
+.leo-product-card__cta:hover { background: var(--accent-fire); }
+
+/* =================================================================
+   FOUNDER STORY (clone of bb-founder)
+   ================================================================= */
+.bb-founder {
+  background: var(--bg-snow);
+  padding: clamp(48px, 6vw, 88px) clamp(20px, 4vw, 48px);
+  color: var(--fg-forest);
+}
+.bb-founder__inner { max-width: 1280px; margin: 0 auto; }
+.bb-founder__layout {
+  display: grid; grid-template-columns: 1fr;
+  gap: 32px; align-items: center;
+}
+@media (min-width: 900px) {
+  .bb-founder__layout {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(36px, 5vw, 72px);
+  }
+}
+.bb-founder__copy {
+  display: flex; flex-direction: column;
+  gap: 24px; max-width: 44rem;
+}
+.bb-founder__eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: "Roboto", sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--accent-fire); margin: 0;
+  align-self: flex-start;
+}
+.bb-founder__eyebrow::before {
+  content: ""; display: inline-block;
+  width: 22px; height: 1.5px; background: var(--accent-fire);
+}
+.bb-founder__heading {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(32px, 4.5vw, 56px);
+  line-height: 1.04; letter-spacing: -0.025em;
+  color: var(--fg-forest); margin: 0;
+}
+.bb-founder__heading em {
+  font-style: italic; font-weight: 900;
+  color: var(--accent-fire);
+}
+.bb-founder__lede {
+  font-size: 16.5px; line-height: 1.7;
+  color: var(--fg-forest); margin: 0;
+}
+.bb-founder__lede p { margin: 0 0 16px; opacity: 0.84; }
+.bb-founder__lede p:first-child {
+  position: relative;
+  font-weight: 500;
+  font-size: clamp(18px, 1.9vw, 22px);
+  line-height: 1.5;
+  color: var(--fg-forest); opacity: 1;
+  padding-left: 26px; margin-bottom: 22px;
+  letter-spacing: -0.005em;
+}
+.bb-founder__lede p:first-child::before {
+  content: "„";
+  position: absolute; left: -2px; top: -8px;
+  font-family: Georgia, serif;
+  font-size: 56px; line-height: 1;
+  color: var(--accent-fire); opacity: 0.92;
+  font-weight: 800;
+}
+.bb-founder__lede p:last-child { margin-bottom: 0; }
+.bb-founder__lede strong { font-weight: 800; color: var(--fg-forest); }
+.bb-founder__stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0; margin-top: 24px; padding-top: 22px;
+  border-top: 1px solid var(--bg-border-light);
+}
+.bb-founder__stat {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 0 16px 0 0;
+  border-right: 1px solid var(--bg-border-soft);
+}
+.bb-founder__stat:not(:first-child) { padding-left: 16px; }
+.bb-founder__stat:last-child { border-right: none; padding-right: 0; }
+.bb-founder__stat-value {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1; letter-spacing: -0.02em;
+  color: var(--fg-forest); margin: 0;
+}
+.bb-founder__stat-label {
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--neutral-moss); margin: 0;
+  line-height: 1.3;
+}
+.bb-founder__signoff {
+  display: flex; flex-direction: column; gap: 4px;
+  margin-top: 12px; padding-top: 18px;
+  border-top: 1px solid var(--bg-border-light);
+}
+.bb-founder__name {
+  font-weight: 700; font-size: 15px;
+  color: var(--fg-forest); margin: 0;
+}
+.bb-founder__role {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--neutral-moss); margin: 0;
+}
+.bb-founder__cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 28px; padding: 14px 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700; font-size: 14px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--fg-forest);
+  background: transparent; text-decoration: none;
+  border: none; border-bottom: 2px solid var(--fg-forest);
+  transition: all 200ms ease;
+  align-self: flex-start;
+}
+.bb-founder__cta:hover {
+  color: var(--accent-fire);
+  border-bottom-color: var(--accent-fire);
+  gap: 16px;
+}
+.bb-founder__media {
+  position: relative; margin: 0;
+}
+.bb-founder__img-ph {
+  width: 100%; aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #2C2620 0%, #15130F 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  box-shadow: 0 24px 64px rgba(21, 19, 15, 0.18);
+  position: relative; overflow: hidden;
+  color: rgba(255,255,255,0.72);
+  text-align: center;
+  padding: 32px;
+}
+.bb-founder__img-ph::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(201, 161, 74, 0.22) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(201, 161, 74, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.bb-founder__img-ph-svg { width: 100%; max-width: 240px; height: auto; opacity: 0.95; position: relative; z-index: 1; }
+.bb-founder__img-ph-label {
+  margin-top: 18px;
+  font-size: 11px; letter-spacing: 0.24em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--accent-fire);
+  position: relative; z-index: 1;
+}
+.bb-founder__caption {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 18px 0 0;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--neutral-moss);
+}
+.bb-founder__caption::before {
+  content: ""; display: inline-block;
+  width: 18px; height: 1px;
+  background: var(--neutral-moss); opacity: 0.6;
+}
+@media (max-width: 899px) {
+  .bb-founder__media { order: -1; }
+  .bb-founder__img-ph { aspect-ratio: 4 / 3; border-radius: 14px; }
+}
+
+/* =================================================================
+   STATS / SCIENCE STRIP
+   ================================================================= */
+.leo-stats {
+  background: var(--fg-forest);
+  color: #FFFFFF;
+  padding: clamp(56px, 7vw, 96px) clamp(20px, 4vw, 48px);
+  text-align: center;
+}
+.leo-stats__inner { max-width: 1280px; margin: 0 auto; }
+.leo-stats__eyebrow {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px; letter-spacing: 0.24em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--accent-fire); margin: 0 0 14px;
+}
+.leo-stats__heading {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.05; letter-spacing: -0.025em;
+  color: #FFFFFF; margin: 0 auto clamp(40px, 5vw, 64px);
+  max-width: 22ch;
+}
+.leo-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0;
+}
+.leo-stats__cell {
+  display: flex; flex-direction: column;
+  gap: 8px; padding: 24px;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+.leo-stats__cell:last-child { border-right: none; }
+@media (max-width: 750px) {
+  .leo-stats__cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .leo-stats__cell:last-child { border-bottom: none; }
+}
+.leo-stats__value {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(36px, 4vw, 56px);
+  letter-spacing: -0.03em; line-height: 1;
+  color: var(--accent-fire);
+}
+.leo-stats__label {
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.4;
+}
+
+/* =================================================================
+   COMPARISON — LEO gegen den Markt
+   1:1 Bachgold-Pattern · LEO obsidian + gold
+   ================================================================= */
+.bb-cmp {
+  position: relative;
+  isolation: isolate;
+  color: #FFFFFF;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 540px;
+  display: flex;
+  align-items: stretch;
+}
+@media (min-width: 900px) { .bb-cmp { min-height: 580px; } }
+.bb-cmp__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(120% 80% at 18% 92%, rgba(201,161,74,0.22) 0%, rgba(201,161,74,0) 55%),
+    radial-gradient(90% 70% at 88% 10%, rgba(201,161,74,0.10) 0%, rgba(201,161,74,0) 60%),
+    linear-gradient(140deg, #16110A 0%, #1F1814 35%, #15110D 70%, #0C0907 100%);
+}
+.bb-cmp__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.32;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0 0.55 0 0 0 0.45 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+.bb-cmp::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(10,8,6,0.30) 0%, rgba(10,8,6,0.45) 50%, rgba(10,8,6,0.78) 100%),
+    linear-gradient(90deg, rgba(10,8,6,0.55) 0%, rgba(10,8,6,0.0) 35%, rgba(10,8,6,0.0) 60%, rgba(10,8,6,0.40) 100%);
+}
+.bb-cmp__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 44px 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "logo"
+    "list"
+    "headline";
+  gap: 28px;
+}
+@media (min-width: 900px) {
+  .bb-cmp__inner {
+    padding: 56px 48px;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      ".         logo"
+      "headline  list";
+    gap: 32px 80px;
+    align-items: end;
+  }
+}
+@media (min-width: 1400px) {
+  .bb-cmp__inner { padding: 64px 72px; gap: 40px 96px; }
+}
+.bb-cmp__brand {
+  grid-area: logo;
+  align-self: start;
+  justify-self: end;
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 14px 22px;
+  text-align: center;
+  min-width: 160px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.32);
+}
+.bb-cmp__brand-logo {
+  font-family: "Instrument Serif", "Roboto", serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--fg-forest, #15130F);
+  line-height: 1;
+  margin: 0 0 4px;
+}
+.bb-cmp__brand-tag {
+  font-family: "Roboto", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-forest, #15130F);
+  opacity: 0.55;
+  margin: 0;
+  font-weight: 500;
+}
+.bb-cmp__headline {
+  grid-area: headline;
+  align-self: end;
+  max-width: 32rem;
+}
+.bb-cmp__eyebrow {
+  font-family: "Roboto", monospace;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-fire, #C9A14A);
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+.bb-cmp__heading {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(32px, 4.5vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  margin: 0 0 16px;
+}
+.bb-cmp__heading em {
+  font-style: normal;
+  color: var(--accent-fire, #C9A14A);
+}
+.bb-cmp__sub {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 14px;
+  max-width: 38ch;
+}
+.bb-cmp__footnote {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.48);
+  font-style: italic;
+  max-width: 42ch;
+  margin: 0;
+}
+.bb-cmp__list-wrap {
+  grid-area: list;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.bb-cmp__list-header {
+  display: grid;
+  grid-template-columns: 1fr 80px 110px;
+  gap: 12px;
+  align-items: end;
+  padding: 0 0 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.20);
+}
+.bb-cmp__list-header-label {
+  font-family: "Roboto", monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  margin: 0;
+}
+.bb-cmp__list-header-label--bachgold { color: var(--accent-fire, #C9A14A); }
+.bb-cmp__list-header-label--other { color: rgba(255,255,255,0.72); }
+.bb-cmp__list { list-style: none; margin: 0; padding: 0; }
+.bb-cmp__item {
+  display: grid;
+  grid-template-columns: 1fr 80px 110px;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+}
+.bb-cmp__item:last-child { border-bottom: none; }
+.bb-cmp__item-label {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #FFFFFF;
+}
+@media (min-width: 1100px) { .bb-cmp__item-label { font-size: 16px; } }
+.bb-cmp__icon-cell { display: flex; justify-content: center; align-items: center; }
+.bb-cmp__icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.bb-cmp__icon--check { background: var(--accent-fire, #C9A14A); color: #FFFFFF; }
+.bb-cmp__icon--check svg {
+  width: 14px; height: 14px;
+  stroke: #15130F; stroke-width: 3; fill: none;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.bb-cmp__icon--partial {
+  background: rgba(244,229,197,0.14);
+  border: 1.5px solid rgba(244,229,197,0.55);
+}
+.bb-cmp__icon--partial svg {
+  width: 12px; height: 12px;
+  stroke: rgba(244,229,197,0.85); stroke-width: 3; fill: none;
+  stroke-linecap: round;
+}
+.bb-cmp__icon--cross {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.32);
+}
+.bb-cmp__icon--cross svg {
+  width: 12px; height: 12px;
+  stroke: rgba(255,255,255,0.45); stroke-width: 2.5; fill: none;
+  stroke-linecap: round;
+}
+@media (max-width: 600px) {
+  .bb-cmp__inner { padding: 36px 20px; gap: 24px; }
+  .bb-cmp__brand { padding: 10px 16px; min-width: 140px; }
+  .bb-cmp__brand-logo { font-size: 1.3rem; }
+  .bb-cmp__list-header, .bb-cmp__item { grid-template-columns: 1fr 56px 80px; gap: 6px; }
+  .bb-cmp__list-header-label { font-size: 9px; letter-spacing: 0.16em; }
+  .bb-cmp__item-label { font-size: 13px; }
+  .bb-cmp__heading { font-size: 30px; }
+  .bb-cmp__icon { width: 24px; height: 24px; }
+}
+
+/* =================================================================
+   TESTIMONIAL
+   ================================================================= */
+.leo-testi {
+  background: var(--bg-snow);
+  padding: clamp(56px, 7vw, 96px) clamp(20px, 4vw, 48px);
+}
+.leo-testi__inner {
+  max-width: 880px; margin: 0 auto;
+  text-align: center;
+}
+.leo-testi__quote-mark {
+  font-family: Georgia, serif;
+  font-size: 96px; line-height: 1;
+  color: var(--accent-fire); opacity: 0.92;
+  font-weight: 800;
+  margin: 0 0 8px;
+  display: inline-block;
+}
+.leo-testi__quote {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.4; letter-spacing: -0.012em;
+  color: var(--fg-forest); margin: 0 0 28px;
+}
+.leo-testi__author {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700; font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--fg-forest); margin: 0;
+}
+.leo-testi__role {
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--neutral-moss); margin-top: 4px;
+}
+
+/* =================================================================
+   FAQ
+   ================================================================= */
+.leo-faq {
+  background: var(--bg-sand-soft);
+  padding: clamp(56px, 7vw, 96px) clamp(20px, 4vw, 48px);
+}
+.leo-faq__inner { max-width: 880px; margin: 0 auto; }
+.leo-faq__head { text-align: center; margin-bottom: clamp(40px, 5vw, 56px); }
+.leo-faq__eyebrow {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px; letter-spacing: 0.24em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--accent-fire); margin: 0 0 14px;
+}
+.leo-faq__heading {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(32px, 4.5vw, 56px);
+  line-height: 1.05; letter-spacing: -0.025em;
+  color: var(--fg-forest); margin: 0;
+}
+.leo-faq__list { display: flex; flex-direction: column; gap: 4px; }
+.leo-faq__item {
+  border-top: 1px solid var(--bg-border-light);
+}
+.leo-faq__item:last-child { border-bottom: 1px solid var(--bg-border-light); }
+.leo-faq__q {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%; padding: 22px 0;
+  background: transparent; border: none;
+  cursor: pointer; text-align: left;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700; font-size: 18px;
+  letter-spacing: -0.005em; color: var(--fg-forest);
+  list-style: none;
+}
+.leo-faq__q::-webkit-details-marker { display: none; }
+.leo-faq__q-icon {
+  display: inline-flex; width: 28px; height: 28px;
+  align-items: center; justify-content: center;
+  color: var(--accent-fire); font-weight: 800; font-size: 22px;
+  transition: transform 240ms ease;
+  flex-shrink: 0; margin-left: 16px;
+}
+.leo-faq__item[open] .leo-faq__q-icon { transform: rotate(45deg); }
+.leo-faq__a {
+  padding: 0 0 22px;
+  font-size: 16px; line-height: 1.65;
+  color: var(--fg-forest); opacity: 0.84;
+  max-width: 60ch;
+}
+
+/* =================================================================
+   FINAL CTA
+   ================================================================= */
+.leo-final {
+  background: var(--fg-forest);
+  color: #FFFFFF;
+  padding: clamp(72px, 9vw, 128px) clamp(20px, 4vw, 48px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.leo-final::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(201, 161, 74, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(201, 161, 74, 0.10) 0%, transparent 60%);
+  pointer-events: none;
+}
+.leo-final__inner {
+  max-width: 880px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+.leo-final__eyebrow {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px; letter-spacing: 0.28em;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--accent-fire); margin: 0 0 18px;
+}
+.leo-final__heading {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 6vw, 88px);
+  line-height: 1.02; letter-spacing: -0.03em;
+  color: #FFFFFF; margin: 0 0 28px;
+}
+.leo-final__sub {
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.55;
+  color: rgba(255,255,255,0.78);
+  max-width: 56ch; margin: 0 auto 40px;
+}
+.leo-final__cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 20px 48px;
+  background: var(--accent-fire); color: #FFFFFF;
+  font-family: "Roboto", sans-serif;
+  font-weight: 800; font-size: 14.5px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; border-radius: 6px;
+  transition: all 180ms ease-out;
+  box-shadow: 0 12px 32px rgba(201, 161, 74, 0.36);
+}
+.leo-final__cta:hover {
+  background: #FFFFFF; color: var(--fg-forest);
+  transform: translateY(-2px);
+}
+
+/* =================================================================
+   FOOTER (clone of bg-footer)
+   ================================================================= */
+.bg-footer {
+  background: var(--fg-charcoal);
+  color: #FFFFFF;
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 4vw, 48px) clamp(24px, 3vw, 40px);
+}
+.bg-footer__inner { max-width: 1280px; margin: 0 auto; }
+.bg-footer__grid {
+  display: grid; grid-template-columns: 1fr;
+  gap: 40px;
+}
+@media (min-width: 750px) {
+  .bg-footer__grid { grid-template-columns: 1.4fr 1fr 1fr 1fr 1.4fr; gap: 32px; }
+}
+.bg-footer__wordmark {
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-weight: 700; font-size: 32px;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: #FFFFFF; margin-bottom: 12px;
+}
+.bg-footer__tagline {
+  font-size: 14px; line-height: 1.55;
+  color: rgba(255,255,255,0.72); margin: 0;
+}
+.bg-footer__heading {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700; font-size: 13px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: #FFFFFF; margin: 0 0 16px;
+}
+.bg-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.bg-footer__link {
+  color: rgba(255,255,255,0.72); text-decoration: none;
+  font-size: 14px; transition: color 160ms ease;
+}
+.bg-footer__link:hover { color: var(--accent-fire); }
+.bg-footer__newsletter-text {
+  font-size: 13.5px; line-height: 1.5;
+  color: rgba(255,255,255,0.72); margin: 0 0 16px;
+}
+.bg-footer__newsletter-field {
+  display: flex; gap: 0;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 6px; overflow: hidden;
+  background: rgba(255,255,255,0.04);
+}
+.bg-footer__newsletter-input {
+  flex: 1; padding: 13px 14px;
+  background: transparent; border: none;
+  color: #FFFFFF; font-size: 14px;
+  font-family: "Roboto", sans-serif;
+}
+.bg-footer__newsletter-input::placeholder { color: rgba(255,255,255,0.4); }
+.bg-footer__newsletter-input:focus { outline: none; }
+.bg-footer__newsletter-btn {
+  padding: 0 18px;
+  background: var(--accent-fire); color: #FFFFFF;
+  border: none; cursor: pointer;
+  display: inline-flex; align-items: center;
+  transition: background 160ms ease;
+}
+.bg-footer__newsletter-btn:hover { background: #FFFFFF; color: var(--fg-forest); }
+.bg-footer__bottom {
+  margin-top: clamp(36px, 4vw, 56px);
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 14px;
+  font-size: 12px; letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.5);
+}
+
+/* =================================================================
+   BB BRANDS PREVIEW TAG
+   ================================================================= */
+.bb-prev-tag {
+  position: fixed;
+  bottom: 18px; right: 18px;
+  z-index: 9999;
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 9px 16px 9px 13px;
+  background: #15130F;
+  color: #FFFFFF;
+  border-radius: 999px;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+  transition: transform 200ms ease;
+}
+.bb-prev-tag:hover { transform: translateY(-2px); }
+.bb-prev-tag__dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #5B6BFF;
+  box-shadow: 0 0 10px #5B6BFF;
+  animation: bb-pulse 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes bb-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.55; transform: scale(0.85); }
+}
+
+/* =================================================================
+   UTILITIES
+   ================================================================= */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== ANNOUNCEMENT BAR ========== -->
+<div class="bg-ann-bar" role="region" aria-label="Ankündigung">
+  <div class="bg-ann-bar__desktop">
+    <span class="bg-ann-item"><strong>Frei von Zucker</strong> · ohne Ballast</span>
+    <span class="bg-ann-item">Kostenloser Versand <strong>ab 60 €</strong></span>
+    <span class="bg-ann-item"><strong>Kölner Liste®</strong> · Anti-Doping geprüft</span>
+    <span class="bg-ann-item">In Deutschland · in <strong>Pharmaqualität</strong> entwickelt</span>
+  </div>
+</div>
+
+<!-- ========== HEADER ========== -->
+<header class="bg-header" role="banner">
+  <div class="bg-dh">
+    <button type="button" class="bg-dh-ic bg-hamburger" aria-label="Menu öffnen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+    </button>
+
+    <a href="index.html" class="bg-dh-logo" aria-label="LEO Sport Nutrition">
+      <span class="bg-dh-logo__main">LEO</span>
+      <span class="bg-dh-logo__sub">Sport Nutrition</span>
+    </a>
+
+    <nav class="bg-dh-nav-wrap" aria-label="Hauptnavigation">
+      <ul class="bg-dh-nav" role="menubar">
+        <li><a href="shop.html" class="bg-dh-nav-link">Shop</a></li>
+        <li><a href="product-bundle.html" class="bg-dh-nav-link">Bundle</a></li>
+        <li><a href="about.html" class="bg-dh-nav-link">Über LEO</a></li>
+        <li><a href="science.html" class="bg-dh-nav-link">Wissenschaft</a></li>
+      </ul>
+    </nav>
+
+    <div class="bg-dh-utility">
+      <a href="#" class="bg-dh-ic" aria-label="Account">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 21c0-4 4-7 8-7s8 3 8 7"></path>
+        </svg>
+      </a>
+      <a href="#" class="bg-dh-ic" aria-label="Warenkorb">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 7h14l-1.5 11a2 2 0 0 1-2 1.8h-7a2 2 0 0 1-2-1.8L5 7z"></path>
+          <path d="M9 7V5a3 3 0 0 1 6 0v2"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main role="main">
+
+<!-- ========== HERO (Dual rotating, like bachgold-hero-dual) ========== -->
+<section class="leo-hero-dual" data-auto-rotate="8000" aria-label="LEO Phasen-System Hero">
+  <div class="leo-hero-dual__container">
+
+    <div class="leo-hero-dual__track" data-track="a" data-active="true">
+      <div class="leo-hero-dual__content">
+        <p class="leo-hero-dual__eyebrow">PRE · INTRA · POST</p>
+        <h1 class="leo-hero-dual__headline">Drei Phasen.<br>Ein System.</h1>
+        <p class="leo-hero-dual__subheadline">
+          Pre, Intra, Post — entwickelt von zwei Sportmedizinern.
+          Wissenschaftlich dosiert, im Profifußball erprobt, frei von Zucker und Ballast.
+        </p>
+        <div class="leo-hero-dual__ctas">
+          <a href="product-bundle.html" class="leo-hero-dual__cta-primary">Bundle ansehen — 99 €/Mon.</a>
+          <a href="science.html" class="leo-hero-dual__cta-secondary">So funktioniert das System →</a>
+        </div>
+        <div class="leo-hero-dual__pills">
+          <span class="leo-hero-dual__pill">Kölner Liste®</span>
+          <span class="leo-hero-dual__pill">Pharmaqualität</span>
+          <span class="leo-hero-dual__pill">Made in Germany</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="leo-hero-dual__track" data-track="b" data-active="false">
+      <div class="leo-hero-dual__content">
+        <p class="leo-hero-dual__eyebrow">WISSENSCHAFTLICH DOSIERT</p>
+        <h1 class="leo-hero-dual__headline">Nicht maximal.<br>Funktional.</h1>
+        <p class="leo-hero-dual__subheadline">
+          Kein Marketing-Megadose. Studienkonforme Dosierung.
+          Citrullin 6 g, Kreatin 3 g, BCAAs im Verhältnis 2:1:1 — wie es die Studienlage sagt.
+        </p>
+        <div class="leo-hero-dual__ctas">
+          <a href="science.html" class="leo-hero-dual__cta-primary">Zur Wissenschaft →</a>
+          <a href="shop.html" class="leo-hero-dual__cta-secondary">Produkte ansehen →</a>
+        </div>
+        <div class="leo-hero-dual__pills">
+          <span class="leo-hero-dual__pill">Anti-Doping geprüft</span>
+          <span class="leo-hero-dual__pill">Studienkonform</span>
+          <span class="leo-hero-dual__pill">Profifußball-DNA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="leo-hero-dual__dots" role="tablist" aria-label="Slide wechseln">
+      <button type="button" class="leo-hero-dual__dot" data-target="a" aria-pressed="true" aria-label="Drei Phasen Ein System anzeigen"></button>
+      <button type="button" class="leo-hero-dual__dot" data-target="b" aria-pressed="false" aria-label="Nicht maximal Funktional anzeigen"></button>
+      <span class="leo-hero-dual__dot-label" aria-live="polite">DREI PHASEN. EIN SYSTEM.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TRUST BAR ========== -->
+<section class="bb-press" aria-label="Vertrauenssignale">
+  <div class="bb-press__inner">
+    <p class="bb-press__heading">Geprüft · Validiert · Erprobt</p>
+    <div class="bb-press__marquee" role="presentation">
+      <div class="bb-press__track" aria-hidden="true">
+        <div class="bb-press__item"><span class="bb-press__ph">Kölner Liste®</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Pharmaqualität</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Studienkonform</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Profifußball-DNA</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Made in Germany</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Anti-Doping geprüft</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Kölner Liste®</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Pharmaqualität</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Studienkonform</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Profifußball-DNA</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Made in Germany</span></div>
+        <div class="bb-press__item"><span class="bb-press__ph">Anti-Doping geprüft</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BUNDLE HIGHLIGHT ========== -->
+<section class="leo-bundle-highlight" aria-labelledby="leo-bundle-heading">
+  <div class="leo-bundle-highlight__inner">
+
+    <!-- LEFT: Trinity -->
+    <div class="leo-bundle-highlight__media" aria-hidden="true">
+      <div class="leo-bundle-highlight__trinity">
+        <!-- Activate (top center) -->
+        <div class="leo-bundle-highlight__tin leo-bundle-highlight__tin--top">
+          <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="100" cy="226" rx="78" ry="9" fill="rgba(0,0,0,0.18)"/>
+            <rect x="30" y="42" width="140" height="184" rx="6" fill="#15130F"/>
+            <ellipse cx="100" cy="42" rx="70" ry="9" fill="#221C16"/>
+            <ellipse cx="100" cy="40" rx="70" ry="6" fill="#15130F" stroke="#D18A64" stroke-width="0.7"/>
+            <text x="100" y="100" text-anchor="middle" font-family="Roboto" font-weight="900" font-size="22" fill="#FFFFFF" letter-spacing="-0.6">LEO</text>
+            <text x="100" y="116" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="6" fill="#979D85" letter-spacing="2">SPORT NUTRITION</text>
+            <line x1="55" y1="132" x2="145" y2="132" stroke="#D18A64" stroke-width="0.5" opacity="0.6"/>
+            <text x="100" y="158" text-anchor="middle" font-family="Roboto" font-style="italic" font-weight="700" font-size="22" fill="#D18A64" letter-spacing="-0.5">Activate</text>
+            <text x="100" y="172" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="6.5" fill="#FFFFFF" opacity="0.62" letter-spacing="1.3">PHASE 01 · T-30</text>
+          </svg>
+        </div>
+        <!-- Recovery (bottom left) -->
+        <div class="leo-bundle-highlight__tin leo-bundle-highlight__tin--left">
+          <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="100" cy="226" rx="78" ry="9" fill="rgba(0,0,0,0.18)"/>
+            <rect x="30" y="42" width="140" height="184" rx="6" fill="#15130F"/>
+            <ellipse cx="100" cy="42" rx="70" ry="9" fill="#221C16"/>
+            <ellipse cx="100" cy="40" rx="70" ry="6" fill="#15130F" stroke="#6B9C2B" stroke-width="0.7"/>
+            <text x="100" y="100" text-anchor="middle" font-family="Roboto" font-weight="900" font-size="22" fill="#FFFFFF" letter-spacing="-0.6">LEO</text>
+            <text x="100" y="116" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="6" fill="#979D85" letter-spacing="2">SPORT NUTRITION</text>
+            <line x1="55" y1="132" x2="145" y2="132" stroke="#6B9C2B" stroke-width="0.5" opacity="0.7"/>
+            <text x="100" y="158" text-anchor="middle" font-family="Roboto" font-style="italic" font-weight="700" font-size="20" fill="#6B9C2B" letter-spacing="-0.5">Recovery</text>
+            <text x="100" y="172" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="6.5" fill="#FFFFFF" opacity="0.62" letter-spacing="1.3">PHASE 03 · T+30</text>
+          </svg>
+        </div>
+        <!-- Energy (bottom right) -->
+        <div class="leo-bundle-highlight__tin leo-bundle-highlight__tin--right">
+          <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="100" cy="226" rx="78" ry="9" fill="rgba(0,0,0,0.18)"/>
+            <rect x="30" y="42" width="140" height="184" rx="6" fill="#15130F"/>
+            <ellipse cx="100" cy="42" rx="70" ry="9" fill="#221C16"/>
+            <ellipse cx="100" cy="40" rx="70" ry="6" fill="#15130F" stroke="#C43528" stroke-width="0.7"/>
+            <text x="100" y="100" text-anchor="middle" font-family="Roboto" font-weight="900" font-size="22" fill="#FFFFFF" letter-spacing="-0.6">LEO</text>
+            <text x="100" y="116" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="6" fill="#979D85" letter-spacing="2">SPORT NUTRITION</text>
+            <line x1="55" y1="132" x2="145" y2="132" stroke="#C43528" stroke-width="0.5" opacity="0.7"/>
+            <text x="100" y="158" text-anchor="middle" font-family="Roboto" font-style="italic" font-weight="700" font-size="22" fill="#C43528" letter-spacing="-0.5">Energy</text>
+            <text x="100" y="172" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="6.5" fill="#FFFFFF" opacity="0.62" letter-spacing="1.3">PHASE 02 · T+0</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Content -->
+    <div class="leo-bundle-highlight__content">
+      <p class="leo-bundle-highlight__eyebrow">02 · Das Bundle</p>
+      <h2 id="leo-bundle-heading" class="leo-bundle-highlight__heading">
+        Die Trinität.<br>
+        <em>Activate — Energy — Recovery.</em>
+      </h2>
+      <p class="leo-bundle-highlight__lede">
+        Alle drei Phasen in einer Box. Die konsequenteste Art, dein Training,
+        Spiel oder Wettkampf sportmedizinisch sinnvoll zu begleiten — von
+        der Aktivierung bis zur Regeneration.
+      </p>
+
+      <!-- Price card -->
+      <div class="leo-bundle-highlight__card">
+        <div class="leo-bundle-highlight__price-row">
+          <div class="leo-bundle-highlight__price" id="leo-bh-price">99,00 €</div>
+          <div class="leo-bundle-highlight__compare">
+            <s id="leo-bh-compare">132,00 €</s>
+          </div>
+          <span class="leo-bundle-highlight__savings" id="leo-bh-savings">−25 %</span>
+        </div>
+
+        <div class="leo-bundle-highlight__toggle" role="tablist" aria-label="Bezahl-Modus">
+          <button type="button" class="leo-bundle-highlight__toggle-btn" data-mode="onetime" aria-pressed="false">
+            <div class="lbl-row"><span class="lbl">Einmalig</span></div>
+            <div class="sub">119,00 € · ohne Bindung</div>
+          </button>
+          <button type="button" class="leo-bundle-highlight__toggle-btn" data-mode="subscribe" aria-pressed="true">
+            <div class="lbl-row"><span class="lbl">Abo · alle 4 Wochen</span><span class="badge">−25 %</span></div>
+            <div class="sub">99,00 €/Mon. · pausierbar</div>
+          </button>
+        </div>
+
+        <a href="product-bundle.html" class="leo-bundle-highlight__cta">In den Warenkorb →</a>
+      </div>
+
+      <!-- Trust strip -->
+      <div class="leo-bundle-highlight__trust">
+        <div class="leo-bundle-highlight__trust-item">30-Tage-Rückgabe</div>
+        <div class="leo-bundle-highlight__trust-item">Versand in 48 h</div>
+        <div class="leo-bundle-highlight__trust-item">Abo jederzeit kündbar</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== PHASE SYSTEM (3 alternating steps) ========== -->
+<section class="bb-hiw" aria-labelledby="leo-phases-heading">
+  <div class="bb-hiw__inner">
+    <header class="bb-hiw__header">
+      <p class="bb-hiw__eyebrow">DAS 3-PHASEN-SYSTEM</p>
+      <h2 class="bb-hiw__heading" id="leo-phases-heading">So trainierst du mit LEO.</h2>
+      <p class="bb-hiw__sub">Drei Drinks, drei Zeitpunkte, ein System. Jede Phase hat einen Job — wissenschaftlich dosiert, im Profifußball erprobt.</p>
+    </header>
+
+    <ol class="bb-hiw__steps" role="list">
+
+      <li class="bb-hiw__step bb-hiw__step--phase-activate">
+        <div class="bb-hiw__copy">
+          <p class="bb-hiw__step-num">PHASE 01 · T−30</p>
+          <h3 class="bb-hiw__step-title">Activate.<br>Zünden.</h3>
+          <p class="bb-hiw__step-body">
+            30 Minuten vor dem Training. Zündet den Körper, öffnet die Zelle, schützt vor oxidativem Stress.
+            Koffein, Citrullin (6 g), Beta-Alanin — studienkonform, ohne Megadose-Theater.
+          </p>
+          <div class="bb-hiw__step-meta">
+            <span class="bb-hiw__step-chip">Koffein</span>
+            <span class="bb-hiw__step-chip">Citrullin 6 g</span>
+            <span class="bb-hiw__step-chip">Beta-Alanin</span>
+          </div>
+        </div>
+        <figure class="bb-hiw__media">
+          <div class="bb-hiw__media-ph">
+            <div class="leo-tin">
+              <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="226" rx="78" ry="9" fill="rgba(0,0,0,0.22)"/>
+                <rect x="30" y="42" width="140" height="184" rx="6" fill="#15130F"/>
+                <ellipse cx="100" cy="42" rx="70" ry="9" fill="#221C16"/>
+                <text x="100" y="100" text-anchor="middle" font-family="Roboto" font-weight="900" font-size="26" fill="#FFFFFF" letter-spacing="-0.6">LEO</text>
+                <text x="100" y="118" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="7" fill="#979D85" letter-spacing="2.5">SPORT NUTRITION</text>
+                <line x1="55" y1="138" x2="145" y2="138" stroke="#D18A64" stroke-width="0.6"/>
+                <text x="100" y="170" text-anchor="middle" font-family="Roboto" font-style="italic" font-weight="700" font-size="26" fill="#D18A64" letter-spacing="-0.6">Activate</text>
+                <text x="100" y="190" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="8" fill="#FFFFFF" opacity="0.66" letter-spacing="1.5">PHASE 01 · T−30</text>
+              </svg>
+            </div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="bb-hiw__step bb-hiw__step--reverse bb-hiw__step--phase-energy">
+        <div class="bb-hiw__copy">
+          <p class="bb-hiw__step-num">PHASE 02 · T+0</p>
+          <h3 class="bb-hiw__step-title">Energy.<br>Liefern.</h3>
+          <p class="bb-hiw__step-body">
+            Während des Trainings. Hält den Blutzucker konstant, ersetzt Elektrolyte 1:1.
+            Dual-Carb-System (Maltodextrin + Fructose) für maximale Aufnahme — kein Zuckerloch in Minute 60.
+          </p>
+          <div class="bb-hiw__step-meta">
+            <span class="bb-hiw__step-chip">Iso-Elektrolyte</span>
+            <span class="bb-hiw__step-chip">Dual-Carb 2:1</span>
+            <span class="bb-hiw__step-chip">Magnesium</span>
+          </div>
+        </div>
+        <figure class="bb-hiw__media">
+          <div class="bb-hiw__media-ph">
+            <div class="leo-tin">
+              <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="226" rx="78" ry="9" fill="rgba(0,0,0,0.22)"/>
+                <rect x="30" y="42" width="140" height="184" rx="6" fill="#15130F"/>
+                <ellipse cx="100" cy="42" rx="70" ry="9" fill="#221C16"/>
+                <text x="100" y="100" text-anchor="middle" font-family="Roboto" font-weight="900" font-size="26" fill="#FFFFFF" letter-spacing="-0.6">LEO</text>
+                <text x="100" y="118" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="7" fill="#979D85" letter-spacing="2.5">SPORT NUTRITION</text>
+                <line x1="55" y1="138" x2="145" y2="138" stroke="#C43528" stroke-width="0.6"/>
+                <text x="100" y="170" text-anchor="middle" font-family="Roboto" font-style="italic" font-weight="700" font-size="26" fill="#C43528" letter-spacing="-0.6">Energy</text>
+                <text x="100" y="190" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="8" fill="#FFFFFF" opacity="0.66" letter-spacing="1.5">PHASE 02 · T+0</text>
+              </svg>
+            </div>
+          </div>
+        </figure>
+      </li>
+
+      <li class="bb-hiw__step bb-hiw__step--phase-recovery">
+        <div class="bb-hiw__copy">
+          <p class="bb-hiw__step-num">PHASE 03 · T+30</p>
+          <h3 class="bb-hiw__step-title">Recovery.<br>Aufbauen.</h3>
+          <p class="bb-hiw__step-body">
+            30 Minuten nach dem Training. Füllt Glykogen auf, startet Muskel-Reparatur, schützt vor Übertraining.
+            Kreatin (3 g), Glutamin, BCAAs 2:1:1 — die Mengen, die in der Studie standen.
+          </p>
+          <div class="bb-hiw__step-meta">
+            <span class="bb-hiw__step-chip">Kreatin 3 g</span>
+            <span class="bb-hiw__step-chip">Glutamin</span>
+            <span class="bb-hiw__step-chip">BCAAs 2:1:1</span>
+          </div>
+        </div>
+        <figure class="bb-hiw__media">
+          <div class="bb-hiw__media-ph">
+            <div class="leo-tin">
+              <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="226" rx="78" ry="9" fill="rgba(0,0,0,0.22)"/>
+                <rect x="30" y="42" width="140" height="184" rx="6" fill="#15130F"/>
+                <ellipse cx="100" cy="42" rx="70" ry="9" fill="#221C16"/>
+                <text x="100" y="100" text-anchor="middle" font-family="Roboto" font-weight="900" font-size="26" fill="#FFFFFF" letter-spacing="-0.6">LEO</text>
+                <text x="100" y="118" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="7" fill="#979D85" letter-spacing="2.5">SPORT NUTRITION</text>
+                <line x1="55" y1="138" x2="145" y2="138" stroke="#6B9C2B" stroke-width="0.6"/>
+                <text x="100" y="170" text-anchor="middle" font-family="Roboto" font-style="italic" font-weight="700" font-size="24" fill="#6B9C2B" letter-spacing="-0.6">Recovery</text>
+                <text x="100" y="190" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="8" fill="#FFFFFF" opacity="0.66" letter-spacing="1.5">PHASE 03 · T+30</text>
+              </svg>
+            </div>
+          </div>
+        </figure>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+<!-- ========== PRODUCTS GRID (3 phases) ========== -->
+<section class="leo-products" aria-labelledby="leo-products-heading">
+  <div class="leo-products__inner">
+    <header class="leo-products__head">
+      <p class="leo-products__eyebrow">EINZELN ODER IM BUNDLE</p>
+      <h2 id="leo-products-heading" class="leo-products__heading">Drei Drinks. Klar zugewiesen.</h2>
+    </header>
+
+    <div class="leo-products__grid">
+
+      <article class="leo-product-card leo-product-card--activate">
+        <span class="leo-product-card__phase-tag">Phase 01 · Pre</span>
+        <div class="leo-product-card__media">
+          <div class="leo-tin">
+            <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="100" cy="226" rx="78" ry="9" fill="rgba(0,0,0,0.22)"/>
+              <rect x="30" y="42" width="140" height="184" rx="6" fill="#15130F"/>
+              <ellipse cx="100" cy="42" rx="70" ry="9" fill="#221C16"/>
+              <text x="100" y="100" text-anchor="middle" font-family="Roboto" font-weight="900" font-size="22" fill="#FFFFFF" letter-spacing="-0.6">LEO</text>
+              <text x="100" y="118" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="6" fill="#979D85" letter-spacing="2.5">SPORT NUTRITION</text>
+              <line x1="55" y1="135" x2="145" y2="135" stroke="#D18A64" stroke-width="0.5"/>
+              <text x="100" y="165" text-anchor="middle" font-family="Roboto" font-style="italic" font-weight="700" font-size="24" fill="#D18A64" letter-spacing="-0.5">Activate</text>
+              <text x="100" y="183" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="7" fill="#FFFFFF" opacity="0.66" letter-spacing="1.5">PHASE 01 · T−30</text>
+            </svg>
+          </div>
+        </div>
+        <h3 class="leo-product-card__name">Activate</h3>
+        <p class="leo-product-card__tagline">Zündet den Körper. Schützt die Zelle. 30 Min vor dem Training.</p>
+        <div class="leo-product-card__ingredients">
+          <span class="leo-product-card__ing">Koffein</span>
+          <span class="leo-product-card__ing">Citrullin 6 g</span>
+          <span class="leo-product-card__ing">Beta-Alanin</span>
+        </div>
+        <div class="leo-product-card__footer">
+          <span class="leo-product-card__price">44 €</span>
+          <a href="shop.html" class="leo-product-card__cta">Ansehen →</a>
+        </div>
+      </article>
+
+      <article class="leo-product-card leo-product-card--energy">
+        <span class="leo-product-card__phase-tag">Phase 02 · Intra</span>
+        <div class="leo-product-card__media">
+          <div class="leo-tin">
+            <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="100" cy="226" rx="78" ry="9" fill="rgba(0,0,0,0.22)"/>
+              <rect x="30" y="42" width="140" height="184" rx="6" fill="#15130F"/>
+              <ellipse cx="100" cy="42" rx="70" ry="9" fill="#221C16"/>
+              <text x="100" y="100" text-anchor="middle" font-family="Roboto" font-weight="900" font-size="22" fill="#FFFFFF" letter-spacing="-0.6">LEO</text>
+              <text x="100" y="118" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="6" fill="#979D85" letter-spacing="2.5">SPORT NUTRITION</text>
+              <line x1="55" y1="135" x2="145" y2="135" stroke="#C43528" stroke-width="0.5"/>
+              <text x="100" y="165" text-anchor="middle" font-family="Roboto" font-style="italic" font-weight="700" font-size="24" fill="#C43528" letter-spacing="-0.5">Energy</text>
+              <text x="100" y="183" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="7" fill="#FFFFFF" opacity="0.66" letter-spacing="1.5">PHASE 02 · T+0</text>
+            </svg>
+          </div>
+        </div>
+        <h3 class="leo-product-card__name">Energy</h3>
+        <p class="leo-product-card__tagline">Konstante Leistung. Kein Zuckerloch. Während des Trainings.</p>
+        <div class="leo-product-card__ingredients">
+          <span class="leo-product-card__ing">Iso-Elektrolyte</span>
+          <span class="leo-product-card__ing">Dual-Carb</span>
+          <span class="leo-product-card__ing">Magnesium</span>
+        </div>
+        <div class="leo-product-card__footer">
+          <span class="leo-product-card__price">44 €</span>
+          <a href="shop.html" class="leo-product-card__cta">Ansehen →</a>
+        </div>
+      </article>
+
+      <article class="leo-product-card leo-product-card--recovery">
+        <span class="leo-product-card__phase-tag">Phase 03 · Post</span>
+        <div class="leo-product-card__media">
+          <div class="leo-tin">
+            <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="100" cy="226" rx="78" ry="9" fill="rgba(0,0,0,0.22)"/>
+              <rect x="30" y="42" width="140" height="184" rx="6" fill="#15130F"/>
+              <ellipse cx="100" cy="42" rx="70" ry="9" fill="#221C16"/>
+              <text x="100" y="100" text-anchor="middle" font-family="Roboto" font-weight="900" font-size="22" fill="#FFFFFF" letter-spacing="-0.6">LEO</text>
+              <text x="100" y="118" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="6" fill="#979D85" letter-spacing="2.5">SPORT NUTRITION</text>
+              <line x1="55" y1="135" x2="145" y2="135" stroke="#6B9C2B" stroke-width="0.5"/>
+              <text x="100" y="165" text-anchor="middle" font-family="Roboto" font-style="italic" font-weight="700" font-size="22" fill="#6B9C2B" letter-spacing="-0.5">Recovery</text>
+              <text x="100" y="183" text-anchor="middle" font-family="Roboto" font-weight="600" font-size="7" fill="#FFFFFF" opacity="0.66" letter-spacing="1.5">PHASE 03 · T+30</text>
+            </svg>
+          </div>
+        </div>
+        <h3 class="leo-product-card__name">Recovery</h3>
+        <p class="leo-product-card__tagline">Auffüllen. Wiederherstellen. Aufbauen. 30 Min nach dem Training.</p>
+        <div class="leo-product-card__ingredients">
+          <span class="leo-product-card__ing">Kreatin 3 g</span>
+          <span class="leo-product-card__ing">Glutamin</span>
+          <span class="leo-product-card__ing">BCAAs 2:1:1</span>
+        </div>
+        <div class="leo-product-card__footer">
+          <span class="leo-product-card__price">44 €</span>
+          <a href="shop.html" class="leo-product-card__cta">Ansehen →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== STATS / SCIENCE STRIP ========== -->
+<section class="leo-stats" aria-labelledby="leo-stats-heading">
+  <div class="leo-stats__inner">
+    <p class="leo-stats__eyebrow">DIE WISSENSCHAFT DAHINTER</p>
+    <h2 id="leo-stats-heading" class="leo-stats__heading">Studienkonform. Ohne Marketing.</h2>
+    <div class="leo-stats__grid">
+      <div class="leo-stats__cell">
+        <span class="leo-stats__value">6 g</span>
+        <span class="leo-stats__label">Citrullin · Studiendose</span>
+      </div>
+      <div class="leo-stats__cell">
+        <span class="leo-stats__value">3 g</span>
+        <span class="leo-stats__label">Kreatin · Erhaltungsdose</span>
+      </div>
+      <div class="leo-stats__cell">
+        <span class="leo-stats__value">1.000+</span>
+        <span class="leo-stats__label">Geprüfte Substanzen</span>
+      </div>
+      <div class="leo-stats__cell">
+        <span class="leo-stats__value">100 %</span>
+        <span class="leo-stats__label">Made in Germany</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COMPARISON · LEO gegen den Markt (Bachgold-Pattern) ========== -->
+<section class="bb-cmp" aria-labelledby="leo-cmp-heading">
+  <div class="bb-cmp__bg" aria-hidden="true"></div>
+  <div class="bb-cmp__inner">
+
+    <div class="bb-cmp__brand">
+      <p class="bb-cmp__brand-logo">LEO</p>
+      <p class="bb-cmp__brand-tag">Sport Nutrition · Pharma</p>
+    </div>
+
+    <header class="bb-cmp__headline">
+      <p class="bb-cmp__eyebrow">VERGLEICH</p>
+      <h2 id="leo-cmp-heading" class="bb-cmp__heading">LEO gegen den <em>Markt.</em></h2>
+      <p class="bb-cmp__sub">Sieben Punkte, harte Fakten — was wir liefern und was Standard-Booster nicht können.</p>
+      <p class="bb-cmp__footnote">Stand April 2026. „Standard-Booster" = Querschnitt der meistverkauften All-in-one-Pre-Workouts im DACH. — = produktabhängig.</p>
+    </header>
+
+    <div class="bb-cmp__list-wrap">
+      <div class="bb-cmp__list-header" role="presentation">
+        <span aria-hidden="true"></span>
+        <p class="bb-cmp__list-header-label bb-cmp__list-header-label--bachgold">LEO</p>
+        <p class="bb-cmp__list-header-label bb-cmp__list-header-label--other">Standard-Booster</p>
+      </div>
+
+      <ul class="bb-cmp__list">
+        <li class="bb-cmp__item">
+          <span class="bb-cmp__item-label">Phasen sauber getrennt (Pre · Intra · Post)</span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--check" aria-label="Ja"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span></span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--cross" aria-label="Nein"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span></span>
+        </li>
+        <li class="bb-cmp__item">
+          <span class="bb-cmp__item-label">Studienkonforme Dosierung</span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--check" aria-label="Ja"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span></span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--partial" aria-label="Teilweise"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="12" x2="18" y2="12"></line></svg></span></span>
+        </li>
+        <li class="bb-cmp__item">
+          <span class="bb-cmp__item-label">Kölner Liste® · Anti-Doping geprüft</span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--check" aria-label="Ja"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span></span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--cross" aria-label="Nein"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span></span>
+        </li>
+        <li class="bb-cmp__item">
+          <span class="bb-cmp__item-label">Pharmaqualität · Made in Germany</span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--check" aria-label="Ja"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span></span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--partial" aria-label="Teilweise"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="12" x2="18" y2="12"></line></svg></span></span>
+        </li>
+        <li class="bb-cmp__item">
+          <span class="bb-cmp__item-label">Frei von Zucker &amp; Ballaststoffen</span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--check" aria-label="Ja"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span></span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--cross" aria-label="Nein"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span></span>
+        </li>
+        <li class="bb-cmp__item">
+          <span class="bb-cmp__item-label">Von Sportmedizinern entwickelt</span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--check" aria-label="Ja"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span></span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--cross" aria-label="Nein"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span></span>
+        </li>
+        <li class="bb-cmp__item">
+          <span class="bb-cmp__item-label">Megadose-Marketing</span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--cross" aria-label="Nein"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span></span>
+          <span class="bb-cmp__icon-cell"><span class="bb-cmp__icon bb-cmp__icon--check" aria-label="Ja"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span></span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== TESTIMONIAL ========== -->
+<section class="leo-testi" aria-label="Athleten-Stimme">
+  <div class="leo-testi__inner">
+    <div class="leo-testi__quote-mark" aria-hidden="true">„</div>
+    <p class="leo-testi__quote">
+      Ich hab vorher drei Dosen mit drei Etiketten gemixt und mich gefragt, ob die Mengen stimmen.
+      Bei LEO macht das jemand, der's studiert hat.
+    </p>
+    <p class="leo-testi__author">Jonas K.</p>
+    <p class="leo-testi__role">Profi · 2. Bundesliga</p>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="leo-faq" aria-labelledby="leo-faq-heading">
+  <div class="leo-faq__inner">
+    <header class="leo-faq__head">
+      <p class="leo-faq__eyebrow">HÄUFIGE FRAGEN</p>
+      <h2 id="leo-faq-heading" class="leo-faq__heading">Was uns oft gefragt wird.</h2>
+    </header>
+
+    <div class="leo-faq__list">
+      <details class="leo-faq__item">
+        <summary class="leo-faq__q">
+          Für wen ist LEO?
+          <span class="leo-faq__q-icon" aria-hidden="true">+</span>
+        </summary>
+        <p class="leo-faq__a">
+          Für ambitionierte Hobby- und Profi-Athleten, die wissen, was sie trinken — und warum.
+          Wer einfach nur „mehr Bumms" will, ist bei Standard-Boostern besser aufgehoben.
+          Wer Pre, Intra und Post sauber trennen will: LEO.
+        </p>
+      </details>
+
+      <details class="leo-faq__item">
+        <summary class="leo-faq__q">
+          Warum drei Drinks statt einem?
+          <span class="leo-faq__q-icon" aria-hidden="true">+</span>
+        </summary>
+        <p class="leo-faq__a">
+          Weil dein Körper in drei Phasen drei verschiedene Sachen braucht. Pre: aktivieren und schützen.
+          Intra: Energie konstant halten. Post: auffüllen und reparieren. Ein All-in-one-Drink ist Marketing —
+          biochemisch funktioniert das nicht.
+        </p>
+      </details>
+
+      <details class="leo-faq__item">
+        <summary class="leo-faq__q">
+          Ist LEO Anti-Doping-konform?
+          <span class="leo-faq__q-icon" aria-hidden="true">+</span>
+        </summary>
+        <p class="leo-faq__a">
+          Ja. Alle drei Drinks sind auf der Kölner Liste® gelistet. Heißt: jede Charge wird auf
+          1.000+ verbotene Substanzen geprüft. Du kannst LEO im Profisport ohne Risiko trinken.
+        </p>
+      </details>
+
+      <details class="leo-faq__item">
+        <summary class="leo-faq__q">
+          Ersetzt LEO eine Mahlzeit?
+          <span class="leo-faq__q-icon" aria-hidden="true">+</span>
+        </summary>
+        <p class="leo-faq__a">
+          Nein. LEO ist ein Sport-Nutrition-System um das Training herum, kein Meal Replacement.
+          Iss vor dem Training was Anständiges, danach was Anständiges — LEO macht den Rest.
+        </p>
+      </details>
+
+      <details class="leo-faq__item">
+        <summary class="leo-faq__q">
+          Wie verträglich sind die Drinks?
+          <span class="leo-faq__q-icon" aria-hidden="true">+</span>
+        </summary>
+        <p class="leo-faq__a">
+          Sehr gut. Frei von Zucker, ohne unnötige Ballaststoffe, ohne Süßstoff-Bombe.
+          Die Iso-Energy ist isoton — heißt: gleiche Konzentration wie dein Blutplasma, sodass
+          dein Magen nichts erst verdünnen muss. Kein Aufstoßen, kein Loch.
+        </p>
+      </details>
+
+      <details class="leo-faq__item">
+        <summary class="leo-faq__q">
+          Wie funktioniert das Abo?
+          <span class="leo-faq__q-icon" aria-hidden="true">+</span>
+        </summary>
+        <p class="leo-faq__a">
+          Du wählst deinen Rhythmus (4 / 6 / 8 Wochen), bekommst dein Bundle automatisch geliefert,
+          sparst 25 % gegenüber dem Einzelkauf. Pausieren, ändern, kündigen jederzeit im Account-Bereich.
+          Kein Trick.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FINAL CTA ========== -->
+<section class="leo-final" aria-labelledby="leo-final-heading">
+  <div class="leo-final__inner">
+    <p class="leo-final__eyebrow">PRE · INTRA · POST</p>
+    <h2 id="leo-final-heading" class="leo-final__heading">Dein System wartet.</h2>
+    <p class="leo-final__sub">
+      Drei Phasen. Ein System. Wissenschaftlich dosiert, im Profifußball erprobt.
+      Im Abo 25 % günstiger als der Einzelkauf — pausieren, ändern, kündigen jederzeit.
+    </p>
+    <a href="product-bundle.html" class="leo-final__cta">Bundle sichern · 99 €/Mon. im Abo →</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-footer" role="contentinfo">
+  <div class="bg-footer__inner">
+    <div class="bg-footer__grid">
+      <div>
+        <div class="bg-footer__wordmark">LEO</div>
+        <p class="bg-footer__tagline">
+          Drei Phasen. Ein System. Wissenschaftlich dosiert.<br>
+          Made in Germany · Kölner Liste® · Pharmaqualität.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="bg-footer__heading">Shop</h3>
+        <ul class="bg-footer__list" role="list">
+          <li><a href="shop.html" class="bg-footer__link">Alle Produkte</a></li>
+          <li><a href="shop.html#activate" class="bg-footer__link">Activate · Pre</a></li>
+          <li><a href="shop.html#energy" class="bg-footer__link">Energy · Intra</a></li>
+          <li><a href="shop.html#recovery" class="bg-footer__link">Recovery · Post</a></li>
+          <li><a href="product-bundle.html" class="bg-footer__link">3-Phasen-Bundle</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="bg-footer__heading">System</h3>
+        <ul class="bg-footer__list" role="list">
+          <li><a href="science.html" class="bg-footer__link">Wissenschaft</a></li>
+          <li><a href="science.html#studies" class="bg-footer__link">Studien</a></li>
+          <li><a href="science.html#testing" class="bg-footer__link">Kölner Liste®</a></li>
+          <li><a href="science.html#dosing" class="bg-footer__link">Dosierung</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="bg-footer__heading">Marke</h3>
+        <ul class="bg-footer__list" role="list">
+          <li><a href="about.html" class="bg-footer__link">Über LEO</a></li>
+          <li><a href="about.html#founders" class="bg-footer__link">Gründer</a></li>
+          <li><a href="about.html#mission" class="bg-footer__link">Mission</a></li>
+          <li><a href="about.html#partner" class="bg-footer__link">Athletenpartner</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="bg-footer__heading">Bleib in Kontakt.</h3>
+        <p class="bg-footer__newsletter-text">
+          Einmal pro Monat. 10 % Rabatt auf die erste Bestellung. Kein Spam.
+        </p>
+        <form method="post" action="#" class="bg-footer__newsletter" onsubmit="event.preventDefault(); alert('Preview · Newsletter wird im Live-Shop aktiviert.');">
+          <div class="bg-footer__newsletter-field">
+            <label for="LeoFooterEmail" class="visually-hidden">E-Mail</label>
+            <input id="LeoFooterEmail" type="email" name="contact[email]" placeholder="Deine E-Mail" autocomplete="email" required class="bg-footer__newsletter-input">
+            <button type="submit" class="bg-footer__newsletter-btn" aria-label="Newsletter abonnieren">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="bg-footer__bottom">
+      <span>© 2026 LEO Sport Nutrition · Made in Germany</span>
+      <span>AGB · Datenschutz · Impressum · Widerrufsrecht</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== BB BRANDS PREVIEW TAG ========== -->
+<a href="https://bb-brands.de" target="_blank" rel="noopener" class="bb-prev-tag">
+  <span class="bb-prev-tag__dot" aria-hidden="true"></span>
+  <span>Built by BB Brands</span>
+</a>
+
+<script>
+/* HERO DUAL — auto-rotation + dot-toggle */
+(function() {
+  var hero = document.querySelector('.leo-hero-dual');
+  if (!hero) return;
+  var tracks = hero.querySelectorAll('.leo-hero-dual__track');
+  var dots = hero.querySelectorAll('.leo-hero-dual__dot');
+  var label = hero.querySelector('.leo-hero-dual__dot-label');
+  var current = 0;
+  var auto = parseInt(hero.dataset.autoRotate || '8000', 10);
+  var timer;
+
+  function show(idx) {
+    tracks.forEach(function(t, i) {
+      t.dataset.active = (i === idx) ? 'true' : 'false';
+    });
+    dots.forEach(function(d, i) {
+      d.setAttribute('aria-pressed', (i === idx) ? 'true' : 'false');
+    });
+    if (label) {
+      var headline = tracks[idx].querySelector('.leo-hero-dual__headline');
+      if (headline) label.textContent = headline.textContent.toUpperCase().replace(/\s+/g, ' ').trim();
+    }
+    current = idx;
+  }
+
+  function next() {
+    show((current + 1) % tracks.length);
+  }
+
+  dots.forEach(function(d, i) {
+    d.addEventListener('click', function() {
+      show(i);
+      clearInterval(timer);
+      timer = setInterval(next, auto);
+    });
+  });
+
+  if (auto > 0 && tracks.length > 1) {
+    timer = setInterval(next, auto);
+  }
+})();
+
+/* BUNDLE TOGGLE — Einmalig vs. Abo */
+(function() {
+  var toggle = document.querySelector('.leo-bundle-highlight__toggle');
+  if (!toggle) return;
+  var btns = toggle.querySelectorAll('.leo-bundle-highlight__toggle-btn');
+  var priceEl = document.getElementById('leo-bh-price');
+  var compareEl = document.getElementById('leo-bh-compare');
+  var savingsEl = document.getElementById('leo-bh-savings');
+
+  btns.forEach(function(b) {
+    b.addEventListener('click', function() {
+      btns.forEach(function(x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true');
+      var mode = b.dataset.mode;
+      if (mode === 'subscribe') {
+        if (priceEl) priceEl.textContent = '99,00 €';
+        if (compareEl) compareEl.textContent = '132,00 €';
+        if (savingsEl) savingsEl.textContent = '−25 %';
+      } else {
+        if (priceEl) priceEl.textContent = '119,00 €';
+        if (compareEl) compareEl.textContent = '132,00 €';
+        if (savingsEl) savingsEl.textContent = '−10 %';
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

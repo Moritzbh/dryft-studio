@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<style id="bbprev-auth-gate-style">
+html.bbprev-auth-pending body { visibility: hidden !important; }
+html.bbprev-auth-pending::before { content:''; position:fixed; inset:0; background:#FAF6EC; z-index:9999999; }
+html.bbprev-auth-pending::after { content:'Lade Konzept-Store…'; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:99999990; font-family:-apple-system,BlinkMacSystemFont,sans-serif; font-size:14px; color:#5A5348; }
+</style>
+<script id="bbprev-auth-gate">
+(function() {
+  document.documentElement.classList.add('bbprev-auth-pending');
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.ok || !d.brand || d.brand.slug !== 'leo') {
+        location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+        return;
+      }
+      document.documentElement.classList.remove('bbprev-auth-pending');
+    })
+    .catch(function() {
+      location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+    });
+})();
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wissenschaft — Pharmaqualität · Kölner Liste · Studienkonform | LEO Sport Nutrition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<div class="bb-announcement">
+  <div class="bb-announcement__track">
+    <span><span class="dot"></span> Frei von Zucker · ohne Ballast</span>
+    <span class="sep">/</span>
+    <span>Kostenloser Versand ab 60 €</span>
+    <span class="sep">/</span>
+    <span class="gold">Kölner Liste® · Anti-Doping geprüft</span>
+    <span class="sep">/</span>
+    <span>In Deutschland · in Pharmaqualität entwickelt</span>
+    <span class="sep">/</span>
+    <span><span class="dot"></span> Frei von Zucker · ohne Ballast</span>
+    <span class="sep">/</span>
+    <span>Kostenloser Versand ab 60 €</span>
+    <span class="sep">/</span>
+    <span class="gold">Kölner Liste® · Anti-Doping geprüft</span>
+    <span class="sep">/</span>
+    <span>In Deutschland · in Pharmaqualität entwickelt</span>
+  </div>
+</div>
+
+<nav class="bb-nav">
+  <div class="bb-nav__inner">
+    <div class="bb-nav__links">
+      <a href="index.html">Start</a>
+      <a href="shop.html">Shop</a>
+      <a href="product-bundle.html">Bundle</a>
+      <a href="about.html">Über LEO</a>
+      <a href="science.html" class="active">Wissenschaft</a>
+    </div>
+    <a class="bb-logo" href="index.html"><span class="bb-logo__glyph">L</span><span class="bb-logo__word"><strong>LEO</strong><small>SPORT NUTRITION</small></span></a>
+    <div class="bb-nav__actions">
+      <button class="bb-nav__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="bb-nav__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="9" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></button>
+      <a class="bb-nav__cart" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg><span class="count">02</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO MINIMAL -->
+<section style="padding:100px 0 60px;text-align:center">
+  <div class="bb-container" style="max-width:880px">
+    <span class="bb-eyebrow" style="display:inline-flex;margin-bottom:24px"><span class="dot"></span>✦ &nbsp;Wissenschaft</span>
+    <h1 class="bb-h-display bb-h-xl" style="margin-bottom:24px">Was drin ist,<br>ist <em>messbar</em>.</h1>
+    <p style="font-family:var(--bb-font-display);font-style:italic;font-size:24px;color:var(--bb-color-text-muted);max-width:60ch;margin:0 auto;line-height:1.4">Jede Dosis transparent deklariert. Jede Charge geprüft. Wir veröffentlichen die Mengen, weil wir uns für sie nicht schämen müssen — anders als der halbe Markt.</p>
+  </div>
+</section>
+
+<!-- 4-COL STATS -->
+<section class="bb-stats" style="background:var(--bb-color-bg)">
+  <div class="bb-container">
+    <div class="bb-stats__grid">
+      <div class="bb-stat-cell"><div class="num">6 g</div><div class="lab">Citrullin pro Dose</div><div class="desc">Studienkonform dosiert für gesteigerte Stickoxid-Produktion und längere Pump-Wirkung im Workout.</div></div>
+      <div class="bb-stat-cell"><div class="num">3 g</div><div class="lab">Kreatin Monohydrat</div><div class="desc">Tagesdosis nach EFSA-Empfehlung — die Form mit der breitesten Studienlage.</div></div>
+      <div class="bb-stat-cell"><div class="num">200 mg</div><div class="lab">Koffein</div><div class="desc">Verschiebt wahrgenommene Anstrengung, aktiviert ZNS. Entspricht zwei Espressi.</div></div>
+      <div class="bb-stat-cell"><div class="num">1.000+</div><div class="lab">Geprüfte Substanzen</div><div class="desc">Jede Charge gegen die gesamte Kölner-Liste-Datenbank getestet.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEEP DIVE — Compare against industry -->
+<section class="bb-pdp-compare" style="background:var(--bb-color-bg-alt);border-top:1px solid var(--bb-color-border);border-bottom:1px solid var(--bb-color-border)">
+  <div class="bb-container">
+    <div class="bb-pdp-compare__head">
+      <span class="bb-eyebrow"><span class="dot"></span>✦ &nbsp;Im Vergleich</span>
+      <h2>LEO vs. <em>Standard-Markt</em>.</h2>
+      <p>Wir nennen keine Markennamen. Aber die Standards sind öffentlich, und die Zahlen sprechen.</p>
+    </div>
+    <div class="bb-pdp-compare__table">
+      <div class="bb-pdp-compare__cell head"></div>
+      <div class="bb-pdp-compare__cell head leo">LEO</div>
+      <div class="bb-pdp-compare__cell head">Pre-Workout-Booster</div>
+      <div class="bb-pdp-compare__cell"><strong>Koffein-Dosis</strong></div>
+      <div class="bb-pdp-compare__cell"><span class="yes">200 mg</span><br><small>Studienkonform</small></div>
+      <div class="bb-pdp-compare__cell"><span class="no">300–600 mg</span><br><small>Megadosis · überdreht</small></div>
+      <div class="bb-pdp-compare__cell"><strong>Citrullin-Form</strong></div>
+      <div class="bb-pdp-compare__cell"><span class="yes">Citrullin-Malat 6 g</span><br><small>Studien-Standard</small></div>
+      <div class="bb-pdp-compare__cell"><span class="partial">Citrullin „proprietary"</span><br><small>Menge nicht deklariert</small></div>
+      <div class="bb-pdp-compare__cell"><strong>Süßstoffe</strong></div>
+      <div class="bb-pdp-compare__cell"><span class="yes">Kategorie B</span><br><small>Stevia · Erythrit</small></div>
+      <div class="bb-pdp-compare__cell"><span class="no">Aspartam · Acesulfam-K</span><br><small>Kategorie A</small></div>
+      <div class="bb-pdp-compare__cell"><strong>Doping-Prüfung</strong></div>
+      <div class="bb-pdp-compare__cell"><span class="yes">Kölner Liste® jede Charge</span></div>
+      <div class="bb-pdp-compare__cell"><span class="no">Selten oder nie</span></div>
+      <div class="bb-pdp-compare__cell"><strong>Produktion</strong></div>
+      <div class="bb-pdp-compare__cell"><span class="yes">Pharmaqualität DE</span></div>
+      <div class="bb-pdp-compare__cell"><span class="no">Lohnabfüllung Ausland</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INGREDIENTS DEEP -->
+<section class="bb-pdp-ingr" style="background:var(--bb-color-bg)">
+  <div class="bb-container">
+    <div class="bb-pdp-ingr__head">
+      <span class="bb-eyebrow"><span class="dot"></span>Wirkstoffe · Phase 02 (Energy)</span>
+      <h2>Die <em>Iso-Logik</em>.</h2>
+      <p>Energy ist kein süßes Sportgetränk. Es ist eine isotonische Mischung aus kurz- und langkettigen Kohlenhydraten plus Elektrolyte, optimiert für magenschonende Aufnahme während der Belastung.</p>
+    </div>
+
+    <div class="bb-pdp-ingr__table">
+      <div class="bb-pdp-ingr__row head"><div>Wirkstoff</div><div>Dosis / Portion</div><div>Wofür</div></div>
+      <div class="bb-pdp-ingr__row">
+        <div class="bb-pdp-ingr__name">Maltodextrin DE19</div>
+        <div class="bb-pdp-ingr__dose">22 g</div>
+        <div class="bb-pdp-ingr__why">Schnell verfügbarer Kohlenhydrat-Speed. Glykämischer Index ca. 100, Magen-Entleerung in 8–12 Min.</div>
+      </div>
+      <div class="bb-pdp-ingr__row">
+        <div class="bb-pdp-ingr__name">Fructose</div>
+        <div class="bb-pdp-ingr__dose">11 g</div>
+        <div class="bb-pdp-ingr__why">Langsamere Aufnahme über separates Transportsystem. 2:1-Verhältnis Maltodextrin:Fructose maximiert Aufnahme.</div>
+      </div>
+      <div class="bb-pdp-ingr__row">
+        <div class="bb-pdp-ingr__name">Natrium-Chlorid</div>
+        <div class="bb-pdp-ingr__dose">480 mg</div>
+        <div class="bb-pdp-ingr__why">Kompensiert Schweißverlust, fördert Wasseraufnahme. Schwellenwert für Krampfprävention.</div>
+      </div>
+      <div class="bb-pdp-ingr__row">
+        <div class="bb-pdp-ingr__name">Magnesium-Citrat</div>
+        <div class="bb-pdp-ingr__dose">120 mg</div>
+        <div class="bb-pdp-ingr__why">Muskel-Nerv-Übertragung. Citrat-Form wegen besserer Bioverfügbarkeit als Oxid.</div>
+      </div>
+      <div class="bb-pdp-ingr__row">
+        <div class="bb-pdp-ingr__name">Kalium-Citrat</div>
+        <div class="bb-pdp-ingr__dose">220 mg</div>
+        <div class="bb-pdp-ingr__why">Zellinnerer Elektrolyt. Schweißverlust-Ausgleich, Kontraktionsfähigkeit der Muskulatur.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KÖLNER LISTE EXPLAINER -->
+<section class="bb-image-text">
+  <div class="bb-container">
+    <div class="bb-image-text__grid">
+      <div class="bb-image-text__media" style="background:linear-gradient(160deg,#1a3d1a,#2a4d2a)">
+        <span class="label">[ KÖLNER LISTE® LOGO · Zertifikat-Visual ]</span>
+      </div>
+      <div class="bb-image-text__copy">
+        <span class="bb-eyebrow" style="margin-bottom:20px;display:inline-flex"><span class="dot"></span>✦ &nbsp;Was ist Kölner Liste?</span>
+        <h2>Die schärfste<br><em>Anti-Doping-Prüfung</em>.</h2>
+        <p>Die Kölner Liste® ist die seit 2008 von der Sporthochschule Köln betriebene Datenbank für Nahrungsergänzungsmittel mit minimiertem Doping-Risiko. Jede Charge wird vom unabhängigen Kölner Labor getestet — gegen über 1.000 verbotene Substanzen.</p>
+        <p>Was das für dich heißt: Du kannst LEO im Profibereich, im Verband und in jeder Liga ohne Risiko nehmen. Wenn dein Verband NADA-Standards einhält, bist du mit LEO konform.</p>
+        <p style="font-family:var(--bb-font-display);font-style:italic;font-size:20px;color:var(--leo-gold-deep);margin-top:14px">Wir prüfen jede Charge. Nicht nur das Standardrezept.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="bb-final-cta">
+  <div class="bb-container bb-final-cta__inner">
+    <span class="bb-eyebrow" style="margin-bottom:24px;display:inline-flex"><span class="dot"></span>✦ &nbsp;Bereit?</span>
+    <h2>Jetzt das System<br><em>testen.</em></h2>
+    <p class="lede">Drei Phasen, ein Bundle, klare Dosierung. 30 Tage Geld-zurück-Garantie.</p>
+    <a href="product-bundle.html" class="bb-btn-primary bb-btn-primary--gold">
+      Bundle sichern · 99 €/Mon. im Abo
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bb-footer">
+  <div class="bb-container">
+    <div class="bb-footer__top">
+      <div class="bb-footer__brand"><div class="logo"><span class="glyph">L</span><strong>LEO</strong></div><p>Wissenschaftlich entwickelte Sporternährung in Pharmaqualität. Für Sportler, die Funktion über Marketing stellen.</p><div class="bb-footer__socials"><a href="#">IG</a><a href="#">TK</a><a href="#">YT</a><a href="#">ST</a></div></div>
+      <div class="bb-footer__col"><h4>Shop</h4><ul><li><a href="product-bundle.html">Bundle</a></li><li><a href="#">Activate</a></li><li><a href="#">Energy</a></li><li><a href="#">Recovery</a></li><li><a href="#">Abo</a></li></ul></div>
+      <div class="bb-footer__col"><h4>System</h4><ul><li><a href="science.html">Wissenschaft</a></li><li><a href="#">Inhaltsstoffe</a></li><li><a href="#">Kölner Liste®</a></li><li><a href="#">Pharmaqualität</a></li></ul></div>
+      <div class="bb-footer__col"><h4>Marke</h4><ul><li><a href="about.html">Über LEO</a></li><li><a href="#">Founder-Story</a></li><li><a href="#">Athleten</a></li><li><a href="#">Presse</a></li></ul></div>
+      <div class="bb-footer__col"><h4>Service</h4><ul><li><a href="#">Kontakt</a></li><li><a href="#">FAQ</a></li><li><a href="#">Versand</a></li><li><a href="#">AGB · Impressum</a></li></ul></div>
+    </div>
+    <div class="bb-footer__bottom"><span>© 2026 LEO Sport Nutrition · Made in Germany</span><span>Dr. O. Ludwig · Dr. M. Guthörl</span><span>Datenschutz · Cookies · Widerruf</span></div>
+  </div>
+</footer>
+
+<a class="bb-brands-tag" href="https://bb-brands.de" target="_blank">
+  <span class="dot"></span>
+  <span><span class="label">Built by</span><br><span class="name">BB Brands</span></span>
+</a>
+
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<style id="bbprev-auth-gate-style">
+html.bbprev-auth-pending body { visibility: hidden !important; }
+html.bbprev-auth-pending::before { content:''; position:fixed; inset:0; background:#FAF6EC; z-index:9999999; }
+html.bbprev-auth-pending::after { content:'Lade Konzept-Store…'; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:99999990; font-family:-apple-system,BlinkMacSystemFont,sans-serif; font-size:14px; color:#5A5348; }
+</style>
+<script id="bbprev-auth-gate">
+(function() {
+  document.documentElement.classList.add('bbprev-auth-pending');
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.ok || !d.brand || d.brand.slug !== 'leo') {
+        location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+        return;
+      }
+      document.documentElement.classList.remove('bbprev-auth-pending');
+    })
+    .catch(function() {
+      location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+    });
+})();
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3-Phasen-Bundle — Activate. Energy. Recovery. | LEO Sport Nutrition</title>
+<meta name="description" content="Alle drei Phasen in einer Box. Pre, Intra, Post für 99 €/Mon. im Abo oder 119 € einmalig. Kölner Liste zertifiziert. Pharmaqualität.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="bb-announcement">
+  <div class="bb-announcement__track">
+    <span><span class="dot"></span> Frei von Zucker · ohne Ballast</span>
+    <span class="sep">/</span>
+    <span>Kostenloser Versand ab 60 €</span>
+    <span class="sep">/</span>
+    <span class="gold">Kölner Liste® · Anti-Doping geprüft</span>
+    <span class="sep">/</span>
+    <span>In Deutschland · in Pharmaqualität entwickelt</span>
+    <span class="sep">/</span>
+    <span><span class="dot"></span> Frei von Zucker · ohne Ballast</span>
+    <span class="sep">/</span>
+    <span>Kostenloser Versand ab 60 €</span>
+    <span class="sep">/</span>
+    <span class="gold">Kölner Liste® · Anti-Doping geprüft</span>
+    <span class="sep">/</span>
+    <span>In Deutschland · in Pharmaqualität entwickelt</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="bb-nav">
+  <div class="bb-nav__inner">
+    <div class="bb-nav__links">
+      <a href="index.html">Start</a>
+      <a href="shop.html">Shop</a>
+      <a href="product-bundle.html" class="active">Bundle</a>
+      <a href="about.html">Über LEO</a>
+      <a href="science.html">Wissenschaft</a>
+    </div>
+    <a class="bb-logo" href="index.html">
+      <span class="bb-logo__glyph">L</span>
+      <span class="bb-logo__word"><strong>LEO</strong><small>SPORT NUTRITION</small></span>
+    </a>
+    <div class="bb-nav__actions">
+      <button class="bb-nav__icon" aria-label="Suche"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="bb-nav__icon" aria-label="Konto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="9" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></button>
+      <a class="bb-nav__cart" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg><span class="count">02</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     PDP HERO — Theme Product Form
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-pdp-hero">
+  <div class="bb-container">
+    <div class="bb-pdp-hero__grid">
+
+      <div>
+        <div class="bb-pdp-hero__media">
+          <div class="ring"></div>
+          <svg viewBox="0 0 600 600" style="position:relative;z-index:2">
+            <defs>
+              <linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1612"/><stop offset="1" stop-color="#0a0807"/></linearGradient>
+              <linearGradient id="bcap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3530"/><stop offset="1" stop-color="#1a1612"/></linearGradient>
+            </defs>
+            <!-- Activate (left) -->
+            <g transform="translate(80,180) rotate(-6)">
+              <rect x="0" y="20" width="140" height="200" rx="9" fill="url(#b1)"/>
+              <rect x="-4" y="14" width="148" height="14" rx="6" fill="url(#bcap)"/>
+              <text x="70" y="115" text-anchor="middle" font-family="Instrument Serif" font-size="34" font-style="italic" fill="#d18a64">Activate</text>
+              <text x="70" y="142" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="2" fill="#5a5348">PHASE 01</text>
+            </g>
+            <!-- Energy (center) -->
+            <g transform="translate(230,150) rotate(2)">
+              <rect x="0" y="20" width="140" height="220" rx="9" fill="url(#b1)"/>
+              <rect x="-4" y="14" width="148" height="14" rx="6" fill="url(#bcap)"/>
+              <text x="70" y="125" text-anchor="middle" font-family="Instrument Serif" font-size="38" font-style="italic" fill="#c43528">Energy</text>
+              <text x="70" y="155" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="2" fill="#5a5348">PHASE 02</text>
+            </g>
+            <!-- Recovery (right) -->
+            <g transform="translate(380,180) rotate(-3)">
+              <rect x="0" y="20" width="140" height="200" rx="9" fill="url(#b1)"/>
+              <rect x="-4" y="14" width="148" height="14" rx="6" fill="url(#bcap)"/>
+              <text x="70" y="115" text-anchor="middle" font-family="Instrument Serif" font-size="30" font-style="italic" fill="#6b9c2b">Recovery</text>
+              <text x="70" y="142" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="2" fill="#5a5348">PHASE 03</text>
+            </g>
+          </svg>
+        </div>
+        <div class="bb-pdp-hero__thumbs">
+          <div class="bb-pdp-hero__thumb active">
+            <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="6" fill="#1a1612"/><text x="50" y="60" text-anchor="middle" font-family="Instrument Serif" font-size="14" font-style="italic" fill="#c9a14a">3×</text></svg>
+          </div>
+          <div class="bb-pdp-hero__thumb">
+            <svg viewBox="0 0 100 100"><rect x="30" y="20" width="40" height="60" rx="4" fill="#1a1612"/><text x="50" y="60" text-anchor="middle" font-family="Instrument Serif" font-size="11" font-style="italic" fill="#d18a64">A</text></svg>
+          </div>
+          <div class="bb-pdp-hero__thumb">
+            <svg viewBox="0 0 100 100"><rect x="30" y="20" width="40" height="60" rx="4" fill="#1a1612"/><text x="50" y="60" text-anchor="middle" font-family="Instrument Serif" font-size="11" font-style="italic" fill="#c43528">E</text></svg>
+          </div>
+          <div class="bb-pdp-hero__thumb">
+            <svg viewBox="0 0 100 100"><rect x="30" y="20" width="40" height="60" rx="4" fill="#1a1612"/><text x="50" y="60" text-anchor="middle" font-family="Instrument Serif" font-size="11" font-style="italic" fill="#6b9c2b">R</text></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bb-pdp-hero__copy">
+        <span class="bb-eyebrow"><span class="dot"></span>BESTSELLER · 3-PHASEN-SYSTEM</span>
+        <h1>Das 3-Phasen-Bundle.<br><em>Activate · Energy · Recovery.</em></h1>
+
+        <div class="bb-pdp-hero__rating">
+          <div class="bb-pdp-hero__stars">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          </div>
+          <span class="count"><strong>4.9 / 5</strong> · 127 Bewertungen · <span style="color:var(--leo-recovery)">✓</span> Verifizierte Käufer</span>
+        </div>
+
+        <p class="bb-pdp-hero__lead">
+          Alle drei Phasen in einer Box. Drei separate Drinks für die drei Momente, in denen dein Körper messbar etwas anderes braucht. Pre, Intra, Post — ein System, drei Wirkstofflogiken.
+        </p>
+
+        <ul class="bb-pdp-hero__bullets">
+          <li>3 × 600 g Dosen · 45 Trainingseinheiten</li>
+          <li>Studienkonform dosiert · keine Marketing-Megadosen</li>
+          <li>Kölner Liste® zertifiziert · Pharmaqualität · Made in Germany</li>
+        </ul>
+
+        <div class="bb-pdp-hero__price-card">
+          <div class="bb-pdp-hero__price" id="pdp-price-row">
+            <span class="bb-pdp-hero__price-now" id="pdp-price">99,00&nbsp;€</span>
+            <span class="bb-pdp-hero__price-was">132,00&nbsp;€</span>
+            <span class="bb-pdp-hero__save" id="pdp-save">−25 %</span>
+          </div>
+
+          <div class="bb-bundle__toggle" style="margin-bottom:16px">
+            <button class="bb-bundle__toggle-btn" data-active="false" onclick="setPDP(this,'once')">
+              <div class="label">Einmalig</div>
+              <div class="sub">119,00 € · ohne Bindung</div>
+            </button>
+            <button class="bb-bundle__toggle-btn" data-active="true" onclick="setPDP(this,'sub')">
+              <span class="badge">−25 %</span>
+              <div class="label">Abo · alle 4 Wochen</div>
+              <div class="sub">99,00 €/Mon. · pausierbar</div>
+            </button>
+          </div>
+
+          <div class="bb-pdp-hero__atc">
+            <button class="bb-btn-primary bb-btn-primary--gold">
+              In den Warenkorb
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="bb-pdp-hero__shipping">
+            <span>FREI</span> Versand · Heute bestellt · <span>ÜBERMORGEN</span> da
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION-LIBRARY: pdp/pdp-trust-bar
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-pdp-trust">
+  <div class="bb-container">
+    <ul class="bb-pdp-trust__list">
+      <li class="bb-pdp-trust__item">
+        <span class="bb-pdp-trust__icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></span>
+        <div><strong>Kölner Liste®</strong><br><small style="color:var(--bb-color-text-muted)">Anti-Doping geprüft</small></div>
+      </li>
+      <li class="bb-pdp-trust__item">
+        <span class="bb-pdp-trust__icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M5 7v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7"/></svg></span>
+        <div><strong>Pharmaqualität</strong><br><small style="color:var(--bb-color-text-muted)">Made in Germany</small></div>
+      </li>
+      <li class="bb-pdp-trust__item">
+        <span class="bb-pdp-trust__icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v9M3 15h18"/></svg></span>
+        <div><strong>Versand 48 h</strong><br><small style="color:var(--bb-color-text-muted)">DHL · klimaneutral</small></div>
+      </li>
+      <li class="bb-pdp-trust__item">
+        <span class="bb-pdp-trust__icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 6-8.5"/><path d="M3 4v5h5"/></svg></span>
+        <div><strong>30-Tage Rückgabe</strong><br><small style="color:var(--bb-color-text-muted)">Auch geöffnet</small></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION-LIBRARY: pdp/pdp-how-it-works
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-pdp-hiw">
+  <div class="bb-container">
+    <div class="bb-pdp-hiw__head">
+      <span class="bb-eyebrow"><span class="dot"></span>So funktioniert's</span>
+      <h2>Drei Drinks. <em>Drei Momente.</em></h2>
+      <p>LEO ist kein Snack — es ist ein Ablauf. Jede Phase hat ihren Moment. Wer sie verschiebt, verschenkt Wirkung.</p>
+    </div>
+
+    <div class="bb-pdp-hiw__steps">
+      <div class="bb-pdp-hiw__step">
+        <div class="num">01</div>
+        <h4>30 Min vor Training</h4>
+        <p>Eine Dose Activate mit 400 ml Wasser. Koffein und Citrullin sind nach 30 Minuten im System. Auf nüchternen Magen wirkt's am schnellsten.</p>
+      </div>
+      <div class="bb-pdp-hiw__step">
+        <div class="num">02</div>
+        <h4>Während Belastung</h4>
+        <p>Energy in der Trinkflasche dabei. Konstanter Glukose-Drip, Elektrolyte gegen Krämpfe. Magenfreundlich, kein Zuckerloch in Halbzeit zwei.</p>
+      </div>
+      <div class="bb-pdp-hiw__step">
+        <div class="num">03</div>
+        <h4>Direkt danach</h4>
+        <p>Recovery innerhalb 30 Minuten. Kreatin, BCAAs, Elektrolyt-Refill. Der Reiz wird zur Entwicklung — Regeneration startet im Anabolic Window.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION-LIBRARY: pdp/pdp-ingredients
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-pdp-ingr">
+  <div class="bb-container">
+    <div class="bb-pdp-ingr__head">
+      <span class="bb-eyebrow"><span class="dot"></span>Was drin ist · Phase 01: Activate</span>
+      <h2>Mengen, <em>nicht Marketing</em>.</h2>
+      <p>Wir veröffentlichen jede Dosis transparent. Keine Proprietary-Blends, keine "wirkungsvollen Mengen" auf dem Etikett ohne Zahl dahinter. Was drin ist, wirkt. Was nicht wirkt, ist nicht drin.</p>
+    </div>
+
+    <div class="bb-pdp-ingr__table">
+      <div class="bb-pdp-ingr__row head">
+        <div>Wirkstoff</div>
+        <div>Dosis / Portion</div>
+        <div>Wofür</div>
+      </div>
+      <div class="bb-pdp-ingr__row">
+        <div class="bb-pdp-ingr__name">Citrullin-Malat</div>
+        <div class="bb-pdp-ingr__dose">6,0 g</div>
+        <div class="bb-pdp-ingr__why">Erhöht Stickoxid-Produktion und Durchblutung. Längere Pump-Phasen, reduziertes Brennen bei Wiederholungen im hohen Bereich.</div>
+      </div>
+      <div class="bb-pdp-ingr__row">
+        <div class="bb-pdp-ingr__name">Koffein</div>
+        <div class="bb-pdp-ingr__dose">200 mg</div>
+        <div class="bb-pdp-ingr__why">Verschiebt wahrgenommene Anstrengung, aktiviert ZNS. Entspricht zwei Espressi — wirkt, ohne zu überdrehen.</div>
+      </div>
+      <div class="bb-pdp-ingr__row">
+        <div class="bb-pdp-ingr__name">Beta-Alanin</div>
+        <div class="bb-pdp-ingr__dose">3,2 g</div>
+        <div class="bb-pdp-ingr__why">Puffert Muskelübersäuerung, verzögert Punkt der Erschöpfung. Hautkribbeln ist normal und legt sich nach 20 Min.</div>
+      </div>
+      <div class="bb-pdp-ingr__row">
+        <div class="bb-pdp-ingr__name">L-Carnitin</div>
+        <div class="bb-pdp-ingr__dose">1,5 g</div>
+        <div class="bb-pdp-ingr__why">Fördert Fettsäuretransport in die Mitochondrien. Energieverwertung, besonders in Ausdauer-Einheiten.</div>
+      </div>
+      <div class="bb-pdp-ingr__row">
+        <div class="bb-pdp-ingr__name">Magnesium · Natrium · Kalium</div>
+        <div class="bb-pdp-ingr__dose">isoton.</div>
+        <div class="bb-pdp-ingr__why">Elektrolyt-Grundversorgung, optimal für Schweißverlust und Muskelkontraktion.</div>
+      </div>
+    </div>
+
+    <p style="text-align:center;margin-top:32px;font-family:var(--bb-font-mono);font-size:11px;letter-spacing:0.14em;color:var(--bb-color-text-subtle);text-transform:uppercase">
+      Vollständige Deklaration aller Phasen → <a href="#" style="color:var(--leo-gold-deep);text-decoration:underline">Wirkstoff-Datenblatt (PDF)</a>
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION-LIBRARY: pdp/pdp-compare-hero
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-pdp-compare">
+  <div class="bb-container">
+    <div class="bb-pdp-compare__head">
+      <span class="bb-eyebrow"><span class="dot"></span>Im Vergleich</span>
+      <h2>Was die Konkurrenz <em>nicht</em> macht.</h2>
+      <p>Direkter Vergleich mit klassischen Pre-Workout-Boostern und Standard-Iso-Drinks. Keine Markennamen — wir streiten nicht öffentlich. Aber die Zahlen sprechen.</p>
+    </div>
+
+    <div class="bb-pdp-compare__table">
+      <div class="bb-pdp-compare__cell head"></div>
+      <div class="bb-pdp-compare__cell head leo">LEO</div>
+      <div class="bb-pdp-compare__cell head">Standard-Markt</div>
+
+      <div class="bb-pdp-compare__cell"><strong>3-Phasen-System</strong><br><small style="color:var(--bb-color-text-muted)">Pre, Intra, Post separat</small></div>
+      <div class="bb-pdp-compare__cell"><span class="yes">✓ JA</span><br><small>3 spezialisierte Drinks</small></div>
+      <div class="bb-pdp-compare__cell"><span class="no">✗ NEIN</span><br><small>1 Pulver für alles</small></div>
+
+      <div class="bb-pdp-compare__cell"><strong>Kölner Liste® zertifiziert</strong><br><small style="color:var(--bb-color-text-muted)">1.000+ Substanzen geprüft</small></div>
+      <div class="bb-pdp-compare__cell"><span class="yes">✓ JA</span><br><small>Jede Charge</small></div>
+      <div class="bb-pdp-compare__cell"><span class="partial">~ TEILS</span><br><small>Selten oder nie</small></div>
+
+      <div class="bb-pdp-compare__cell"><strong>Pharmaqualität · Made in Germany</strong><br><small style="color:var(--bb-color-text-muted)">Eigene Produktion</small></div>
+      <div class="bb-pdp-compare__cell"><span class="yes">✓ JA</span><br><small>Keine Lohnabfüllung</small></div>
+      <div class="bb-pdp-compare__cell"><span class="no">✗ NEIN</span><br><small>Lohnabfüllung Ausland</small></div>
+
+      <div class="bb-pdp-compare__cell"><strong>Studienkonforme Dosen</strong><br><small style="color:var(--bb-color-text-muted)">Kein Etiketten-Bullshit</small></div>
+      <div class="bb-pdp-compare__cell"><span class="yes">✓ JA</span><br><small>EFSA + Forschung</small></div>
+      <div class="bb-pdp-compare__cell"><span class="partial">~ TEILS</span><br><small>Megadosen oder Spuren</small></div>
+
+      <div class="bb-pdp-compare__cell"><strong>Founder = Sportmediziner</strong><br><small style="color:var(--bb-color-text-muted)">Aktiv im Profifußball</small></div>
+      <div class="bb-pdp-compare__cell"><span class="yes">✓ JA</span><br><small>Dr. Ludwig &amp; Dr. Guthörl</small></div>
+      <div class="bb-pdp-compare__cell"><span class="no">✗ NEIN</span><br><small>Marketing-Team</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION-LIBRARY: pdp/pdp-reviews
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-pdp-reviews">
+  <div class="bb-container">
+    <div class="bb-pdp-reviews__head">
+      <div>
+        <span class="bb-eyebrow"><span class="dot"></span>Bewertungen · Verifiziert</span>
+        <h2>Was die <em>nehmen</em>, die's nehmen.</h2>
+      </div>
+      <div class="bb-pdp-reviews__summary">
+        <strong>4.9</strong>
+        <div>
+          <div class="bb-pdp-hero__stars" style="color:var(--leo-gold)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          </div>
+          <small>aus 127 verifizierten Bewertungen</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="bb-pdp-reviews__grid">
+      <div class="bb-pdp-review">
+        <div class="stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+        </div>
+        <h4>Kein Etiketten-Theater mehr</h4>
+        <p>"Ich hab vorher drei Dosen gemixt und mich gefragt, ob die Mengen stimmen. Bei LEO macht das jemand, der's studiert hat."</p>
+        <div class="author">Jonas K. · Profi 2. Bundesliga · ✓ Verifiziert</div>
+      </div>
+
+      <div class="bb-pdp-review">
+        <div class="stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+        </div>
+        <h4>Halbzeit zwei fühlt sich anders an</h4>
+        <p>"Vorher in der 75. Minute Beine raus. Mit Energy ist die zweite Halbzeit nicht mehr Schmerzphase, sondern Spielphase."</p>
+        <div class="author">Tobias W. · Regionalliga · ✓ Verifiziert</div>
+      </div>
+
+      <div class="bb-pdp-review">
+        <div class="stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 7h7l-5.7 4.5 2.2 7L12 16l-6 4.5 2.2-7L2.5 9h7z"/></svg>
+        </div>
+        <h4>Endlich mit Karriere kompatibel</h4>
+        <p>"Kölner Liste war für mich der Grund. Hab vor LEO immer Sorge gehabt, mit irgendeinem Pulver versehentlich gesperrt zu werden."</p>
+        <div class="author">Anna L. · Triathlon-Profi · ✓ Verifiziert</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="bb-final-cta">
+  <div class="bb-container bb-final-cta__inner">
+    <span class="bb-eyebrow" style="margin-bottom:24px;display:inline-flex"><span class="dot"></span>✦ &nbsp;Heute bestellen</span>
+    <h2>Dein System<br><em>wartet.</em></h2>
+    <p class="lede">Drei Phasen, ein Bundle, klare Dosierung. Heute bestellt, übermorgen im Spind.</p>
+    <a href="#" class="bb-btn-primary bb-btn-primary--gold">
+      Bundle sichern · 99 €/Mon. im Abo
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER (same as homepage) -->
+<footer class="bb-footer">
+  <div class="bb-container">
+    <div class="bb-footer__top">
+      <div class="bb-footer__brand">
+        <div class="logo"><span class="glyph">L</span><strong>LEO</strong></div>
+        <p>Wissenschaftlich entwickelte Sporternährung in Pharmaqualität. Für Sportler, die Funktion über Marketing stellen.</p>
+        <div class="bb-footer__socials"><a href="#">IG</a><a href="#">TK</a><a href="#">YT</a><a href="#">ST</a></div>
+      </div>
+      <div class="bb-footer__col"><h4>Shop</h4><ul><li><a href="product-bundle.html">Bundle</a></li><li><a href="#">Activate</a></li><li><a href="#">Energy</a></li><li><a href="#">Recovery</a></li><li><a href="#">Abo</a></li></ul></div>
+      <div class="bb-footer__col"><h4>System</h4><ul><li><a href="science.html">Wissenschaft</a></li><li><a href="#">Inhaltsstoffe</a></li><li><a href="#">Kölner Liste®</a></li><li><a href="#">Pharmaqualität</a></li></ul></div>
+      <div class="bb-footer__col"><h4>Marke</h4><ul><li><a href="about.html">Über LEO</a></li><li><a href="#">Founder-Story</a></li><li><a href="#">Athleten</a></li><li><a href="#">Presse</a></li></ul></div>
+      <div class="bb-footer__col"><h4>Service</h4><ul><li><a href="#">Kontakt</a></li><li><a href="#">FAQ</a></li><li><a href="#">Versand</a></li><li><a href="#">AGB · Impressum</a></li></ul></div>
+    </div>
+    <div class="bb-footer__bottom">
+      <span>© 2026 LEO Sport Nutrition · Made in Germany</span>
+      <span>Dr. O. Ludwig · Dr. M. Guthörl</span>
+      <span>Datenschutz · Cookies · Widerruf</span>
+    </div>
+  </div>
+</footer>
+
+<a class="bb-brands-tag" href="https://bb-brands.de" target="_blank">
+  <span class="dot"></span>
+  <span><span class="label">Built by</span><br><span class="name">BB Brands</span></span>
+</a>
+
+<script>
+function setPDP(btn, type) {
+  document.querySelectorAll('.bb-bundle__toggle-btn').forEach(b => b.dataset.active = 'false');
+  btn.dataset.active = 'true';
+  const price = document.getElementById('pdp-price');
+  const save = document.getElementById('pdp-save');
+  if (type === 'sub') {price.textContent = '99,00 €';save.textContent = '−25 %';} else {price.textContent = '119,00 €';save.textContent = '−10 %';}
+}
+</script>
+
+</body>
+</html>

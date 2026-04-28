@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+<!-- ════════════════════════════════════════════════════════
+     BB BRANDS · CUSTOMER PREVIEW AUTH GATE · slug: leo
+     ════════════════════════════════════════════════════════ -->
+<style id="bbprev-auth-gate-style">
+html.bbprev-auth-pending body { visibility: hidden !important; }
+html.bbprev-auth-pending::before { content:''; position:fixed; inset:0; background:#FAF6EC; z-index:9999999; }
+html.bbprev-auth-pending::after { content:'Lade Vertrag…'; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:99999990; font-family:-apple-system,BlinkMacSystemFont,sans-serif; font-size:14px; color:#5A5348; }
+</style>
+<script id="bbprev-auth-gate">
+(function() {
+  document.documentElement.classList.add('bbprev-auth-pending');
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
+    .then(r => r.json())
+    .then(d => {
+      if (!d.ok || !d.brand || d.brand.slug !== 'leo') {
+        location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+        return;
+      }
+      document.documentElement.classList.remove('bbprev-auth-pending');
+    })
+    .catch(() => {
+      location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+    });
+})();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Werkvertrag · LEO Sport Nutrition × BB Brands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#FAF6EC;
+  --bg-2:#F5EFDE;
+  --paper:#FFFFFF;
+  --ink:#15130F;
+  --muted:#5A5348;
+  --subtle:#9A8F7F;
+  --gold:#C9A14A;
+  --gold-deep:#8A6D2D;
+  --gold-hi:#E6C57A;
+  --line:rgba(21,19,15,0.10);
+  --line-strong:rgba(21,19,15,0.18);
+}
+
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6}
+em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+
+/* Header */
+.cover{
+  background:linear-gradient(135deg,#1A1612 0%,#2A2520 100%);
+  color:#fff;
+  padding:48px clamp(24px,5vw,80px) 64px;
+  position:relative;overflow:hidden;
+}
+.cover::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 600px 400px at 80% 30%,rgba(201,161,74,0.20),transparent 60%);
+  pointer-events:none;
+}
+.cover-top{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;position:relative;z-index:2}
+.cover-brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:14px}
+.cover-brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.cover-meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
+.cover-main{position:relative;z-index:2;margin-top:48px;max-width:880px}
+.cover-kicker{
+  display:inline-block;padding:6px 16px;
+  background:rgba(201,161,74,0.12);border:1px solid rgba(201,161,74,0.35);
+  border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold-hi);margin-bottom:24px;
+}
+.cover-title{
+  font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(40px,5.4vw,68px);line-height:1.05;letter-spacing:-0.02em;margin-bottom:14px;
+}
+.cover-title em{color:var(--gold-hi)}
+.cover-sub{font-size:15px;color:rgba(255,255,255,0.78);max-width:62ch;line-height:1.6}
+.cover-bottom{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.55);position:relative;z-index:2}
+.cover-bottom strong{color:var(--gold-hi);font-weight:700;display:block;margin-bottom:4px}
+
+/* Container */
+.wrap{max-width:880px;margin:-32px auto 80px;padding:0 24px;position:relative;z-index:5}
+.paper{
+  background:var(--paper);border-radius:14px;
+  box-shadow:0 24px 60px rgba(21,19,15,0.10);
+  padding:clamp(32px,5vw,64px);
+}
+
+/* Sections */
+section.s{margin-bottom:36px;border-bottom:1px solid var(--line);padding-bottom:32px}
+section.s:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
+.s-num{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;font-weight:700;
+  color:var(--gold-deep);margin-bottom:6px;
+}
+.s-title{
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;
+  letter-spacing:-0.4px;margin-bottom:16px;
+}
+.s-title em{color:var(--gold-deep)}
+.s p{margin-bottom:12px;color:var(--ink);max-width:65ch;line-height:1.65}
+.s p strong{font-weight:700}
+.s ul{list-style:none;padding:0;margin:8px 0 16px}
+.s ul li{padding:8px 0 8px 20px;position:relative;color:var(--ink);line-height:1.55;font-size:14.5px}
+.s ul li::before{content:'→';position:absolute;left:0;color:var(--gold-deep);font-weight:700}
+.s ul li strong{color:var(--ink);font-weight:700}
+
+/* Parties table */
+.parties{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:8px}
+@media (max-width:680px){.parties{grid-template-columns:1fr}}
+.party{
+  background:var(--bg-2);border:1px solid var(--line);border-radius:10px;
+  padding:24px;font-size:14px;line-height:1.65;
+}
+.party h4{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold-deep);margin-bottom:10px;font-weight:700;
+}
+.party .name{font-size:17px;font-weight:800;margin-bottom:6px;color:var(--ink)}
+.party .addr{color:var(--muted)}
+.party .meta{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.7;letter-spacing:0.02em}
+
+/* Spec table */
+.spec{
+  border:1px solid var(--line-strong);border-radius:10px;overflow:hidden;
+  margin:14px 0 18px;
+}
+.spec-row{display:grid;grid-template-columns:2fr 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--line);align-items:center}
+.spec-row:last-child{border-bottom:0}
+.spec-row.head{background:var(--bg-2);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.spec-row .item{font-size:14px;color:var(--ink);font-weight:500}
+.spec-row .val{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-deep);font-weight:700;text-align:right}
+
+/* Price highlight */
+.price{
+  background:linear-gradient(135deg,var(--bg-2),#EBE3CA);
+  border:1.5px solid var(--gold);border-radius:14px;
+  padding:24px 28px;margin:18px 0;
+  display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:14px;
+}
+.price .label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+.price .value{font-family:'Instrument Serif',serif;font-size:48px;line-height:1;color:var(--ink)}
+.price .note{font-size:12px;color:var(--muted);width:100%;margin-top:4px}
+
+/* Signature */
+.sig{
+  margin-top:48px;padding-top:32px;border-top:2px solid var(--line-strong);
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;
+}
+@media (max-width:680px){.sig{grid-template-columns:1fr;gap:32px}}
+.sig-block{font-size:13px;color:var(--muted)}
+.sig-line{height:1px;background:var(--ink);margin:36px 0 8px;width:100%}
+.sig-block strong{color:var(--ink);font-weight:700;font-size:14px}
+.sig-block .role{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--subtle);margin-top:2px}
+
+/* Print */
+@media print{
+  body{background:#fff;font-size:12px}
+  .wrap{margin:0;padding:0;max-width:100%}
+  .paper{box-shadow:none;padding:24px;border-radius:0}
+  .cover{padding:32px}
+  .cover-title{font-size:36px}
+  section.s{break-inside:avoid;page-break-inside:avoid}
+  .sig{break-inside:avoid;page-break-inside:avoid}
+  .print-only{display:block !important}
+  .no-print{display:none !important}
+}
+.print-only{display:none}
+.print-btn{
+  position:fixed;bottom:24px;right:24px;z-index:1000;
+  background:#1A1612;color:#fff;
+  padding:12px 22px;border:0;border-radius:999px;
+  font-family:inherit;font-weight:700;font-size:13px;letter-spacing:0.04em;
+  cursor:pointer;display:inline-flex;align-items:center;gap:10px;
+  box-shadow:0 12px 28px rgba(0,0,0,0.32);
+}
+.print-btn:hover{background:var(--gold-deep)}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-top">
+    <div class="cover-brand"><span class="dot"></span>BB Brands · Vertrag</div>
+    <div class="cover-meta">Vertrag-Nr. BB-LEO-2026-001 · 28.04.2026</div>
+  </div>
+  <div class="cover-main">
+    <span class="cover-kicker">✦ &nbsp;Werkvertrag</span>
+    <h1 class="cover-title">LEO Sport Nutrition<br><em>× BB Brands.</em></h1>
+    <p class="cover-sub">Werkvertrag über die Erstellung eines Custom-Shopify-Themes — Homepage, PDP-Template, Cart-Drawer und Theme-Setup. Volltext zum Durchlesen, Unterschriftsfelder am Ende. Anzahlung erst nach beidseitiger Unterschrift.</p>
+  </div>
+  <div class="cover-bottom">
+    <div><strong>Auftragswert</strong>500,00 € netto</div>
+    <div><strong>Build-Zeit</strong>3–4 Wochen</div>
+    <div><strong>Build-Start</strong>nach Anzahlung</div>
+  </div>
+</section>
+
+<div class="wrap"><div class="paper">
+
+<!-- PARTIES -->
+<section class="s">
+  <p class="s-num">PRÄAMBEL</p>
+  <h2 class="s-title">Vertrags<em>parteien</em></h2>
+
+  <div class="parties">
+    <div class="party">
+      <h4>Auftraggeber</h4>
+      <div class="name">LEO Sport Nutrition GmbH</div>
+      <div class="addr">
+        Trierer Str. 215 – 217<br>
+        66663 Merzig<br>
+        Deutschland
+      </div>
+      <div class="meta">
+        Registergericht Saarbrücken · HRB 110500<br>
+        Steuer-Nr. 040/113/01148<br>
+        USt-ID DE369459405
+      </div>
+    </div>
+    <div class="party">
+      <h4>Auftragnehmer</h4>
+      <div class="name">BB Brands</div>
+      <div class="addr">
+        Inh. Moritz Bohmbach<br>
+        Kniggenkamp 40<br>
+        38444 Wolfsburg<br>
+        Deutschland
+      </div>
+      <div class="meta">
+        Einzelunternehmen<br>
+        Kleinunternehmer gem. § 19 UStG<br>
+        info@bb-brands.de
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:18px">— im Folgenden „<strong>Auftraggeber</strong>" und „<strong>Auftragnehmer</strong>", gemeinsam „<strong>Parteien</strong>" —</p>
+</section>
+
+<!-- §1 -->
+<section class="s">
+  <p class="s-num">§ 1</p>
+  <h2 class="s-title">Vertrags<em>gegenstand</em></h2>
+  <p>Der Auftragnehmer erstellt für den Auftraggeber ein <strong>Custom-Shopify-Theme</strong> auf Basis von Shopify Dawn 2.x. Das Theme wird auf den vom Auftraggeber bereitgestellten Shopify-Store deployed und an die Markenwelt von LEO Sport Nutrition (Activate · Energy · Recovery) angepasst.</p>
+  <p>Grundlage für die visuelle Gestaltung ist die im Sales-Call vorgestellte Konzept-Vorschau (siehe beigefügtes Konzept-Asset).</p>
+</section>
+
+<!-- §2 -->
+<section class="s">
+  <p class="s-num">§ 2</p>
+  <h2 class="s-title">Leistungs<em>umfang</em></h2>
+
+  <p style="font-weight:700;color:var(--ink);margin-top:6px">Im Auftrag enthalten:</p>
+  <div class="spec">
+    <div class="spec-row head"><div>Komponente</div><div>Aufwand</div></div>
+    <div class="spec-row"><div class="item">Custom Shopify Theme auf Dawn-Basis (2.x)</div><div class="val">Inkl.</div></div>
+    <div class="spec-row"><div class="item">Theme-Setup, Color-Schemes, Theme-Settings</div><div class="val">Inkl.</div></div>
+    <div class="spec-row"><div class="item">Homepage komplett: Hero · Phase-System · Bundle-Spotlight · Testimonial · Final-CTA · Footer</div><div class="val">Inkl.</div></div>
+    <div class="spec-row"><div class="item">1 PDP-Template (für eine der drei Phasen — adaptierbar via Duplicate für die anderen zwei)</div><div class="val">Inkl.</div></div>
+    <div class="spec-row"><div class="item">Cart-Drawer mit Trust-Elementen, Upsell-Slot, Conversion-Optimierung</div><div class="val">Inkl.</div></div>
+    <div class="spec-row"><div class="item">Übergabe-Walkthrough als Video-Loom (Pflege-Doku)</div><div class="val">Inkl.</div></div>
+    <div class="spec-row"><div class="item">Code-Übergabe + Nutzungsrechte (siehe § 6)</div><div class="val">Inkl.</div></div>
+  </div>
+
+  <p style="font-weight:700;color:var(--ink);margin-top:18px">Nicht im Auftrag enthalten:</p>
+  <ul>
+    <li><strong>Echte Produktfotografie</strong> — Studio-Shoot wird vom Auftraggeber gestellt oder separat beauftragt</li>
+    <li><strong>Copywriting &amp; KI-generierte Visuals</strong> — werden vom Auftraggeber bereitgestellt</li>
+    <li><strong>Abo-Logik / Subscriptions-App-Setup</strong> — wird vom Auftraggeber selbst konfiguriert (Shopify Subscriptions, Recharge o.ä.)</li>
+    <li><strong>Zwei weitere PDPs (Energy + Recovery)</strong> — werden vom Auftraggeber auf Basis der gelieferten PDP-Vorlage selbst dupliziert</li>
+    <li><strong>Backoffice / Shopify-Admin-Konfiguration</strong> — Produkte anlegen, Versand, Steuern, Zahlungs-Provider</li>
+    <li><strong>Launch-Marketing / Ads / Influencer-Koordination / E-Mail-Flows</strong></li>
+  </ul>
+
+  <p>Diese Punkte können auf Wunsch separat beauftragt werden — sind aber nicht Bestandteil dieses Auftrags.</p>
+</section>
+
+<!-- §3 -->
+<section class="s">
+  <p class="s-num">§ 3</p>
+  <h2 class="s-title">Termine &amp; <em>Build-Zeit</em></h2>
+  <p>Der Auftragnehmer beginnt mit dem Build, sobald (a) dieser Vertrag von beiden Parteien unterzeichnet ist <strong>und</strong> (b) die Anzahlung gemäß § 4 auf dem Konto des Auftragnehmers eingegangen ist.</p>
+  <p><strong>Build-Dauer:</strong> in der Regel 3 bis 4 Wochen ab Build-Start. Voraussetzung ist die rechtzeitige Bereitstellung der Mitwirkungsleistungen gemäß § 5.</p>
+  <p>Verzögerungen, die der Auftraggeber zu vertreten hat (etwa fehlende Brand-Assets, fehlender Shopify-Zugang, ausbleibende Freigaben), verlängern die Build-Zeit entsprechend.</p>
+</section>
+
+<!-- §4 -->
+<section class="s">
+  <p class="s-num">§ 4</p>
+  <h2 class="s-title">Vergütung &amp; <em>Zahlung</em></h2>
+
+  <div class="price">
+    <div>
+      <div class="label">Auftragswert · netto</div>
+      <div class="value">500,00 €</div>
+    </div>
+    <div class="note">Gem. § 19 UStG wird keine Umsatzsteuer ausgewiesen. Pauschalpreis für den vollständigen Leistungsumfang gemäß § 2.</div>
+  </div>
+
+  <p><strong>Zahlungsmodell · 50 / 50:</strong></p>
+  <ul>
+    <li><strong>50 % Anzahlung (250,00 €)</strong> — fällig binnen 7 Tagen nach Vertragsunterzeichnung, vor Build-Start</li>
+    <li><strong>50 % Restzahlung (250,00 €)</strong> — fällig binnen 7 Tagen nach Theme-Übergabe (gem. § 6)</li>
+  </ul>
+  <p>Die Rechnung wird elektronisch (PDF) an die im Auftraggeber-Profil hinterlegte E-Mail-Adresse gesendet. Zahlung per Banküberweisung in EUR. Bankverbindung folgt mit Rechnung.</p>
+</section>
+
+<!-- §5 -->
+<section class="s">
+  <p class="s-num">§ 5</p>
+  <h2 class="s-title">Mitwirkungs<em>pflichten</em> Auftraggeber</h2>
+  <p>Der Auftraggeber stellt zeitnah folgende Voraussetzungen bereit:</p>
+  <ul>
+    <li><strong>Shopify-Store-Zugang</strong> als Collaborator-Account oder eigener Store, in dem der Auftragnehmer das Theme deployen kann</li>
+    <li><strong>Brand-Assets</strong>: Logo (idealerweise SVG + PNG), Farbcodes, Schrift-Wunsch oder Schriftdateien</li>
+    <li><strong>Inhalte</strong>: Texte, Produktbeschreibungen, Wirkstoff-Daten, Bilder bzw. Bild-Platzhalter</li>
+    <li><strong>Freigaben</strong>: zeitnahe Rückmeldung auf Build-Reviews (Richtwert: innerhalb von 3 Werktagen pro Iteration)</li>
+    <li><strong>Ansprechpartner</strong>: eine zentrale Kontaktperson (Stand: Nico Bichlmayer) für sämtliche Build-Rückfragen</li>
+  </ul>
+  <p>Der Auftraggeber wird über den Onboarding-Fragebogen abgefragt; dessen vollständige Beantwortung ist Voraussetzung für den Build-Start.</p>
+</section>
+
+<!-- §6 -->
+<section class="s">
+  <p class="s-num">§ 6</p>
+  <h2 class="s-title">Übergabe &amp; <em>Nutzungsrechte</em></h2>
+  <p><strong>Übergabe</strong> erfolgt durch Aktivierung des Themes auf dem Shopify-Store des Auftraggebers <strong>und</strong> Übersendung des Übergabe-Looms (Walkthrough-Video). Mit der Übergabe gilt das Werk als abgenommen, sofern der Auftraggeber nicht binnen 7 Tagen schriftlich konkrete Mängel anzeigt.</p>
+  <p><strong>Nutzungsrechte:</strong> Mit vollständiger Zahlung des Auftragswerts erhält der Auftraggeber ein <strong>einfaches, zeitlich und räumlich unbeschränktes Nutzungsrecht</strong> am gelieferten Theme-Code für eigene Geschäftszwecke. Der Auftragnehmer behält das Recht, das Theme oder Bestandteile davon (Sektionen, Patterns) für andere Projekte wiederzuverwenden, sofern keine LEO-spezifischen Inhalte enthalten sind.</p>
+  <p><strong>Referenz-Nutzung:</strong> Der Auftragnehmer ist berechtigt, das fertige Projekt nach Launch in seinem Portfolio (bb-brands.de) und in Marketing-Material zu nennen und visuell darzustellen, sofern keine zwingenden Geheimhaltungsgründe entgegenstehen.</p>
+</section>
+
+<!-- §7 -->
+<section class="s">
+  <p class="s-num">§ 7</p>
+  <h2 class="s-title">Gewährleistung &amp; <em>Mängel</em></h2>
+  <p>Mängel, die innerhalb von 14 Tagen nach Übergabe schriftlich gemeldet werden, werden vom Auftragnehmer kostenfrei behoben, sofern sie auf Fehlern in der Build-Lieferung beruhen.</p>
+  <p>Nicht als Mangel gelten: nachträgliche Wunsch-Änderungen, Erweiterungen, Drittanbieter-App-Konflikte, Shopify-Plattform-Änderungen oder Änderungen, die der Auftraggeber selbst am Theme vornimmt.</p>
+</section>
+
+<!-- §8 -->
+<section class="s">
+  <p class="s-num">§ 8</p>
+  <h2 class="s-title"><em>Haftung</em></h2>
+  <p>Die Haftung des Auftragnehmers für Schäden — gleich aus welchem Rechtsgrund — ist auf den Wert des Auftrags (500,00 €) begrenzt, soweit nicht Vorsatz oder grobe Fahrlässigkeit vorliegt oder gesetzlich zwingend weitergehend gehaftet wird (z. B. Produkthaftungsgesetz, Verletzung von Leben/Körper/Gesundheit).</p>
+  <p>Der Auftragnehmer haftet nicht für Umsatzausfälle, entgangene Gewinne, Datenverluste oder Folgeschäden infolge von Drittanbieter-Problemen (Shopify-Ausfälle, Apps, Provider).</p>
+</section>
+
+<!-- §9 -->
+<section class="s">
+  <p class="s-num">§ 9</p>
+  <h2 class="s-title">Vertragsdauer &amp; <em>Kündigung</em></h2>
+  <p>Der Vertrag endet mit der vollständigen Übergabe und Zahlung. Eine ordentliche Kündigung vor Build-Abschluss ist ausgeschlossen.</p>
+  <p><strong>Außerordentliche Kündigung</strong> ist beidseitig bei Vorliegen wichtiger Gründe möglich (z. B. nachhaltige Verletzung von Mitwirkungspflichten oder Lieferpflichten). Im Fall einer Kündigung durch den Auftraggeber nach Build-Start wird die Anzahlung als pauschalierter Aufwendungsersatz nicht erstattet; bereits geleistete Arbeitsschritte verbleiben beim Auftragnehmer.</p>
+</section>
+
+<!-- §10 -->
+<section class="s">
+  <p class="s-num">§ 10</p>
+  <h2 class="s-title">Schluss<em>bestimmungen</em></h2>
+  <p><strong>Schriftform:</strong> Änderungen und Ergänzungen bedürfen der Textform (E-Mail oder Chat reicht aus, sofern beidseitig bestätigt).</p>
+  <p><strong>Salvatorische Klausel:</strong> Sollten einzelne Bestimmungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt. Die Parteien werden eine unwirksame Bestimmung durch eine wirksame ersetzen, die dem wirtschaftlichen Zweck am nächsten kommt.</p>
+  <p><strong>Erfüllungsort &amp; Gerichtsstand:</strong> Erfüllungsort ist Wolfsburg. Gerichtsstand ist — soweit gesetzlich zulässig — Wolfsburg. Es gilt deutsches Recht unter Ausschluss des UN-Kaufrechts.</p>
+</section>
+
+<!-- SIGNATURE -->
+<div class="sig">
+  <div class="sig-block">
+    <div class="sig-line"></div>
+    <strong>LEO Sport Nutrition GmbH</strong>
+    <div class="role">Auftraggeber · Ort, Datum, Unterschrift</div>
+  </div>
+  <div class="sig-block">
+    <div class="sig-line"></div>
+    <strong>Moritz Bohmbach · BB Brands</strong>
+    <div class="role">Auftragnehmer · Ort, Datum, Unterschrift</div>
+  </div>
+</div>
+
+</div></div>
+
+<button class="print-btn no-print" onclick="window.print()">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Als PDF speichern
+</button>
+
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<style id="bbprev-auth-gate-style">
+html.bbprev-auth-pending body { visibility: hidden !important; }
+html.bbprev-auth-pending::before { content:''; position:fixed; inset:0; background:#FAF6EC; z-index:9999999; }
+html.bbprev-auth-pending::after { content:'Lade Konzept-Store…'; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:99999990; font-family:-apple-system,BlinkMacSystemFont,sans-serif; font-size:14px; color:#5A5348; }
+</style>
+<script id="bbprev-auth-gate">
+(function() {
+  document.documentElement.classList.add('bbprev-auth-pending');
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.ok || !d.brand || d.brand.slug !== 'leo') {
+        location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+        return;
+      }
+      document.documentElement.classList.remove('bbprev-auth-pending');
+    })
+    .catch(function() {
+      location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+    });
+})();
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Über LEO — Zwei Mediziner. Eine Frage. Drei Drinks. | LEO Sport Nutrition</title>
+<meta name="description" content="LEO wurde nicht im Marketing-Meeting gestartet, sondern am Spielfeldrand. Dr. Ludwig (Humanbiologe) + Dr. Guthörl (Sportmediziner) erzählen die Story.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="bb-announcement">
+  <div class="bb-announcement__track">
+    <span><span class="dot"></span> Frei von Zucker · ohne Ballast</span>
+    <span class="sep">/</span>
+    <span>Kostenloser Versand ab 60 €</span>
+    <span class="sep">/</span>
+    <span class="gold">Kölner Liste® · Anti-Doping geprüft</span>
+    <span class="sep">/</span>
+    <span>In Deutschland · in Pharmaqualität entwickelt</span>
+    <span class="sep">/</span>
+    <span><span class="dot"></span> Frei von Zucker · ohne Ballast</span>
+    <span class="sep">/</span>
+    <span>Kostenloser Versand ab 60 €</span>
+    <span class="sep">/</span>
+    <span class="gold">Kölner Liste® · Anti-Doping geprüft</span>
+    <span class="sep">/</span>
+    <span>In Deutschland · in Pharmaqualität entwickelt</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="bb-nav">
+  <div class="bb-nav__inner">
+    <div class="bb-nav__links">
+      <a href="index.html">Start</a>
+      <a href="shop.html">Shop</a>
+      <a href="product-bundle.html">Bundle</a>
+      <a href="about.html" class="active">Über LEO</a>
+      <a href="science.html">Wissenschaft</a>
+    </div>
+    <a class="bb-logo" href="index.html">
+      <span class="bb-logo__glyph">L</span>
+      <span class="bb-logo__word"><strong>LEO</strong><small>SPORT NUTRITION</small></span>
+    </a>
+    <div class="bb-nav__actions">
+      <button class="bb-nav__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="bb-nav__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="9" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></button>
+      <a class="bb-nav__cart" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg><span class="count">02</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     ABOUT HERO — hero-split adaptation
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-about-hero">
+  <div class="bb-container">
+    <div class="bb-about-hero__grid">
+      <div class="bb-about-hero__copy">
+        <span class="bb-eyebrow"><span class="dot"></span>✦ &nbsp;Über LEO</span>
+        <h1>Zwei Mediziner.<br>Eine Frage.<br><em>Drei Drinks.</em></h1>
+        <p class="lede">Wir haben LEO nicht im Marketing-Meeting gestartet, sondern am Spielfeldrand.</p>
+      </div>
+      <div class="bb-about-hero__photo">
+        <span class="label">[ FOUNDER-PORTRAIT · Echtbild folgt ]<br><br>Dr. Oliver Ludwig &amp; Dr. Marius Guthörl</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION-LIBRARY: homepage/image-text
+     Founder Story Block 1 — Dr. Ludwig
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-image-text">
+  <div class="bb-container">
+    <div class="bb-image-text__grid">
+      <div class="bb-image-text__media">
+        <span class="label">[ DR. LUDWIG · Bei Mannschaft am Spielfeldrand ]</span>
+      </div>
+      <div class="bb-image-text__copy">
+        <span class="bb-eyebrow" style="margin-bottom:20px;display:inline-flex"><span class="dot"></span>✦ &nbsp;Founder · 01</span>
+        <h2>Dr. Oliver Ludwig.<br><em>Humanbiologe.</em></h2>
+        <p>Arbeitet seit Jahren mit Profimannschaften. Sein Job: rausfinden, warum ein Spieler in Halbzeit zwei einbricht und der nächste nicht. Antwort meistens nicht im Trainingsplan, sondern im Stoffwechsel.</p>
+        <p>Was ihn an den Rand der Geduld brachte: Spieler kamen mit Plastikdosen aus dem Internet, deren Etiketten Substanzen versprachen, die in der Dose gar nicht in der angegebenen Menge waren. Manchmal mit Doping-Spuren, die eine Karriere kosten können.</p>
+        <div class="bb-image-text__author">
+          <div>
+            <div class="name">Dr. Oliver Ludwig</div>
+            <div class="role">Humanbiologe · Profifußball-Mannschaftsbetreuung</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Founder Story Block 2 — Dr. Guthörl (mirrored) -->
+<section class="bb-image-text" style="background:var(--bb-color-bg-alt);border-top:1px solid var(--bb-color-border);border-bottom:1px solid var(--bb-color-border)">
+  <div class="bb-container">
+    <div class="bb-image-text__grid" style="direction:rtl">
+      <div class="bb-image-text__media" style="direction:ltr;background:linear-gradient(160deg,#3a3a4d,#1f1d2a)">
+        <span class="label">[ DR. GUTHÖRL · In der Sportmedizin-Praxis ]</span>
+      </div>
+      <div class="bb-image-text__copy" style="direction:ltr">
+        <span class="bb-eyebrow" style="margin-bottom:20px;display:inline-flex"><span class="dot"></span>✦ &nbsp;Founder · 02</span>
+        <h2>Dr. Marius Guthörl.<br><em>Sportmediziner.</em></h2>
+        <p>Betreut Mannschaften und Einzelathleten. Seine tägliche Arbeit: Trainings­steuerung, Verletzungs­prävention, Ernährung. Sein Befund: Der Sport-Nutrition-Markt belügt seine Kunden, weil's keiner kontrolliert.</p>
+        <p>Mit Dr. Ludwig zusammen war die Frage einfach: Warum gibt es kein Sport-Nutrition-System, das pharmazeutisch sauber produziert ist, in Mengen funktioniert, die Studien tatsächlich belegen, und auf der Kölner Liste steht?</p>
+        <p style="font-family:var(--bb-font-display);font-style:italic;font-size:24px;color:var(--leo-gold-deep);line-height:1.3">Antwort: Weil's keiner gemacht hat. Also haben wir's gemacht.</p>
+        <div class="bb-image-text__author">
+          <div>
+            <div class="name">Dr. Marius Guthörl</div>
+            <div class="role">Sportmediziner · Mannschafts- &amp; Einzelathleten-Betreuung</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION-LIBRARY: homepage/timeline
+     Journey: Profifußball → LEO
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-timeline">
+  <div class="bb-container">
+    <div class="bb-timeline__head" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="bb-eyebrow" style="display:inline-flex"><span class="dot"></span>✦ &nbsp;Wie LEO entstand</span>
+      <h2>Vom Spielfeldrand<br>zur <em>Marke</em>.</h2>
+      <p style="font-size:16px;color:var(--bb-color-text-muted);max-width:600px;margin:0 auto">Drei Jahre Recherche, eine konsequente Antwort. Hier ist die Timeline.</p>
+    </div>
+
+    <div class="bb-timeline__list">
+      <div class="bb-timeline__item">
+        <div class="bb-timeline__year">2023 · Q1</div>
+        <h3>Die Spielfeldrand-Frage</h3>
+        <p>Dr. Ludwig analysiert Performance-Daten von Profis in der zweiten Halbzeit. Auffällig: Wer Standard-Sportgetränke trinkt, hat 18% schlechtere Sprintwerte ab Minute 75. Die Hypothese: Das Problem ist die Phasen-Logik.</p>
+      </div>
+      <div class="bb-timeline__item">
+        <div class="bb-timeline__year">2023 · Q3</div>
+        <h3>Die erste Rezeptur</h3>
+        <p>Dr. Guthörl und Dr. Ludwig arbeiten mit drei Pharmazeuten an einer studienkonformen Pre/Intra/Post-Formel. Erste Tests mit Profis aus dem Umfeld. Erkenntnis: Die Mengen müssen runter, nicht hoch.</p>
+      </div>
+      <div class="bb-timeline__item">
+        <div class="bb-timeline__year">2024 · Q1</div>
+        <h3>Pharma-Standard-Produktion</h3>
+        <p>Entscheidung: Keine Lohnabfüllung. LEO wird in Deutschland unter Pharmastandard produziert — der gleichen Qualitätsstufe wie Medikamente. Höhere Kosten, klarere Verantwortung.</p>
+      </div>
+      <div class="bb-timeline__item">
+        <div class="bb-timeline__year">2024 · Q4</div>
+        <h3>Kölner Liste® Aufnahme</h3>
+        <p>Jede Charge wird auf die Kölner Liste gegen über 1.000 Doping-Substanzen geprüft. Damit ist LEO im Profibereich, in Verbänden und in jeder Liga ohne Risiko nutzbar.</p>
+      </div>
+      <div class="bb-timeline__item">
+        <div class="bb-timeline__year">2026 · Q2</div>
+        <h3>LEO geht live</h3>
+        <p>Drei Jahre nach der ersten Frage am Spielfeldrand. Drei Drinks, ein System, klare Logik. Für Sportler, die wissen wollen, was sie nehmen — und warum.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION-LIBRARY: homepage/stats-counter
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-stats">
+  <div class="bb-container">
+    <div class="bb-stats__head">
+      <div>
+        <span class="bb-eyebrow" style="margin-bottom:20px;display:inline-flex"><span class="dot"></span>✦ &nbsp;In Zahlen</span>
+        <h2>Drei Jahre.<br><em>Zwei Mediziner.</em></h2>
+      </div>
+      <p>Was hinter LEO steht. In Zahlen, weil wir an Zahlen glauben.</p>
+    </div>
+    <div class="bb-stats__grid">
+      <div class="bb-stat-cell">
+        <div class="num">12+</div>
+        <div class="lab">Jahre Profifußball</div>
+        <div class="desc">Mannschaftsbetreuung im Leistungs- und Profisport durch Dr. Ludwig.</div>
+      </div>
+      <div class="bb-stat-cell">
+        <div class="num">3</div>
+        <div class="lab">Jahre Entwicklung</div>
+        <div class="desc">Von der Spielfeldrand-Frage zur fertigen Rezeptur — keine Quick-Wins.</div>
+      </div>
+      <div class="bb-stat-cell">
+        <div class="num">1.000+</div>
+        <div class="lab">Geprüfte Substanzen</div>
+        <div class="desc">Kölner-Liste-Datenbank, gegen die jede Charge getestet wird.</div>
+      </div>
+      <div class="bb-stat-cell">
+        <div class="num">100 %</div>
+        <div class="lab">Made in Germany</div>
+        <div class="desc">Eigene Produktion unter Pharmastandard. Keine Mischpartner.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     MANIFESTO — highlight-text adaptation (dark)
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-manifesto">
+  <div class="bb-container bb-manifesto__inner">
+    <span class="bb-eyebrow" style="background:rgba(250,246,236,0.06);color:var(--leo-gold-hi);border:1px solid rgba(250,246,236,0.1)"><span class="dot" style="background:var(--leo-gold-hi)"></span>✦ &nbsp;Manifesto</span>
+    <h2 class="bb-manifesto__claim">Nicht maximal.<br><em>Funktional.</em></h2>
+    <p class="bb-manifesto__body">
+      Der Markt überbietet sich in Megadosen, die der Körper nicht verarbeitet. Mehr Koffein, mehr Kreatin, mehr Hashtags. LEO nicht. Wir dosieren nach dem, was die Studienlage hergibt — nicht nach dem, was auf dem Etikett gut aussieht. Was drin ist, wirkt. Was nicht wirkt, ist nicht drin.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     FINAL CTA
+     ════════════════════════════════════════════════════════ -->
+<section class="bb-final-cta">
+  <div class="bb-container bb-final-cta__inner">
+    <span class="bb-eyebrow" style="margin-bottom:24px;display:inline-flex"><span class="dot"></span>✦ &nbsp;Bereit?</span>
+    <h2>Probier das<br><em>System.</em></h2>
+    <p class="lede">Drei Phasen, ein Bundle, klare Dosierung. Heute bestellt, übermorgen im Spind.</p>
+    <a href="product-bundle.html" class="bb-btn-primary bb-btn-primary--gold">
+      Bundle sichern · 99 €/Mon. im Abo
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bb-footer">
+  <div class="bb-container">
+    <div class="bb-footer__top">
+      <div class="bb-footer__brand">
+        <div class="logo"><span class="glyph">L</span><strong>LEO</strong></div>
+        <p>Wissenschaftlich entwickelte Sporternährung in Pharmaqualität. Für Sportler, die Funktion über Marketing stellen.</p>
+        <div class="bb-footer__socials"><a href="#">IG</a><a href="#">TK</a><a href="#">YT</a><a href="#">ST</a></div>
+      </div>
+      <div class="bb-footer__col"><h4>Shop</h4><ul><li><a href="product-bundle.html">Bundle</a></li><li><a href="#">Activate</a></li><li><a href="#">Energy</a></li><li><a href="#">Recovery</a></li><li><a href="#">Abo</a></li></ul></div>
+      <div class="bb-footer__col"><h4>System</h4><ul><li><a href="science.html">Wissenschaft</a></li><li><a href="#">Inhaltsstoffe</a></li><li><a href="#">Kölner Liste®</a></li><li><a href="#">Pharmaqualität</a></li></ul></div>
+      <div class="bb-footer__col"><h4>Marke</h4><ul><li><a href="about.html">Über LEO</a></li><li><a href="#">Founder-Story</a></li><li><a href="#">Athleten</a></li><li><a href="#">Presse</a></li></ul></div>
+      <div class="bb-footer__col"><h4>Service</h4><ul><li><a href="#">Kontakt</a></li><li><a href="#">FAQ</a></li><li><a href="#">Versand</a></li><li><a href="#">AGB · Impressum</a></li></ul></div>
+    </div>
+    <div class="bb-footer__bottom">
+      <span>© 2026 LEO Sport Nutrition · Made in Germany</span>
+      <span>Dr. O. Ludwig · Dr. M. Guthörl</span>
+      <span>Datenschutz · Cookies · Widerruf</span>
+    </div>
+  </div>
+</footer>
+
+<a class="bb-brands-tag" href="https://bb-brands.de" target="_blank">
+  <span class="dot"></span>
+  <span><span class="label">Built by</span><br><span class="name">BB Brands</span></span>
+</a>
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+<style id="bbprev-auth-gate-style">
+html.bbprev-auth-pending body { visibility: hidden !important; }
+html.bbprev-auth-pending::before { content:''; position:fixed; inset:0; background:#FAF6EC; z-index:9999999; }
+html.bbprev-auth-pending::after { content:'Lade Scope-Brief…'; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:99999990; font-family:-apple-system,BlinkMacSystemFont,sans-serif; font-size:14px; color:#5A5348; }
+</style>
+<script id="bbprev-auth-gate">
+(function() {
+  document.documentElement.classList.add('bbprev-auth-pending');
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
+    .then(r => r.json())
+    .then(d => {
+      if (!d.ok || !d.brand || d.brand.slug !== 'leo') {
+        location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+        return;
+      }
+      document.documentElement.classList.remove('bbprev-auth-pending');
+    })
+    .catch(() => {
+      location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+    });
+})();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Scope-Brief · LEO × BB Brands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#FAF6EC;
+  --paper:#FFFFFF;
+  --bg-2:#F5EFDE;
+  --ink:#15130F;
+  --muted:#5A5348;
+  --subtle:#9A8F7F;
+  --gold:#C9A14A;
+  --gold-deep:#8A6D2D;
+  --gold-hi:#E6C57A;
+  --line:rgba(21,19,15,0.10);
+  --line-strong:rgba(21,19,15,0.18);
+  --green:#6B9C2B;
+  --red:#B83A2C;
+}
+
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6}
+em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+
+/* Header */
+.cover{
+  background:linear-gradient(135deg,#1A1612,#2A2520);
+  color:#fff;padding:48px clamp(24px,5vw,80px) 60px;
+  position:relative;overflow:hidden;
+}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 400px at 80% 30%,rgba(201,161,74,0.20),transparent 60%);pointer-events:none}
+.cover-top{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;position:relative;z-index:2}
+.cover-brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:14px}
+.cover-brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.cover-meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
+.cover-main{position:relative;z-index:2;margin-top:40px;max-width:880px}
+.cover-kicker{display:inline-block;padding:6px 16px;background:rgba(201,161,74,0.12);border:1px solid rgba(201,161,74,0.35);border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-hi);margin-bottom:20px}
+.cover-title{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(36px,5vw,60px);line-height:1.05;letter-spacing:-0.02em;margin-bottom:14px}
+.cover-title em{color:var(--gold-hi)}
+.cover-sub{font-size:15px;color:rgba(255,255,255,0.78);max-width:62ch;line-height:1.6}
+
+/* Container */
+.wrap{max-width:980px;margin:-32px auto 80px;padding:0 24px;position:relative;z-index:5}
+
+/* Sections */
+.s{background:var(--paper);border-radius:14px;box-shadow:0 16px 40px rgba(21,19,15,0.06);padding:clamp(28px,4vw,44px);margin-bottom:20px}
+.s-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;font-weight:700;color:var(--gold-deep);margin-bottom:6px}
+.s-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.4px;margin-bottom:6px;line-height:1.2}
+.s-title em{color:var(--gold-deep)}
+.s-lede{font-size:14.5px;color:var(--muted);margin-bottom:24px;max-width:62ch;line-height:1.6}
+
+/* Two-column: drin / nicht drin */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+@media (max-width:780px){.cols{grid-template-columns:1fr}}
+.col{padding:24px;border-radius:10px;border:1.5px solid var(--line)}
+.col.in{background:rgba(107,156,43,0.05);border-color:rgba(107,156,43,0.30)}
+.col.out{background:rgba(184,58,44,0.04);border-color:rgba(184,58,44,0.22)}
+.col-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.col-icon{
+  width:24px;height:24px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:14px;color:#fff;flex-shrink:0;
+}
+.col.in .col-icon{background:var(--green)}
+.col.out .col-icon{background:var(--red)}
+.col-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700}
+.col.in .col-title{color:var(--green)}
+.col.out .col-title{color:var(--red)}
+.col ul{list-style:none;padding:0;margin:0}
+.col ul li{padding:9px 0;border-bottom:1px solid rgba(21,19,15,0.06);font-size:13.5px;line-height:1.5;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.col ul li:last-child{border-bottom:0}
+.col ul li::before{content:'·';color:var(--gold-deep);font-weight:700;flex-shrink:0;margin-top:-2px;font-size:18px;line-height:1}
+.col ul li strong{font-weight:700;display:block;margin-bottom:2px}
+.col ul li .sub{display:block;font-size:11.5px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em}
+
+/* Timeline */
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-strong);border:1px solid var(--line-strong);border-radius:10px;overflow:hidden;margin-top:20px}
+@media (max-width:780px){.timeline{grid-template-columns:1fr 1fr}}
+.tl-step{background:var(--paper);padding:22px 18px}
+.tl-week{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;margin-bottom:8px}
+.tl-step h4{font-size:15px;font-weight:800;margin-bottom:6px;letter-spacing:-0.2px}
+.tl-step p{font-size:12.5px;color:var(--muted);line-height:1.5}
+
+/* Pricing */
+.pricing{
+  background:linear-gradient(135deg,var(--bg-2),#EBE3CA);
+  border:1.5px solid var(--gold);border-radius:14px;
+  padding:28px 32px;margin-top:18px;
+  display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;
+}
+@media (max-width:680px){.pricing{grid-template-columns:1fr}}
+.pricing .lab{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;margin-bottom:6px}
+.pricing .val{font-family:'Instrument Serif',serif;font-size:60px;line-height:1;color:var(--ink)}
+.pricing .val small{font-size:18px;color:var(--gold-deep);font-style:normal;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;margin-left:6px}
+.pricing .note{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+/* Customer responsibilities */
+.resp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+@media (max-width:780px){.resp-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.resp-grid{grid-template-columns:1fr}}
+.resp-item{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:18px 16px}
+.resp-item h5{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;margin-bottom:6px}
+.resp-item p{font-size:13px;color:var(--ink);line-height:1.5}
+
+/* Footer note */
+.foot{margin-top:24px;padding:20px 24px;background:var(--bg-2);border-radius:10px;border-left:3px solid var(--gold);font-size:13px;color:var(--muted);line-height:1.6}
+.foot strong{color:var(--ink);font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-top">
+    <div class="cover-brand"><span class="dot"></span>BB Brands · Scope-Brief</div>
+    <div class="cover-meta">LEO Sport Nutrition · 28.04.2026</div>
+  </div>
+  <div class="cover-main">
+    <span class="cover-kicker">✦ &nbsp;Auf einen Blick</span>
+    <h1 class="cover-title">Was im Build <em>drin ist</em>.<br>Was <em>nicht</em>.</h1>
+    <p class="cover-sub">1-Pager-Übersicht zum Scope. Klar abgegrenzt, damit für die Founders sofort sichtbar ist, was wir liefern und was ihr selbst macht — keine Überraschungen, kein Scope-Creep.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+<!-- DRIN / NICHT DRIN -->
+<div class="s">
+  <p class="s-num">01 · LEISTUNGSPAKET</p>
+  <h2 class="s-title">Was <em>geliefert</em> wird — was <em>nicht</em>.</h2>
+  <p class="s-lede">Pauschalpreis 500 € deckt das Custom-Theme + Homepage + 1 PDP-Template + Cart-Drawer + Übergabe ab. Photography, Copy, Abo-App und weitere PDPs liegen bei euch.</p>
+
+  <div class="cols">
+
+    <div class="col in">
+      <div class="col-head">
+        <span class="col-icon">✓</span>
+        <span class="col-title">Im Auftrag</span>
+      </div>
+      <ul>
+        <li><div><strong>Custom Shopify Theme</strong><span class="sub">Dawn 2.x Basis · LEO-Brand-Tokens</span></div></li>
+        <li><div><strong>Homepage komplett</strong><span class="sub">Hero · Phase-System · Bundle-Spotlight · Testimonial · Final-CTA · Footer</span></div></li>
+        <li><div><strong>1 PDP-Template</strong><span class="sub">Vorlage für eine Phase, übertragbar</span></div></li>
+        <li><div><strong>Cart-Drawer</strong><span class="sub">Trust-Elemente · Upsell-Slot · CR-optimiert</span></div></li>
+        <li><div><strong>Theme-Setup</strong><span class="sub">Color-Schemes · Theme-Settings · Sections-Library</span></div></li>
+        <li><div><strong>Übergabe-Loom</strong><span class="sub">Walkthrough-Video für eure Pflege</span></div></li>
+        <li><div><strong>Code-Übergabe + Nutzungsrechte</strong><span class="sub">Theme gehört euch nach Vollzahlung</span></div></li>
+      </ul>
+    </div>
+
+    <div class="col out">
+      <div class="col-head">
+        <span class="col-icon">×</span>
+        <span class="col-title">Nicht im Auftrag</span>
+      </div>
+      <ul>
+        <li><div><strong>Echte Produktfotografie</strong><span class="sub">Studio-Shoot — eigenes Team / extern</span></div></li>
+        <li><div><strong>Copywriting + KI-Visuals</strong><span class="sub">Texte und Lifestyle-Renderings liefert ihr</span></div></li>
+        <li><div><strong>Abo-Logik / Subscriptions-App</strong><span class="sub">Shopify Subscriptions oder Recharge — eure Konfiguration</span></div></li>
+        <li><div><strong>2 weitere PDPs</strong><span class="sub">Energy + Recovery via Duplicate aus PDP-Vorlage</span></div></li>
+        <li><div><strong>Backoffice / Admin-Setup</strong><span class="sub">Produkte anlegen · Versand · Zahlungs-Provider</span></div></li>
+        <li><div><strong>Launch-Marketing</strong><span class="sub">Ads · Influencer · E-Mail-Flows · Social</span></div></li>
+        <li><div><strong>Ongoing-Wartung</strong><span class="sub">Nach Übergabe optional als Retainer</span></div></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="s">
+  <p class="s-num">02 · BUILD-TIMELINE</p>
+  <h2 class="s-title">3–4 Wochen ab <em>Build-Start</em>.</h2>
+  <p class="s-lede">Build-Start nach Vertragsunterzeichnung + Anzahlung + ausgefülltem Onboarding-Fragebogen. Eure Backoffice-Arbeit (Produkte einpflegen, Abo-App, Versand) läuft parallel.</p>
+
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-week">KW 1 · Tag 1–3</div>
+      <h4>Brand-Setup &amp; Theme-Base</h4>
+      <p>Shopify Dawn aufsetzen, LEO-Brand-Tokens (Farben, Typo) konfigurieren, Asset-Import.</p>
+    </div>
+    <div class="tl-step">
+      <div class="tl-week">KW 1–3 · Tag 4–14</div>
+      <h4>Homepage-Sections</h4>
+      <p>Custom Sections aus Section-Library: Hero, Phase-System, Bundle-Spotlight, Trust, Reviews, FAQ, Final-CTA.</p>
+    </div>
+    <div class="tl-step">
+      <div class="tl-week">KW 3 · Tag 15–18</div>
+      <h4>PDP-Template + Cart</h4>
+      <p>1 vollständiges PDP-Template (Activate o. Energy o. Recovery), Cart-Drawer mit Upsell.</p>
+    </div>
+    <div class="tl-step">
+      <div class="tl-week">KW 3–4 · Tag 19–21</div>
+      <h4>QA + Übergabe</h4>
+      <p>Lighthouse-Audit, Mobile-Check, Browser-Tests, Übergabe-Loom, Hand-off &amp; Restzahlung.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WAS IHR LIEFERT -->
+<div class="s">
+  <p class="s-num">03 · WAS IHR ZUM START LIEFERT</p>
+  <h2 class="s-title">Damit der Build <em>sofort</em> losgehen kann.</h2>
+  <p class="s-lede">Diese Punkte werden im Onboarding-Fragebogen abgefragt — sobald sie da sind, startet der Build.</p>
+
+  <div class="resp-grid">
+    <div class="resp-item">
+      <h5>Brand</h5>
+      <p>Logo (SVG/PNG), Farb-Hex-Codes, Schrift-Wunsch, Brand-Voice / Mantra</p>
+    </div>
+    <div class="resp-item">
+      <h5>Produkte</h5>
+      <p>Wirkstoff-Listen pro Phase, Mengen, Geschmack, Pricing, ggf. Produktfotos / Platzhalter</p>
+    </div>
+    <div class="resp-item">
+      <h5>Trust</h5>
+      <p>Kölner-Liste-Zertifikat, Hersteller-Adresse, AGB / Impressum / Datenschutz / Widerruf</p>
+    </div>
+    <div class="resp-item">
+      <h5>Founder</h5>
+      <p>Bios Dr. Ludwig + Dr. Guthörl, Founder-Foto (oder Platzhalter), Athleten-Referenzen</p>
+    </div>
+    <div class="resp-item">
+      <h5>Shopify</h5>
+      <p>Store-Zugang als Collaborator, Domain, Subscriptions-App-Wahl</p>
+    </div>
+    <div class="resp-item">
+      <h5>Marketing</h5>
+      <p>Newsletter-Provider, Social-Handles, gewünschte Tracking-Pixel (Meta · GA4 · TikTok)</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <strong>Onboarding-Fragebogen</strong> ist online unter <em>preview/leo-oppahw/onboarding</em> — meistens in 2–3 Min ausgefüllt, viele Felder sind aus dem Sales-Call schon vorausgefüllt.
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="s">
+  <p class="s-num">04 · INVESTITION</p>
+  <h2 class="s-title">Was es <em>kostet</em>.</h2>
+  <p class="s-lede">Pauschalpreis. Keine versteckten Posten. Zahlung 50/50 — vor und nach Übergabe.</p>
+
+  <div class="pricing">
+    <div>
+      <div class="lab">Pauschalpreis · netto</div>
+      <div class="val">500,00<small>€</small></div>
+      <div class="note" style="margin-top:6px">§ 19 UStG — keine USt-Ausweisung</div>
+    </div>
+    <div class="note">
+      <strong style="color:var(--ink)">50 / 50-Split:</strong><br>
+      <strong style="color:var(--gold-deep)">250 €</strong> Anzahlung · vor Build-Start<br>
+      <strong style="color:var(--gold-deep)">250 €</strong> Restzahlung · nach Übergabe<br><br>
+      <strong style="color:var(--ink)">Was nicht im Preis ist:</strong> Alle Punkte aus Spalte „Nicht im Auftrag" oben. Bei Bedarf separat anfragen.
+    </div>
+  </div>
+</div>
+
+<!-- WHY -->
+<div class="s">
+  <p class="s-num">05 · WARUM 500 € REALISTISCH IST</p>
+  <h2 class="s-title">Was <em>gut investiert</em> heißt.</h2>
+  <p class="s-lede">Klassische Shopify-Custom-Builds in DACH liegen bei 5.000 € – 15.000 €. Wir kommen auf 500 €, weil wir KI-nativ arbeiten — nicht beim Handwerk, sondern bei der Erstellungs-Pipeline.</p>
+
+  <div class="cols">
+    <div class="col in" style="background:rgba(21,19,15,0.03);border-color:var(--line)">
+      <div class="col-head">
+        <span class="col-icon" style="background:var(--gold-deep)">€</span>
+        <span class="col-title" style="color:var(--gold-deep)">Klassische Agentur</span>
+      </div>
+      <ul>
+        <li><div><strong>5.000 € – 15.000 €</strong><span class="sub">Custom-Theme · 1 PDP · Übergabe</span></div></li>
+        <li><div><strong>6–10 Wochen</strong><span class="sub">Discovery · Konzept · Build · Iterationen</span></div></li>
+        <li><div><strong>Manuelle Pipeline</strong><span class="sub">Designer + Developer + PM in Schleife</span></div></li>
+      </ul>
+    </div>
+    <div class="col in">
+      <div class="col-head">
+        <span class="col-icon" style="background:var(--green)">€</span>
+        <span class="col-title" style="color:var(--green)">BB Brands · KI-nativ</span>
+      </div>
+      <ul>
+        <li><div><strong>500 €</strong><span class="sub">Gleiches Liefer-Niveau · pauschal</span></div></li>
+        <li><div><strong>3–4 Wochen</strong><span class="sub">Section-Library · Brand-Tokens · KI-Pipeline</span></div></li>
+        <li><div><strong>Reproduzierbare Pipeline</strong><span class="sub">Skalierbar ohne Qualitätsverlust</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot" style="margin-top:24px">
+    Heißt: ihr bekommt kein Discount-Theme. Ihr bekommt das gleiche, nur mit besserer Pipeline. Build-Quality sieht man im <strong>Konzept-Store</strong> (eigener Link).
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>

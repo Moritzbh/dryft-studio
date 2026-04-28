@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<style id="bbprev-auth-gate-style">
+html.bbprev-auth-pending body { visibility: hidden !important; }
+html.bbprev-auth-pending::before { content:''; position:fixed; inset:0; background:#FAF6EC; z-index:9999999; }
+html.bbprev-auth-pending::after { content:'Lade Konzept-Store…'; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:99999990; font-family:-apple-system,BlinkMacSystemFont,sans-serif; font-size:14px; color:#5A5348; }
+</style>
+<script id="bbprev-auth-gate">
+(function() {
+  document.documentElement.classList.add('bbprev-auth-pending');
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.ok || !d.brand || d.brand.slug !== 'leo') {
+        location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+        return;
+      }
+      document.documentElement.classList.remove('bbprev-auth-pending');
+    })
+    .catch(function() {
+      location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+    });
+})();
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop — Alle Produkte | LEO Sport Nutrition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<div class="bb-announcement">
+  <div class="bb-announcement__track">
+    <span><span class="dot"></span> Frei von Zucker · ohne Ballast</span>
+    <span class="sep">/</span>
+    <span>Kostenloser Versand ab 60 €</span>
+    <span class="sep">/</span>
+    <span class="gold">Kölner Liste® · Anti-Doping geprüft</span>
+    <span class="sep">/</span>
+    <span>In Deutschland · in Pharmaqualität entwickelt</span>
+    <span class="sep">/</span>
+    <span><span class="dot"></span> Frei von Zucker · ohne Ballast</span>
+    <span class="sep">/</span>
+    <span>Kostenloser Versand ab 60 €</span>
+    <span class="sep">/</span>
+    <span class="gold">Kölner Liste® · Anti-Doping geprüft</span>
+    <span class="sep">/</span>
+    <span>In Deutschland · in Pharmaqualität entwickelt</span>
+  </div>
+</div>
+
+<nav class="bb-nav">
+  <div class="bb-nav__inner">
+    <div class="bb-nav__links">
+      <a href="index.html">Start</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="product-bundle.html">Bundle</a>
+      <a href="about.html">Über LEO</a>
+      <a href="science.html">Wissenschaft</a>
+    </div>
+    <a class="bb-logo" href="index.html"><span class="bb-logo__glyph">L</span><span class="bb-logo__word"><strong>LEO</strong><small>SPORT NUTRITION</small></span></a>
+    <div class="bb-nav__actions">
+      <button class="bb-nav__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="bb-nav__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="9" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></button>
+      <a class="bb-nav__cart" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg><span class="count">02</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- COLLECTION HERO -->
+<section style="padding:80px 0 48px;text-align:center;background:var(--bb-color-bg-warm)">
+  <div class="bb-container">
+    <span class="bb-eyebrow" style="display:inline-flex;margin-bottom:20px"><span class="dot"></span>✦ &nbsp;Shop · Alles auf einen Blick</span>
+    <h1 class="bb-h-display bb-h-xl" style="margin-bottom:20px">Vier Wege, das <em>System</em> zu starten.</h1>
+    <p class="bb-h-display" style="font-size:20px;font-style:italic;color:var(--bb-color-text-muted);max-width:60ch;margin:0 auto">Bundle für Komplett-Einstieg. Einzeldosen für gezielten Bedarf. Wähle, was zu deinem Training passt.</p>
+  </div>
+</section>
+
+<!-- PRODUCT GRID — Bundle prominent + 3 Phasen -->
+<section class="bb-section" style="padding-top:80px">
+  <div class="bb-container">
+
+    <!-- BUNDLE FEATURE CARD -->
+    <a href="product-bundle.html" class="bb-product" style="display:grid;grid-template-columns:1fr 1.5fr;gap:0;margin-bottom:32px;background:linear-gradient(135deg,#fff,var(--bb-color-bg-warm));border:1px solid var(--leo-gold);border-radius:var(--bb-radius-lg);overflow:hidden;box-shadow:0 20px 60px var(--leo-gold-shadow)">
+      <div class="bb-product__plate" style="aspect-ratio:auto;min-height:380px;background:linear-gradient(135deg,var(--bb-color-bg-warm),#e6dcc0)">
+        <span class="phase-tag" style="background:var(--leo-gold);color:#fff;padding:4px 10px;border-radius:999px;font-weight:800">BESTSELLER</span>
+        <svg viewBox="0 0 600 500" style="width:80%;height:auto;filter:drop-shadow(0 20px 30px rgba(0,0,0,0.18))">
+          <defs>
+            <linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1612"/><stop offset="1" stop-color="#0a0807"/></linearGradient>
+            <linearGradient id="bcap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3530"/><stop offset="1" stop-color="#1a1612"/></linearGradient>
+          </defs>
+          <g transform="translate(80,140) rotate(-4)"><rect x="0" y="20" width="120" height="180" rx="8" fill="url(#b1)"/><rect x="-3" y="14" width="126" height="12" rx="5" fill="url(#bcap)"/><text x="60" y="105" text-anchor="middle" font-family="Instrument Serif" font-size="28" font-style="italic" fill="#d18a64">Activate</text><text x="60" y="128" text-anchor="middle" font-family="JetBrains Mono" font-size="7" letter-spacing="2" fill="#5a5348">PHASE 01</text></g>
+          <g transform="translate(230,110) rotate(2)"><rect x="0" y="20" width="120" height="200" rx="8" fill="url(#b1)"/><rect x="-3" y="14" width="126" height="12" rx="5" fill="url(#bcap)"/><text x="60" y="115" text-anchor="middle" font-family="Instrument Serif" font-size="32" font-style="italic" fill="#c43528">Energy</text><text x="60" y="140" text-anchor="middle" font-family="JetBrains Mono" font-size="7" letter-spacing="2" fill="#5a5348">PHASE 02</text></g>
+          <g transform="translate(380,140) rotate(-3)"><rect x="0" y="20" width="120" height="180" rx="8" fill="url(#b1)"/><rect x="-3" y="14" width="126" height="12" rx="5" fill="url(#bcap)"/><text x="60" y="105" text-anchor="middle" font-family="Instrument Serif" font-size="24" font-style="italic" fill="#6b9c2b">Recovery</text><text x="60" y="128" text-anchor="middle" font-family="JetBrains Mono" font-size="7" letter-spacing="2" fill="#5a5348">PHASE 03</text></g>
+        </svg>
+      </div>
+      <div class="bb-product__meta" style="padding:48px;display:flex;flex-direction:column;justify-content:center">
+        <span class="bb-eyebrow" style="display:inline-flex;width:fit-content;margin-bottom:18px"><span class="dot"></span>Empfohlen · Alle 3 Phasen</span>
+        <h2 class="bb-h-display" style="font-size:48px;line-height:1;margin-bottom:14px">Das 3-Phasen-Bundle.<br><em>Activate · Energy · Recovery.</em></h2>
+        <p style="font-size:16px;color:var(--bb-color-text-muted);margin-bottom:24px;max-width:48ch">Alle drei Phasen in einer Box. Pre, Intra, Post — ein System, drei Wirkstofflogiken. 45 Trainingseinheiten.</p>
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:24px">
+          <span class="bb-h-display" style="font-size:48px;color:var(--leo-gold-deep)">99,00 €</span>
+          <span style="text-decoration:line-through;color:var(--bb-color-text-subtle);font-size:18px">132,00 €</span>
+          <span class="bb-bundle__save">−25 % im Abo</span>
+        </div>
+        <span class="bb-btn-primary bb-btn-primary--gold" style="width:fit-content">Bundle ansehen<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 3 PHASE CARDS -->
+    <h3 class="bb-h-display" style="font-size:32px;margin:48px 0 24px;text-align:center">Oder eine <em>Phase</em> nach der anderen.</h3>
+
+    <div class="bb-products__grid">
+      <a class="bb-product" data-color="activate" href="product-bundle.html">
+        <div class="bb-product__plate">
+          <span class="phase-tag">PHASE 01</span>
+          <span class="size-tag">600 G · 15×</span>
+          <svg viewBox="0 0 200 280"><rect x="20" y="40" width="160" height="220" rx="10" fill="#1a1612"/><rect x="14" y="34" width="172" height="14" rx="6" fill="#2a2520"/><text x="100" y="140" text-anchor="middle" font-family="Instrument Serif" font-size="40" font-style="italic" fill="#d18a64">Activate</text><text x="100" y="170" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="2" fill="#5a5348">PHASE 01</text><line x1="40" y1="190" x2="160" y2="190" stroke="rgba(255,255,255,0.1)"/><text x="100" y="210" text-anchor="middle" font-family="Manrope" font-size="8" letter-spacing="1.5" fill="#9a8f7f">PRE-WORKOUT</text><text x="100" y="245" text-anchor="middle" font-family="Manrope" font-weight="600" font-size="8" letter-spacing="2" fill="#c9a14a">LEO</text></svg>
+        </div>
+        <div class="bb-product__meta">
+          <div class="bb-product__row"><span class="name">Activate</span><span class="price">44,00 €</span></div>
+          <div class="bb-product__line">Zündet den Körper. Schützt die Zelle.</div>
+          <div class="bb-product__ingr">Koffein · Citrullin · Beta-Alanin</div>
+          <span class="bb-product__cta">Details ansehen<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a class="bb-product" data-color="energy" href="product-bundle.html">
+        <div class="bb-product__plate">
+          <span class="phase-tag">PHASE 02</span>
+          <span class="size-tag">600 G · 15×</span>
+          <svg viewBox="0 0 200 280"><rect x="20" y="40" width="160" height="220" rx="10" fill="#1a1612"/><rect x="14" y="34" width="172" height="14" rx="6" fill="#2a2520"/><text x="100" y="140" text-anchor="middle" font-family="Instrument Serif" font-size="44" font-style="italic" fill="#c43528">Energy</text><text x="100" y="170" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="2" fill="#5a5348">PHASE 02</text><line x1="40" y1="190" x2="160" y2="190" stroke="rgba(255,255,255,0.1)"/><text x="100" y="210" text-anchor="middle" font-family="Manrope" font-size="8" letter-spacing="1.5" fill="#9a8f7f">INTRA-WORKOUT</text><text x="100" y="245" text-anchor="middle" font-family="Manrope" font-weight="600" font-size="8" letter-spacing="2" fill="#c9a14a">LEO</text></svg>
+        </div>
+        <div class="bb-product__meta">
+          <div class="bb-product__row"><span class="name">Energy</span><span class="price">44,00 €</span></div>
+          <div class="bb-product__line">Konstante Leistung. Kein Zuckerloch.</div>
+          <div class="bb-product__ingr">Iso-Elektrolyte · Dual-Carb</div>
+          <span class="bb-product__cta">Details ansehen<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a class="bb-product" data-color="recovery" href="product-bundle.html">
+        <div class="bb-product__plate">
+          <span class="phase-tag">PHASE 03</span>
+          <span class="size-tag">600 G · 15×</span>
+          <svg viewBox="0 0 200 280"><rect x="20" y="40" width="160" height="220" rx="10" fill="#1a1612"/><rect x="14" y="34" width="172" height="14" rx="6" fill="#2a2520"/><text x="100" y="140" text-anchor="middle" font-family="Instrument Serif" font-size="36" font-style="italic" fill="#6b9c2b">Recovery</text><text x="100" y="170" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="2" fill="#5a5348">PHASE 03</text><line x1="40" y1="190" x2="160" y2="190" stroke="rgba(255,255,255,0.1)"/><text x="100" y="210" text-anchor="middle" font-family="Manrope" font-size="8" letter-spacing="1.5" fill="#9a8f7f">POST-WORKOUT</text><text x="100" y="245" text-anchor="middle" font-family="Manrope" font-weight="600" font-size="8" letter-spacing="2" fill="#c9a14a">LEO</text></svg>
+        </div>
+        <div class="bb-product__meta">
+          <div class="bb-product__row"><span class="name">Recovery</span><span class="price">44,00 €</span></div>
+          <div class="bb-product__line">Auffüllen. Wiederherstellen. Aufbauen.</div>
+          <div class="bb-product__ingr">Kreatin · Glutamin · BCAAs</div>
+          <span class="bb-product__cta">Details ansehen<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<section class="bb-trust-bar">
+  <div class="bb-container">
+    <ul class="bb-trust-bar__list">
+      <li class="bb-trust-bar__item"><span class="bb-trust-bar__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></span><div><div class="bb-trust-bar__title">Kölner Liste®</div><div class="bb-trust-bar__desc">Anti-Doping geprüft</div></div></li>
+      <li class="bb-trust-bar__item"><span class="bb-trust-bar__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h18M5 7v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7"/></svg></span><div><div class="bb-trust-bar__title">Pharmaqualität</div><div class="bb-trust-bar__desc">Made in Germany</div></div></li>
+      <li class="bb-trust-bar__item"><span class="bb-trust-bar__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div><div class="bb-trust-bar__title">Versand 48 h</div><div class="bb-trust-bar__desc">Heute bestellt · übermorgen da</div></div></li>
+      <li class="bb-trust-bar__item"><span class="bb-trust-bar__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12a9 9 0 1 0 6-8.5"/><path d="M3 4v5h5"/></svg></span><div><div class="bb-trust-bar__title">30-Tage Rückgabe</div><div class="bb-trust-bar__desc">Auch geöffnete Dosen</div></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bb-footer">
+  <div class="bb-container">
+    <div class="bb-footer__top">
+      <div class="bb-footer__brand"><div class="logo"><span class="glyph">L</span><strong>LEO</strong></div><p>Wissenschaftlich entwickelte Sporternährung in Pharmaqualität. Für Sportler, die Funktion über Marketing stellen.</p><div class="bb-footer__socials"><a href="#">IG</a><a href="#">TK</a><a href="#">YT</a><a href="#">ST</a></div></div>
+      <div class="bb-footer__col"><h4>Shop</h4><ul><li><a href="product-bundle.html">Bundle</a></li><li><a href="#">Activate</a></li><li><a href="#">Energy</a></li><li><a href="#">Recovery</a></li><li><a href="#">Abo</a></li></ul></div>
+      <div class="bb-footer__col"><h4>System</h4><ul><li><a href="science.html">Wissenschaft</a></li><li><a href="#">Inhaltsstoffe</a></li><li><a href="#">Kölner Liste®</a></li><li><a href="#">Pharmaqualität</a></li></ul></div>
+      <div class="bb-footer__col"><h4>Marke</h4><ul><li><a href="about.html">Über LEO</a></li><li><a href="#">Founder-Story</a></li><li><a href="#">Athleten</a></li><li><a href="#">Presse</a></li></ul></div>
+      <div class="bb-footer__col"><h4>Service</h4><ul><li><a href="#">Kontakt</a></li><li><a href="#">FAQ</a></li><li><a href="#">Versand</a></li><li><a href="#">AGB · Impressum</a></li></ul></div>
+    </div>
+    <div class="bb-footer__bottom"><span>© 2026 LEO Sport Nutrition · Made in Germany</span><span>Dr. O. Ludwig · Dr. M. Guthörl</span><span>Datenschutz · Cookies · Widerruf</span></div>
+  </div>
+</footer>
+
+<a class="bb-brands-tag" href="https://bb-brands.de" target="_blank">
+  <span class="dot"></span>
+  <span><span class="label">Built by</span><br><span class="name">BB Brands</span></span>
+</a>
+
+</body>
+</html>
