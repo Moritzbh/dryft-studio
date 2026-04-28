@@ -215,8 +215,13 @@ function setAuthCookie(res, token, maxAgeSec) {
 }
 
 function clearAuthCookie(res) {
-  res.setHeader('Set-Cookie',
-    `${AUTH_COOKIE_NAME}=; Path=/; Domain=.bb-brands.de; HttpOnly; Secure; SameSite=Lax; Max-Age=0`);
+  // Killt BEIDE Cookie-Varianten: alte ohne Domain-Spec (nur www.) + neue mit
+  // Domain=.bb-brands.de. Sonst bleibt alter Cookie kleben weil Browser beide
+  // als getrennte Cookies sieht.
+  res.setHeader('Set-Cookie', [
+    `${AUTH_COOKIE_NAME}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`,
+    `${AUTH_COOKIE_NAME}=; Path=/; Domain=.bb-brands.de; HttpOnly; Secure; SameSite=Lax; Max-Age=0`,
+  ]);
 }
 
 function jsonResponse(res, status, body) {
