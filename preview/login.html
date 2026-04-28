@@ -184,18 +184,34 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   const errorEl = document.getElementById('error');
   const btn = document.getElementById('submit-btn');
 
-  // Auto-redirect wenn schon eingeloggt (Cookie wird automatisch mitgesendet)
+  // Auto-redirect wenn schon eingeloggt — aber NUR wenn der bestehende Brand
+  // zum gewünschten Slug passt (verhindert Login↔Brand-Page Endlos-Loop bei
+  // Stale-Cookie eines anderen Brands)
   fetch('/api/preview-auth?action=verify', { credentials: 'include' })
     .then(r => r.json())
     .then(d => {
-      if (d.ok && d.brand) {
-        const params = new URLSearchParams(location.search);
-        const ret = params.get('return');
-        if (ret && ret.startsWith('/preview/')) {
-          location.href = ret;
-        } else {
-          location.href = '/preview/' + d.brand.slug + '-' + d.brand.token + '/';
-        }
+      if (!d.ok || !d.brand) return;
+      const params = new URLSearchParams(location.search);
+      const wantedSlug = params.get('slug');
+      const ret = params.get('return') || '';
+      const retMatch = ret.match(/^\/preview\/([a-z0-9-]+?)-[a-z0-9]{4,}\//i);
+      const expectedSlug = wantedSlug || (retMatch && retMatch[1]) || null;
+      // Wenn return/slug nichts wünscht: dashboard-redirect ok
+      // Wenn return/slug einen anderen Brand wünscht als Cookie: Form zeigen
+      if (expectedSlug && d.brand.slug !== expectedSlug) {
+        // Stale cookie für anderes Brand — alten killen, Form anzeigen
+        fetch('/api/preview-auth', {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'logout' })
+        }).catch(() => {});
+        return;
+      }
+      if (ret && ret.startsWith('/preview/')) {
+        location.href = ret;
+      } else {
+        location.href = '/preview/' + d.brand.slug + '-' + d.brand.token + '/';
       }
     })
     .catch(() => {});
