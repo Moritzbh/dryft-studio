@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+<!-- ════════════════════════════════════════════════════════
+     BB BRANDS · CUSTOMER PREVIEW AUTH GATE
+     Slug: leo · Login via /preview/login
+     ════════════════════════════════════════════════════════ -->
+<style id="bbprev-auth-gate-style">
+html.bbprev-auth-pending body { visibility: hidden !important; }
+html.bbprev-auth-pending::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: #FAF6EC;
+  z-index: 9999999;
+}
+html.bbprev-auth-pending::after {
+  content: 'Lade Onboarding…';
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999990;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px; color: #5A5348;
+}
+</style>
+<script id="bbprev-auth-gate">
+(function() {
+  document.documentElement.classList.add('bbprev-auth-pending');
+  var EXPECTED_SLUG = "leo";
+  var token = localStorage.getItem('bb-preview-token');
+  if (!token) {
+    location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+    return;
+  }
+  fetch('/api/preview-auth?action=verify', {
+    headers: { 'Authorization': 'Bearer ' + token }
+  })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.ok || !d.brand || d.brand.slug !== EXPECTED_SLUG) {
+        localStorage.removeItem('bb-preview-token');
+        location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+        return;
+      }
+      window.__BB_BRAND = d.brand;
+      document.documentElement.classList.remove('bbprev-auth-pending');
+    })
+    .catch(function() {
+      location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+    });
+})();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>LEO Sport Nutrition — Onboarding · BB Brands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;700;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bb-blue:#5B6BFF;
+  --bb-pink:#FF21A6;
+  --bb-yellow:#FFDE59;
+  --leo-gold:#C9A14A;
+  --leo-gold-deep:#8A6D2D;
+  --leo-gold-hi:#E6C57A;
+  --leo-paper:#FAF6EC;
+  --leo-ink:#15130F;
+  --leo-dark:#1A1612;
+  --line:rgba(21,19,15,0.10);
+  --line-strong:rgba(21,19,15,0.18);
+  --muted:#5A5348;
+  --subtle:#9A8F7F;
+}
+
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--leo-paper);
+  color:var(--leo-ink);
+  font-size:16px;line-height:1.55;
+  min-height:100vh;
+}
+a{color:var(--leo-gold-deep);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* === COVER === */
+.cover{
+  background:var(--leo-dark);color:#fff;
+  min-height:62vh;
+  position:relative;overflow:hidden;
+  padding:48px clamp(24px,5vw,80px) 96px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.cover::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 800px 500px at 85% 30%, rgba(201,161,74,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 400px at 15% 80%, rgba(91,107,255,0.12) 0%, transparent 60%);
+  pointer-events:none;
+}
+.cover__top{
+  display:flex;justify-content:space-between;align-items:center;gap:24px;
+  position:relative;z-index:2;flex-wrap:wrap;
+}
+.cover__brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:14px;letter-spacing:-0.2px}
+.cover__brand .dot{width:8px;height:8px;border-radius:50%;background:var(--bb-blue);box-shadow:0 0 12px var(--bb-blue);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.55;transform:scale(0.85)}}
+.cover__meta{font-family:'Roboto',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5)}
+.cover__main{position:relative;z-index:2;max-width:780px;margin-top:48px}
+.cover__kicker{
+  display:inline-block;padding:6px 16px;
+  background:rgba(201,161,74,0.12);
+  border:1px solid rgba(201,161,74,0.35);
+  border-radius:999px;
+  font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--leo-gold-hi);
+  margin-bottom:24px;
+}
+.cover__title{
+  font-family:'Instrument Serif','Roboto',sans-serif;
+  font-size:clamp(40px,6vw,80px);line-height:0.96;font-weight:400;letter-spacing:-0.02em;
+  margin-bottom:24px;
+}
+.cover__title em{color:var(--leo-gold-hi);font-style:italic}
+.cover__sub{font-size:17px;line-height:1.55;color:rgba(255,255,255,0.78);max-width:62ch}
+.cover__sub strong{color:#fff;font-weight:700}
+.cover__bottom{position:relative;z-index:2;display:flex;gap:36px;flex-wrap:wrap;font-family:'Roboto',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.5)}
+.cover__bottom strong{color:var(--leo-gold-hi);font-weight:700}
+
+/* === FORM CONTAINER === */
+.form-wrap{max-width:880px;margin:-64px auto 0;padding:0 24px 80px;position:relative;z-index:5}
+.form-card{
+  background:#fff;border-radius:18px;
+  box-shadow:0 24px 60px rgba(21,19,15,0.10);
+  overflow:hidden;
+}
+.form-progress{
+  display:flex;background:#fff;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:10;
+  font-family:'Roboto',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--subtle);
+}
+.form-progress span{padding:14px 12px;flex:1;text-align:center;border-right:1px solid var(--line)}
+.form-progress span:last-child{border-right:0}
+.form-progress span.done{color:var(--leo-gold-deep);background:rgba(201,161,74,0.06)}
+
+/* === SECTIONS === */
+.fs{padding:48px clamp(24px,5vw,56px) 12px;border-bottom:1px solid var(--line)}
+.fs:last-of-type{border-bottom:0}
+.fs__head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+.fs__num{
+  font-family:'Roboto',monospace;font-weight:700;font-size:11px;letter-spacing:0.2em;
+  color:var(--leo-gold-deep);
+}
+.fs__title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;line-height:1.15;letter-spacing:-0.4px;color:var(--leo-ink)}
+.fs__sub{font-size:13.5px;color:var(--muted);margin-bottom:28px;max-width:60ch;line-height:1.55}
+.fs__sub strong{color:var(--leo-ink);font-weight:700}
+
+/* === FIELDS === */
+.field{margin-bottom:22px}
+.field__label{
+  display:block;font-size:13px;font-weight:700;color:var(--leo-ink);
+  margin-bottom:8px;letter-spacing:-0.1px;
+}
+.field__label .opt{font-weight:500;color:var(--subtle);font-size:11.5px;letter-spacing:0;margin-left:6px}
+.field__hint{font-size:12px;color:var(--subtle);margin-top:6px;line-height:1.5}
+.field__hint strong{color:var(--muted);font-weight:600}
+
+input[type="text"],input[type="email"],input[type="url"],input[type="date"],textarea,select{
+  width:100%;padding:13px 16px;
+  font-family:inherit;font-size:14.5px;color:var(--leo-ink);
+  background:#fff;
+  border:1.5px solid var(--line-strong);
+  border-radius:8px;
+  transition:border-color 160ms;
+}
+input:focus,textarea:focus,select:focus{
+  outline:none;border-color:var(--leo-gold);
+  box-shadow:0 0 0 3px rgba(201,161,74,0.14);
+}
+textarea{resize:vertical;min-height:80px;line-height:1.5;font-family:inherit}
+
+/* Pre-filled value indicator */
+.field--prefilled input,.field--prefilled textarea{
+  background:rgba(201,161,74,0.06);
+  border-color:rgba(201,161,74,0.40);
+}
+.field__prefilled-tag{
+  display:inline-block;
+  font-family:'Roboto',monospace;font-size:9.5px;letter-spacing:0.16em;
+  text-transform:uppercase;font-weight:700;
+  color:var(--leo-gold-deep);
+  background:rgba(201,161,74,0.12);
+  padding:2px 8px;border-radius:999px;margin-left:8px;
+}
+
+/* Radio / Checkbox groups */
+.choice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.choice{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:12px 14px;
+  border:1.5px solid var(--line-strong);
+  border-radius:8px;
+  cursor:pointer;background:#fff;
+  transition:all 160ms ease;
+}
+.choice:hover{border-color:var(--leo-gold);background:rgba(201,161,74,0.04)}
+.choice input{margin-top:2px;accent-color:var(--leo-gold-deep)}
+.choice-content{flex:1}
+.choice-content .lbl{font-size:13.5px;font-weight:700;color:var(--leo-ink);line-height:1.3;display:block}
+.choice-content .sub{font-size:12px;color:var(--subtle);margin-top:2px;line-height:1.4;display:block}
+.choice input:checked + .choice-content .lbl{color:var(--leo-gold-deep)}
+
+/* Field row (2 cols) */
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:680px){.field-row{grid-template-columns:1fr}}
+
+/* === SUBMIT === */
+.submit-bar{
+  padding:32px clamp(24px,5vw,56px);
+  background:linear-gradient(180deg,#fff,var(--leo-paper));
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.submit-info{font-size:13px;color:var(--muted);max-width:46ch;line-height:1.5}
+.btn-submit{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:18px 36px;
+  background:var(--leo-gold);
+  color:#fff;
+  font-family:inherit;font-weight:800;font-size:13.5px;letter-spacing:0.06em;text-transform:uppercase;
+  border:0;border-radius:999px;cursor:pointer;
+  transition:all 180ms ease;
+  box-shadow:0 8px 28px rgba(201,161,74,0.32);
+}
+.btn-submit:hover{background:var(--leo-gold-deep);transform:translateY(-2px);box-shadow:0 12px 36px rgba(201,161,74,0.42)}
+
+/* === OUTPUT MODAL === */
+.modal{
+  display:none;
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(21,19,15,0.78);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+  padding:24px;
+}
+.modal.open{display:flex}
+.modal__inner{
+  background:#fff;border-radius:18px;
+  max-width:760px;width:100%;
+  max-height:88vh;
+  display:flex;flex-direction:column;
+  box-shadow:0 32px 80px rgba(0,0,0,0.32);
+  overflow:hidden;
+}
+.modal__head{
+  padding:24px 28px;
+  background:var(--leo-dark);color:#fff;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.modal__head h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;letter-spacing:-0.01em}
+.modal__head h2 em{color:var(--leo-gold-hi);font-style:italic}
+.modal__close{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,0.10);
+  border:0;color:#fff;cursor:pointer;font-size:20px;
+}
+.modal__close:hover{background:rgba(255,255,255,0.18)}
+.modal__body{padding:28px;flex:1;overflow:auto}
+.modal__hint{font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.55}
+.modal__hint strong{color:var(--leo-ink)}
+.modal__output{
+  background:#1A1612;color:#FAF6EC;
+  font-family:'Roboto',monospace;font-size:12.5px;line-height:1.6;
+  padding:20px;border-radius:10px;
+  white-space:pre-wrap;word-wrap:break-word;
+  max-height:50vh;overflow:auto;
+}
+.modal__actions{padding:18px 28px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.btn-copy{
+  padding:12px 22px;background:var(--leo-gold);color:#fff;border:0;border-radius:999px;
+  font-family:inherit;font-weight:700;font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;
+  transition:all 180ms ease;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-copy:hover{background:var(--leo-gold-deep)}
+.btn-copy.copied{background:#2F8534}
+.btn-whatsapp{
+  padding:12px 22px;background:#25D366;color:#fff;border:0;border-radius:999px;
+  font-family:inherit;font-weight:700;font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;
+  transition:all 180ms ease;
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+}
+.btn-whatsapp:hover{background:#1DA851}
+
+/* === BB BRANDS TAG === */
+.bb-tag{
+  position:fixed;bottom:18px;right:18px;z-index:1000;
+  background:#0A0A0A;color:#fff;
+  padding:10px 18px 10px 14px;border-radius:999px;
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;font-weight:600;letter-spacing:0.04em;
+  box-shadow:0 8px 24px rgba(0,0,0,0.32);
+  text-decoration:none;
+}
+.bb-tag .dot{width:8px;height:8px;border-radius:50%;background:#5B6BFF;box-shadow:0 0 12px #5B6BFF;animation:pulse 1.6s ease-in-out infinite}
+.bb-tag span.label{color:#A4ADFF;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     COVER
+     ════════════════════════════════════════════════════════ -->
+<section class="cover">
+  <div class="cover__top">
+    <div class="cover__brand">
+      <span class="dot"></span>
+      BB Brands · Onboarding
+    </div>
+    <div class="cover__meta">LEO Sport Nutrition · 28.04.2026</div>
+  </div>
+
+  <div class="cover__main">
+    <span class="cover__kicker">✦ &nbsp;Nach dem Sales Call</span>
+    <h1 class="cover__title">Schön dass ihr dabei seid.<br><em>Jetzt geht's los.</em></h1>
+    <p class="cover__sub">
+      Hey Nico, danke für den Call. Ich brauche von dir nur die <strong>wichtigsten Punkte</strong>
+      damit der Build sauber starten kann — keine Romanen, kurz und konkret.
+      Dauer: <strong>2–3 Minuten.</strong> Felder die im Call schon geklärt wurden, sind
+      <strong>vorausgefüllt</strong> — du musst nur bestätigen oder ergänzen.
+    </p>
+  </div>
+
+  <div class="cover__bottom">
+    <span><strong>Build-Start</strong> Nächste Woche</span>
+    <span><strong>Live</strong> 3–4 Wochen</span>
+    <span><strong>Scope</strong> Homepage + 1 PDP-Template</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     FORM
+     ════════════════════════════════════════════════════════ -->
+<div class="form-wrap">
+<form id="leo-onboarding" class="form-card" onsubmit="return submitForm(event)">
+
+  <div class="form-progress">
+    <span>01 Brand</span>
+    <span>02 Produkte</span>
+    <span>03 Trust</span>
+    <span>04 Founder</span>
+    <span>05 Shopify</span>
+    <span>06 Marketing</span>
+    <span>07 Launch</span>
+  </div>
+
+  <!-- ── 01 Brand ─────────────────────────────────────── -->
+  <section class="fs">
+    <div class="fs__head">
+      <span class="fs__num">01</span>
+      <h2 class="fs__title">Brand-Basics</h2>
+    </div>
+    <p class="fs__sub">Logo, Farben, Schrift. Wenn final: hier rein. Wenn noch Work-in-Progress: kurz beschreiben oder Kasten leer lassen.</p>
+
+    <div class="field field--prefilled">
+      <label class="field__label">Brand-Name <span class="field__prefilled-tag">aus Call</span></label>
+      <input type="text" name="brand_name" value="LEO Sport Nutrition">
+    </div>
+
+    <div class="field-row">
+      <div class="field field--prefilled">
+        <label class="field__label">Primärfarbe (Hex) <span class="field__prefilled-tag">aus Call · ändern wenn nötig</span></label>
+        <input type="text" name="color_primary" value="#C9A14A" placeholder="#XXXXXX">
+        <p class="field__hint">Aktuell: warmes Gold</p>
+      </div>
+      <div class="field">
+        <label class="field__label">Sekundärfarbe (optional)<span class="opt">optional</span></label>
+        <input type="text" name="color_secondary" placeholder="#XXXXXX (z.B. dunkles Holz für Backgrounds)">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Schriftart-Wunsch</label>
+      <textarea name="fonts" placeholder="z.B.: Headlines = Roboto Black, Body = Roboto Regular. Oder: 'wir haben noch keine, schlagt was vor'.">Headlines: Roboto Black + Instrument Serif Italic Akzent &#10;Body: Roboto Regular</textarea>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Logo-Files (Status)</label>
+      <div class="choice-grid">
+        <label class="choice"><input type="radio" name="logo_status" value="final"><span class="choice-content"><span class="lbl">Final, schick ich per Mail</span><span class="sub">SVG + PNG bevorzugt</span></span></label>
+        <label class="choice"><input type="radio" name="logo_status" value="wip"><span class="choice-content"><span class="lbl">WIP, in 1–2 Wochen</span><span class="sub">Wir starten mit Wordmark-Platzhalter</span></span></label>
+        <label class="choice"><input type="radio" name="logo_status" value="none"><span class="choice-content"><span class="lbl">Brauchen wir Hilfe</span><span class="sub">Logo-Design extra anfragen</span></span></label>
+      </div>
+    </div>
+
+    <div class="field field--prefilled">
+      <label class="field__label">Brand-Voice / Tonalität <span class="field__prefilled-tag">aus Entwurf</span></label>
+      <textarea name="voice" rows="2">Direkt, klar, pharma-nah. Mantra: „Nicht maximal. Funktional." Keine Bro-Science-Sprache, keine Mega-Claims. Dosis-orientiert.</textarea>
+    </div>
+  </section>
+
+  <!-- ── 02 Produkte ─────────────────────────────────────── -->
+  <section class="fs">
+    <div class="fs__head">
+      <span class="fs__num">02</span>
+      <h2 class="fs__title">Produkt-Details · 3 Phasen + Bundle</h2>
+    </div>
+    <p class="fs__sub">Final-Wirkstoffe, Mengen und Geschmack. <strong>Bundle ist Money-Maker</strong>, Einzelpreis 44 € pro Phase, Bundle 99 €/Mon. Abo · 119 € einmalig.</p>
+
+    <div class="field field--prefilled">
+      <label class="field__label">Phase 01 · Activate (Pre-Workout) — Wirkstoffe + Dosen <span class="field__prefilled-tag">aus Entwurf</span></label>
+      <textarea name="activate_ingredients" rows="3">Koffein 200 mg, Citrullin-Malat 6 g, Beta-Alanin 3,2 g, L-Carnitin 1,5 g + Mg/Na/K Elektrolyte&#10;&#10;Bitte korrigieren falls finale Rezeptur abweicht.</textarea>
+    </div>
+
+    <div class="field field--prefilled">
+      <label class="field__label">Phase 02 · Energy (Intra-Workout) — Wirkstoffe + Dosen <span class="field__prefilled-tag">aus Entwurf</span></label>
+      <textarea name="energy_ingredients" rows="3">Maltodextrin 22 g, Fructose 11 g (2:1), Natrium 480 mg, Magnesium 120 mg, Kalium 220 mg&#10;&#10;Bitte korrigieren falls finale Rezeptur abweicht.</textarea>
+    </div>
+
+    <div class="field field--prefilled">
+      <label class="field__label">Phase 03 · Recovery (Post-Workout) — Wirkstoffe + Dosen <span class="field__prefilled-tag">aus Entwurf</span></label>
+      <textarea name="recovery_ingredients" rows="3">Kreatin Monohydrat 3 g, Glutamin, BCAAs 2:1:1 + Elektrolyt-Refill&#10;&#10;Bitte korrigieren falls finale Rezeptur abweicht.</textarea>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Geschmacksrichtungen — welche pro Phase?</label>
+      <textarea name="flavors" rows="3" placeholder="z.B.: Activate = Citrus, Energy = Beere, Recovery = Schoko. Oder: 'nur eine Sorte pro Phase, Namen folgen'."></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Dosen-Format / Inhalt</label>
+      <input type="text" name="package_size" value="600 g · 30 Portionen pro Dose" placeholder="z.B. 600 g · 30 Portionen">
+    </div>
+
+    <div class="field">
+      <label class="field__label">Probe als Sales-Magnet — wollt ihr das umsetzen?<span class="opt">aus Call</span></label>
+      <div class="choice-grid">
+        <label class="choice"><input type="radio" name="sample_strategy" value="yes"><span class="choice-content"><span class="lbl">Ja</span><span class="sub">3-er Probier-Set ~ 9,90 €</span></span></label>
+        <label class="choice"><input type="radio" name="sample_strategy" value="newsletter"><span class="choice-content"><span class="lbl">Als Newsletter-Lead-Magnet</span><span class="sub">Probe gratis, Newsletter-Opt-in</span></span></label>
+        <label class="choice"><input type="radio" name="sample_strategy" value="later"><span class="choice-content"><span class="lbl">Erst nach Launch</span><span class="sub">Phase 2</span></span></label>
+        <label class="choice"><input type="radio" name="sample_strategy" value="no"><span class="choice-content"><span class="lbl">Nicht im Plan</span><span class="sub">Bundle-Only</span></span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 03 Trust & Compliance ─────────────────────────────────────── -->
+  <section class="fs">
+    <div class="fs__head">
+      <span class="fs__num">03</span>
+      <h2 class="fs__title">Trust &amp; Compliance</h2>
+    </div>
+    <p class="fs__sub">Zertifikate und Pflichtangaben — die brauchen wir für die Trust-Sektionen + Footer.</p>
+
+    <div class="field">
+      <label class="field__label">Kölner Liste® Zertifikat — habt ihr das schon? <span class="field__prefilled-tag">USP</span></label>
+      <div class="choice-grid">
+        <label class="choice"><input type="radio" name="kl_status" value="have"><span class="choice-content"><span class="lbl">Ja, PDF schick ich</span><span class="sub">Wird als Download verlinkt</span></span></label>
+        <label class="choice"><input type="radio" name="kl_status" value="pending"><span class="choice-content"><span class="lbl">Beantragt, läuft</span><span class="sub">Bis Launch da</span></span></label>
+        <label class="choice"><input type="radio" name="kl_status" value="planned"><span class="choice-content"><span class="lbl">Geplant, noch nicht beantragt</span><span class="sub">Wann?</span></span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Hersteller / Pharma-Standard — Adresse für Impressum</label>
+      <textarea name="manufacturer" rows="2" placeholder="Hersteller-Name + Adresse (Pharma-zertifizierter Lohnabfüller in DE) — kommt ins Impressum."></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Rechtliches — was schon fertig?</label>
+      <div class="choice-grid">
+        <label class="choice"><input type="checkbox" name="legal_agb"><span class="choice-content"><span class="lbl">AGB</span></span></label>
+        <label class="choice"><input type="checkbox" name="legal_dsgvo"><span class="choice-content"><span class="lbl">Datenschutz</span></span></label>
+        <label class="choice"><input type="checkbox" name="legal_widerruf"><span class="choice-content"><span class="lbl">Widerruf</span></span></label>
+        <label class="choice"><input type="checkbox" name="legal_impressum"><span class="choice-content"><span class="lbl">Impressum</span></span></label>
+      </div>
+      <p class="field__hint">Was fehlt, kommt nach Launch — wir verlinken Platzhalter-Pages auf der Live-Seite</p>
+    </div>
+  </section>
+
+  <!-- ── 04 Founder ─────────────────────────────────────── -->
+  <section class="fs">
+    <div class="fs__head">
+      <span class="fs__num">04</span>
+      <h2 class="fs__title">Founder &amp; Athleten</h2>
+    </div>
+    <p class="fs__sub">Eure echten Namen sind ein Trust-Asset — wir nutzen das prominent. Athleten-Quotes machen den Unterschied zu jeder ESN-/AG1-Story.</p>
+
+    <div class="field">
+      <label class="field__label">Dr. O. Ludwig — 1-Satz-Bio + Hauptfeld</label>
+      <textarea name="bio_ludwig" rows="2" placeholder="z.B.: Humanbiologe, betreut seit X Jahren Bundesliga-Mannschaft Y, Spezialgebiet Stoffwechsel/Performance."></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Dr. M. Guthörl — 1-Satz-Bio + Hauptfeld</label>
+      <textarea name="bio_guthoerl" rows="2" placeholder="z.B.: Sportmediziner, Mannschaftsarzt bei Verein Y, betreut Einzelathleten in Sportart Z."></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Founder-Portrait — Status</label>
+      <div class="choice-grid">
+        <label class="choice"><input type="radio" name="founder_photo" value="now"><span class="choice-content"><span class="lbl">Foto gibt's</span><span class="sub">Schick ich per Mail</span></span></label>
+        <label class="choice"><input type="radio" name="founder_photo" value="shoot"><span class="choice-content"><span class="lbl">Shoot in Planung</span><span class="sub">Bis Launch da</span></span></label>
+        <label class="choice"><input type="radio" name="founder_photo" value="placeholder"><span class="choice-content"><span class="lbl">Erstmal Platzhalter</span><span class="sub">Foto später ergänzen</span></span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Athleten als Reference — habt ihr schon Namen / Vereine die wir nennen dürfen?<span class="opt">aus Call: Profi-Sportler als Reference</span></label>
+      <textarea name="athletes" rows="3" placeholder="z.B.: 'Lukas K. — Profi Verein X (zugesagt), Anna L. — Triathlon-Profi DTB (in Klärung)'. Wir brauchen schriftliche Freigabe pro Person."></textarea>
+    </div>
+  </section>
+
+  <!-- ── 05 Shopify ─────────────────────────────────────── -->
+  <section class="fs">
+    <div class="fs__head">
+      <span class="fs__num">05</span>
+      <h2 class="fs__title">Shopify-Setup</h2>
+    </div>
+    <p class="fs__sub">Was bei euch schon steht, was wir bauen, was ihr selbst macht.</p>
+
+    <div class="field">
+      <label class="field__label">Shopify-Store — Status</label>
+      <div class="choice-grid">
+        <label class="choice"><input type="radio" name="shop_status" value="exists"><span class="choice-content"><span class="lbl">Store existiert</span><span class="sub">Collaborator-Access kommt</span></span></label>
+        <label class="choice"><input type="radio" name="shop_status" value="new"><span class="choice-content"><span class="lbl">Wir legen neu an</span><span class="sub">Plan-Empfehlung Basic</span></span></label>
+        <label class="choice"><input type="radio" name="shop_status" value="dev"><span class="choice-content"><span class="lbl">Development-Store</span><span class="sub">Wir bauen, ihr aktiviert</span></span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Domain</label>
+      <input type="text" name="domain" placeholder="z.B. leo-sport.de · oder: 'noch nicht final'">
+    </div>
+
+    <div class="field">
+      <label class="field__label">Subscriptions — welche App? <span class="opt">macht ihr selbst</span></label>
+      <div class="choice-grid">
+        <label class="choice"><input type="radio" name="sub_app" value="native"><span class="choice-content"><span class="lbl">Shopify Subscriptions</span><span class="sub">Native, kostenlos, empfohlen</span></span></label>
+        <label class="choice"><input type="radio" name="sub_app" value="recharge"><span class="choice-content"><span class="lbl">Recharge</span><span class="sub">Premium, mehr Features</span></span></label>
+        <label class="choice"><input type="radio" name="sub_app" value="bold"><span class="choice-content"><span class="lbl">Bold Subscriptions</span></span></label>
+        <label class="choice"><input type="radio" name="sub_app" value="undecided"><span class="choice-content"><span class="lbl">Noch nicht entschieden</span><span class="sub">Empfehlung gewünscht</span></span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Bestehende Apps die rein sollen?<span class="opt">optional</span></label>
+      <textarea name="other_apps" rows="2" placeholder="z.B. Judge.me Reviews, Klaviyo, Loox, etc."></textarea>
+    </div>
+  </section>
+
+  <!-- ── 06 Marketing ─────────────────────────────────────── -->
+  <section class="fs">
+    <div class="fs__head">
+      <span class="fs__num">06</span>
+      <h2 class="fs__title">Marketing &amp; Tracking</h2>
+    </div>
+    <p class="fs__sub">Was wir verbinden müssen — Newsletter, Social-Handles, Pixel.</p>
+
+    <div class="field field--prefilled">
+      <label class="field__label">Traffic-Strategie <span class="field__prefilled-tag">aus Call</span></label>
+      <textarea name="traffic_plan" rows="2">Social Media + Influencer-Community. Profi-Sportler als Reference, kleinere Sportarten als Fokus.</textarea>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Newsletter-Provider</label>
+      <div class="choice-grid">
+        <label class="choice"><input type="radio" name="newsletter" value="klaviyo"><span class="choice-content"><span class="lbl">Klaviyo</span><span class="sub">Empfohlen für D2C</span></span></label>
+        <label class="choice"><input type="radio" name="newsletter" value="mailchimp"><span class="choice-content"><span class="lbl">Mailchimp</span></span></label>
+        <label class="choice"><input type="radio" name="newsletter" value="cleverreach"><span class="choice-content"><span class="lbl">CleverReach / Brevo</span></span></label>
+        <label class="choice"><input type="radio" name="newsletter" value="none"><span class="choice-content"><span class="lbl">Noch nichts</span><span class="sub">Empfehlung gewünscht</span></span></label>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label class="field__label">Instagram</label>
+        <input type="text" name="ig" placeholder="@leo.sport.nutrition">
+      </div>
+      <div class="field">
+        <label class="field__label">TikTok / YouTube</label>
+        <input type="text" name="tt_yt" placeholder="@handle / Channel-URL">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Tracking — was braucht ihr?</label>
+      <div class="choice-grid">
+        <label class="choice"><input type="checkbox" name="tracking_meta"><span class="choice-content"><span class="lbl">Meta-Pixel</span></span></label>
+        <label class="choice"><input type="checkbox" name="tracking_ga"><span class="choice-content"><span class="lbl">Google Analytics 4</span></span></label>
+        <label class="choice"><input type="checkbox" name="tracking_tiktok"><span class="choice-content"><span class="lbl">TikTok Pixel</span></span></label>
+        <label class="choice"><input type="checkbox" name="tracking_klaviyo"><span class="choice-content"><span class="lbl">Klaviyo-Tracking</span></span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 07 Launch ─────────────────────────────────────── -->
+  <section class="fs">
+    <div class="fs__head">
+      <span class="fs__num">07</span>
+      <h2 class="fs__title">Launch &amp; Timing</h2>
+    </div>
+    <p class="fs__sub">Wann startet ihr Backoffice-Arbeit (Produkte einpflegen, Abo-App, Shipping)? Wann soll's live?</p>
+
+    <div class="field-row">
+      <div class="field">
+        <label class="field__label">Wunsch-Launch-Datum</label>
+        <input type="date" name="launch_date">
+      </div>
+      <div class="field">
+        <label class="field__label">Backoffice-Start (eure Seite)</label>
+        <input type="date" name="backoffice_start">
+        <p class="field__hint">Produkte anlegen, Abo konfigurieren, Versand-Setup — läuft parallel zum Build</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Open Items / Wünsche / Bedenken<span class="opt">optional</span></label>
+      <textarea name="open_items" rows="3" placeholder="Alles was offen ist, was ihr noch klären müsst, oder was ich wissen sollte."></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field__label">Hauptansprechpartner für Build-Rückfragen</label>
+      <input type="text" name="contact_person" value="Nico Bichlmayer" placeholder="Name + Rolle (Nico oder direkt Founders?)">
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label class="field__label">Beste E-Mail für Vertrag</label>
+        <input type="email" name="email" placeholder="nico@…">
+      </div>
+      <div class="field">
+        <label class="field__label">WhatsApp / Telefon für schnelle Rückfragen</label>
+        <input type="text" name="phone" placeholder="+49…">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SUBMIT ─────────────────────────────────────── -->
+  <div class="submit-bar">
+    <p class="submit-info">Klick auf <strong>„Antworten zusammenstellen"</strong> → Output kopieren → an Moritz per WhatsApp / Mail.</p>
+    <button type="submit" class="btn-submit">
+      Antworten zusammenstellen
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+
+</form>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     OUTPUT MODAL
+     ════════════════════════════════════════════════════════ -->
+<div class="modal" id="output-modal">
+  <div class="modal__inner">
+    <header class="modal__head">
+      <h2>✓ Antworten <em>eingereicht</em></h2>
+      <button class="modal__close" onclick="closeModal()" aria-label="Schließen">×</button>
+    </header>
+    <div class="modal__body">
+      <p class="modal__hint"><strong style="color:#2F8534">✓ Eingereicht.</strong> Antworten sind bei Moritz angekommen — wir schicken Vertrag &amp; Rechnung bis heute Abend zurück. Die Übersicht unten ist als Backup, kannst du optional auch per WhatsApp schicken.</p>
+      <pre class="modal__output" id="output-text"></pre>
+    </div>
+    <div class="modal__actions">
+      <button class="btn-copy" onclick="copyOutput()" id="copy-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+        Antworten kopieren
+      </button>
+      <a class="btn-whatsapp" id="wa-btn" href="#" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.84 11.91L4 20l4.2-1.1a7.93 7.93 0 0 0 3.84.98h.01a7.93 7.93 0 0 0 7.93-7.93 7.86 7.86 0 0 0-2.38-5.63zm-5.55 12.21h-.01a6.59 6.59 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.6 6.6 0 1 1 12.23-3.49 6.6 6.6 0 0 1-6.63 6.58z"/></svg>
+        Nach WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<a class="bb-tag" href="https://bb-brands.de" target="_blank">
+  <span class="dot"></span>
+  <span><span class="label">Built by</span><br>BB Brands</span>
+</a>
+
+<script>
+function submitForm(e){
+  e.preventDefault();
+  const f = document.getElementById('leo-onboarding');
+  const fd = new FormData(f);
+  const submitBtn = f.querySelector('.btn-submit');
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.6'; submitBtn.innerHTML = 'Speichern…'; }
+
+  /* Group radios/checkboxes */
+  const fields = {};
+  for (const [k, v] of fd.entries()) {
+    if (fields[k]) {
+      if (Array.isArray(fields[k])) fields[k].push(v);
+      else fields[k] = [fields[k], v];
+    } else {
+      fields[k] = v;
+    }
+  }
+
+  /* Submit to backend (auto-emails Moritz + stores in Redis) */
+  const token = localStorage.getItem('bb-preview-token');
+  if (token) {
+    fetch('/api/onboarding-submit', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        brandSlug: 'leo',
+        brandName: fields.brand_name || 'LEO Sport Nutrition',
+        submittedByName: fields.contact_person || '',
+        submittedByEmail: fields.email || '',
+        answers: fields,
+      }),
+    }).then(r => r.json()).then(d => {
+      console.log('[onboarding-submit]', d);
+    }).catch(err => {
+      console.warn('[onboarding-submit] failed', err);
+    }).finally(() => {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; submitBtn.innerHTML = 'Antworten zusammenstellen'; }
+    });
+  }
+
+  /* Build markdown output */
+  let md = `# LEO Sport Nutrition — Onboarding-Antworten\n`;
+  md += `_Eingereicht: ${new Date().toLocaleString('de-DE')}_\n\n`;
+  md += `---\n\n`;
+
+  md += `## 01 · Brand-Basics\n`;
+  md += `- **Brand-Name:** ${fields.brand_name || '–'}\n`;
+  md += `- **Primärfarbe:** ${fields.color_primary || '–'}\n`;
+  md += `- **Sekundärfarbe:** ${fields.color_secondary || '–'}\n`;
+  md += `- **Schriftarten:** ${(fields.fonts || '–').replace(/\n/g, ' / ')}\n`;
+  md += `- **Logo-Status:** ${labelFor('logo_status', fields.logo_status)}\n`;
+  md += `- **Voice:** ${(fields.voice || '–').replace(/\n/g, ' ')}\n\n`;
+
+  md += `## 02 · Produkte\n`;
+  md += `### Phase 01 · Activate\n${fields.activate_ingredients || '–'}\n\n`;
+  md += `### Phase 02 · Energy\n${fields.energy_ingredients || '–'}\n\n`;
+  md += `### Phase 03 · Recovery\n${fields.recovery_ingredients || '–'}\n\n`;
+  md += `- **Geschmacksrichtungen:** ${(fields.flavors || '–').replace(/\n/g, ' / ')}\n`;
+  md += `- **Dosen-Format:** ${fields.package_size || '–'}\n`;
+  md += `- **Probe-Strategie:** ${labelFor('sample_strategy', fields.sample_strategy)}\n\n`;
+
+  md += `## 03 · Trust & Compliance\n`;
+  md += `- **Kölner Liste:** ${labelFor('kl_status', fields.kl_status)}\n`;
+  md += `- **Hersteller / Pharma-Standard:** ${(fields.manufacturer || '–').replace(/\n/g, ' ')}\n`;
+  md += `- **Rechtliches fertig:** ${legalChecks(fields)}\n\n`;
+
+  md += `## 04 · Founder & Athleten\n`;
+  md += `- **Dr. O. Ludwig:** ${(fields.bio_ludwig || '–').replace(/\n/g, ' ')}\n`;
+  md += `- **Dr. M. Guthörl:** ${(fields.bio_guthoerl || '–').replace(/\n/g, ' ')}\n`;
+  md += `- **Founder-Portrait:** ${labelFor('founder_photo', fields.founder_photo)}\n`;
+  md += `- **Athleten als Reference:** ${(fields.athletes || '–').replace(/\n/g, ' / ')}\n\n`;
+
+  md += `## 05 · Shopify-Setup\n`;
+  md += `- **Store-Status:** ${labelFor('shop_status', fields.shop_status)}\n`;
+  md += `- **Domain:** ${fields.domain || '–'}\n`;
+  md += `- **Subscriptions-App:** ${labelFor('sub_app', fields.sub_app)}\n`;
+  md += `- **Andere Apps:** ${(fields.other_apps || '–').replace(/\n/g, ' / ')}\n\n`;
+
+  md += `## 06 · Marketing & Tracking\n`;
+  md += `- **Traffic-Plan:** ${(fields.traffic_plan || '–').replace(/\n/g, ' ')}\n`;
+  md += `- **Newsletter:** ${labelFor('newsletter', fields.newsletter)}\n`;
+  md += `- **Instagram:** ${fields.ig || '–'}\n`;
+  md += `- **TikTok / YouTube:** ${fields.tt_yt || '–'}\n`;
+  md += `- **Tracking:** ${trackingChecks(fields)}\n\n`;
+
+  md += `## 07 · Launch & Timing\n`;
+  md += `- **Wunsch-Launch:** ${fields.launch_date || '–'}\n`;
+  md += `- **Backoffice-Start:** ${fields.backoffice_start || '–'}\n`;
+  md += `- **Open Items:** ${(fields.open_items || '–').replace(/\n/g, ' / ')}\n`;
+  md += `- **Ansprechpartner:** ${fields.contact_person || '–'}\n`;
+  md += `- **E-Mail:** ${fields.email || '–'}\n`;
+  md += `- **WhatsApp/Tel:** ${fields.phone || '–'}\n\n`;
+
+  md += `---\n\n`;
+  md += `_Eingereicht via BB Brands Onboarding-Fragebogen_\n`;
+
+  /* Show modal */
+  document.getElementById('output-text').textContent = md;
+  document.getElementById('output-modal').classList.add('open');
+
+  /* WhatsApp link */
+  const wa = document.getElementById('wa-btn');
+  wa.href = 'https://wa.me/491608725947?text=' + encodeURIComponent(md);
+
+  return false;
+}
+
+function labelFor(name, value){
+  if (!value) return '–';
+  const labels = {
+    logo_status: { final: 'Final, kommt per Mail', wip: 'WIP — Platzhalter starten', none: 'Brauchen Logo-Design-Hilfe' },
+    sample_strategy: { yes: 'Ja, Probier-Set', newsletter: 'Newsletter-Lead-Magnet', later: 'Erst nach Launch', no: 'Nicht im Plan' },
+    kl_status: { have: 'Vorhanden — PDF kommt', pending: 'Beantragt, läuft', planned: 'Geplant, noch nicht beantragt' },
+    founder_photo: { now: 'Foto vorhanden', shoot: 'Shoot in Planung', placeholder: 'Erstmal Platzhalter' },
+    shop_status: { exists: 'Store existiert', new: 'Wir legen neu an', dev: 'Development-Store' },
+    sub_app: { native: 'Shopify Subscriptions (native)', recharge: 'Recharge', bold: 'Bold Subscriptions', undecided: 'Empfehlung gewünscht' },
+    newsletter: { klaviyo: 'Klaviyo', mailchimp: 'Mailchimp', cleverreach: 'CleverReach / Brevo', none: 'Empfehlung gewünscht' }
+  };
+  return (labels[name] && labels[name][value]) || value;
+}
+
+function legalChecks(f){
+  const items = [];
+  if (f.legal_agb) items.push('AGB');
+  if (f.legal_dsgvo) items.push('Datenschutz');
+  if (f.legal_widerruf) items.push('Widerruf');
+  if (f.legal_impressum) items.push('Impressum');
+  return items.length ? items.join(', ') : 'Nichts fertig — Platzhalter-Pages';
+}
+
+function trackingChecks(f){
+  const items = [];
+  if (f.tracking_meta) items.push('Meta-Pixel');
+  if (f.tracking_ga) items.push('GA4');
+  if (f.tracking_tiktok) items.push('TikTok-Pixel');
+  if (f.tracking_klaviyo) items.push('Klaviyo-Tracking');
+  return items.length ? items.join(', ') : '–';
+}
+
+function closeModal(){
+  document.getElementById('output-modal').classList.remove('open');
+}
+
+function copyOutput(){
+  const txt = document.getElementById('output-text').textContent;
+  navigator.clipboard.writeText(txt).then(() => {
+    const btn = document.getElementById('copy-btn');
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5 11-11"/></svg>Kopiert!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2200);
+  });
+}
+</script>
+
+</body>
+</html>
