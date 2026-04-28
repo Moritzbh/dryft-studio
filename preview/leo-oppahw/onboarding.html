@@ -28,18 +28,11 @@ html.bbprev-auth-pending::after {
 (function() {
   document.documentElement.classList.add('bbprev-auth-pending');
   var EXPECTED_SLUG = "leo";
-  var token = localStorage.getItem('bb-preview-token');
-  if (!token) {
-    location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
-    return;
-  }
-  fetch('/api/preview-auth?action=verify', {
-    headers: { 'Authorization': 'Bearer ' + token }
-  })
+  /* Auth via HttpOnly-Cookie — credentials:'include' sendet ihn automatisch */
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
     .then(function(r) { return r.json(); })
     .then(function(d) {
       if (!d.ok || !d.brand || d.brand.slug !== EXPECTED_SLUG) {
-        localStorage.removeItem('bb-preview-token');
         location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
         return;
       }
@@ -660,22 +653,22 @@ textarea{resize:vertical;min-height:80px;line-height:1.5;font-family:inherit}
 <div class="modal" id="output-modal">
   <div class="modal__inner">
     <header class="modal__head">
-      <h2>✓ Antworten <em>eingereicht</em></h2>
+      <h2>Letzter Schritt — <em>per WhatsApp</em></h2>
       <button class="modal__close" onclick="closeModal()" aria-label="Schließen">×</button>
     </header>
     <div class="modal__body">
-      <p class="modal__hint"><strong style="color:#2F8534">✓ Eingereicht.</strong> Antworten sind bei Moritz angekommen — wir schicken Vertrag &amp; Rechnung bis heute Abend zurück. Die Übersicht unten ist als Backup, kannst du optional auch per WhatsApp schicken.</p>
+      <p class="modal__hint"><strong>Letzter Klick:</strong> drück unten <strong>„Nach WhatsApp"</strong> — der Block geht direkt an Moritz, du musst nur noch absenden. Vertrag &amp; Rechnung kommen bis heute Abend zurück.</p>
       <pre class="modal__output" id="output-text"></pre>
     </div>
     <div class="modal__actions">
-      <button class="btn-copy" onclick="copyOutput()" id="copy-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
-        Antworten kopieren
-      </button>
-      <a class="btn-whatsapp" id="wa-btn" href="#" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.84 11.91L4 20l4.2-1.1a7.93 7.93 0 0 0 3.84.98h.01a7.93 7.93 0 0 0 7.93-7.93 7.86 7.86 0 0 0-2.38-5.63zm-5.55 12.21h-.01a6.59 6.59 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.6 6.6 0 1 1 12.23-3.49 6.6 6.6 0 0 1-6.63 6.58z"/></svg>
-        Nach WhatsApp
+      <a class="btn-whatsapp" id="wa-btn" href="#" target="_blank" style="font-size:13.5px;padding:14px 28px;font-weight:800">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.84 11.91L4 20l4.2-1.1a7.93 7.93 0 0 0 3.84.98h.01a7.93 7.93 0 0 0 7.93-7.93 7.86 7.86 0 0 0-2.38-5.63zm-5.55 12.21h-.01a6.59 6.59 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.6 6.6 0 1 1 12.23-3.49 6.6 6.6 0 0 1-6.63 6.58z"/></svg>
+        Nach WhatsApp senden →
       </a>
+      <button class="btn-copy" onclick="copyOutput()" id="copy-btn" style="background:transparent;color:#5A5348;border:1.5px solid rgba(21,19,15,0.16)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+        Nur kopieren
+      </button>
     </div>
   </div>
 </div>
@@ -690,8 +683,6 @@ function submitForm(e){
   e.preventDefault();
   const f = document.getElementById('leo-onboarding');
   const fd = new FormData(f);
-  const submitBtn = f.querySelector('.btn-submit');
-  if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.6'; submitBtn.innerHTML = 'Speichern…'; }
 
   /* Group radios/checkboxes */
   const fields = {};
@@ -704,30 +695,19 @@ function submitForm(e){
     }
   }
 
-  /* Submit to backend (auto-emails Moritz + stores in Redis) */
-  const token = localStorage.getItem('bb-preview-token');
-  if (token) {
-    fetch('/api/onboarding-submit', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + token,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        brandSlug: 'leo',
-        brandName: fields.brand_name || 'LEO Sport Nutrition',
-        submittedByName: fields.contact_person || '',
-        submittedByEmail: fields.email || '',
-        answers: fields,
-      }),
-    }).then(r => r.json()).then(d => {
-      console.log('[onboarding-submit]', d);
-    }).catch(err => {
-      console.warn('[onboarding-submit] failed', err);
-    }).finally(() => {
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; submitBtn.innerHTML = 'Antworten zusammenstellen'; }
-    });
-  }
+  /* Silent backup-store im Backend (storage in Redis falls Email/Recovery nötig) */
+  fetch('/api/onboarding-submit', {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      brandSlug: 'leo',
+      brandName: fields.brand_name || 'LEO Sport Nutrition',
+      submittedByName: fields.contact_person || '',
+      submittedByEmail: fields.email || '',
+      answers: fields,
+    }),
+  }).catch(() => { /* silent — WhatsApp ist primary */ });
 
   /* Build markdown output */
   let md = `# LEO Sport Nutrition — Onboarding-Antworten\n`;

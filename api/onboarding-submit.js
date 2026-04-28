@@ -48,6 +48,22 @@ const NTFY_SERVER = (process.env.NTFY_SERVER || 'https://ntfy.sh').trim().replac
 
 const ONBOARDING_LIST_KEY = 'bb:onboarding:list';
 const ONBOARDING_HASH_KEY = 'bb:onboarding:items';
+const AUTH_COOKIE_NAME = 'bb_preview_auth';
+
+function getCookieToken(req) {
+  const raw = req.headers['cookie'] || '';
+  if (!raw) return '';
+  const parts = raw.split(';');
+  for (let i = 0; i < parts.length; i++) {
+    const eq = parts[i].indexOf('=');
+    if (eq < 0) continue;
+    const k = parts[i].slice(0, eq).trim();
+    if (k === AUTH_COOKIE_NAME) {
+      try { return decodeURIComponent(parts[i].slice(eq + 1).trim()); } catch { return ''; }
+    }
+  }
+  return '';
+}
 
 // ----- Redis helper -----------------------------------------
 async function redis(...command) {
@@ -214,7 +230,10 @@ module.exports = async function handler(req, res) {
   try {
     // ============ POST: customer submits onboarding ============
     if (req.method === 'POST') {
-      const auth = (req.headers['authorization'] || '').replace(/^Bearer\s+/i, '');
+      // Cookie first (browser flow), Bearer fallback (CLI/scripts)
+      const cookieTok = getCookieToken(req);
+      const bearerTok = (req.headers['authorization'] || '').replace(/^Bearer\s+/i, '');
+      const auth = cookieTok || bearerTok;
       const tokenInfo = verifyToken(auth);
       if (!tokenInfo) return jsonResponse(res, 401, { ok: false, error: 'invalid token' });
 
