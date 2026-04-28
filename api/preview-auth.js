@@ -201,9 +201,11 @@ function getAuthToken(req) {
 }
 
 function setAuthCookie(res, token, maxAgeSec) {
+  // Domain=.bb-brands.de → Cookie gilt für www. UND apex (kein Verlust bei Domain-Switch)
   const parts = [
     `${AUTH_COOKIE_NAME}=${encodeURIComponent(token)}`,
     'Path=/',
+    'Domain=.bb-brands.de',
     'HttpOnly',
     'Secure',
     'SameSite=Lax',
@@ -214,7 +216,7 @@ function setAuthCookie(res, token, maxAgeSec) {
 
 function clearAuthCookie(res) {
   res.setHeader('Set-Cookie',
-    `${AUTH_COOKIE_NAME}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`);
+    `${AUTH_COOKIE_NAME}=; Path=/; Domain=.bb-brands.de; HttpOnly; Secure; SameSite=Lax; Max-Age=0`);
 }
 
 function jsonResponse(res, status, body) {
