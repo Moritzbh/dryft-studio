@@ -346,11 +346,15 @@ module.exports = async function handler(req, res) {
         // optionally add a page in the same call
         const page = body.page;
         if (page && typeof page === 'object' && page.key) {
+          // Status preserve wenn page bereits existiert (z.B. 'approved' bleibt approved auch nach redeploy)
+          const existingPage = (brand.pages || []).find(p => p.key === page.key);
+          const preservedStatus = existingPage?.status || 'review';
           brand.pages = (brand.pages || []).filter(p => p.key !== page.key);
           brand.pages.push({
             key: str(page.key, 80),
             label: str(page.label, 200) || page.key,
             url_path: str(page.url_path, 300) || '',
+            status: preservedStatus,  // default 'review' für frisch deployed pages
             deployed_at: new Date().toISOString(),
           });
         }
@@ -365,12 +369,16 @@ module.exports = async function handler(req, res) {
       }
 
       // ----- set-phase (admin only) -----
-      // Erlaubte Phasen: onboarding, plan, setup, build, review, launch, live
+      // Stages (v2): brief_plan, build_review, launch, live
+      // Legacy (v1) accepted for backwards compat: onboarding, plan, setup, build, review
       if (action === 'set-phase') {
         if (!checkAdmin(req)) return jsonResponse(res, 401, { ok: false, error: 'unauthorized' });
         const slug = str(body.slug, 60).toLowerCase();
         const phase = str(body.phase, 40);
-        const VALID_PHASES = ['onboarding', 'plan', 'setup', 'build', 'review', 'launch', 'live'];
+        const VALID_PHASES = [
+          'brief_plan', 'build_review', 'launch', 'live',          // v2
+          'onboarding', 'plan', 'setup', 'build', 'review',        // v1 legacy
+        ];
         if (!isValidSlug(slug) || !VALID_PHASES.includes(phase)) {
           return jsonResponse(res, 400, { ok: false, error: 'slug or phase invalid' });
         }
@@ -378,6 +386,30 @@ module.exports = async function handler(req, res) {
         if (!brand) return jsonResponse(res, 404, { ok: false, error: 'brand not found' });
         brand.phase = phase;
         brand.phase_set_at = new Date().toISOString();
+        brand.updated_at = new Date().toISOString();
+        await setBrand(slug, brand);
+        return jsonResponse(res, 200, { ok: true, brand: publicBrand(brand) });
+      }
+
+      // ----- set-page-status (admin only) -----
+      // Status: building, review, approved, change_request
+      if (action === 'set-page-status') {
+        if (!checkAdmin(req)) return jsonResponse(res, 401, { ok: false, error: 'unauthorized' });
+        const slug = str(body.slug, 60).toLowerCase();
+        const pageKey = str(body.page_key, 80);
+        const status = str(body.status, 40);
+        const VALID_STATUS = ['building', 'review', 'approved', 'change_request'];
+        if (!isValidSlug(slug) || !pageKey || !VALID_STATUS.includes(status)) {
+          return jsonResponse(res, 400, { ok: false, error: 'slug, page_key, or status invalid' });
+        }
+        const brand = await getBrand(slug);
+        if (!brand) return jsonResponse(res, 404, { ok: false, error: 'brand not found' });
+        brand.pages = (brand.pages || []).map(p => {
+          if (p.key === pageKey) {
+            return { ...p, status, status_set_at: new Date().toISOString() };
+          }
+          return p;
+        });
         brand.updated_at = new Date().toISOString();
         await setBrand(slug, brand);
         return jsonResponse(res, 200, { ok: true, brand: publicBrand(brand) });
@@ -393,11 +425,14 @@ module.exports = async function handler(req, res) {
         }
         const brand = await getBrand(slug);
         if (!brand) return jsonResponse(res, 404, { ok: false, error: 'brand not found' });
+        const existingPage = (brand.pages || []).find(p => p.key === page.key);
+        const preservedStatus = existingPage?.status || 'review';
         brand.pages = (brand.pages || []).filter(p => p.key !== page.key);
         brand.pages.push({
           key: str(page.key, 80),
           label: str(page.label, 200) || page.key,
           url_path: str(page.url_path, 300) || '',
+          status: preservedStatus,
           deployed_at: new Date().toISOString(),
         });
         brand.updated_at = new Date().toISOString();
