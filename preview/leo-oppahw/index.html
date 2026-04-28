@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+<style id="bbprev-auth-gate-style">
+html.bbprev-auth-pending body { visibility: hidden !important; }
+html.bbprev-auth-pending::before { content:''; position:fixed; inset:0; background:#FAF6EC; z-index:9999999; }
+html.bbprev-auth-pending::after { content:'Lade Kunden-Bereich…'; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:99999990; font-family:-apple-system,BlinkMacSystemFont,sans-serif; font-size:14px; color:#5A5348; }
+</style>
+<script id="bbprev-auth-gate">
+(function() {
+  document.documentElement.classList.add('bbprev-auth-pending');
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.ok || !d.brand || d.brand.slug !== 'leo') {
+        location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+        return;
+      }
+      window.__BB_BRAND = d.brand;
+      document.documentElement.classList.remove('bbprev-auth-pending');
+    })
+    .catch(function() {
+      location.href = '/preview/login?slug=leo&return=' + encodeURIComponent(location.pathname);
+    });
+})();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>LEO × BB Brands — Kunden-Bereich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#FAF6EC;
+  --paper:#FFFFFF;
+  --bg-2:#F5EFDE;
+  --ink:#15130F;
+  --muted:#5A5348;
+  --subtle:#9A8F7F;
+  --gold:#C9A14A;
+  --gold-deep:#8A6D2D;
+  --gold-hi:#E6C57A;
+  --line:rgba(21,19,15,0.10);
+  --line-strong:rgba(21,19,15,0.18);
+}
+
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+
+/* HEADER */
+.cover{
+  background:linear-gradient(135deg,#1A1612,#2A2520);
+  color:#fff;padding:48px clamp(24px,5vw,80px) 80px;
+  position:relative;overflow:hidden;
+}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 400px at 80% 30%,rgba(201,161,74,0.20),transparent 60%);pointer-events:none}
+.cover-top{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;position:relative;z-index:2}
+.cover-brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:14px}
+.cover-brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.cover-meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
+.cover-actions{display:inline-flex;gap:10px;align-items:center}
+.btn-logout{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;
+  text-transform:uppercase;color:rgba(255,255,255,0.55);
+  padding:8px 16px;border:1px solid rgba(255,255,255,0.18);border-radius:999px;
+  cursor:pointer;background:transparent;transition:all 180ms;
+}
+.btn-logout:hover{border-color:var(--gold);color:var(--gold-hi)}
+
+.cover-main{position:relative;z-index:2;margin-top:48px;max-width:880px}
+.cover-kicker{display:inline-block;padding:6px 16px;background:rgba(201,161,74,0.12);border:1px solid rgba(201,161,74,0.35);border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-hi);margin-bottom:24px}
+.cover-title{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(40px,5.4vw,68px);line-height:1.05;letter-spacing:-0.02em;margin-bottom:14px}
+.cover-title em{color:var(--gold-hi)}
+.cover-sub{font-size:15px;color:rgba(255,255,255,0.78);max-width:62ch;line-height:1.6}
+
+/* CONTAINER */
+.wrap{max-width:1080px;margin:-48px auto 80px;padding:0 24px;position:relative;z-index:5}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:24px}
+@media (max-width:760px){.cards{grid-template-columns:1fr}}
+.card{
+  display:block;background:var(--paper);
+  border-radius:14px;
+  padding:32px;
+  box-shadow:0 16px 40px rgba(21,19,15,0.06);
+  border:1.5px solid transparent;
+  transition:all 220ms ease;
+  position:relative;overflow:hidden;
+}
+.card:hover{
+  transform:translateY(-3px);
+  border-color:var(--gold);
+  box-shadow:0 24px 56px rgba(201,161,74,0.18);
+}
+.card-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;font-weight:700;color:var(--gold-deep);margin-bottom:6px}
+.card h3{
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;
+  letter-spacing:-0.4px;margin-bottom:8px;line-height:1.2;
+}
+.card h3 em{color:var(--gold-deep)}
+.card p{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:18px;max-width:48ch}
+.card-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-deep);
+}
+.card-link::after{content:'→';transition:transform 200ms}
+.card:hover .card-link::after{transform:translateX(4px)}
+
+.card.featured{
+  background:linear-gradient(135deg,#FFFFFF,var(--bg-2));
+  border-color:var(--gold);
+}
+.card-status{
+  position:absolute;top:18px;right:18px;
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:0.18em;text-transform:uppercase;font-weight:700;
+  padding:4px 10px;border-radius:999px;
+}
+.status-todo{background:rgba(184,58,44,0.10);color:#B83A2C}
+.status-ready{background:rgba(107,156,43,0.10);color:#6B9C2B}
+.status-pending{background:rgba(201,161,74,0.14);color:var(--gold-deep)}
+
+/* INFO STRIP */
+.info{
+  background:var(--paper);border-radius:12px;padding:24px 28px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  margin-bottom:24px;border:1px solid var(--line);
+}
+@media (max-width:760px){.info{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.info{grid-template-columns:1fr}}
+.info-item .lab{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--subtle);font-weight:700;margin-bottom:4px}
+.info-item .val{font-size:15px;font-weight:600;color:var(--ink)}
+.info-item .val em{color:var(--gold-deep);font-weight:600}
+
+/* FOOT */
+.foot{
+  margin-top:36px;padding:18px 24px;background:rgba(21,19,15,0.04);
+  border-radius:10px;font-size:12.5px;color:var(--muted);line-height:1.6;text-align:center;
+}
+.foot strong{color:var(--ink);font-weight:700}
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-top">
+    <div class="cover-brand"><span class="dot"></span>BB Brands · Kunden-Bereich</div>
+    <div class="cover-actions">
+      <span class="cover-meta">LEO Sport Nutrition</span>
+      <button class="btn-logout" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+  <div class="cover-main">
+    <span class="cover-kicker">✦ &nbsp;Eingeloggt</span>
+    <h1 class="cover-title">Willkommen bei <em>BB Brands</em>.</h1>
+    <p class="cover-sub">Hier findet ihr alles zu eurem Build an einem Ort — Vertrag, Scope-Brief, Konzept-Store und Onboarding-Fragebogen. Während wir bauen, kommen weitere Dokumente und der Live-Theme-Stand dazu.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- INFO -->
+  <div class="info">
+    <div class="info-item">
+      <div class="lab">Phase</div>
+      <div class="val"><em>Pre-Build</em> — Vertrag &amp; Onboarding</div>
+    </div>
+    <div class="info-item">
+      <div class="lab">Build-Start</div>
+      <div class="val">Nach Anzahlung &amp; Onboarding</div>
+    </div>
+    <div class="info-item">
+      <div class="lab">Build-Zeit</div>
+      <div class="val">3–4 Wochen</div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards">
+
+    <a href="/preview/leo-oppahw/vertrag" class="card featured">
+      <span class="card-status status-pending">Aktion erforderlich</span>
+      <p class="card-num">01 · Vertrag</p>
+      <h3>Werk<em>vertrag</em></h3>
+      <p>Der formale Vertrag zwischen LEO Sport Nutrition GmbH und BB Brands. Druckbar als PDF, Unterschriftsfelder am Ende. Nach beidseitiger Unterschrift wird die Anzahlung fällig.</p>
+      <span class="card-link">Vertrag öffnen</span>
+    </a>
+
+    <a href="/preview/leo-oppahw/scope-brief" class="card">
+      <span class="card-status status-ready">Bereit</span>
+      <p class="card-num">02 · Scope-Brief</p>
+      <h3>Was im Build <em>drin ist</em></h3>
+      <p>1-Pager-Übersicht: was im Auftrag enthalten ist, was nicht, Timeline und Pricing-Logik. Damit die Founders den Scope auf einen Blick erfassen.</p>
+      <span class="card-link">Scope-Brief öffnen</span>
+    </a>
+
+    <a href="/preview/leo-oppahw/konzept" class="card">
+      <span class="card-status status-ready">Bereit</span>
+      <p class="card-num">03 · Konzept-Store</p>
+      <h3>Visueller <em>Mockup</em></h3>
+      <p>Das im Sales-Call vorgestellte Multi-Page-Konzept — Homepage, Bundle-PDP, Über LEO, Wissenschaft, Shop. Jetzt voll navigierbar.</p>
+      <span class="card-link">Konzept ansehen</span>
+    </a>
+
+    <a href="/preview/leo-oppahw/onboarding" class="card">
+      <span class="card-status status-pending">Aktion erforderlich</span>
+      <p class="card-num">04 · Onboarding</p>
+      <h3>Onboarding-<em>Fragebogen</em></h3>
+      <p>2–3 Minuten Aufwand. Brand-Assets, Produkt-Details, Trust-Daten, Founder-Bios — alles was wir für den Build brauchen. Felder aus dem Sales-Call sind vorausgefüllt.</p>
+      <span class="card-link">Fragebogen ausfüllen</span>
+    </a>
+
+  </div>
+
+  <div class="foot">
+    Dieser Kunden-Bereich ist <strong>privat</strong> und nur für euch sichtbar.<br>
+    Während des Builds kommen Live-Theme-Vorschau, Status-Updates und Asset-Listen dazu.
+  </div>
+
+</div>
+
+<script>
+function doLogout() {
+  fetch('/api/preview-auth', {
+    method: 'POST', credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'logout' })
+  }).then(function() { location.href = '/preview/login'; });
+}
+</script>
+
+</body>
+</html>
