@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email-Marketing — BB Brands</title>
+<meta name="description" content="Email-Designs aus eigenen D2C-Brand-Builds und ausgewählten Spec-Projekten. Selbst gemacht.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://bb-brands.de/email">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Email-Marketing — BB Brands">
+<meta property="og:description" content="Selbst gebaut. Eigene Brand. Spec-Range. Direkt vom Operator.">
+<meta property="og:url" content="https://bb-brands.de/email">
+<meta property="og:image" content="https://bb-brands.de/assets/email-showcase/goto-skincare.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<link rel="preload" as="image" href="assets/email-showcase/apple-airpods.jpg">
+<link rel="preload" as="image" href="assets/email-showcase/early-earls-matcha.jpg">
+<link rel="preload" as="image" href="assets/email-showcase/goto-skincare.jpg">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bb-blue: #5B6BFF;
+  --bb-blue-dark: #3D4FE6;
+  --bb-blue-light: #7E8BFF;
+  --bb-yellow: #FFDE59;
+  --bg: #0A0A0A;
+  --bg-surface: #0E0E11;
+  --bg-card: #111114;
+  --bg-elevated: #15151A;
+  --text-primary: #FAFAFA;
+  --text-body: #A1A1AA;
+  --text-muted: #71717A;
+  --text-faint: #52525B;
+  --primary: #5B6BFF;
+  --primary-light: #7E8BFF;
+  --accent-text: #7E8BFF;
+  --accent-glow: rgba(91, 107, 255, 0.18);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.18);
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --max-width: 1240px;
+  --radius: 16px;
+  --radius-pill: 100px;
+  --radius-image: 14px;
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  font-weight: 400;
+}
+::selection { background: var(--primary); color: #fff; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+.container-narrow { max-width: 880px; margin: 0 auto; padding: 0 40px; }
+
+/* ====== NAV ====== */
+nav.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 40px;
+  background: rgba(10, 10, 10, 0.78);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; height: 64px;
+}
+.logo {
+  font-size: 17px; font-weight: 800;
+  letter-spacing: -0.5px; color: var(--text-primary);
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.logo-mark {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 800; font-size: 12px; letter-spacing: -0.5px;
+}
+.nav-cta {
+  padding: 10px 20px; background: var(--primary); color: #fff;
+  font-size: 13px; font-weight: 600;
+  transition: all 0.25s; border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.nav-cta:hover { background: var(--bb-blue-dark); transform: translateY(-1px); }
+.nav-back { font-size: 13px; color: var(--text-muted); transition: color 0.2s; }
+.nav-back:hover { color: var(--text-primary); }
+
+/* ====== HERO — kompakt, kein Show-Stealer ====== */
+.hero { padding: 130px 0 50px; position: relative; }
+.hero::before {
+  content: ''; position: absolute; top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 500px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+  z-index: -1;
+}
+.eyebrow {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2.8px; text-transform: uppercase; color: var(--accent-text);
+  display: inline-flex; align-items: center; gap: 10px; margin-bottom: 24px;
+  padding: 6px 14px; border-radius: var(--radius-pill);
+  background: rgba(91, 107, 255, 0.10);
+}
+.eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--accent-text); border-radius: 2px; }
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin-bottom: 22px;
+  max-width: 880px;
+}
+.hero-title .accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -1px;
+  color: var(--accent-text);
+}
+.hero-sub {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--text-body);
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: 34px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  padding: 15px 28px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  transition: all 0.25s;
+  box-shadow: 0 6px 20px rgba(91, 107, 255, 0.28);
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-primary:hover { background: var(--bb-blue-dark); transform: translateY(-1px); }
+.btn-ghost {
+  padding: 15px 24px;
+  color: var(--text-body);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--text-primary); }
+
+/* ====== VISUAL HERO STAGE — Designs IMMEDIATELY ====== */
+.stage {
+  padding: 30px 0 60px;
+  position: relative;
+}
+.stage-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr 0.85fr;
+  gap: 28px;
+  align-items: end;
+}
+.stage-cell {
+  position: relative;
+  border-radius: var(--radius-image);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.stage-cell:hover { transform: translateY(-6px); }
+.stage-cell.center { transform: translateY(-30px); }
+.stage-cell.center:hover { transform: translateY(-36px); }
+.stage-cell img { width: 100%; height: auto; display: block; }
+.stage-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 30px 20px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ====== REERECT — eigene Brand, prominent ====== */
+.reerect-section {
+  padding: 130px 0;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.reerect-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(91, 107, 255, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.reerect-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.reerect-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 700; color: var(--accent-text);
+  padding: 6px 14px; border-radius: var(--radius-pill);
+  background: rgba(91, 107, 255, 0.10);
+  margin-bottom: 28px;
+}
+.reerect-tag .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--bb-blue-light);
+  box-shadow: 0 0 8px var(--bb-blue-light);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.reerect-headline {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+.reerect-headline .accent {
+  font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-text);
+}
+.reerect-body { font-size: 16px; color: var(--text-body); line-height: 1.75; margin-bottom: 36px; }
+.reerect-body p { margin-bottom: 14px; }
+.reerect-body strong { color: var(--text-primary); font-weight: 600; }
+
+.reerect-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  padding-top: 28px; border-top: 1px solid var(--border);
+}
+.stat-item .stat-num {
+  font-family: var(--font-display); font-size: 30px; font-weight: 800;
+  letter-spacing: -0.6px; color: var(--accent-text);
+  line-height: 1; margin-bottom: 6px;
+}
+.stat-item .stat-label {
+  font-size: 11px; color: var(--text-muted); letter-spacing: 1px;
+  text-transform: uppercase; font-weight: 600;
+}
+
+.reerect-visual {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-image);
+  padding: 60px 40px 50px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 580px;
+  overflow: hidden;
+}
+.reerect-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(74, 222, 128, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 80% 75%, rgba(91, 107, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Reerect phone-mock stack */
+.phone-stack {
+  position: relative;
+  width: 280px;
+  height: 460px;
+  z-index: 2;
+  perspective: 1200px;
+}
+.phone-card {
+  position: absolute;
+  width: 280px;
+  height: 460px;
+  background: #0A0A0A;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 22px;
+  padding: 22px 20px;
+  display: flex; flex-direction: column;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.phone-card.back {
+  transform: rotate(-8deg) translate(-50px, 14px) scale(0.92);
+  opacity: 0.5;
+}
+.phone-card.mid {
+  transform: rotate(5deg) translate(36px, 8px) scale(0.96);
+  opacity: 0.75;
+}
+.phone-card.front {
+  transform: rotate(0deg) translate(0, 0);
+  z-index: 3;
+}
+.reerect-visual:hover .phone-card.back { transform: rotate(-12deg) translate(-70px, 20px) scale(0.92); }
+.reerect-visual:hover .phone-card.mid { transform: rotate(8deg) translate(50px, 14px) scale(0.96); }
+.reerect-visual:hover .phone-card.front { transform: translateY(-6px); }
+
+.phone-brand {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #FAFAFA;
+  text-align: center;
+  padding: 8px 0 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 18px;
+}
+.phone-subject {
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  color: #71717A;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.phone-hero {
+  position: relative;
+  flex: 1;
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(74, 222, 128, 0.12) 0%, transparent 50%),
+    linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.phone-hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 60%;
+  background:
+    radial-gradient(circle at 70% 30%, rgba(74, 222, 128, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 30% 60%, rgba(255, 255, 255, 0.04) 0%, transparent 40%);
+}
+.phone-hero::after {
+  content: 'REERECT';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: rgba(255, 255, 255, 0.06);
+}
+.phone-headline {
+  position: relative; z-index: 1;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #FAFAFA;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+.phone-body {
+  position: relative; z-index: 1;
+  font-size: 11px;
+  color: #A1A1AA;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.phone-cta {
+  display: inline-block;
+  padding: 11px 20px;
+  background: #4ADE80;
+  color: #0A0A0A;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  text-align: center;
+}
+.phone-footer {
+  font-size: 9px;
+  color: #52525B;
+  text-align: center;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.reerect-visual .visual-meta {
+  margin-top: 28px;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  position: relative; z-index: 4;
+  text-align: center;
+}
+.reerect-visual .visual-meta-sub {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-faint);
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 400;
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+/* ====== SPEC CASES — full-width, image-led ====== */
+.spec-intro {
+  padding: 100px 0 60px;
+  text-align: center;
+}
+.spec-intro .section-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.08;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+.spec-intro .section-title .accent {
+  font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-text);
+}
+.spec-intro .section-sub {
+  font-size: 16px; font-weight: 300; color: var(--text-body);
+  max-width: 600px; line-height: 1.75; margin: 0 auto;
+}
+
+.spec-case {
+  padding: 80px 0;
+  position: relative;
+}
+.spec-case + .spec-case { border-top: 1px solid var(--border); }
+.spec-case-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+.spec-case.reverse .spec-case-grid {
+  grid-template-columns: 1fr 1fr;
+}
+.spec-case.reverse .spec-image-wrap { order: 2; }
+.spec-case.reverse .spec-text { order: 1; }
+
+.spec-image-wrap {
+  background: #fff;
+  border-radius: var(--radius-image);
+  padding: 30px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border);
+  display: flex; align-items: center; justify-content: center;
+  max-height: 780px;
+  overflow: hidden;
+}
+.spec-image-wrap img {
+  max-width: 100%;
+  max-height: 720px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.spec-text { padding: 20px 0; }
+.spec-tag {
+  font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase;
+  color: var(--accent-text); font-weight: 700; margin-bottom: 18px;
+  display: inline-block;
+}
+.spec-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+}
+.spec-title .accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-text); }
+.spec-desc {
+  font-size: 16px; color: var(--text-body); line-height: 1.75;
+  margin-bottom: 24px;
+}
+.spec-meta-list { display: flex; flex-direction: column; gap: 10px; }
+.spec-meta-row {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+}
+.spec-meta-row .key { color: var(--text-faint); width: 100px; flex-shrink: 0; letter-spacing: 0.8px; text-transform: uppercase; font-size: 10px; font-weight: 700; }
+.spec-meta-row .val { color: var(--text-primary); font-weight: 500; }
+
+/* ====== PROCESS ====== */
+.process-section {
+  padding: 100px 0;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.section-header { margin-bottom: 56px; text-align: center; }
+.section-header .eyebrow { margin-bottom: 18px; }
+.section-header .section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.6vw, 42px);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+.section-header .section-title .accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-text); }
+.section-header .section-sub {
+  font-size: 15px; color: var(--text-body);
+  max-width: 540px; margin: 0 auto; line-height: 1.7;
+}
+.process-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.process-step {
+  padding: 28px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.step-num {
+  font-family: var(--font-serif); font-style: italic; font-size: 28px;
+  color: var(--accent-text); font-weight: 400;
+  line-height: 1; margin-bottom: 16px;
+}
+.step-title {
+  font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;
+}
+.step-body { font-size: 13px; color: var(--text-body); line-height: 1.6; }
+
+/* ====== CTA ====== */
+.cta-section {
+  padding: 110px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 500px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-inner { position: relative; max-width: 680px; margin: 0 auto; }
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+}
+.cta-title .accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-text); }
+.cta-sub { font-size: 16px; color: var(--text-body); margin-bottom: 32px; line-height: 1.7; }
+.cta-pills { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 36px; }
+.cta-pill {
+  padding: 10px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  color: var(--text-body);
+  font-weight: 500;
+}
+.cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ====== HONEST FOOTER NOTE ====== */
+.honest-strip {
+  padding: 30px 0;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.honest-strip-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.7;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.honest-strip-text strong { color: var(--text-body); }
+
+/* ====== FOOTER ====== */
+footer {
+  padding: 40px 0 50px;
+  background: var(--bg);
+}
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; }
+.footer-meta { font-size: 12px; color: var(--text-faint); }
+.footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: var(--text-muted); transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-primary); }
+
+/* ====== HERO VIDEO BG ====== */
+.hero { overflow: hidden; }
+.hero-video-bg {
+  position: absolute; inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-video-bg video {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: auto; height: 130%;
+  min-width: 100%;
+  transform: translate(-50%, -50%) scale(1.05);
+  object-fit: cover;
+  opacity: 0.32;
+  filter: saturate(1.05) contrast(1.05);
+  will-change: transform;
+}
+.hero-video-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.40) 30%, rgba(10,10,10,0.85) 75%, rgba(10,10,10,1) 100%),
+    radial-gradient(circle at 20% 30%, rgba(91, 107, 255, 0.10) 0%, transparent 60%);
+}
+.hero .container { position: relative; z-index: 2; }
+
+/* ====== SCROLL-SCRUB SECTION ====== */
+.scrub-section {
+  position: relative;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.scrub-container {
+  height: 280vh;
+  position: relative;
+}
+.scrub-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: #000;
+}
+.scrub-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.scrub-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10,10,10,0.30) 0%, rgba(10,10,10,0.10) 35%, rgba(10,10,10,0.85) 100%);
+  pointer-events: none;
+}
+.scrub-caption {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+}
+.scrub-caption .eyebrow {
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 24px;
+}
+.scrub-caption .scrub-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.5vw, 68px);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 22px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);
+}
+.scrub-caption .scrub-title .accent {
+  font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent-text);
+}
+.scrub-caption .scrub-sub {
+  font-size: 17px; font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 540px; margin: 0 auto 30px;
+  line-height: 1.65;
+}
+.scrub-progress {
+  position: absolute;
+  bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  width: 240px; height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 3;
+}
+.scrub-progress-bar {
+  height: 100%;
+  background: var(--accent-text);
+  width: 0%;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 8px rgba(91, 107, 255, 0.6);
+}
+
+/* ====== REVEAL ANIMATIONS ====== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 1.0s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.0s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+[data-reveal].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal-delay="1"] { transition-delay: 0.08s; }
+[data-reveal-delay="2"] { transition-delay: 0.16s; }
+[data-reveal-delay="3"] { transition-delay: 0.24s; }
+[data-reveal-delay="4"] { transition-delay: 0.32s; }
+
+/* Stage cell pop-in */
+[data-reveal="stage"] { transform: translateY(60px) scale(0.94); }
+[data-reveal="stage"].visible { transform: translateY(0) scale(1); }
+
+/* Spec image float-in */
+[data-reveal="image"] { transform: translateY(50px) scale(0.96); transition-duration: 1.2s; }
+[data-reveal="image"].visible { transform: translateY(0) scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .hero-video-bg video, .scrub-video { display: none; }
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 960px) {
+  .container, .container-narrow { padding: 0 22px; }
+  nav.top-nav { padding: 0 22px; }
+  .hero { padding: 110px 0 30px; }
+  .stage { padding: 20px 0 40px; }
+  .stage-grid { grid-template-columns: 1fr; gap: 30px; }
+  .stage-cell.center { transform: none; }
+  .stage-cell.center:hover { transform: translateY(-4px); }
+  .reerect-section { padding: 80px 0; }
+  .reerect-inner { grid-template-columns: 1fr; gap: 50px; }
+  .reerect-visual { padding: 50px 30px; min-height: 320px; }
+  .spec-case { padding: 60px 0; }
+  .spec-case-grid { grid-template-columns: 1fr; gap: 40px; }
+  .spec-case.reverse .spec-image-wrap { order: 1; }
+  .spec-case.reverse .spec-text { order: 2; }
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  .nav-back { display: none; }
+}
+@media (max-width: 560px) {
+  .process-grid { grid-template-columns: 1fr; }
+  .reerect-stats { grid-template-columns: 1fr; gap: 14px; padding-top: 18px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark">BB</span>
+      <span>BB Brands</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 18px;">
+      <a href="/" class="nav-back">← bb-brands.de</a>
+      <a href="https://wa.me/491608725947?text=Hey%20Moritz%2C%20zur%20Email-Showcase." class="nav-cta">WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="hero-video-bg">
+    <video autoplay loop muted playsinline preload="auto" aria-hidden="true">
+      <source src="assets/email-showcase/editorial-reel.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="container">
+    <span class="eyebrow" data-reveal>Email · D2C</span>
+    <h1 class="hero-title" data-reveal data-reveal-delay="1">
+      Email-Designs, die nicht aussehen wie aus dem <span class="accent">Template-Builder.</span>
+    </h1>
+    <p class="hero-sub" data-reveal data-reveal-delay="2">
+      Selbst gebaut. Eigene Brand. Spec-Builds für Brands, die uns inspirieren. Direkt vom Operator.
+    </p>
+    <div class="hero-actions" data-reveal data-reveal-delay="3">
+      <a href="https://wa.me/491608725947?text=Hey%20Moritz%2C%20Email-Marketing%20f%C3%BCr%20meine%20Brand." class="btn-primary">15 Min Discovery Call →</a>
+      <a href="#reerect" class="btn-ghost">Designs ansehen ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== STAGE — Designs SOFORT, Hero-Mosaic ============== -->
+<section class="stage">
+  <div class="container">
+    <div class="stage-grid">
+      <a class="stage-cell" href="#case-matcha" data-reveal="stage" data-reveal-delay="1">
+        <img src="assets/email-showcase/early-earls-matcha.jpg" alt="Newsletter — Matcha Monday Editorial" loading="eager">
+        <div class="stage-caption">Newsletter · Lifestyle</div>
+      </a>
+      <a class="stage-cell center" href="#case-apple" data-reveal="stage" data-reveal-delay="2">
+        <img src="assets/email-showcase/apple-airpods.jpg" alt="Editorial Email — AirPods Max im Apple-Stil" loading="eager">
+        <div class="stage-caption">Editorial · Tech</div>
+      </a>
+      <a class="stage-cell" href="#case-goto" data-reveal="stage" data-reveal-delay="3">
+        <img src="assets/email-showcase/goto-skincare.jpg" alt="5-Step Welcome-Flow im Beauty-Look" loading="eager">
+        <div class="stage-caption">Flow · Beauty</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== REERECT ============== -->
+<section class="reerect-section" id="reerect">
+  <div class="container">
+    <div class="reerect-inner">
+      <div>
+        <span class="reerect-tag"><span class="dot"></span>Eigene Brand · Live</span>
+        <h2 class="reerect-headline">
+          Reerect — wir bauen für unsere Brand <span class="accent">erst, dann</span> für deine.
+        </h2>
+        <div class="reerect-body">
+          <p>
+            Reerect ist meine eigene D2C-Brand. Den kompletten Email-Stack hab ich von Grund auf selbst gebaut — Klaviyo-Setup, Segmentierung, Flow-Design, Copy, A/B-Tests.
+          </p>
+          <p>
+            <strong>30+ Email-Designs</strong> in DE und EN, fünf Flow-Typen — Welcome, Cart-Recovery, Post-Purchase, Promo, Brand-Stories. Was funktioniert hat, was nicht, und warum: das nehmen wir mit in jedes Kundenprojekt.
+          </p>
+        </div>
+        <div class="reerect-stats">
+          <div class="stat-item">
+            <div class="stat-num">30+</div>
+            <div class="stat-label">Email-Designs</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5</div>
+            <div class="stat-label">Flow-Typen</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">DE/EN</div>
+            <div class="stat-label">Bilingual</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reerect-visual">
+        <div class="phone-stack">
+          <div class="phone-card back">
+            <div class="phone-brand">REERECT</div>
+            <div class="phone-subject">Subject · Was die Community sagt</div>
+            <div class="phone-hero"></div>
+            <div class="phone-cta">JETZT ENTDECKEN</div>
+          </div>
+          <div class="phone-card mid">
+            <div class="phone-brand">REERECT</div>
+            <div class="phone-subject">Subject · Letzte Erinnerung</div>
+            <div class="phone-hero"></div>
+            <div class="phone-cta">PIECE SICHERN</div>
+          </div>
+          <div class="phone-card front">
+            <div class="phone-brand">REERECT</div>
+            <div class="phone-subject">Subject · Dein Piece ist noch verfügbar</div>
+            <div class="phone-hero">
+              <div class="phone-headline">Browse Abandonment Flow.<br>Dein Piece wartet.</div>
+              <div class="phone-body">Du warst kurz davor — und dann war der Tab weg. Wir halten dir das Piece warm.</div>
+              <div class="phone-cta">JETZT SICHERN →</div>
+            </div>
+            <div class="phone-footer">© REERECT · BUILT IN-HOUSE</div>
+          </div>
+        </div>
+        <div class="visual-meta">30+ Designs · 5 Flow-Typen</div>
+        <div class="visual-meta-sub">Live-Demo gibt's im Call.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SCROLL-SCRUB — Design Reel ============== -->
+<section class="scrub-section">
+  <div class="scrub-container">
+    <div class="scrub-sticky">
+      <video class="scrub-video" muted playsinline preload="auto" aria-hidden="true">
+        <source src="assets/email-showcase/design-reel.mp4" type="video/mp4">
+      </video>
+      <div class="scrub-overlay"></div>
+      <div class="scrub-caption">
+        <span class="eyebrow">More than email</span>
+        <h2 class="scrub-title">Brand. Store. Ads. Email — <span class="accent">aus einem Studio.</span></h2>
+        <p class="scrub-sub">
+          Wenn du Email magst, schau was wir noch bauen. Scroll, um durch unsere Design-Range zu navigieren.
+        </p>
+      </div>
+      <div class="scrub-progress"><div class="scrub-progress-bar"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SPEC INTRO ============== -->
+<section class="spec-intro">
+  <div class="container-narrow">
+    <span class="eyebrow" data-reveal>Design-Range</span>
+    <h2 class="section-title" data-reveal data-reveal-delay="1">Drei <span class="accent">Brand-Welten,</span> ein Studio.</h2>
+    <p class="section-sub" data-reveal data-reveal-delay="2">
+      Spec-Designs für Brands, die uns inspirieren. So würden wir Email-Marketing für sie bauen, wenn sie unsere Kunden wären. Beweis, dass wir das Design-Spektrum bedienen — von Editorial bis Beauty.
+    </p>
+  </div>
+</section>
+
+<!-- ============== CASE 1: APPLE ============== -->
+<section class="spec-case" id="case-apple">
+  <div class="container">
+    <div class="spec-case-grid">
+      <div class="spec-image-wrap" data-reveal="image">
+        <img src="assets/email-showcase/apple-airpods.jpg" alt="Editorial Email-Layout im Apple-Stil — AirPods Max">
+      </div>
+      <div class="spec-text" data-reveal data-reveal-delay="2">
+        <span class="spec-tag">Editorial · Tech</span>
+        <h3 class="spec-title">Premium-Editorial im <span class="accent">Apple-Stil.</span></h3>
+        <p class="spec-desc">
+          Whitespace als Statement, Typografie als Hero, Produktfoto als Fokus. Neun Frames in einem Email-Layout. Für Brands, die nicht laut sein müssen, um teuer zu wirken.
+        </p>
+        <div class="spec-meta-list">
+          <div class="spec-meta-row"><span class="key">Brand</span><span class="val">Apple AirPods Max (Spec)</span></div>
+          <div class="spec-meta-row"><span class="key">Format</span><span class="val">Editorial PDP-Email</span></div>
+          <div class="spec-meta-row"><span class="key">Approach</span><span class="val">Multi-Frame, Long-Scroll, Tech-Specs als Tabelle</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CASE 2: MATCHA ============== -->
+<section class="spec-case reverse" id="case-matcha">
+  <div class="container">
+    <div class="spec-case-grid">
+      <div class="spec-image-wrap" data-reveal="image">
+        <img src="assets/email-showcase/early-earls-matcha.jpg" alt="Matcha Monday Newsletter — Early Earls">
+      </div>
+      <div class="spec-text" data-reveal data-reveal-delay="2">
+        <span class="spec-tag">Newsletter · Lifestyle</span>
+        <h3 class="spec-title">Editorial-Newsletter im <span class="accent">Wellness-Look.</span></h3>
+        <p class="spec-desc">
+          Warm, ruhig, taktil. Foto-getrieben, Copy in Long-Form, weniger CTAs, mehr Atmosphäre. Für Brands, deren Produkt ein Ritual ist — nicht ein Klick.
+        </p>
+        <div class="spec-meta-list">
+          <div class="spec-meta-row"><span class="key">Brand</span><span class="val">Early Earls Matcha (Spec)</span></div>
+          <div class="spec-meta-row"><span class="key">Format</span><span class="val">Lifestyle-Newsletter</span></div>
+          <div class="spec-meta-row"><span class="key">Approach</span><span class="val">Hero-Image, Mid-Form Copy, Single-CTA</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CASE 3: GO-TO ============== -->
+<section class="spec-case" id="case-goto">
+  <div class="container">
+    <div class="spec-case-grid">
+      <div class="spec-image-wrap" data-reveal="image">
+        <img src="assets/email-showcase/goto-skincare.jpg" alt="5-Step Welcome-Flow für Go-To Skincare">
+      </div>
+      <div class="spec-text" data-reveal data-reveal-delay="2">
+        <span class="spec-tag">Flow · Beauty</span>
+        <h3 class="spec-title">5-Step Welcome-Flow, der <span class="accent">nicht nervt.</span></h3>
+        <p class="spec-desc">
+          Discount → Bestseller → Social Proof → Brand Story. Fünf Mails, fünf klare Jobs. Klare Hierarchie, warmer Beauty-Look, jede Mail mit eigenem Zweck.
+        </p>
+        <div class="spec-meta-list">
+          <div class="spec-meta-row"><span class="key">Brand</span><span class="val">Go-To Skincare (Spec)</span></div>
+          <div class="spec-meta-row"><span class="key">Format</span><span class="val">5-Step Welcome-Flow</span></div>
+          <div class="spec-meta-row"><span class="key">Approach</span><span class="val">Sequence-Design, Trigger-Logik, Segment-spezifisch</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PROCESS ============== -->
+<section class="process-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">So arbeiten wir</span>
+      <h2 class="section-title">Vier Schritte. <span class="accent">Zwei Wochen.</span></h2>
+      <p class="section-sub">Email-Marketing als Sprint, nicht als Dauerprojekt. Klare Übergaben, fixer Preis, kein Stundenzettel.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step" data-reveal data-reveal-delay="1">
+        <div class="step-num">1</div>
+        <div class="step-title">Discovery</div>
+        <div class="step-body">Brand, Zielgruppe, Conversion-Pfade. Was läuft, was bremst.</div>
+      </div>
+      <div class="process-step" data-reveal data-reveal-delay="2">
+        <div class="step-num">2</div>
+        <div class="step-title">Strategie</div>
+        <div class="step-body">Flow-Map, Segmente, KPIs. Was wir messen, bevor irgendwas designt wird.</div>
+      </div>
+      <div class="process-step" data-reveal data-reveal-delay="3">
+        <div class="step-num">3</div>
+        <div class="step-title">Design + Copy</div>
+        <div class="step-body">Beides aus einer Hand. Du sprichst mit einer Person, nicht einem Team.</div>
+      </div>
+      <div class="process-step" data-reveal data-reveal-delay="4">
+        <div class="step-num">4</div>
+        <div class="step-title">Setup + Test</div>
+        <div class="step-body">Klaviyo live in zwei Wochen, A/B-Test ab Tag eins.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CTA ============== -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-title">Pricing besprechen wir <span class="accent">im Call.</span></h2>
+      <p class="cta-sub">Hängt davon ab, wo du stehst — Neuaufbau, Audit oder einzelner Flow als Test. Drei Wege, ein Preis pro Sprint.</p>
+      <div class="cta-pills">
+        <span class="cta-pill">Starter — Welcome + Newsletter</span>
+        <span class="cta-pill">Wachstum — Full Flow-Suite</span>
+        <span class="cta-pill">Skalierung — Laufende Optimierung</span>
+      </div>
+      <div class="cta-actions">
+        <a href="https://wa.me/491608725947?text=Hey%20Moritz%2C%20Email-Marketing%20f%C3%BCr%20meine%20Brand." class="btn-primary">15 Min Discovery Call →</a>
+        <a href="mailto:info@bb-brands.de?subject=Email-Marketing" class="btn-ghost">info@bb-brands.de</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== HONEST STRIP ============== -->
+<div class="honest-strip">
+  <div class="container">
+    <p class="honest-strip-text">
+      <strong>Transparent:</strong> BB Brands ist als Agentur jung. Designs hier sind aus eigenen Brand-Builds (Reerect) plus drei Spec-Builds — nicht fremde Cases als unsere ausgegeben. Performance-Daten teilen wir direkt im Call.
+    </p>
+  </div>
+</div>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-meta">© BB Brands · Selbst gebaut, nicht delegiert.</div>
+      <div class="footer-links">
+        <a href="/">bb-brands.de</a>
+        <a href="https://wa.me/491608725947">WhatsApp</a>
+        <a href="mailto:info@bb-brands.de">info@bb-brands.de</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  // ========== Reveal-on-scroll Observer ==========
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('[data-reveal]').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }
+
+  // ========== Scroll-Scrub Video ==========
+  var scrubVideo = document.querySelector('.scrub-video');
+  var scrubContainer = document.querySelector('.scrub-container');
+  var scrubBar = document.querySelector('.scrub-progress-bar');
+
+  if (scrubVideo && scrubContainer) {
+    scrubVideo.pause();
+    scrubVideo.removeAttribute('autoplay');
+
+    var ticking = false;
+    var lastProgress = -1;
+
+    function updateScrub() {
+      if (!scrubVideo.duration || isNaN(scrubVideo.duration)) {
+        ticking = false;
+        return;
+      }
+      var rect = scrubContainer.getBoundingClientRect();
+      var scrollHeight = scrubContainer.offsetHeight - window.innerHeight;
+      if (scrollHeight <= 0) { ticking = false; return; }
+      var scrolled = Math.max(0, -rect.top);
+      var progress = Math.max(0, Math.min(1, scrolled / scrollHeight));
+
+      if (Math.abs(progress - lastProgress) > 0.001) {
+        scrubVideo.currentTime = progress * scrubVideo.duration;
+        if (scrubBar) scrubBar.style.width = (progress * 100) + '%';
+        lastProgress = progress;
+      }
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(updateScrub);
+        ticking = true;
+      }
+    }
+
+    function init() {
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      updateScrub();
+    }
+
+    if (scrubVideo.readyState >= 1) {
+      init();
+    } else {
+      scrubVideo.addEventListener('loadedmetadata', init, { once: true });
+      scrubVideo.load();
+    }
+  }
+
+  // ========== Hero Video parallax (subtle) ==========
+  var heroVideo = document.querySelector('.hero-video-bg video');
+  if (heroVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var heroParallaxTicking = false;
+    function updateHeroParallax() {
+      var y = window.scrollY;
+      var max = window.innerHeight * 0.8;
+      if (y < max) {
+        heroVideo.style.transform = 'translate(-50%, -50%) scale(1.05) translateY(' + (y * 0.15) + 'px)';
+      }
+      heroParallaxTicking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!heroParallaxTicking) {
+        requestAnimationFrame(updateHeroParallax);
+        heroParallaxTicking = true;
+      }
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>
