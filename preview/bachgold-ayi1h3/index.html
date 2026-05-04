@@ -4,12 +4,406 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Bachgold · BB Brands Kunden-Hub</title>
+<title>bachgold · BB Brands Kunden-Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/preview/_hub-app.css">
-<script>window.BB_HUB = { slug: 'bachgold', token: 'ayi1h3' };</script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #FAFAFB;
+  --bg-card: #FFFFFF;
+  --bg-soft: #F4F4F7;
+  --primary: #0305C6;
+  --primary-soft: rgba(3, 5, 198, 0.08);
+  --accent: #FF21A6;
+  --text: #0A0A0A;
+  --text-muted: #6B7280;
+  --text-light: #9CA3AF;
+  --border: rgba(10, 10, 10, 0.08);
+  --green: #10B981;
+  --green-soft: rgba(16, 185, 129, 0.10);
+  --orange: #F59E0B;
+  --orange-soft: rgba(245, 158, 11, 0.10);
+  --red: #EF4444;
+  --red-soft: rgba(239, 68, 68, 0.10);
+  --blue: #3B82F6;
+  --blue-soft: rgba(59, 130, 246, 0.10);
+  --radius: 14px;
+  --radius-sm: 10px;
+  --radius-pill: 100px;
+  --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+html { -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+.gate {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  color: var(--text-muted);
+}
+.app { display: none; }
+.app.is-active { display: block; }
+
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+}
+.topbar-inner {
+  max-width: 1180px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.topbar-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 15px; font-weight: 700; color: var(--primary);
+  text-decoration: none;
+}
+.topbar-brand-mark {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--primary); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+}
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+.topbar-actions a, .btn-logout {
+  font-size: 12px; color: var(--text-muted);
+  text-decoration: none; font-weight: 600;
+  padding: 8px 14px; border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.topbar-actions a:hover { background: var(--bg-soft); color: var(--text); }
+.btn-logout { border: 1px solid var(--border); }
+.btn-logout:hover { border-color: var(--text-muted); color: var(--text); }
+
+/* ===== Hero ===== */
+.hero { max-width: 1180px; margin: 0 auto; padding: 48px 28px 12px; }
+.hero-greeting {
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--primary);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-greeting::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--primary-soft), transparent);
+  max-width: 120px;
+}
+.hero h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px; }
+.hero-sub { font-size: 16px; color: var(--text-muted); max-width: 640px; }
+
+/* ===== Stage-Tracker (4 Major Stages, kein lineares Step-by-Step) ===== */
+.stage-strip { max-width: 1180px; margin: 28px auto; padding: 0 28px; }
+.stage-track {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.stage-step {
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: flex-start;
+  padding-right: 16px;
+}
+.stage-step + .stage-step::before {
+  content: ''; position: absolute;
+  left: -8px; top: 14px;
+  width: 16px; height: 2px;
+  background: var(--border);
+}
+.stage-step.is-done + .stage-step::before { background: var(--green); }
+.stage-step.is-current + .stage-step::before {
+  background: linear-gradient(90deg, var(--primary), var(--border));
+}
+.stage-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.stage-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--bg-soft);
+  border: 2px solid var(--border);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.stage-step.is-done .stage-dot {
+  background: var(--green); border-color: var(--green); color: #fff;
+}
+.stage-step.is-current .stage-dot {
+  background: var(--primary); border-color: var(--primary); color: #fff;
+  box-shadow: 0 0 0 4px rgba(3, 5, 198, 0.12);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(3, 5, 198, 0.12); }
+  50% { box-shadow: 0 0 0 8px rgba(3, 5, 198, 0.04); }
+}
+.stage-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1px;
+}
+.stage-step.is-done .stage-label,
+.stage-step.is-current .stage-label { color: var(--text); }
+.stage-sub {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.4;
+  padding-left: 38px;
+}
+
+/* ===== Iteration-Sub-Card (visible only when Stage = Build & Review) ===== */
+.iteration-card {
+  max-width: 1180px;
+  margin: 16px auto 0;
+  padding: 0 28px;
+  display: none;
+}
+.iteration-card.is-active { display: block; }
+.iteration-inner {
+  background: linear-gradient(135deg, var(--primary-soft), rgba(255, 33, 166, 0.04));
+  border: 1px solid rgba(3, 5, 198, 0.15);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 720px) {
+  .iteration-inner { grid-template-columns: minmax(220px, 0.6fr) 1fr; align-items: center; }
+}
+.iteration-headline {
+  font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 4px;
+}
+.iteration-headline::before {
+  content: '🔄'; font-size: 16px;
+}
+.iteration-sub {
+  font-size: 12px; color: var(--text-muted);
+  line-height: 1.5;
+}
+.iteration-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.iteration-stat {
+  background: rgba(255,255,255,0.7);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  text-align: center;
+}
+.iteration-stat-num {
+  font-size: 22px; font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.iteration-stat-num.is-zero { color: var(--text-light); }
+.iteration-stat-label {
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+@media (max-width: 600px) {
+  .iteration-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== Section Headers ===== */
+.section-head {
+  max-width: 1180px;
+  margin: 32px auto 16px;
+  padding: 0 28px;
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.section-title { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+.section-meta { font-size: 12px; color: var(--text-light); }
+
+/* ===== Cards ===== */
+.cards {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.card {
+  display: block;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 24px 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: all .2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 100px; height: 100px;
+  background: radial-gradient(circle at top right, rgba(3, 5, 198, 0.06), transparent 60%);
+  pointer-events: none;
+}
+.card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(3, 5, 198, 0.10);
+}
+
+/* Page-Status-Badges (mehrere Zustände) */
+.card-badge {
+  position: absolute;
+  top: 18px; right: 18px;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.card-badge::before {
+  content: ''; width: 6px; height: 6px;
+  border-radius: 50%; display: inline-block;
+}
+.card-badge.status-review     { background: var(--orange-soft); color: var(--orange); }
+.card-badge.status-review::before     { background: var(--orange); }
+.card-badge.status-approved   { background: var(--green-soft);  color: var(--green); }
+.card-badge.status-approved::before   { background: var(--green); }
+.card-badge.status-building   { background: var(--blue-soft);   color: var(--blue); }
+.card-badge.status-building::before   { background: var(--blue); animation: pulse-dot 1.4s ease-in-out infinite; }
+.card-badge.status-change_request { background: var(--red-soft); color: var(--red); }
+.card-badge.status-change_request::before { background: var(--red); }
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+}
+
+.card-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+.card-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.3px; }
+.card-meta { font-size: 12px; color: var(--text-muted); font-weight: 500; line-height: 1.5; }
+.card-cta {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.card-cta::after { content: '→'; transition: transform .15s ease; }
+.card:hover .card-cta::after { transform: translateX(3px); }
+
+/* ===== Activity ===== */
+.activity { max-width: 1180px; margin: 24px auto; padding: 0 28px 32px; }
+.activity-list {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+}
+.activity-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+.activity-text { flex: 1; font-size: 13px; color: var(--text); }
+.activity-text strong { font-weight: 700; }
+.activity-time { font-size: 11px; color: var(--text-light); font-weight: 500; flex-shrink: 0; }
+
+/* ===== Help-Box ===== */
+.help-box { max-width: 1180px; margin: 16px auto 64px; padding: 24px 28px; }
+.help-inner {
+  background: linear-gradient(135deg, var(--primary-soft), rgba(255, 33, 166, 0.04));
+  border: 1px solid rgba(3, 5, 198, 0.10);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.help-inner h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.2px; }
+.help-inner p { font-size: 13px; color: var(--text-muted); flex: 1; min-width: 200px; }
+.help-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.help-actions a {
+  font-size: 13px; font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: all .15s ease;
+}
+.help-actions a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.empty {
+  text-align: center;
+  padding: 60px 24px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 0 28px;
+}
+.empty-emoji { font-size: 36px; margin-bottom: 12px; }
+
+.spinner {
+  display: inline-block;
+  width: 24px; height: 24px;
+  border: 3px solid rgba(0,0,0,.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 720px) {
+  .topbar { padding: 12px 16px; }
+  .hero, .stage-strip, .iteration-card, .section-head, .cards, .activity, .help-box { padding-left: 16px; padding-right: 16px; }
+  .help-inner { flex-direction: column; align-items: flex-start; }
+  .stage-track { grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px; }
+  .stage-step + .stage-step::before { display: none; }
+}
+</style>
 </head>
 <body>
 
@@ -36,14 +430,16 @@
 
   <div class="hero">
     <div class="hero-greeting"><span id="greeting-time">Willkommen</span></div>
-    <h1 id="brand-name">Bachgold</h1>
+    <h1 id="brand-name">bachgold</h1>
     <p class="hero-sub">Hier siehst du alles was wir aktuell für dich vorbereiten — Vorschauen, Status und alle nächsten Schritte. Kein Email-Hin-und-Her, kein WhatsApp-Suchen.</p>
   </div>
 
+  <!-- 4-Stage Tracker (Brief & Plan / Build & Review / Launch / Live) -->
   <div class="stage-strip">
     <div class="stage-track" id="stage-track"></div>
   </div>
 
+  <!-- Sub-Card mit Iteration-Stats (sichtbar wenn Build & Review aktiv) -->
   <div class="iteration-card" id="iteration-card">
     <div class="iteration-inner">
       <div>
@@ -55,7 +451,7 @@
   </div>
 
   <div class="section-head">
-    <div class="section-title">📂 Dein Bereich</div>
+    <div class="section-title">📂 Aktuelle Vorschauen</div>
     <div class="section-meta" id="page-count"></div>
   </div>
   <div class="cards" id="cards"></div>
@@ -71,7 +467,7 @@
   <div class="help-box">
     <div class="help-inner">
       <div>
-        <h3>Fragen zu deinem Bereich?</h3>
+        <h3>Fragen zur Vorschau?</h3>
         <p>Schreib uns direkt — wir sind hier um dein Brand-Erlebnis perfekt zu machen.</p>
       </div>
       <div class="help-actions">
@@ -82,6 +478,208 @@
   </div>
 </div>
 
-<script src="/preview/_hub-app.js"></script>
+<script>
+const BRAND_SLUG = "bachgold";
+const BRAND_TOKEN = "ayi1h3";
+
+const PAGE_LABELS = {
+  homepage:  { icon: '🏠', label: 'Homepage',     sub: 'Startseite mit Hero, Trust, Reviews und Bundle-Finder' },
+  pdp:       { icon: '📦', label: 'Produktseite', sub: 'Conversion-Page mit ATC, Trust und FAQ' },
+  cart:      { icon: '🛒', label: 'Warenkorb',    sub: 'Cart-Drawer und Checkout-Vorbereitung' },
+  collection:{ icon: '🗂️', label: 'Kollektion',   sub: 'Produktübersicht und Filter' },
+};
+
+// 4 Major-Stages — keine lineare 7-Step-Tour mehr
+const STAGES = [
+  { key: 'brief_plan',   label: 'Brief & Plan',    sub: 'Onboarding, Strategie, Roadmap'    },
+  { key: 'build_review', label: 'Build & Review',  sub: 'Iterativ — Wir bauen, du gibst Feedback' },
+  { key: 'launch',       label: 'Launch',          sub: 'Soft-Launch, Final-Checks'          },
+  { key: 'live',         label: 'Live',            sub: 'Aktiv im Markt + Performance'       },
+];
+
+// Mapping legacy 7-Stage-Keys → neue 4-Stages (für Backwards Compat)
+const LEGACY_PHASE_MAP = {
+  onboarding:  'brief_plan',
+  plan:        'brief_plan',
+  setup:       'brief_plan',
+  build:       'build_review',
+  review:      'build_review',
+  launch:      'launch',
+  live:        'live',
+};
+
+const STATUS_LABELS = {
+  building:        { label: 'In Arbeit',      icon: '🔵' },
+  review:          { label: 'In Review',      icon: '🟡' },
+  approved:        { label: 'Freigegeben',    icon: '🟢' },
+  change_request:  { label: 'Change-Request', icon: '🟠' },
+};
+
+(function(){
+  fetch('/api/preview-auth?action=verify', { credentials: 'include' })
+    .then(r => r.json())
+    .then(d => {
+      if (!d.ok || !d.brand || d.brand.slug !== BRAND_SLUG) {
+        localStorage.removeItem('bb-preview-brand');
+        location.href = '/preview/login?return=' + encodeURIComponent(location.pathname);
+        return;
+      }
+      renderApp(d.brand);
+    })
+    .catch(() => {
+      location.href = '/preview/login?return=' + encodeURIComponent(location.pathname);
+    });
+
+  function renderApp(brand) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').classList.add('is-active');
+    document.getElementById('brand-name').textContent = brand.name;
+    localStorage.setItem('bb-preview-brand', JSON.stringify(brand));
+
+    const hour = new Date().getHours();
+    document.getElementById('greeting-time').textContent =
+      hour < 11 ? 'Guten Morgen' : (hour < 18 ? 'Hallo' : 'Guten Abend');
+
+    const currentStage = resolveStage(brand);
+    renderStages(currentStage);
+    renderIterationStats(currentStage, brand);
+    renderCards(brand);
+    renderActivity(brand);
+  }
+
+  function resolveStage(brand) {
+    // Map legacy 7-Stage → 4-Stage
+    if (brand.phase) {
+      const mapped = LEGACY_PHASE_MAP[brand.phase] || brand.phase;
+      if (STAGES.findIndex(s => s.key === mapped) >= 0) return mapped;
+    }
+    // Fallback heuristic
+    if (!brand.pages || brand.pages.length === 0) return 'brief_plan';
+    return 'build_review';
+  }
+
+  function renderStages(currentStage) {
+    const currentIdx = STAGES.findIndex(s => s.key === currentStage);
+    const track = document.getElementById('stage-track');
+    track.innerHTML = STAGES.map((s, i) => {
+      let cls = '';
+      if (i < currentIdx) cls = 'is-done';
+      else if (i === currentIdx) cls = 'is-current';
+      return `
+        <div class="stage-step ${cls}">
+          <div class="stage-row">
+            <span class="stage-dot">${i < currentIdx ? '✓' : (i === currentIdx ? '●' : '')}</span>
+            <span class="stage-label">${s.label}</span>
+          </div>
+          <div class="stage-sub">${s.sub}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderIterationStats(currentStage, brand) {
+    const card = document.getElementById('iteration-card');
+    if (currentStage !== 'build_review') return;
+    card.classList.add('is-active');
+
+    const pages = brand.pages || [];
+    const counts = { building: 0, review: 0, approved: 0, change_request: 0 };
+    pages.forEach(p => {
+      const status = p.status || 'review';
+      if (counts.hasOwnProperty(status)) counts[status]++;
+    });
+
+    const stats = [
+      { key: 'building',       num: counts.building,       label: 'In Arbeit' },
+      { key: 'review',         num: counts.review,         label: 'In Review' },
+      { key: 'approved',       num: counts.approved,       label: 'Freigegeben' },
+      { key: 'change_request', num: counts.change_request, label: 'Change-Request' },
+    ];
+    document.getElementById('iteration-stats').innerHTML = stats.map(s => `
+      <div class="iteration-stat">
+        <div class="iteration-stat-num ${s.num === 0 ? 'is-zero' : ''}">${s.num}</div>
+        <div class="iteration-stat-label">${s.label}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderCards(brand) {
+    const cardsEl = document.getElementById('cards');
+    const pages = brand.pages || [];
+    document.getElementById('page-count').textContent =
+      pages.length === 0 ? 'noch keine' : (pages.length === 1 ? '1 Vorschau' : pages.length + ' Vorschauen');
+
+    if (!pages.length) {
+      cardsEl.outerHTML = '<div class="empty"><div class="empty-emoji">🛠️</div>Wir bereiten gerade deine ersten Vorschauen vor. Du wirst per Mail informiert sobald sie ready sind.</div>';
+      return;
+    }
+
+    pages.sort((a, b) => (b.deployed_at || '').localeCompare(a.deployed_at || ''));
+    cardsEl.innerHTML = pages.map(p => {
+      const meta = PAGE_LABELS[p.key] || { icon: '📄', label: p.label || p.key, sub: '' };
+      const deployed = p.deployed_at ? new Date(p.deployed_at) : null;
+      const deployedStr = deployed
+        ? deployed.toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+        : '';
+      const url = '/preview/' + brand.slug + '-' + brand.token + '/' + p.key;
+      const status = p.status || 'review';
+      const statusLabel = (STATUS_LABELS[status] || STATUS_LABELS.review).label;
+      return `
+        <a class="card" href="${url}">
+          <span class="card-badge status-${status}">${statusLabel}</span>
+          <div class="card-icon">${meta.icon}</div>
+          <div class="card-title">${meta.label}</div>
+          <div class="card-meta">${meta.sub}${deployedStr ? '<br>📅 aktualisiert ' + deployedStr : ''}</div>
+          <div class="card-cta">Vorschau öffnen</div>
+        </a>
+      `;
+    }).join('');
+  }
+
+  function renderActivity(brand) {
+    const listEl = document.getElementById('activity-list');
+    const pages = (brand.pages || []).slice().sort((a, b) => (b.deployed_at || '').localeCompare(a.deployed_at || ''));
+    if (!pages.length) {
+      listEl.innerHTML = '<div class="activity-item"><span class="activity-dot" style="background: var(--text-light)"></span><span class="activity-text">Noch keine Aktivitäten — wir starten gleich.</span></div>';
+      return;
+    }
+    listEl.innerHTML = pages.slice(0, 6).map(p => {
+      const meta = PAGE_LABELS[p.key] || { label: p.label || p.key };
+      const t = p.deployed_at ? new Date(p.deployed_at) : null;
+      return `
+        <div class="activity-item">
+          <span class="activity-dot"></span>
+          <span class="activity-text">Neue Vorschau: <strong>${meta.label}</strong></span>
+          <span class="activity-time">${t ? formatRelative(t) : ''}</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function formatRelative(date) {
+    const diff = Date.now() - date.getTime();
+    const m = Math.round(diff / 60000);
+    if (m < 1) return 'gerade eben';
+    if (m < 60) return 'vor ' + m + ' Min';
+    const h = Math.round(m / 60);
+    if (h < 24) return 'vor ' + h + ' Std';
+    const d = Math.round(h / 24);
+    if (d < 7) return 'vor ' + d + ' Tagen';
+    return date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
+  }
+
+  document.getElementById('btn-logout').addEventListener('click', () => {
+    fetch('/api/preview-auth', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'logout' })
+    }).finally(() => {
+      localStorage.removeItem('bb-preview-brand');
+      location.href = '/preview/login';
+    });
+  });
+})();
+</script>
 </body>
 </html>
