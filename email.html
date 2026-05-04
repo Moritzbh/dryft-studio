@@ -442,6 +442,67 @@ nav.top-nav {
   font-family: var(--font-serif);
 }
 
+/* ====== Figma Live-Embed ====== */
+.figma-embed-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #1E1E1E;
+  border: 1px solid var(--border);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(91, 107, 255, 0.10);
+  z-index: 2;
+  transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.figma-embed-wrap:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 36px 90px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(91, 107, 255, 0.25),
+    0 0 32px rgba(91, 107, 255, 0.18);
+}
+.figma-embed {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.figma-open-btn {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--primary);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  box-shadow:
+    0 6px 20px rgba(91, 107, 255, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  transition: all 0.25s ease;
+  z-index: 3;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.figma-open-btn:hover {
+  background: var(--bb-blue-dark);
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 28px rgba(91, 107, 255, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.14) inset;
+}
+.figma-open-btn svg { display: block; }
+
 /* ====== SPEC CASES — full-width, image-led ====== */
 .spec-intro {
   padding: 100px 0 60px;
@@ -892,32 +953,26 @@ footer {
       </div>
 
       <div class="reerect-visual">
-        <div class="phone-stack">
-          <div class="phone-card back">
-            <div class="phone-brand">REERECT</div>
-            <div class="phone-subject">Subject · Was die Community sagt</div>
-            <div class="phone-hero"></div>
-            <div class="phone-cta">JETZT ENTDECKEN</div>
-          </div>
-          <div class="phone-card mid">
-            <div class="phone-brand">REERECT</div>
-            <div class="phone-subject">Subject · Letzte Erinnerung</div>
-            <div class="phone-hero"></div>
-            <div class="phone-cta">PIECE SICHERN</div>
-          </div>
-          <div class="phone-card front">
-            <div class="phone-brand">REERECT</div>
-            <div class="phone-subject">Subject · Dein Piece ist noch verfügbar</div>
-            <div class="phone-hero">
-              <div class="phone-headline">Browse Abandonment Flow.<br>Dein Piece wartet.</div>
-              <div class="phone-body">Du warst kurz davor — und dann war der Tab weg. Wir halten dir das Piece warm.</div>
-              <div class="phone-cta">JETZT SICHERN →</div>
-            </div>
-            <div class="phone-footer">© REERECT · BUILT IN-HOUSE</div>
-          </div>
+        <div class="figma-embed-wrap">
+          <iframe
+            class="figma-embed"
+            src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FUk4hckpSquhEz8taEz0MT3%2FReerect-X-Email-Scales-Client-File"
+            loading="lazy"
+            allowfullscreen
+            title="Reerect Email Flows — Figma Live-Embed"></iframe>
+          <a
+            class="figma-open-btn"
+            href="https://www.figma.com/design/Uk4hckpSquhEz8taEz0MT3/Reerect-X-Email-Scales-Client-File?node-id=0-1&p=f"
+            target="_blank"
+            rel="noopener noreferrer">
+            <span>Open in Figma</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M9 7h8v8"/>
+            </svg>
+          </a>
         </div>
         <div class="visual-meta">30+ Designs · 5 Flow-Typen</div>
-        <div class="visual-meta-sub">Live-Demo gibt's im Call.</div>
+        <div class="visual-meta-sub">Scroll rein, zoom ran — alle Flows live.</div>
       </div>
     </div>
   </div>
