@@ -17,6 +17,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="preload" as="image" href="assets/wissen-hero-founder-2000.jpg" media="(min-width: 769px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/wissen-hero-founder-1000.jpg" media="(max-width: 768px)" fetchpriority="high">
+
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -61,7 +65,23 @@
         }
         .top-bar-cta:hover { background: var(--accent); transform: translateY(-1px); box-shadow: 0 10px 24px rgba(255,33,166,.42); }
 
-        .hero { max-width: 760px; margin-bottom: 80px; }
+        .hero {
+            position: relative;
+            margin: -16px -40px 80px -40px;
+            padding: 56px 40px 56px 40px;
+            border-radius: 0 0 24px 24px;
+            overflow: hidden;
+            isolation: isolate;
+            background-image:
+                linear-gradient(96deg, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.86) 42%, rgba(10,10,10,0.42) 78%, rgba(10,10,10,0.62) 100%),
+                url('assets/wissen-hero-founder-2000.jpg');
+            background-size: cover;
+            background-position: center right;
+        }
+        .hero > .eyebrow,
+        .hero > h1,
+        .hero > p,
+        .hero > .journey-strip { max-width: 720px; }
         .eyebrow {
             display: inline-flex; align-items: center; gap: 10px;
             font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
@@ -253,7 +273,14 @@
         @media (max-width: 768px) {
             .page { padding: 32px 20px 80px; }
             .top-bar { margin-bottom: 56px; }
-            .hero { margin-bottom: 56px; }
+            .hero {
+                margin: -8px -20px 56px -20px;
+                padding: 40px 20px 40px 20px;
+                background-image:
+                    linear-gradient(180deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.75) 40%, rgba(10,10,10,0.55) 100%),
+                    url('assets/wissen-hero-founder-1000.jpg');
+                background-position: 72% center;
+            }
             .bottom-cta { padding: 40px 28px; flex-direction: column; align-items: flex-start; text-align: left; }
         }
     </style>
