@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BB Brands — Onboarding Fragebogen</title>
+  <meta name="description" content="Damit wir euren Shop, eure Marke und eure Ziele von Anfang an richtig verstehen.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+    :root {
+      --bb-blue:       #0305C6;
+      --bb-blue-dark:  #0204A0;
+      --bb-blue-light: #2325E0;
+      --bb-pink:       #FF21A6;
+      --bb-pink-light: #FF66C4;
+      --bb-yellow:     #FFDE59;
+      --bb-white:      #FFFFFF;
+      --bb-black:      #0A0A0A;
+      --bb-gray:       #F5F5F7;
+      --bb-gray-mid:   #E8E8EC;
+      --bb-gray-dark:  #6B7280;
+      --bb-text:       #1A1A2E;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ECEEF8;
+      color: var(--bb-text);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── COVER PAGE ─────────────────────────────────────────── */
+    .cover {
+      background: var(--bb-blue);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 52px 64px 52px;
+      page-break-after: always;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 700px 600px at 85% 20%, rgba(255,33,166,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 500px 400px at 10% 80%, rgba(35,37,224,0.5) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cover-noise {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .cover-top {
+      position: relative; z-index: 2;
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+
+    .brand-logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .brand-logo-text {
+      font-weight: 800; font-size: 18px; color: var(--bb-white);
+      letter-spacing: -0.01em;
+    }
+    .brand-sep {
+      color: var(--bb-pink); font-weight: 700; font-size: 18px;
+    }
+
+    .cover-meta {
+      text-align: right;
+    }
+    .cover-meta-label {
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.4);
+      text-transform: uppercase; letter-spacing: 0.14em;
+    }
+    .cover-meta-date {
+      font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.65);
+      margin-top: 4px;
+    }
+
+    .cover-center {
+      position: relative; z-index: 2;
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; padding: 60px 0 40px;
+    }
+
+    .cover-eyebrow {
+      font-size: 12px; font-weight: 700; color: var(--bb-pink);
+      text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cover-eyebrow::before {
+      content: '';
+      display: block; width: 32px; height: 2px;
+      background: var(--bb-pink);
+    }
+
+    .cover-headline {
+      font-weight: 800;
+      font-size: clamp(56px, 8vw, 96px);
+      line-height: 0.93;
+      letter-spacing: -0.03em;
+      color: var(--bb-white);
+      margin-bottom: 32px;
+    }
+    .cover-headline .hl-pink { color: var(--bb-pink); }
+    .cover-headline .hl-yellow { color: var(--bb-yellow); }
+
+    .cover-sub {
+      font-size: 18px; font-weight: 400; color: rgba(255,255,255,0.7);
+      max-width: 580px; line-height: 1.65;
+    }
+
+    .cover-tags {
+      display: flex; gap: 24px; margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .cover-tag {
+      font-size: 13px; font-weight: 700; color: var(--bb-blue-light);
+      text-transform: uppercase; letter-spacing: 0.14em;
+    }
+
+    .cover-orbs {
+      position: absolute; z-index: 1;
+      right: 40px; top: 50%; transform: translateY(-50%);
+    }
+    .orb-large {
+      width: 220px; height: 220px; border-radius: 50%;
+      background: var(--bb-pink); opacity: 0.22;
+      position: absolute; right: 60px; top: -110px;
+    }
+    .orb-small {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: var(--bb-yellow); opacity: 0.18;
+      position: absolute; right: 20px; top: 80px;
+    }
+    .orb-ring {
+      width: 300px; height: 300px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      position: absolute; right: -30px; top: -150px;
+    }
+
+    .cover-bottom {
+      position: relative; z-index: 2;
+      display: flex; justify-content: space-between; align-items: flex-end;
+    }
+
+    .cover-client-block {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .cover-client-label {
+      font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.35);
+      text-transform: uppercase; letter-spacing: 0.16em;
+    }
+    .cover-client-name {
+      font-size: 22px; font-weight: 800; color: var(--bb-white);
+      letter-spacing: -0.01em;
+    }
+    .cover-client-hint {
+      font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    .cover-num {
+      font-weight: 800; font-size: 140px; color: rgba(255,255,255,0.04);
+      line-height: 1; letter-spacing: -0.04em;
+    }
+
+    .gradient-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--bb-blue-light), var(--bb-pink), var(--bb-yellow));
+      border-radius: 2px;
+      margin-top: 40px;
+    }
+
+    /* ── FORM WRAPPER ───────────────────────────────────────── */
+    .form-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 24px 100px;
+    }
+
+    /* ── SECTION HEADER ─────────────────────────────────────── */
+    .section-header {
+      margin-bottom: 56px;
+      padding-top: 24px;
+    }
+    .section-eyebrow {
+      font-size: 11px; font-weight: 700; color: var(--bb-pink);
+      text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: block; width: 24px; height: 2px;
+      background: var(--bb-pink);
+    }
+    .section-title {
+      font-weight: 800; font-size: 40px; line-height: 1.05;
+      color: var(--bb-blue); letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 16px; line-height: 1.7; color: var(--bb-gray-dark);
+      max-width: 640px;
+    }
+
+    /* ── QUESTION CARD ──────────────────────────────────────── */
+    .q-card {
+      background: var(--bb-white);
+      border-radius: 20px;
+      padding: 40px 44px;
+      margin-bottom: 24px;
+      border: 1.5px solid var(--bb-gray-mid);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .q-card:hover {
+      border-color: rgba(3,5,198,0.2);
+      box-shadow: 0 8px 32px rgba(3,5,198,0.07);
+    }
+    .q-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--bb-blue), var(--bb-pink));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .q-card:hover::before,
+    .q-card:focus-within::before {
+      opacity: 1;
+    }
+    .q-card:focus-within {
+      border-color: rgba(3,5,198,0.3);
+      box-shadow: 0 8px 40px rgba(3,5,198,0.1);
+    }
+
+    .q-number {
+      font-size: 11px; font-weight: 700; color: var(--bb-pink);
+      text-transform: uppercase; letter-spacing: 0.16em;
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .q-number-badge {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: rgba(255,33,166,0.1);
+      color: var(--bb-pink);
+      font-size: 11px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .q-label {
+      font-weight: 700; font-size: 19px; color: var(--bb-text);
+      line-height: 1.4; margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .q-hint {
+      font-size: 13px; color: var(--bb-gray-dark);
+      margin-bottom: 24px; line-height: 1.55;
+    }
+
+    /* ── RADIO / CHECKBOX OPTIONS ───────────────────────────── */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+    }
+    .options-grid.cols-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+    .options-grid.cols-1 {
+      grid-template-columns: 1fr;
+    }
+
+    .option-item {
+      position: relative;
+    }
+    .option-item input[type="radio"],
+    .option-item input[type="checkbox"] {
+      position: absolute; opacity: 0; width: 0; height: 0;
+    }
+    .option-label {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 18px;
+      border: 1.5px solid var(--bb-gray-mid);
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 14px; font-weight: 500; color: var(--bb-text);
+      transition: all 0.18s;
+      user-select: none;
+      line-height: 1.4;
+    }
+    .option-label:hover {
+      border-color: rgba(3,5,198,0.3);
+      background: rgba(3,5,198,0.03);
+    }
+    .option-item input:checked + .option-label {
+      border-color: var(--bb-blue);
+      background: rgba(3,5,198,0.05);
+      color: var(--bb-blue);
+      font-weight: 600;
+    }
+    .option-dot {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid var(--bb-gray-mid);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.18s;
+    }
+    .option-item input:checked + .option-label .option-dot {
+      border-color: var(--bb-blue);
+      background: var(--bb-blue);
+    }
+    .option-item input:checked + .option-label .option-dot::after {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: white;
+    }
+    .option-check {
+      width: 18px; height: 18px; border-radius: 5px;
+      border: 2px solid var(--bb-gray-mid);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.18s;
+    }
+    .option-item input:checked + .option-label .option-check {
+      border-color: var(--bb-blue);
+      background: var(--bb-blue);
+    }
+    .option-item input:checked + .option-label .option-check::after {
+      content: '';
+      width: 10px; height: 6px;
+      border-left: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(-45deg) translateY(-1px);
+    }
+
+    /* ── TEXT INPUTS — AUTO-EXPAND ───────────────────────── */
+    .text-input,
+    .textarea-input {
+      width: 100%;
+      padding: 16px 20px;
+      border: 1.5px solid var(--bb-gray-mid);
+      border-radius: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px; font-weight: 400;
+      color: var(--bb-text);
+      background: var(--bb-gray);
+      transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+      outline: none;
+      line-height: 1.65;
+    }
+    .text-input:focus,
+    .textarea-input:focus {
+      border-color: var(--bb-blue);
+      background: var(--bb-white);
+      box-shadow: 0 0 0 4px rgba(3,5,198,0.07);
+    }
+    .text-input::placeholder,
+    .textarea-input::placeholder {
+      color: #B0B4C1;
+    }
+    .textarea-input {
+      resize: none;           /* kein manuelles Resize — wir machen's per JS */
+      overflow: hidden;       /* kein internes Scrollen, Feld wächst */
+      min-height: 60px;
+      field-sizing: content;  /* moderne Browser: native auto-resize */
+    }
+    .textarea-input.tall {
+      min-height: 140px;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+    .input-prefix {
+      font-size: 14px; font-weight: 600; color: var(--bb-gray-dark);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .input-row .text-input {
+      padding: 12px 16px;
+    }
+
+    .sub-input {
+      margin-top: 14px;
+    }
+    .sub-input-label {
+      font-size: 12px; font-weight: 600; color: var(--bb-gray-dark);
+      margin-bottom: 6px; display: block;
+    }
+
+    /* ── SPECIAL: HIGHLIGHT CARD ──────────────────────────── */
+    .q-card.highlight-card {
+      border-color: rgba(255,33,166,0.25);
+      background: linear-gradient(135deg, #fff 0%, rgba(255,33,166,0.02) 100%);
+    }
+    .q-card.highlight-card::before {
+      opacity: 1;
+      background: linear-gradient(90deg, var(--bb-pink), var(--bb-yellow));
+    }
+
+    /* ── DIVIDER ──────────────────────────────────────────── */
+    .section-divider {
+      display: flex; align-items: center; gap: 20px;
+      margin: 56px 0 40px;
+    }
+    .section-divider-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--bb-gray-mid), transparent);
+    }
+    .section-divider-label {
+      font-size: 11px; font-weight: 700; color: var(--bb-gray-dark);
+      text-transform: uppercase; letter-spacing: 0.14em;
+      white-space: nowrap;
+      padding: 6px 14px;
+      border: 1px solid var(--bb-gray-mid);
+      border-radius: 100px;
+    }
+
+    /* ── SECTION BADGE ────────────────────────────────────── */
+    .section-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px;
+      background: var(--bb-gray);
+      border: 1px solid var(--bb-gray-mid);
+      border-radius: 100px;
+      font-size: 11px; font-weight: 700; color: var(--bb-gray-dark);
+      text-transform: uppercase; letter-spacing: 0.16em;
+      margin: 40px auto;
+    }
+    .section-badge-wrap {
+      text-align: center;
+    }
+
+    /* ── REFERENCE INPUT ROW ──────────────────────────────── */
+    .ref-row {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+    .ref-num {
+      font-size: 18px; font-weight: 800; color: var(--bb-blue);
+      padding-top: 14px;
+    }
+    .ref-stack {
+      display: grid; gap: 8px;
+    }
+
+    /* ── END SECTION ──────────────────────────────────────── */
+    .end-section {
+      background: var(--bb-blue);
+      color: var(--bb-white);
+      padding: 80px 60px;
+      border-radius: 24px;
+      margin-top: 80px;
+      position: relative;
+      overflow: hidden;
+      page-break-before: always;
+    }
+    .end-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 600px 400px at 80% 50%, rgba(255,33,166,0.15) 0%, transparent 60%);
+    }
+    .end-eyebrow {
+      font-size: 11px; font-weight: 700; color: var(--bb-pink);
+      text-transform: uppercase; letter-spacing: 0.18em;
+      margin-bottom: 20px;
+      position: relative; z-index: 2;
+    }
+    .end-title {
+      font-weight: 800; font-size: 48px; line-height: 1.05;
+      color: var(--bb-white); letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      position: relative; z-index: 2;
+    }
+    .end-sub {
+      font-size: 17px; color: rgba(255,255,255,0.7);
+      line-height: 1.65; max-width: 540px;
+      margin-bottom: 40px;
+      position: relative; z-index: 2;
+    }
+    .end-steps {
+      counter-reset: step;
+      list-style: none;
+      position: relative; z-index: 2;
+      margin-bottom: 40px;
+    }
+    .end-steps li {
+      counter-increment: step;
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0;
+      font-size: 15px; color: rgba(255,255,255,0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .end-steps li::before {
+      content: counter(step);
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--bb-pink); color: var(--bb-white);
+      font-size: 12px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .end-contact {
+      position: relative; z-index: 2;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      display: flex; gap: 40px; flex-wrap: wrap;
+    }
+    .end-contact-block {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .end-contact-label {
+      font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.35);
+      text-transform: uppercase; letter-spacing: 0.18em;
+    }
+    .end-contact-value {
+      font-size: 15px; font-weight: 600; color: var(--bb-white);
+    }
+
+    .print-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 28px;
+      background: var(--bb-white);
+      color: var(--bb-blue);
+      border: none;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      position: relative; z-index: 2;
+      margin-bottom: 32px;
+    }
+    .print-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+    .print-btn::after {
+      content: '→';
+      font-weight: 800;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       PRINT-SAFE RULES — WICHTIG
+       Beim PDF-Export (Drucken → Als PDF speichern) müssen
+       alle Textareas in voller Höhe sichtbar sein, keine
+       Inhalte dürfen abgeschnitten werden.
+       ═══════════════════════════════════════════════════════ */
+    @media print {
+      body {
+        background: var(--bb-white) !important;
+        color: var(--bb-text) !important;
+      }
+
+      /* Textareas: volle Höhe, kein internes Scrollen */
+      .textarea-input,
+      textarea {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        white-space: pre-wrap !important;
+        word-break: break-word !important;
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+        border: 1.5px solid var(--bb-gray-mid) !important;
+        background: var(--bb-gray) !important;
+        resize: none !important;
+      }
+
+      /* Text-inputs sollen auch nicht abgeschnitten werden */
+      .text-input,
+      input[type="text"],
+      input[type="url"],
+      input[type="number"] {
+        border: 1.5px solid var(--bb-gray-mid) !important;
+        background: var(--bb-gray) !important;
+      }
+
+      /* Q-Cards nicht mitten in Fragen umbrechen */
+      .q-card {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        box-shadow: none !important;
+        border: 1.5px solid var(--bb-gray-mid) !important;
+        margin-bottom: 20px !important;
+      }
+
+      /* Section-Header nicht am Seitenende */
+      .section-header {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+      /* Print-Button im PDF ausblenden */
+      .print-btn,
+      .no-print {
+        display: none !important;
+      }
+
+      /* Cover + End-Section mit eigenen Seiten */
+      .cover { page-break-after: always; }
+      .end-section { page-break-before: always; }
+
+      /* Hidden Parts (conditional) bleiben beim Print auch hidden */
+      .hidden-part { display: none !important; }
+    }
+
+    /* Kleiner Mobile-Optimize */
+    @media (max-width: 720px) {
+      .cover { padding: 40px 32px; }
+      .form-wrapper { padding: 40px 16px 60px; }
+      .q-card { padding: 28px 24px; }
+      .section-title { font-size: 30px; }
+      .end-section { padding: 48px 28px; margin-top: 60px; }
+      .end-title { font-size: 32px; }
+      .options-grid.cols-2 { grid-template-columns: 1fr; }
+      .input-row { grid-template-columns: 1fr; }
+    }
+  </style>
+    <!-- Cookie/Consent Manager (lokal, kein Drittanbieter) -->
+    <script src="/assets/consent.js" defer></script>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       COVER PAGE
+       ═══════════════════════════════════════════════════════ -->
+  <div class="cover">
+    <div class="cover-noise"></div>
+    <div class="cover-orbs">
+      <div class="orb-ring"></div>
+      <div class="orb-large"></div>
+      <div class="orb-small"></div>
+    </div>
+
+    <div class="cover-top">
+      <div class="brand-logo">
+        <span class="brand-logo-text">BB Brands</span>
+        <span class="brand-sep">-/</span>
+      </div>
+      <div class="cover-meta">
+        <div class="cover-meta-label">Onboarding Dokument</div>
+        <div class="cover-meta-date" id="cover-date">—</div>
+      </div>
+    </div>
+
+    <div class="cover-center">
+      <div class="cover-eyebrow">Brand-Brief</div>
+      <h1 class="cover-headline">
+        Der<br>
+        <span class="hl-pink">Brand</span>-<span class="hl-yellow">Brief</span>.
+      </h1>
+      <p class="cover-sub">
+        Damit wir in 2 Wochen liefern können, brauchen wir euer Fundament — klar, strukturiert, vollständig. Je präziser der Brief, desto weniger Rückfragen später.
+      </p>
+      <div class="cover-tags">
+        <span class="cover-tag">Nach Vertragsunterschrift</span>
+        <span class="cover-tag">~25 Minuten</span>
+        <span class="cover-tag">5 Tage vor Kickoff</span>
+      </div>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="cover-client-block">
+        <div class="cover-client-label">Für</div>
+        <div class="cover-client-name" id="cover-client-name">Deine Marke</div>
+        <div class="cover-client-hint">Trage im Fragebogen euren Markennamen ein</div>
+      </div>
+      <div class="cover-num">01</div>
+    </div>
+
+    <div class="gradient-bar"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FORM START
+       ═══════════════════════════════════════════════════════ -->
+  <div class="form-wrapper">
+
+    <!-- ── PART 01 — PROJEKT-SETUP ──────────────────────── -->
+    <div class="section-badge-wrap"><div class="section-badge">Part 01 — Projekt-Setup</div></div>
+
+    <div class="section-header">
+      <div class="section-eyebrow">Part 01</div>
+      <h2 class="section-title">Projekt-Setup</h2>
+      <p class="section-desc">
+        Bevor wir loslegen, ein paar Basics zu eurem Projekt. Das hilft uns, den Scope und die richtigen Ressourcen vorzubereiten.
+      </p>
+    </div>
+
+    <!-- Frage 01 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">1</div> Frage 01 — Brand Name</div>
+      <div class="q-label">Wie heißt eure Marke, und was ist (falls vorhanden) eure aktuelle Website-URL?</div>
+      <div class="q-hint">Wenn noch keine Website existiert: einfach leer lassen.</div>
+      <input type="text" class="text-input" name="brand_name" id="brand_name" placeholder="Brand-Name" style="margin-bottom: 10px;">
+      <input type="url" class="text-input" name="brand_url" placeholder="https://aktuelle-website.de (optional)">
+    </div>
+
+    <!-- Frage 02 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">2</div> Frage 02 — Situation</div>
+      <div class="q-label">Was beschreibt euer Projekt am besten?</div>
+      <div class="q-hint">Das bestimmt, welche weiteren Fragen wir euch stellen.</div>
+      <div class="options-grid cols-1">
+        <div class="option-item">
+          <input type="radio" name="situation" id="sit-neu" value="neu">
+          <label for="sit-neu" class="option-label">
+            <span class="option-dot"></span>
+            <span><strong>Komplett neu</strong> — Wir haben noch keinen Shopify-Store, wollen von null starten</span>
+          </label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="situation" id="sit-opt" value="optimierung">
+          <label for="sit-opt" class="option-label">
+            <span class="option-dot"></span>
+            <span><strong>Optimierung</strong> — Wir haben einen Shopify-Store, wollen ihn runderneuern / aufhübschen</span>
+          </label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="situation" id="sit-rebuild" value="rebuild">
+          <label for="sit-rebuild" class="option-label">
+            <span class="option-dot"></span>
+            <span><strong>Full-Rebuild</strong> — Wir haben einen Shopify-Store, aber er ist unbrauchbar → von null bauen</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frage 03 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">3</div> Frage 03 — Produktanzahl</div>
+      <div class="q-label">Wie viele Produkte habt ihr aktuell live (oder plant ihr zum Launch)?</div>
+      <div class="q-hint">Bitte konkrete Zahl, keine Range.</div>
+      <div class="input-row">
+        <span class="input-prefix">Anzahl</span>
+        <input type="number" class="text-input" name="produkt_anzahl" min="0" placeholder="z.B. 12">
+      </div>
+    </div>
+
+    <!-- Frage 04 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">4</div> Frage 04 — Timeline</div>
+      <div class="q-label">Bis wann soll der Shop live sein?</div>
+      <div class="q-hint">Das hilft uns bei Ressourcen-Planung und Sprint-Setup.</div>
+      <div class="options-grid cols-2">
+        <div class="option-item">
+          <input type="radio" name="timeline" id="tl-7d" value="7-tage">
+          <label for="tl-7d" class="option-label"><span class="option-dot"></span> In 7 Tagen</label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="timeline" id="tl-2w" value="2-wochen">
+          <label for="tl-2w" class="option-label"><span class="option-dot"></span> In 2 Wochen</label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="timeline" id="tl-4w" value="4-wochen">
+          <label for="tl-4w" class="option-label"><span class="option-dot"></span> In 4 Wochen</label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="timeline" id="tl-6w" value="6-8-wochen">
+          <label for="tl-6w" class="option-label"><span class="option-dot"></span> In 6–8 Wochen</label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="timeline" id="tl-flex" value="flexibel">
+          <label for="tl-flex" class="option-label"><span class="option-dot"></span> Flexibel — kein hartes Datum</label>
+        </div>
+      </div>
+      <div class="sub-input">
+        <label class="sub-input-label">Konkretes Zieldatum (optional)</label>
+        <input type="text" class="text-input" name="timeline_date" placeholder="z.B. 01.06.2026 oder 'vor der Sommer-Saison'">
+      </div>
+    </div>
+
+    <!-- ── PART 02 — SHOP & PERFORMANCE (conditional) ──── -->
+    <div id="part-02" class="hidden-part" style="display: none;">
+
+      <div class="section-badge-wrap"><div class="section-badge">Part 02 — Shop & Performance</div></div>
+
+      <div class="section-header">
+        <div class="section-eyebrow">Part 02</div>
+        <h2 class="section-title">Shop & Performance</h2>
+        <p class="section-desc">
+          Wir brauchen ein klares Bild eures aktuellen Shops — Tracking, Infrastruktur, Performance. Nur auszufüllen wenn ihr bereits einen Shopify-Store habt.
+        </p>
+      </div>
+
+      <!-- Frage 05 -->
+      <div class="q-card">
+        <div class="q-number"><div class="q-number-badge">5</div> Frage 05 — AOV</div>
+        <div class="q-label">Wie hoch ist euer aktueller AOV (durchschnittlicher Bestellwert) in €?</div>
+        <div class="q-hint">Bitte konkrete Zahl, nicht geschätzt. Fallback möglich wenn Tracking unklar.</div>
+        <div class="input-row" style="margin-bottom: 14px;">
+          <span class="input-prefix">AOV (€)</span>
+          <input type="number" class="text-input" name="aov" step="0.01" min="0" placeholder="z.B. 78.50">
+        </div>
+        <div class="options-grid cols-1">
+          <div class="option-item">
+            <input type="checkbox" name="aov_unknown" id="aov-unknown" value="1">
+            <label for="aov-unknown" class="option-label"><span class="option-check"></span> Tracking unklar oder noch keine aussagekräftigen Daten vorhanden</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frage 06 -->
+      <div class="q-card">
+        <div class="q-number"><div class="q-number-badge">6</div> Frage 06 — Conversion-Rate</div>
+        <div class="q-label">Wie hoch ist eure aktuelle Conversion-Rate (in %)?</div>
+        <div class="q-hint">Bitte konkrete Zahl, nicht geschätzt. Fallback möglich wenn Tracking unklar.</div>
+        <div class="input-row" style="margin-bottom: 14px;">
+          <span class="input-prefix">CVR (%)</span>
+          <input type="number" class="text-input" name="cvr" step="0.01" min="0" max="100" placeholder="z.B. 2.3">
+        </div>
+        <div class="options-grid cols-1">
+          <div class="option-item">
+            <input type="checkbox" name="cvr_unknown" id="cvr-unknown" value="1">
+            <label for="cvr-unknown" class="option-label"><span class="option-check"></span> Tracking unklar oder noch keine aussagekräftigen Daten vorhanden</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frage 07 -->
+      <div class="q-card">
+        <div class="q-number"><div class="q-number-badge">7</div> Frage 07 — Installierte Apps / Plugins</div>
+        <div class="q-label">Welche Apps und Plugins sind aktuell installiert, auf die ihr nicht verzichten könnt?</div>
+        <div class="q-hint">z.B. Klaviyo, Judge.me, Recharge, Smile.io, Billbee. Bitte vollständig — auch wenn 15 Einträge. Das Feld wächst mit Inhalt.</div>
+        <textarea class="textarea-input tall" name="apps" placeholder="Ein App/Plugin pro Zeile..."></textarea>
+      </div>
+
+      <!-- Frage 08 -->
+      <div class="q-card">
+        <div class="q-number"><div class="q-number-badge">8</div> Frage 08 — Payment-Gateways</div>
+        <div class="q-label">Welche Zahlungsmethoden wollt ihr anbieten?</div>
+        <div class="q-hint">Mehrfachauswahl möglich.</div>
+        <div class="options-grid cols-2">
+          <div class="option-item">
+            <input type="checkbox" name="payment" id="pay-paypal" value="paypal">
+            <label for="pay-paypal" class="option-label"><span class="option-check"></span> PayPal</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="payment" id="pay-klarna" value="klarna">
+            <label for="pay-klarna" class="option-label"><span class="option-check"></span> Klarna (Rechnung / Ratenkauf / Sofort)</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="payment" id="pay-stripe" value="stripe">
+            <label for="pay-stripe" class="option-label"><span class="option-check"></span> Stripe (Kreditkarte)</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="payment" id="pay-shoppay" value="shoppay">
+            <label for="pay-shoppay" class="option-label"><span class="option-check"></span> Shop Pay</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="payment" id="pay-applepay" value="applepay">
+            <label for="pay-applepay" class="option-label"><span class="option-check"></span> Apple Pay / Google Pay</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="payment" id="pay-rechnung" value="rechnung">
+            <label for="pay-rechnung" class="option-label"><span class="option-check"></span> Kauf auf Rechnung (manuell)</label>
+          </div>
+          <div class="option-item">
+            <input type="checkbox" name="payment" id="pay-sepa" value="sepa">
+            <label for="pay-sepa" class="option-label"><span class="option-check"></span> SEPA / Lastschrift</label>
+          </div>
+        </div>
+        <div class="sub-input">
+          <label class="sub-input-label">Andere Payment-Methoden (optional)</label>
+          <textarea class="textarea-input" name="payment_other" placeholder="Freitext..."></textarea>
+        </div>
+      </div>
+
+      <!-- Frage 09 -->
+      <div class="q-card">
+        <div class="q-number"><div class="q-number-badge">9</div> Frage 09 — Fulfillment</div>
+        <div class="q-label">Wie läuft euer Fulfillment?</div>
+        <div class="options-grid cols-2">
+          <div class="option-item">
+            <input type="radio" name="fulfillment" id="ff-self" value="self">
+            <label for="ff-self" class="option-label"><span class="option-dot"></span> Selbst (eigenes Lager / Wohnung)</label>
+          </div>
+          <div class="option-item">
+            <input type="radio" name="fulfillment" id="ff-3pl" value="3pl">
+            <label for="ff-3pl" class="option-label"><span class="option-dot"></span> Drittanbieter (3PL)</label>
+          </div>
+          <div class="option-item">
+            <input type="radio" name="fulfillment" id="ff-drop" value="dropshipping">
+            <label for="ff-drop" class="option-label"><span class="option-dot"></span> Dropshipping</label>
+          </div>
+          <div class="option-item">
+            <input type="radio" name="fulfillment" id="ff-pod" value="pod">
+            <label for="ff-pod" class="option-label"><span class="option-dot"></span> Print-on-Demand</label>
+          </div>
+          <div class="option-item">
+            <input type="radio" name="fulfillment" id="ff-bb" value="billbee">
+            <label for="ff-bb" class="option-label"><span class="option-dot"></span> Billbee / DHL-Integration</label>
+          </div>
+          <div class="option-item">
+            <input type="radio" name="fulfillment" id="ff-other" value="other">
+            <label for="ff-other" class="option-label"><span class="option-dot"></span> Andere</label>
+          </div>
+        </div>
+        <div class="sub-input">
+          <label class="sub-input-label">Details zu Fulfillment (optional)</label>
+          <textarea class="textarea-input" name="fulfillment_detail" placeholder="Freitext..."></textarea>
+        </div>
+      </div>
+
+    </div>
+    <!-- ── END PART 02 ─────────────────────────────────── -->
+
+    <!-- ── PART 03 — BRAND & IDENTITÄT ─────────────────── -->
+    <div class="section-badge-wrap"><div class="section-badge">Part 03 — Brand & Identität</div></div>
+
+    <div class="section-header">
+      <div class="section-eyebrow">Part 03</div>
+      <h2 class="section-title">Brand & Identität</h2>
+      <p class="section-desc">
+        Eure Marke ist mehr als ein Logo. Hier wollen wir verstehen, wo ihr gerade steht — und wohin ihr wollt.
+      </p>
+    </div>
+
+    <!-- Frage 10 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">10</div> Frage 10 — Brand-Guidelines</div>
+      <div class="q-label">Habt ihr bestehende Brand-Guidelines (Farben, Schriftarten, Logo)?</div>
+      <div class="q-hint">Das hilft uns einzuschätzen, ob wir auf einem bestehenden System aufbauen oder neu definieren.</div>
+      <div class="options-grid cols-1">
+        <div class="option-item">
+          <input type="radio" name="brand_guidelines" id="bg-full" value="komplett">
+          <label for="bg-full" class="option-label"><span class="option-dot"></span> <strong>Ja, komplett</strong> — wir haben ein vollständiges Brand-System (Book, Farbcodes, Fonts, Logo-Varianten)</label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="brand_guidelines" id="bg-part" value="teilweise">
+          <label for="bg-part" class="option-label"><span class="option-dot"></span> <strong>Teilweise</strong> — Logo + Farben stehen, Rest ist offen</label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="brand_guidelines" id="bg-none" value="nein">
+          <label for="bg-none" class="option-label"><span class="option-dot"></span> <strong>Nein</strong> — wir brauchen eine komplette Brand-Definition (kann Teil des Projekts sein)</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frage 11 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">11</div> Frage 11 — Markenbeschreibung</div>
+      <div class="q-label">Beschreibt eure Marke in 2–3 Sätzen.</div>
+      <div class="q-hint">Stellt euch vor, ihr erklärt die Marke einem Freund, der sie noch nicht kennt. Kein Marketing-Sprech — echte Worte.</div>
+      <textarea class="textarea-input tall" name="brand_beschreibung" placeholder="Unsere Marke..."></textarea>
+    </div>
+
+    <!-- Frage 12 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">12</div> Frage 12 — Markenwerte</div>
+      <div class="q-label">Was sind eure wichtigsten Markenwerte?</div>
+      <div class="q-hint">Wählt alle die passen — oder ergänzt eigene im Freitext darunter.</div>
+      <div class="options-grid cols-2">
+        <div class="option-item"><input type="checkbox" name="values" id="val-performance" value="performance"><label for="val-performance" class="option-label"><span class="option-check"></span> Performance</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-authenticity" value="authenticity"><label for="val-authenticity" class="option-label"><span class="option-check"></span> Authentizität</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-sustainability" value="sustainability"><label for="val-sustainability" class="option-label"><span class="option-check"></span> Nachhaltigkeit</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-quality" value="quality"><label for="val-quality" class="option-label"><span class="option-check"></span> Qualität</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-innovation" value="innovation"><label for="val-innovation" class="option-label"><span class="option-check"></span> Innovation</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-rebellion" value="rebellion"><label for="val-rebellion" class="option-label"><span class="option-check"></span> Rebellion / Anti-Establishment</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-community" value="community"><label for="val-community" class="option-label"><span class="option-check"></span> Community</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-freedom" value="freedom"><label for="val-freedom" class="option-label"><span class="option-check"></span> Freiheit / Abenteuer</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-science" value="science"><label for="val-science" class="option-label"><span class="option-check"></span> Wissenschaftlichkeit / Evidenz</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-transparency" value="transparency"><label for="val-transparency" class="option-label"><span class="option-check"></span> Transparenz</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-craft" value="craft"><label for="val-craft" class="option-label"><span class="option-check"></span> Handmade / Craftsmanship</label></div>
+        <div class="option-item"><input type="checkbox" name="values" id="val-luxury" value="luxury"><label for="val-luxury" class="option-label"><span class="option-check"></span> Luxus / Premium</label></div>
+      </div>
+      <div class="sub-input">
+        <label class="sub-input-label">Eigene Werte (optional)</label>
+        <textarea class="textarea-input" name="values_custom" placeholder="z.B. Einfachheit, Vertrauen, Zuverlässigkeit..."></textarea>
+      </div>
+    </div>
+
+    <!-- ── PART 04 — PRODUKT & USP ─────────────────────── -->
+    <div class="section-badge-wrap"><div class="section-badge">Part 04 — Produkt & USP</div></div>
+
+    <div class="section-header">
+      <div class="section-eyebrow">Part 04</div>
+      <h2 class="section-title">Produkt & USP</h2>
+      <p class="section-desc">
+        Was verkauft ihr genau — und warum ausgerechnet ihr?
+      </p>
+    </div>
+
+    <!-- Frage 13 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">13</div> Frage 13 — Problemlösung</div>
+      <div class="q-label">Welches konkrete Problem lösen eure Produkte?</div>
+      <div class="q-hint">Was war der Moment, in dem ihr gedacht habt: „Dieses Problem muss gelöst werden"? Seid ehrlich und spezifisch.</div>
+      <textarea class="textarea-input tall" name="problem" placeholder="Unsere Produkte lösen..."></textarea>
+    </div>
+
+    <!-- Frage 14 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">14</div> Frage 14 — USP</div>
+      <div class="q-label">Was ist euer USP im Vergleich zur Konkurrenz?</div>
+      <div class="q-hint">Was kann nur eure Marke? Was würde fehlen, wenn es euch nicht gäbe? Kurz, knapp, ehrlich.</div>
+      <textarea class="textarea-input tall" name="usp" placeholder="Unser USP..."></textarea>
+    </div>
+
+    <!-- Frage 15 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">15</div> Frage 15 — Mitbewerber</div>
+      <div class="q-label">Wer sind eure größten Mitbewerber oder Vorbilder im Markt?</div>
+      <div class="q-hint">Nennt Marken die ihr bewundert oder gegen die ihr euch direkt positioniert — auch aus anderen Branchen. Bitte vollständig.</div>
+      <textarea class="textarea-input tall" name="mitbewerber" placeholder="Ein Mitbewerber pro Zeile, gerne mit kurzer Bemerkung..."></textarea>
+    </div>
+
+    <!-- ── PART 05 — ZIELGRUPPE & SPRACHE ──────────────── -->
+    <div class="section-badge-wrap"><div class="section-badge">Part 05 — Zielgruppe & Sprache</div></div>
+
+    <div class="section-header">
+      <div class="section-eyebrow">Part 05</div>
+      <h2 class="section-title">Zielgruppe & Sprache</h2>
+      <p class="section-desc">
+        Je genauer wir eure Zielgruppe kennen, desto präziser können wir Store-Struktur, Messaging und Ads ausrichten.
+      </p>
+    </div>
+
+    <!-- Frage 16 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">16</div> Frage 16 — Zielgruppe</div>
+      <div class="q-label">Wer ist eure genaue Zielgruppe in 1–3 Sätzen?</div>
+      <div class="q-hint">Alter, Geschlecht, Lebenslage, Schmerzpunkte, Wunsch. Je konkreter, desto besser.</div>
+      <textarea class="textarea-input tall" name="zielgruppe" placeholder="Unsere Kernzielgruppe..."></textarea>
+    </div>
+
+    <!-- Frage 17 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">17</div> Frage 17 — Sprachen</div>
+      <div class="q-label">Welche Sprache(n) soll der Shop unterstützen?</div>
+      <div class="q-hint">Das beeinflusst die technische Architektur und den Content-Aufwand direkt.</div>
+      <div class="options-grid cols-1">
+        <div class="option-item">
+          <input type="radio" name="languages" id="lang-de" value="de">
+          <label for="lang-de" class="option-label"><span class="option-dot"></span> Nur Deutsch</label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="languages" id="lang-de-en" value="de-en">
+          <label for="lang-de-en" class="option-label"><span class="option-dot"></span> Deutsch + Englisch</label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="languages" id="lang-multi" value="multi">
+          <label for="lang-multi" class="option-label"><span class="option-dot"></span> DE + EN + weitere (unten spezifizieren)</label>
+        </div>
+        <div class="option-item">
+          <input type="radio" name="languages" id="lang-other" value="other">
+          <label for="lang-other" class="option-label"><span class="option-dot"></span> Andere Kombination</label>
+        </div>
+      </div>
+      <div class="sub-input">
+        <label class="sub-input-label">Details / weitere Sprachen</label>
+        <textarea class="textarea-input" name="languages_detail" placeholder="z.B. DE + EN + FR, oder Prioritäten / Deadlines pro Sprache..."></textarea>
+      </div>
+    </div>
+
+    <!-- ── PART 06 — SONDERFEATURES & SCOPE ────────────── -->
+    <div class="section-badge-wrap"><div class="section-badge">Part 06 — Sonderfeatures & Scope</div></div>
+
+    <div class="section-header">
+      <div class="section-eyebrow">Part 06</div>
+      <h2 class="section-title">Sonderfeatures & Scope</h2>
+      <p class="section-desc">
+        Hier entscheidet sich, ob wir einen Standard-Build oder einen Premium-Build bauen. Je präziser, desto besser die Scope-Planung.
+      </p>
+    </div>
+
+    <!-- Frage 18 — Besondere Wünsche -->
+    <div class="q-card highlight-card">
+      <div class="q-number"><div class="q-number-badge">18</div> Frage 18 — Besondere Wünsche</div>
+      <div class="q-label">Habt ihr besondere Features oder Ideen, die unbedingt in den Shop müssen?</div>
+      <div class="q-hint">Alles was euch spontan einfällt — Must-Haves, Inspirationen, konkrete Ideen. Wenn unsicher: einfach leer lassen, wir empfehlen was Sinn macht.</div>
+      <textarea class="textarea-input tall" name="special_wishes" placeholder="z.B. Quiz zur Produkt-Findung, Rabatt-Popup, Blog, Mehrsprachigkeit, Abo-Modell, Konfigurator, WhatsApp-Support, …"></textarea>
+    </div>
+
+    <!-- Frage 19 — Erklärungsbedürftigkeit -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">19</div> Frage 19 — Produkt-Komplexität</div>
+      <div class="q-label">Ist euer Produkt erklärungsbedürftig?</div>
+      <div class="q-hint">Manche Produkte versteht man beim ersten Blick (T-Shirt). Andere brauchen Kontext (Wasserfilter, Nahrungsergänzung, Tech).</div>
+      <div class="options-grid cols-1">
+        <div class="option-item"><input type="radio" name="explaining" id="ex-no" value="nein"><label for="ex-no" class="option-label"><span class="option-dot"></span> <strong>Nein</strong> — Produkt versteht man sofort</label></div>
+        <div class="option-item"><input type="radio" name="explaining" id="ex-partial" value="teilweise"><label for="ex-partial" class="option-label"><span class="option-dot"></span> <strong>Teilweise</strong> — ein paar Kontext-Infos schaden nicht</label></div>
+        <div class="option-item"><input type="radio" name="explaining" id="ex-yes" value="ja"><label for="ex-yes" class="option-label"><span class="option-dot"></span> <strong>Ja</strong> — Kunde muss erst verstehen, bevor er kauft</label></div>
+      </div>
+    </div>
+
+    <!-- Frage 20 — E-Mail-Marketing -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">20</div> Frage 20 — E-Mail-Marketing</div>
+      <div class="q-label">Wollt ihr E-Mail-Marketing haben?</div>
+      <div class="q-hint">Falls ja, kümmern wir uns um Setup + Flows. Welches Tool ist uns erstmal egal — wir empfehlen passend.</div>
+      <div class="options-grid cols-1">
+        <div class="option-item"><input type="radio" name="email_status" id="em-yes" value="ja"><label for="em-yes" class="option-label"><span class="option-dot"></span> <strong>Ja</strong> — sollte dazugehören</label></div>
+        <div class="option-item"><input type="radio" name="email_status" id="em-have" value="haben"><label for="em-have" class="option-label"><span class="option-dot"></span> <strong>Haben wir schon</strong> — läuft bereits (Tool siehe unten)</label></div>
+        <div class="option-item"><input type="radio" name="email_status" id="em-no" value="nein"><label for="em-no" class="option-label"><span class="option-dot"></span> <strong>Nein</strong> — noch nicht nötig</label></div>
+      </div>
+      <div class="sub-input">
+        <label class="sub-input-label">Welches Tool nutzt ihr aktuell? (wenn vorhanden)</label>
+        <input type="text" class="text-input" name="email_tool" placeholder="z.B. Klaviyo, Mailchimp, Brevo, …">
+      </div>
+    </div>
+
+    <!-- Frage 21 — Ads & Tracking -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">21</div> Frage 21 — Ads & Tracking</div>
+      <div class="q-label">Plant ihr Werbeanzeigen auf Meta / Google / TikTok?</div>
+      <div class="q-hint">Das entscheidet, ob wir Pixel, GTM, Conversion-API etc. gleich mit einrichten.</div>
+      <div class="options-grid cols-1">
+        <div class="option-item"><input type="radio" name="ads_status" id="ad-yes" value="ja"><label for="ad-yes" class="option-label"><span class="option-dot"></span> <strong>Ja</strong> — beim oder nach dem Launch</label></div>
+        <div class="option-item"><input type="radio" name="ads_status" id="ad-have" value="haben"><label for="ad-have" class="option-label"><span class="option-dot"></span> <strong>Haben wir schon</strong> — Tracking läuft bereits</label></div>
+        <div class="option-item"><input type="radio" name="ads_status" id="ad-no" value="nein"><label for="ad-no" class="option-label"><span class="option-dot"></span> <strong>Nein</strong> — noch nicht</label></div>
+      </div>
+      <div class="sub-input">
+        <label class="sub-input-label">Auf welchen Plattformen? (wenn ja)</label>
+        <input type="text" class="text-input" name="ads_platforms" placeholder="z.B. Meta (IG/FB), Google Ads, TikTok, Pinterest, …">
+      </div>
+    </div>
+
+    <!-- ── PART 07 — CONTENT-INVENTORY ─────────────────── -->
+    <div class="section-badge-wrap"><div class="section-badge">Part 07 — Content-Inventory</div></div>
+
+    <div class="section-header">
+      <div class="section-eyebrow">Part 07</div>
+      <h2 class="section-title">Content-Inventory</h2>
+      <p class="section-desc">
+        Was habt ihr schon — und was fehlt noch? Je klarer das Inventar, desto weniger Zwischenfragen später.
+      </p>
+    </div>
+
+    <!-- Frage 23 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">22</div> Frage 22 — Produktbilder</div>
+      <div class="q-label">Habt ihr Produktbilder?</div>
+      <div class="options-grid cols-1">
+        <div class="option-item"><input type="radio" name="images_status" id="img-all" value="alle"><label for="img-all" class="option-label"><span class="option-dot"></span> <strong>Ja, alle</strong> — professionelle Bilder für alle Produkte (Studio + Lifestyle + Detail)</label></div>
+        <div class="option-item"><input type="radio" name="images_status" id="img-part" value="teilweise"><label for="img-part" class="option-label"><span class="option-dot"></span> <strong>Teilweise</strong> — Studio-Shots ja, Lifestyle / Detail fehlt</label></div>
+        <div class="option-item"><input type="radio" name="images_status" id="img-none" value="keine"><label for="img-none" class="option-label"><span class="option-dot"></span> <strong>Nein</strong> — wir brauchen ein Fotoshoot (kann Teil des Projekts sein)</label></div>
+      </div>
+      <div class="sub-input">
+        <label class="sub-input-label">Bemerkungen (optional)</label>
+        <textarea class="textarea-input" name="images_note" placeholder="Freitext..."></textarea>
+      </div>
+    </div>
+
+    <!-- Frage 24 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">23</div> Frage 23 — Copy-Drafts</div>
+      <div class="q-label">Habt ihr Texte (Copy) schon vorbereitet?</div>
+      <div class="q-hint">Für welche Bereiche liegt Copy vor?</div>
+      <div class="options-grid cols-2">
+        <div class="option-item"><input type="checkbox" name="copy_areas" id="cp-home" value="home"><label for="cp-home" class="option-label"><span class="option-check"></span> Homepage</label></div>
+        <div class="option-item"><input type="checkbox" name="copy_areas" id="cp-pdp" value="pdp"><label for="cp-pdp" class="option-label"><span class="option-check"></span> Product-Detail-Pages</label></div>
+        <div class="option-item"><input type="checkbox" name="copy_areas" id="cp-about" value="about"><label for="cp-about" class="option-label"><span class="option-check"></span> About / Brand Story</label></div>
+        <div class="option-item"><input type="checkbox" name="copy_areas" id="cp-faq" value="faq"><label for="cp-faq" class="option-label"><span class="option-check"></span> FAQ-Antworten</label></div>
+        <div class="option-item"><input type="checkbox" name="copy_areas" id="cp-expl" value="explaining"><label for="cp-expl" class="option-label"><span class="option-check"></span> Erklärseiten / Content-Pages</label></div>
+        <div class="option-item"><input type="checkbox" name="copy_areas" id="cp-email" value="email"><label for="cp-email" class="option-label"><span class="option-check"></span> E-Mail-Templates</label></div>
+        <div class="option-item"><input type="checkbox" name="copy_areas" id="cp-none" value="none"><label for="cp-none" class="option-label"><span class="option-check"></span> Wir haben noch nichts — brauchen komplette Copy</label></div>
+      </div>
+      <div class="sub-input">
+        <label class="sub-input-label">Wo liegen die Texte? (Google Doc Link, Notion, …)</label>
+        <textarea class="textarea-input" name="copy_location" placeholder="URL(s) oder Hinweis..."></textarea>
+      </div>
+    </div>
+
+    <!-- Frage 25 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">24</div> Frage 24 — Legal-Pages</div>
+      <div class="q-label">Welche rechtlichen Seiten habt ihr bereits?</div>
+      <div class="q-hint">Fehlende Legal-Pages müssen wir vor Launch erstellen/beschaffen.</div>
+      <div class="options-grid cols-2">
+        <div class="option-item"><input type="checkbox" name="legal" id="lg-imp" value="impressum"><label for="lg-imp" class="option-label"><span class="option-check"></span> Impressum</label></div>
+        <div class="option-item"><input type="checkbox" name="legal" id="lg-dsgvo" value="datenschutz"><label for="lg-dsgvo" class="option-label"><span class="option-check"></span> Datenschutz (DSGVO)</label></div>
+        <div class="option-item"><input type="checkbox" name="legal" id="lg-agb" value="agb"><label for="lg-agb" class="option-label"><span class="option-check"></span> AGB</label></div>
+        <div class="option-item"><input type="checkbox" name="legal" id="lg-wid" value="widerruf"><label for="lg-wid" class="option-label"><span class="option-check"></span> Widerrufsbelehrung + Formular</label></div>
+        <div class="option-item"><input type="checkbox" name="legal" id="lg-ship" value="versand"><label for="lg-ship" class="option-label"><span class="option-check"></span> Versand- und Lieferinfo</label></div>
+        <div class="option-item"><input type="checkbox" name="legal" id="lg-return" value="retouren"><label for="lg-return" class="option-label"><span class="option-check"></span> Rückgabe- und Retourenbedingungen</label></div>
+        <div class="option-item"><input type="checkbox" name="legal" id="lg-pay" value="zahlung"><label for="lg-pay" class="option-label"><span class="option-check"></span> Zahlungsinformationen</label></div>
+        <div class="option-item"><input type="checkbox" name="legal" id="lg-cookie" value="cookie"><label for="lg-cookie" class="option-label"><span class="option-check"></span> Cookie-Richtlinie</label></div>
+        <div class="option-item"><input type="checkbox" name="legal" id="lg-none" value="none"><label for="lg-none" class="option-label"><span class="option-check"></span> Wir haben noch nichts — komplett neu nötig</label></div>
+      </div>
+      <div class="sub-input">
+        <label class="sub-input-label">Wo liegen die vorhandenen Texte?</label>
+        <textarea class="textarea-input" name="legal_location" placeholder="URL(s) oder Hinweis..."></textarea>
+      </div>
+    </div>
+
+    <!-- ── PART 08 — INSPIRATION & REFERENZEN ──────────── -->
+    <div class="section-badge-wrap"><div class="section-badge">Part 08 — Inspiration & Referenzen</div></div>
+
+    <div class="section-header">
+      <div class="section-eyebrow">Part 08</div>
+      <h2 class="section-title">Inspiration & Referenzen</h2>
+      <p class="section-desc">
+        Zeigt uns was euch begeistert. Je mehr Referenzen, desto präziser treffen wir euren Geschmack — und desto eher können wir Sections 1:1 von Referenz-Sites übernehmen.
+      </p>
+    </div>
+
+    <!-- Frage 26 -->
+    <div class="q-card highlight-card">
+      <div class="q-number"><div class="q-number-badge">25</div> Frage 25 — Positive Referenzen</div>
+      <div class="q-label">Welche 3–5 Websites, Shops oder Marken findet ihr extrem gut?</div>
+      <div class="q-hint">Bitte pro Referenz: URL + 1–2 Sätze warum ihr sie mögt. Je konkreter, desto besser. Diese Referenzen werden direkt beim Store-Bau als Struktur-Vorlagen genutzt.</div>
+
+      <div class="ref-row">
+        <div class="ref-num">1</div>
+        <div class="ref-stack">
+          <input type="url" class="text-input" name="ref_1_url" placeholder="https://...">
+          <textarea class="textarea-input" name="ref_1_why" placeholder="Was gefällt euch an dieser Seite? (Design, Copy, Layout, Produkt-Präsentation, ...)"></textarea>
+        </div>
+      </div>
+
+      <div class="ref-row">
+        <div class="ref-num">2</div>
+        <div class="ref-stack">
+          <input type="url" class="text-input" name="ref_2_url" placeholder="https://...">
+          <textarea class="textarea-input" name="ref_2_why" placeholder="Was gefällt euch?"></textarea>
+        </div>
+      </div>
+
+      <div class="ref-row">
+        <div class="ref-num">3</div>
+        <div class="ref-stack">
+          <input type="url" class="text-input" name="ref_3_url" placeholder="https://...">
+          <textarea class="textarea-input" name="ref_3_why" placeholder="Was gefällt euch?"></textarea>
+        </div>
+      </div>
+
+      <div class="ref-row">
+        <div class="ref-num">4</div>
+        <div class="ref-stack">
+          <input type="url" class="text-input" name="ref_4_url" placeholder="https://... (optional)">
+          <textarea class="textarea-input" name="ref_4_why" placeholder="Was gefällt euch? (optional)"></textarea>
+        </div>
+      </div>
+
+      <div class="ref-row">
+        <div class="ref-num">5</div>
+        <div class="ref-stack">
+          <input type="url" class="text-input" name="ref_5_url" placeholder="https://... (optional)">
+          <textarea class="textarea-input" name="ref_5_why" placeholder="Was gefällt euch? (optional)"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frage 27 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">26</div> Frage 26 — Anti-Referenzen</div>
+      <div class="q-label">Gibt es 1–2 Marken/Shops die ihr ausdrücklich NICHT mögt?</div>
+      <div class="q-hint">So wollen wir NICHT aussehen. Pro Marke: Warum nicht?</div>
+
+      <div class="ref-row">
+        <div class="ref-num">1</div>
+        <div class="ref-stack">
+          <input type="text" class="text-input" name="antiref_1" placeholder="Marke / URL">
+          <textarea class="textarea-input" name="antiref_1_why" placeholder="Warum nicht?"></textarea>
+        </div>
+      </div>
+
+      <div class="ref-row">
+        <div class="ref-num">2</div>
+        <div class="ref-stack">
+          <input type="text" class="text-input" name="antiref_2" placeholder="Marke / URL (optional)">
+          <textarea class="textarea-input" name="antiref_2_why" placeholder="Warum nicht? (optional)"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frage 28 -->
+    <div class="q-card">
+      <div class="q-number"><div class="q-number-badge">27</div> Frage 27 — Bildsprache / Mood</div>
+      <div class="q-label">Welche visuelle Stilrichtung passt zu eurer Marke?</div>
+      <div class="q-hint">Wählt 1–3 die am meisten passen.</div>
+      <div class="options-grid cols-2">
+        <div class="option-item"><input type="checkbox" name="mood" id="md-min" value="minimal"><label for="md-min" class="option-label"><span class="option-check"></span> <strong>Minimal / Clean</strong> — viel Weißraum, wenig Deko</label></div>
+        <div class="option-item"><input type="checkbox" name="mood" id="md-edit" value="editorial"><label for="md-edit" class="option-label"><span class="option-check"></span> <strong>Editorial</strong> — magazinähnlich, große Typografie</label></div>
+        <div class="option-item"><input type="checkbox" name="mood" id="md-bold" value="bold"><label for="md-bold" class="option-label"><span class="option-check"></span> <strong>Bold / Loud</strong> — starke Farben, große Statements</label></div>
+        <div class="option-item"><input type="checkbox" name="mood" id="md-nat" value="natural"><label for="md-nat" class="option-label"><span class="option-check"></span> <strong>Natural / Organic</strong> — Erdtöne, handwerklich, warm</label></div>
+        <div class="option-item"><input type="checkbox" name="mood" id="md-lux" value="luxury"><label for="md-lux" class="option-label"><span class="option-check"></span> <strong>Premium / Luxury</strong> — dunkel, Gold-Akzente, edel</label></div>
+        <div class="option-item"><input type="checkbox" name="mood" id="md-tech" value="tech"><label for="md-tech" class="option-label"><span class="option-check"></span> <strong>Tech / Clinical</strong> — weiß + schwarz, technisch (wie Apple)</label></div>
+        <div class="option-item"><input type="checkbox" name="mood" id="md-play" value="playful"><label for="md-play" class="option-label"><span class="option-check"></span> <strong>Playful / Bold Color</strong> — viele Farben, spielerisch</label></div>
+        <div class="option-item"><input type="checkbox" name="mood" id="md-sci" value="scientific"><label for="md-sci" class="option-label"><span class="option-check"></span> <strong>Scientific / Data</strong> — Diagramme, Fakten, evidenz-basiert</label></div>
+      </div>
+      <div class="sub-input">
+        <label class="sub-input-label">Eigene Beschreibung (optional)</label>
+        <textarea class="textarea-input" name="mood_custom" placeholder="Freitext..."></textarea>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         ABSCHLUSS
+         ═══════════════════════════════════════════════════ -->
+    <div class="end-section">
+      <div class="end-eyebrow">Fertig</div>
+      <h2 class="end-title">Schickt uns den Fragebogen zurück.</h2>
+      <p class="end-sub">
+        Wir melden uns innerhalb von 24h mit dem Architektur-Plan für euren Shop — inklusive Scope, Tiers-Einschätzung und Timeline.
+      </p>
+
+      <button class="print-btn no-print" onclick="window.print()">Als PDF speichern</button>
+
+      <ol class="end-steps">
+        <li>Speichert diese Seite als PDF (Browser: <strong>Drucken → Als PDF speichern</strong>)</li>
+        <li>Schickt die PDF per WhatsApp an euren BB-Brands-Ansprechpartner</li>
+        <li>Hängt eure Brand-Assets an (Logo, Produktfotos, vorhandene Copy)</li>
+      </ol>
+
+      <div class="end-contact">
+        <div class="end-contact-block">
+          <div class="end-contact-label">BB Brands</div>
+          <div class="end-contact-value">Moritz Bohmbach</div>
+        </div>
+        <div class="end-contact-block">
+          <div class="end-contact-label">E-Mail</div>
+          <div class="end-contact-value">info@bb-brands.de</div>
+        </div>
+        <div class="end-contact-block">
+          <div class="end-contact-label">Web</div>
+          <div class="end-contact-value">bb-brands.de</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- ── END FORM WRAPPER ─────────────────────────────── -->
+
+  <script>
+    // ════════════════════════════════════════════════════
+    // COVER DATE — aktuelles Datum
+    // ════════════════════════════════════════════════════
+    (function() {
+      const months = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+      const d = new Date();
+      document.getElementById('cover-date').textContent = `${months[d.getMonth()]} ${d.getFullYear()}`;
+    })();
+
+    // ════════════════════════════════════════════════════
+    // AUTO-RESIZE Textareas (Fallback für browsers ohne field-sizing)
+    // ════════════════════════════════════════════════════
+    function autoResize(ta) {
+      ta.style.height = 'auto';
+      ta.style.height = (ta.scrollHeight + 2) + 'px';
+    }
+
+    document.querySelectorAll('textarea.textarea-input').forEach(ta => {
+      // Initial sizing
+      autoResize(ta);
+      // On input
+      ta.addEventListener('input', () => autoResize(ta));
+      // On paste (delayed, because paste-value is not yet in)
+      ta.addEventListener('paste', () => setTimeout(() => autoResize(ta), 10));
+      // Before print: expand all
+      window.addEventListener('beforeprint', () => autoResize(ta));
+    });
+
+    // ════════════════════════════════════════════════════
+    // COVER CLIENT NAME — Live-Update aus Brand-Name-Feld
+    // ════════════════════════════════════════════════════
+    const brandNameInput = document.getElementById('brand_name');
+    const coverClientName = document.getElementById('cover-client-name');
+    if (brandNameInput && coverClientName) {
+      brandNameInput.addEventListener('input', (e) => {
+        const v = e.target.value.trim();
+        coverClientName.textContent = v || 'Deine Marke';
+      });
+    }
+
+    // ════════════════════════════════════════════════════
+    // CONDITIONAL LOGIC — Part 02 nur wenn Situation != neu
+    // ════════════════════════════════════════════════════
+    const part02 = document.getElementById('part-02');
+    const situationInputs = document.querySelectorAll('input[name="situation"]');
+
+    function togglePart02() {
+      const selected = document.querySelector('input[name="situation"]:checked');
+      if (!selected) {
+        part02.style.display = 'none';
+        part02.classList.add('hidden-part');
+        return;
+      }
+      if (selected.value === 'neu') {
+        part02.style.display = 'none';
+        part02.classList.add('hidden-part');
+      } else {
+        part02.style.display = 'block';
+        part02.classList.remove('hidden-part');
+        // Re-resize textareas in Part 02
+        part02.querySelectorAll('textarea.textarea-input').forEach(ta => autoResize(ta));
+      }
+    }
+
+    situationInputs.forEach(r => r.addEventListener('change', togglePart02));
+
+    // ════════════════════════════════════════════════════
+    // BEFORE-PRINT — alle Textareas auf volle Höhe setzen
+    // damit nichts abgeschnitten wird
+    // ════════════════════════════════════════════════════
+    window.addEventListener('beforeprint', () => {
+      document.querySelectorAll('textarea.textarea-input').forEach(ta => autoResize(ta));
+    });
+  </script>
+
+</body>
+</html>

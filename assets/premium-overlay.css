@@ -136,6 +136,11 @@ nav.top-nav.scrolled {
     color: #A1A1AA !important;
 }
 .nav-links a:hover { color: var(--bb-blue) !important; }
+.nav-links a.nav-founder-os {
+    color: #ff6b3d !important;
+    font-weight: 600 !important;
+}
+.nav-links a.nav-founder-os:hover { color: #ff8a64 !important; }
 
 /* ---------- 6. BUTTONS — multi-layer premium (dark) ---------- */
 .btn-primary,

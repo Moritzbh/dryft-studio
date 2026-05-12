@@ -226,6 +226,18 @@
             color: var(--text-body); transition: color 0.2s;
         }
         .nav-links a:hover { color: var(--primary); }
+        .nav-links a.nav-founder-os {
+            color: #ff6b3d;
+            font-weight: 600;
+            position: relative;
+        }
+        .nav-links a.nav-founder-os::after {
+            content: ""; position: absolute; left: 0; right: 0; bottom: -6px;
+            height: 2px; background: #ff6b3d; border-radius: 2px;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.25s ease;
+        }
+        .nav-links a.nav-founder-os:hover::after { transform: scaleX(1); }
         .nav-cta {
             padding: 12px 24px; background: var(--primary); color: #fff;
             font-family: var(--font-body); font-size: 13px; font-weight: 600;
@@ -4313,6 +4325,7 @@
                 <li><a href="#services">Prozess</a></li>
                 <li><a href="#guarantees">Garantien</a></li>
                 <li><a href="wissen.html">Wissen</a></li>
+                <li><a href="https://founder-os.bb-brands.de" class="nav-founder-os">Founder OS</a></li>
                 <li><a href="#faq">FAQ</a></li>
             </ul>
             <a href="/preview/login" class="nav-customer-login" title="Als Kunde einloggen">Kunden-Login</a>
@@ -4327,6 +4340,7 @@
         <a href="#services">Prozess</a>
         <a href="#guarantees">Garantien</a>
         <a href="wissen.html">Wissen</a>
+        <a href="https://founder-os.bb-brands.de" style="color: var(--c-accent, #ff6b3d); font-weight: 700;">Founder OS</a>
         <a href="#faq">FAQ</a>
         <a href="erstgespraech.html" style="color: var(--c-primary, #0305C6); font-weight: 700;">Kostenloses Erstgespräch →</a>
         <a href="#" data-wa-open data-wa-source="mobile-nav" style="color: #25D366;">Schreib uns direkt</a>
@@ -5511,6 +5525,7 @@
                 <ul>
                     <li><a href="#guarantees">Garantien</a></li>
                     <li><a href="wissen.html">Wissens-Hub</a></li>
+                    <li><a href="https://founder-os.bb-brands.de">Founder OS</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
             </div>
